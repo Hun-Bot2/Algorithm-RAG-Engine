@@ -1,0 +1,502 @@
+{
+  "1003": [
+    "climbing-stairs",
+    "unique-paths",
+    "fibonacci-number"
+  ],
+  "1149": [
+    "minimum-path-sum",
+    "jump-game",
+    "climbing-stairs"
+  ],
+  "1463": [
+    "climbing-stairs",
+    "minimum-path-sum",
+    "edit-distance"
+  ],
+  "1912": [
+    "maximum-subarray",
+    "jump-game",
+    "trapping-rain-water"
+  ],
+  "1932": [
+    "minimum-path-sum",
+    "unique-paths",
+    "climbing-stairs"
+  ],
+  "2156": [
+    "jump-game",
+    "maximum-subarray",
+    "climbing-stairs"
+  ],
+  "2579": [
+    "climbing-stairs",
+    "jump-game",
+    "unique-paths"
+  ],
+  "9095": [
+    "climbing-stairs",
+    "decode-ways",
+    "unique-paths"
+  ],
+  "9251": [
+    "edit-distance",
+    "longest-palindromic-substring",
+    "maximum-subarray"
+  ],
+  "9461": [
+    "climbing-stairs",
+    "unique-paths",
+    "jump-game"
+  ],
+  "1000": [
+    "add-two-numbers",
+    "plus-one",
+    "add-binary"
+  ],
+  "1001": [
+    "subtract-the-product-and-sum-of-digits-of-an-integer",
+    "add-two-numbers",
+    "divide-two-integers"
+  ],
+  "1008": [
+    "divide-two-integers",
+    "integer-to-roman",
+    "roman-to-integer"
+  ],
+  "1010": [
+    "longest-common-prefix",
+    "maximum-subarray",
+    "merge-intervals"
+  ],
+  "1018": [
+    "n-queens",
+    "n-queens-ii",
+    "valid-sudoku"
+  ],
+  "11053": [
+    "longest-common-prefix",
+    "maximum-subarray",
+    "length-of-last-word"
+  ],
+  "11054": [
+    "longest-substring-without-repeating-characters",
+    "maximum-subarray",
+    "trap-rain-water"
+  ],
+  "11726": [
+    "climbing-stairs",
+    "unique-paths",
+    "decode-ways"
+  ],
+  "11727": [
+    "climbing-stairs",
+    "unique-paths",
+    "decode-ways"
+  ],
+  "12865": [
+    "combination-sum",
+    "maximum-subarray",
+    "jump-game"
+  ],
+  "1012": [
+    "word-search",
+    "unique-paths",
+    "maximum-subarray"
+  ],
+  "11724": [
+    "word-search",
+    "n-queens",
+    "unique-paths"
+  ],
+  "1260": [
+    "word-search",
+    "valid-sudoku",
+    "n-queens"
+  ],
+  "1697": [
+    "jump-game-ii",
+    "jump-game",
+    "word-search"
+  ],
+  "2178": [
+    "unique-paths",
+    "unique-paths-ii",
+    "minimum-path-sum"
+  ],
+  "2468": [
+    "trapping-rain-water",
+    "word-search",
+    "maximum-rectangle"
+  ],
+  "2606": [
+    "word-search",
+    "jump-game",
+    "unique-paths"
+  ],
+  "2667": [
+    "word-search",
+    "unique-paths",
+    "maximum-subarray"
+  ],
+  "7562": [
+    "n-queens",
+    "unique-paths",
+    "word-search"
+  ],
+  "7576": [
+    "word-search",
+    "unique-paths",
+    "trapping-rain-water"
+  ],
+  "1753": [
+    "minimum-path-sum",
+    "unique-paths",
+    "merge-intervals"
+  ],
+  "1916": [
+    "minimum-path-sum",
+    "unique-paths",
+    "unique-paths-ii"
+  ],
+  "11404": [
+    "minimum-path-sum",
+    "unique-paths",
+    "unique-paths-ii"
+  ],
+  "1197": [
+    "merge-intervals",
+    "minimum-path-sum",
+    "unique-paths"
+  ],
+  "1238": [
+    "minimum-path-sum",
+    "jump-game",
+    "word-search"
+  ],
+  "1504": [
+    "minimum-path-sum",
+    "unique-paths",
+    "jump-game-ii"
+  ],
+  "9370": [
+    "minimum-path-sum",
+    "unique-paths",
+    "jump-game-ii"
+  ],
+  "13549": [
+    "jump-game",
+    "jump-game-ii",
+    "word-search"
+  ],
+  "1162": [
+    "minimum-path-sum",
+    "jump-game",
+    "maximum-subarray"
+  ],
+  "1865": [
+    "word-search",
+    "jump-game",
+    "merge-intervals"
+  ],
+  "11047": [
+    "combination-sum",
+    "minimum-path-sum",
+    "climbing-stairs"
+  ],
+  "11399": [
+    "merge-sorted-array",
+    "sort-colors",
+    "minimum-path-sum"
+  ],
+  "13305": [
+    "minimum-path-sum",
+    "jump-game",
+    "container-with-most-water"
+  ],
+  "1541": [
+    "valid-parentheses",
+    "generate-parentheses",
+    "longest-valid-parentheses"
+  ],
+  "1931": [
+    "merge-intervals",
+    "insert-interval",
+    "maximum-subarray"
+  ],
+  "2217": [
+    "container-with-most-water",
+    "maximum-subarray",
+    "largest-rectangle-in-histogram"
+  ],
+  "2839": [
+    "3sum",
+    "combination-sum",
+    "minimum-path-sum"
+  ],
+  "5585": [
+    "combination-sum",
+    "3sum",
+    "4sum"
+  ],
+  "1026": [
+    "next-permutation",
+    "3sum",
+    "merge-sorted-array"
+  ],
+  "1439": [
+    "sort-colors",
+    "remove-duplicates-from-sorted-array",
+    "maximum-subarray"
+  ],
+  "1152": [
+    "length-of-last-word",
+    "find-the-index-of-the-first-occurrence-in-a-string",
+    "substring-with-concatenation-of-all-words"
+  ],
+  "1157": [
+    "count-and-say",
+    "group-anagrams",
+    "longest-substring-without-repeating-characters"
+  ],
+  "1316": [
+    "longest-substring-without-repeating-characters",
+    "group-anagrams",
+    "valid-parentheses"
+  ],
+  "2941": [
+    "longest-substring-without-repeating-characters",
+    "find-the-index-of-the-first-occurrence-in-a-string",
+    "valid-parentheses"
+  ],
+  "5052": [
+    "longest-common-prefix",
+    "letter-combinations-of-a-phone-number",
+    "valid-parentheses"
+  ],
+  "5430": [
+    "reverse-linked-list-ii",
+    "rotate-list",
+    "reverse-integer"
+  ],
+  "9012": [
+    "valid-parentheses",
+    "longest-valid-parentheses",
+    "generate-parentheses"
+  ],
+  "9935": [
+    "valid-parentheses",
+    "longest-valid-parentheses",
+    "substring-with-concatenation-of-all-words"
+  ],
+  "1259": [
+    "palindrome-number",
+    "longest-palindromic-substring",
+    "reverse-integer"
+  ],
+  "1764": [
+    "set-matrix-zeroes",
+    "merge-intervals",
+    "longest-common-prefix"
+  ],
+  "10828": [
+    "valid-parentheses",
+    "largest-rectangle-in-histogram",
+    "reverse-linked-list-ii"
+  ],
+  "10773": [
+    "valid-parentheses",
+    "longest-valid-parentheses",
+    "remove-nth-node-from-end-of-list"
+  ],
+  "1874": [
+    "valid-parentheses",
+    "longest-valid-parentheses",
+    "generate-parentheses"
+  ],
+  "1966": [
+    "merge-k-sorted-lists",
+    "minimum-path-sum",
+    "group-anagrams"
+  ],
+  "11279": [
+    "merge-k-sorted-lists",
+    "maximum-subarray",
+    "container-with-most-water"
+  ],
+  "11286": [
+    "merge-k-sorted-lists",
+    "trapping-rain-water",
+    "maximum-subarray"
+  ],
+  "17298": [
+    "largest-rectangle-in-histogram",
+    "trapping-rain-water",
+    "next-permutation"
+  ],
+  "2493": [
+    "largest-rectangle-in-histogram",
+    "trapping-rain-water",
+    "valid-parentheses"
+  ],
+  "5397": [
+    "valid-parentheses",
+    "longest-valid-parentheses",
+    "edit-distance"
+  ],
+  "1406": [
+    "edit-distance",
+    "maximum-window-substring",
+    "valid-parentheses"
+  ],
+  "14503": [
+    "word-search",
+    "spiral-matrix",
+    "unique-paths"
+  ],
+  "3190": [
+    "word-search",
+    "unique-paths",
+    "spiral-matrix"
+  ],
+  "14891": [
+    "rotate-image",
+    "trap",
+    "search-in-rotated-sorted-array"
+  ],
+  "15686": [
+    "combination-sum",
+    "subsets",
+    "n-queens"
+  ],
+  "16236": [
+    "word-search",
+    "combination-sum",
+    "unique-paths"
+  ],
+  "17144": [
+    "trap",
+    "word-search",
+    "unique-paths"
+  ],
+  "14499": [
+    "unique-paths",
+    "spiral-matrix",
+    "word-search"
+  ],
+  "14502": [
+    "word-search",
+    "combination-sum",
+    "unique-paths"
+  ],
+  "14888": [
+    "divide-two-integers",
+    "permutations",
+    "combination-sum"
+  ],
+  "14889": [
+    "combination-sum",
+    "combination-sum-ii",
+    "3sum"
+  ],
+  "1654": [
+    "search-in-rotated-sorted-array",
+    "largest-rectangle-in-histogram",
+    "trapping-rain-water"
+  ],
+  "1920": [
+    "search-in-rotated-sorted-array",
+    "find-first-and-last-position-of-element-in-sorted-array",
+    "search-insert-position"
+  ],
+  "2110": [
+    "search-in-rotated-sorted-array",
+    "trapping-rain-water",
+    "largest-rectangle-in-histogram"
+  ],
+  "2805": [
+    "trapping-rain-water",
+    "largest-rectangle-in-histogram",
+    "search-in-rotated-sorted-array"
+  ],
+  "1011": [
+    "jump-game",
+    "jump-game-ii",
+    "minimum-path-sum"
+  ],
+  "1929": [
+    "3sum",
+    "3sum-closest",
+    "valid-sudoku"
+  ],
+  "1978": [
+    "sqrtx",
+    "valid-number",
+    "count-and-say"
+  ],
+  "4948": [
+    "valid-sudoku",
+    "search-in-rotated-sorted-array",
+    "maximum-subarray"
+  ],
+  "6064": [
+    "jump-game",
+    "unique-paths",
+    "count-and-say"
+  ],
+  "1002": [
+    "trapping-rain-water",
+    "merge-intervals",
+    "search-a-2d-matrix"
+  ],
+  "1181": [
+    "remove-duplicates-from-sorted-list",
+    "group-anagrams",
+    "sort-colors"
+  ],
+  "11650": [
+    "merge-k-sorted-lists",
+    "merge-two-sorted-lists",
+    "sort-colors"
+  ],
+  "11651": [
+    "merge-k-sorted-lists",
+    "sort-colors",
+    "merge-sorted-array"
+  ],
+  "10814": [
+    "merge-k-sorted-lists",
+    "sort-colors",
+    "merge-sorted-array"
+  ],
+  "10989": [
+    "merge-sorted-array",
+    "sort-colors",
+    "merge-k-sorted-lists"
+  ],
+  "2750": [
+    "merge-two-sorted-lists",
+    "merge-k-sorted-lists",
+    "sort-colors"
+  ],
+  "2751": [
+    "merge-sorted-array",
+    "sort-colors",
+    "search-in-rotated-sorted-array"
+  ],
+  "1427": [
+    "sort-colors",
+    "merge-sorted-array",
+    "reverse-integer"
+  ],
+  "2108": [
+    "median-of-two-sorted-arrays",
+    "largest-rectangle-in-histogram",
+    "maximum-subarray"
+  ],
+  "18870": [
+    "search-in-rotated-sorted-array",
+    "search-in-rotated-sorted-array-ii",
+    "merge-intervals"
+  ]
+}
