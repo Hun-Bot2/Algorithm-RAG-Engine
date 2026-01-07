@@ -1,66 +1,11 @@
-# Cross-lingual Algorithm Retrieval: A Study on Semantic Alignment
+# Baekjoon <-> Leetcode 알고리즘 복습 효율
 
-## 1. 학습 목적
-본 프로젝트는 서로 다른 언어(한국어, 영어)로 기술된 알고리즘 문제 간의 의미적 유사성을 측정하고, 이를 추천 시스템으로 연결하는 과정을 학습하기 위해 수행되었습니다.
+이전에 Baekjoon 100문제와 LeetCode 100문제끼리 성능을 비교해 정리한 부분은 Evaluation_100폴더에 있습니다.
 
-### 1.1 핵심 문제 정의
-* 한국어(Baekjoon)와 영어(LeetCode) 간의 도메인 갭(Domain Gap) 해소.
-* 문장의 표면적 스타일이 아닌 알고리즘의 핵심을 기반으로 한 임베딩 정렬.
-* 검색 재현율(Recall)과 정밀도(Precision)의 불균형을 해결하기 위한 파이프라인 최적화.
+내용은 개인블로그에 정리해뒀습니다. 
 
-## 2. 데이터 엔지니어링 및 전처리
-임베딩 모델이 문제의 문학적 묘사가 아닌 알고리즘의 핵심에 집중할 수 있도록 전처리 과정을 설계하였습니다.
+### 정리된 링크
+https://hun-bot.dev/ko/blog/devlog/algorithm_bot_02/
 
-### 2.1 핵심 정리
-* HTML 태그 및 마크다운 특수 기호 제거.
-* 핵심 로직, 제약 조건, 시간 및 공간 복잡도 패턴을 추출하여 요약문 형태로 변환.
-* 데이터 대칭성 확보를 위해 백준과 리트코드의 접두사(Prefix)를 통일하는 Normalization 수행.
-
-### 2.2 데이터셋 구성
-* LeetCode: 3,500개 이상의 전수 데이터 확보.
-* Baekjoon: 리트코드와 매핑 가능한 100개의 핵심 문제 선정.
-* Ground Truth: 모델 평가를 위해 100세트의 BJ-LC 정답 쌍 구축.
-
-## 3. 임베딩 모델 비교 분석 (Benchmarking)
-교차 언어 검색 성능을 확인하기 위해 세 가지 주요 모델을 대상으로 성능을 측정하였습니다.
-
-### 3.1 평가 지표 (Metrics)
-* Recall@K: 상위 K개의 결과 중 정답이 포함된 비율.
-* MRR (Mean Reciprocal Rank): 정답이 나타난 순위의 역수 평균.
-
-### 3.2 벤치마크 결과 (100-Set Golden Set 기준)
-| Model | Recall@1 | Recall@5 | Recall@10 | MRR |
-| ----- | ----- | ----- | ----- | ----- |
-| OpenAI-v3 (small) | 0.22 | 0.50 | 0.65 | 0.354 |
-| Jina-v3 (1024 dim) | 0.17 | 0.47 | 0.63 | 0.319 |
-| BGE-M3 (Local) | 0.15 | 0.40 | 0.53 | 0.272 |
-
-**공학적 해석**: OpenAI-v3 모델이 다국어 의미 정렬에서 가장 우수하였으나, Recall@10(0.65) 대비 Recall@1(0.22)이 낮게 측정되었습니다. 이는 모델이 정답 후보군을 10위 안에는 잘 가져오지만(Search), 그중에서 최상위 1위를 결정짓는 변별력(Decision Power)이 부족함을 의미합니다.
-
-## 4. 검색 병목 분석 및 해결 전략
-단순 벡터 검색(Dense Retrieval) 시 '피보나치 함수' 쿼리에 대해 수학적 구조가 같은 'Climbing Stairs'보다 단어 중복이 많은 'Count and Say'가 높게 평가되는 오류가 발견되었습니다. 이를 해결하기 위해 3단계 RAG 파이프라인을 설계하였습니다.
-
-### Stage 1: Dense Retrieval (Recall Phase)
-* 로컬 메모리에 적재된 NumPy 인덱스를 통해 코사인 유사도를 계산하여 상위 30개를 빠르게 추출합니다.
-* 벡터 DB(Pinecone) 대신 로컬 엔진을 사용하여 네트워크 지연 시간과 비용을 0으로 최적화하였습니다.
-
-### Stage 2: Hybrid Scoring (Domain Filtering)
-* 플랫폼 간 상이한 알고리즘 태그(예: dp, dynamic programming)를 매핑하는 Tag Normalization을 수행합니다.
-* 벡터 유사도(60%)와 태그 일치도(40%)를 결합하여 알고리즘 도메인의 특수성을 반영하였습니다.
-
-### Stage 3: Intelligent Re-ranking (Precision Phase)
-* GPT-4o-mini 모델을 리랭커로 활용하여 상위 10개 후보의 논리 구조를 심층 비교합니다.
-* 단순 키워드 매칭이 아닌 수학적 점화식($f(n) = f(n-1) + f(n-2)$ 등)의 일치 여부를 판단하여 Recall@1 수치를 개선하고 추천 사유(Reason)를 생성합니다.
-
-## 5. 자동화 및 서비스 통합
-학습된 로직을 실제 생활에 적용하기 위해 GitHub Actions와 Slack을 결합한 서버리스 아키텍처를 구축하였습니다.
-
-* **Spaced Repetition**: 에빙하우스 망각 곡선 주기에 맞춰 복습 대상 문제를 식별합니다.
-* **Git History Analysis**: git log를 분석하여 파일의 최초 생성일을 기준으로 복습 주기를 계산합니다.
-* **Zero-cost Hosting**: GitHub Actions의 컴퓨팅 자원과 저장소 내 .npy 파일을 활용하여 별도의 서버 비용 없이 서비스를 운영합니다.
-
-## 6. 학습 결론 및 시사점
-1. RAG의 핵심은 전처리: 임베딩 모델의 성능보다 데이터의 정밀한 정제(Logical Skeleton)가 검색 품질에 더 큰 영향을 미칩니다.
-2. 다단계 파이프라인의 필요성: 임베딩 모델의 변별력 한계를 LLM 기반의 리랭커로 보완할 때 실무적인 수준의 정밀도(Recall@1) 확보가 가능합니다.
-3. 비용 효율적 설계: 3,500개의 데이터를 전수 조사하더라도 로컬 NumPy 연산과 지능형 필터링을 결합하면 최소한의 API 비용으로 고성능 엔진 운영이 가능함을 확인하였습니다.
-        
+---
+## Langchain FAISS

@@ -26,3 +26,6 @@ p.ipynb
 
 # Test notebooks
 *.ipynb
+
+# Reports
+REPORT.md
