@@ -15,3 +15,14 @@ env/
 # IDE Settings
 .vscode/
 .idea/
+
+# Data files (large datasets)
+*.jsonl
+*.npy
+
+# Temporary files
+temp.md
+p.ipynb
+
+# Test notebooks
+*.ipynb
