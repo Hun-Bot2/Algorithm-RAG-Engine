@@ -23,7 +23,7 @@ env/
 
 # Data files (large datasets)
 *.jsonl
-*.npy
+
 
 # FAISS indexes (binary)
 indexes/
@@ -31,12 +31,6 @@ indexes/
 # Temporary files
 temp.md
 p.ipynb
-
-# Test notebooks
-*.ipynb
-
-# Evaluation results
-Evaluation_*/
 
 # Reports
 REPORT.md
