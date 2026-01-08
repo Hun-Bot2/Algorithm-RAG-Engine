@@ -36,18 +36,3 @@
 | BGE-M3 (Local) | 0.15 | 0.40 | 0.53 | 0.272 |
 
 **공학적 해석**: OpenAI-v3 모델이 다국어 의미 정렬에서 가장 우수하였으나, Recall@10(0.65) 대비 Recall@1(0.22)이 낮게 측정되었습니다. 이는 모델이 정답 후보군을 10위 안에는 잘 가져오지만(Search), 그중에서 최상위 1위를 결정짓는 변별력(Decision Power)이 부족함을 의미합니다.
-
-## 4. 검색 병목 분석 및 해결 전략
-단순 벡터 검색(Dense Retrieval) 시 '피보나치 함수' 쿼리에 대해 수학적 구조가 같은 'Climbing Stairs'보다 단어 중복이 많은 'Count and Say'가 높게 평가되는 오류가 발견되었습니다. 이를 해결하기 위해 3단계 RAG 파이프라인을 설계하였습니다.
-
-### Stage 1: Dense Retrieval (Recall Phase)
-* 로컬 메모리에 적재된 NumPy 인덱스를 통해 코사인 유사도를 계산하여 상위 30개를 빠르게 추출합니다.
-* 벡터 DB(Pinecone) 대신 로컬 엔진을 사용하여 네트워크 지연 시간과 비용을 0으로 최적화하였습니다.
-
-### Stage 2: Hybrid Scoring (Domain Filtering)
-* 플랫폼 간 상이한 알고리즘 태그(예: dp, dynamic programming)를 매핑하는 Tag Normalization을 수행합니다.
-* 벡터 유사도(60%)와 태그 일치도(40%)를 결합하여 알고리즘 도메인의 특수성을 반영하였습니다.
-
-### Stage 3: Intelligent Re-ranking (Precision Phase)
-* GPT-4o-mini 모델을 리랭커로 활용하여 상위 10개 후보의 논리 구조를 심층 비교합니다.
-* 단순 키워드 매칭이 아닌 수학적 점화식($f(n) = f(n-1) + f(n-2)$ 등)의 일치 여부를 판단하여 Recall@1 수치를 개선하고 추천 사유(Reason)를 생성합니다.
