@@ -6,16 +6,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class LeetCodeRefiner:
+class BaekjoonRefiner:
     def __init__(self):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.model = "gpt-4o-mini" # 비용 효율성을 고려하되, 품질 저하 시 4o로 상향 검토
+        self.model = "gpt-4o-mini"
 
     def extract_skeleton(self, title, tags, content):
         # Extract core algorithm logic with unified format
         prompt = f"""
-        Extract the core algorithm logic from the LeetCode problem below.
-        Discard all examples, specific input numbers, and boilerplate text.
+        Extract the core algorithm logic from the following Korean problem description.
+        Translate them into a concise English summary for technical retrieval.
         
         Title: {title}
         Tags: {tags}
@@ -47,21 +47,22 @@ class LeetCodeRefiner:
             for item in all_problems:
                 print(f"Processing ({processed_count + 1}/{len(all_problems)}): {item['title']}")
                 
-                # 기존 embedding_text를 Skeleton으로 교체
                 skeleton = self.extract_skeleton(
                     item['title'], 
-                    item['tags'], 
-                    item['content_cleaned']
+                    item.get('tags', []), 
+                    item.get('content_cleaned', item.get('content', ''))
                 )
                 
                 if skeleton:
                     item["embedding_text"] = skeleton
                     out_f.write(json.dumps(item, ensure_ascii=False) + "\n")
                     processed_count += 1
+                
+                time.sleep(0.05)
 
 if __name__ == "__main__":
-    refiner = LeetCodeRefiner()
+    refiner = BaekjoonRefiner()
     refiner.process_all(
-        "Evaluation_100/data/leetcode_preprocessed.jsonl", 
-        "Evaluation_100/data/leetcode_refined.jsonl"
+        "Evaluation_100/data/baekjoon_preprocessed.jsonl", 
+        "Evaluation_100/data/baekjoon_refined.jsonl"
     )
