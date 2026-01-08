@@ -16,9 +16,17 @@ env/
 .vscode/
 .idea/
 
+# OS files
+.DS_Store
+*.swp
+*.swo
+
 # Data files (large datasets)
 *.jsonl
 *.npy
+
+# FAISS indexes (binary)
+indexes/
 
 # Temporary files
 temp.md
@@ -27,5 +35,10 @@ p.ipynb
 # Test notebooks
 *.ipynb
 
+# Evaluation results
+Evaluation_*/
+
 # Reports
 REPORT.md
+Project_Prompt*.md
+Prompt.md
