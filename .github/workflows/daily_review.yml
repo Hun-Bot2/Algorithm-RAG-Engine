@@ -37,6 +37,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Download FAISS index
+        run: |
+          curl -L https://github.com/Hun-Bot2/Algorithm-RAG-Engine/releases/download/v1.0.0-faiss-index/faiss-index.tar.gz -o faiss-index.tar.gz
+          tar -xzf faiss-index.tar.gz -C .
+          rm faiss-index.tar.gz
+
       - name: Run daily review bot
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

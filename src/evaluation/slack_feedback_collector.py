@@ -9,8 +9,6 @@ from dataclasses import dataclass
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-from src.evaluation.recommendation_evaluator import RecommendationEvaluator
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 
@@ -18,6 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from src.utils.logger import get_logger
+from src.evaluation.recommendation_evaluator import RecommendationEvaluator
 
 logger = get_logger(__name__)
 

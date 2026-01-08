@@ -39,7 +39,11 @@ class DailyReviewBot:
             self.DEFAULT_REVIEW_CYCLES
         )
         
-        self.pipeline = RecommendationPipeline(self.review_cycles)
+        try:
+            self.pipeline = RecommendationPipeline(self.review_cycles)
+        except FileNotFoundError as e:
+            logger.warning(f"FAISS index missing; pipeline will skip recommendations. {e}")
+            self.pipeline = None
     
     @staticmethod
     def _parse_env_review_cycles() -> Optional[list]:
@@ -59,6 +63,9 @@ class DailyReviewBot:
         logger.info("="*80)
         
         # 파이프라인 실행
+        if not self.pipeline:
+            logger.warning("Pipeline unavailable; skipping run.")
+            return {}
         result = self.pipeline.run(
             today=None,  # 오늘 날짜 자동 사용
             dry_run=dry_run,
