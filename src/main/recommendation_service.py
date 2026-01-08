@@ -214,10 +214,14 @@ class RecommendationService:
         Args:
             index_dir: FAISS 인덱스 디렉토리
         """
-        self.engine = FAISSRecommendationEngine(
-            index_dir=index_dir,
-            llm_reranking=True
-        )
+        try:
+            self.engine = FAISSRecommendationEngine(
+                index_dir=index_dir,
+                llm_reranking=True
+            )
+        except FileNotFoundError as e:
+            logger.warning(f"FAISS index missing; recommendations will be skipped. {e}")
+            self.engine = None
     
     def get_recommendations_for_problem(
         self,
@@ -226,6 +230,9 @@ class RecommendationService:
         top_n: int = 3
     ) -> List[Dict]:
         """문제에 대한 추천 조회"""
+        if not self.engine:
+            logger.debug("Recommendation engine unavailable; returning empty recommendations.")
+            return []
         try:
             recommendations = self.engine.get_recommendations(
                 problem_content,

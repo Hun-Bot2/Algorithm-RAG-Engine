@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
+from src.evaluation.recommendation_evaluator import RecommendationEvaluator
+
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 
