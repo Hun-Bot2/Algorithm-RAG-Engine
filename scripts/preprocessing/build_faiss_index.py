@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Build a FAISS index from the collected LeetCode dataset.
-- Reads: data/raw/leetcode_raw_data.jsonl
-- Produces: indexes/faiss_leetcode (FAISS + index metadata)
-- Embeddings: OpenAI by default, falls back to sentence-transformers
-"""
 import os
 import sys
 import json
