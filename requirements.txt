@@ -35,7 +35,6 @@ pytest>=7.4.0
 pytest-cov>=4.1.0
 
 # Evaluation & Monitoring
-sqlite3
 langsmith>=0.1.0
 slack-sdk>=3.19.0
 
