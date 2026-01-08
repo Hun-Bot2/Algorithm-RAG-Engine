@@ -389,9 +389,10 @@ class RecommendationPipeline:
             
             problem['recommendations'] = recommendations
             
-            # LangSmith에 로깅 (평가는 LangSmith에서 자동)
+            # LangSmith에 로깅 및 run_id 저장
+            run_id = None
             if recommendations:
-                self.langsmith_tracker.log_recommendation(
+                run_id = self.langsmith_tracker.log_recommendation(
                     baekjoon_problem=problem['problem_name'],
                     recommendations=recommendations,
                     metadata={
@@ -400,6 +401,9 @@ class RecommendationPipeline:
                         'difficulty': problem.get('difficulty', 'unknown')
                     }
                 )
+            
+            # run_id를 문제 데이터에 추가 (나중에 피드백 연결용)
+            problem['langsmith_run_id'] = run_id
             
             review_data.append(problem)
         

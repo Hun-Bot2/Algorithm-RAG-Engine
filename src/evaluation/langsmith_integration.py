@@ -61,13 +61,22 @@ class LangSmithTracker:
             return None
         
         try:
-            from langsmith import traceable
+            from langsmith.run_helpers import traceable
+            import langsmith
+            
+            run_id_container = []
             
             @traceable(
                 name="problem_recommendation",
-                project_name=self.project_name
+                project_name=self.project_name,
+                run_type="chain"
             )
             def recommend():
+                # 현재 run context에서 run_id 가져오기
+                current_run = langsmith.get_current_run_tree()
+                if current_run:
+                    run_id_container.append(str(current_run.id))
+                
                 return {
                     "baekjoon_problem": baekjoon_problem,
                     "recommendations": recommendations,
@@ -76,8 +85,14 @@ class LangSmithTracker:
                 }
             
             result = recommend()
-            logger.info(f"Logged to LangSmith: {baekjoon_problem}")
-            return result
+            run_id = run_id_container[0] if run_id_container else None
+            
+            if run_id:
+                logger.info(f"Logged to LangSmith: {baekjoon_problem} (run_id: {run_id})")
+            else:
+                logger.warning(f"Logged to LangSmith but no run_id: {baekjoon_problem}")
+            
+            return run_id
         
         except Exception as e:
             logger.error(f"Failed to log to LangSmith: {e}")

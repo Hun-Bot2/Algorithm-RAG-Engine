@@ -169,16 +169,31 @@ class SlackFeedbackCollector:
             if not feedback_type:
                 continue
             
-            # 추천 ID 추출 (임시: ts 기반)
-            recommendation_id = f"{date.isoformat()}_{ts}_{reaction_name}"
+            # run_id 추출 시도 (메시지에 숨겨진 메타데이터)
+            # 형식: <!-- langsmith_run_id:uuid -->
+            run_id = None
+            import re
+            run_id_match = re.search(r'<!-- langsmith_run_id:([a-f0-9-]+) -->', message_text)
+            if run_id_match:
+                run_id = run_id_match.group(1)
+                logger.debug(f"Found run_id in message: {run_id}")
+            else:
+                # fallback: timestamp 기반 ID
+                run_id = f"{date.isoformat()}_{ts}"
+                logger.debug(f"No run_id found, using ts-based ID: {run_id}")
             
             logger.info(f"Processing reaction: {reaction_name} ({reaction_count}x) on message {ts}")
             
-            # 피드백 저장 (반응 개수만큼)
+            # 피드백을 LangSmith에 저장
             for _ in range(reaction_count):
                 success = self.evaluator.save_feedback(
-                    recommendation_id=recommendation_id,
-                    feedback_type=feedback_type
+                    recommendation_id=run_id,
+                    feedback_type=feedback_type,
+                    metadata={
+                        'message_ts': ts,
+                        'reaction': reaction_name,
+                        'date': date.isoformat()
+                    }
                 )
                 if success:
                     processed += 1
