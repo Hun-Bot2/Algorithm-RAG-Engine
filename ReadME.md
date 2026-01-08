@@ -1,11 +1,10 @@
-# Baekjoon <-> Leetcode 알고리즘 복습 효율
+# Algorithm RAG Engine
+백준 문제 풀이 기반 LeetCode 자동 추천 시스템
 
-이전에 Baekjoon 100문제와 LeetCode 100문제끼리 성능을 비교해 정리한 부분은 Evaluation_100폴더에 있습니다.
+## Project Goal
+기존에 복습 주기에 따라 Slack 알림만 줬던 기능에서 -> 풀고 github에 업로드한 백준 문제를 분석하여 유사한 LeetCode 문제를 자동으로 추천
+- GitHub Actions 자동화 + Slack 알림
+- FAISS 벡터 검색 기반 추천
+- Spaced Repetition 복습 스케줄
 
-내용은 개인블로그에 정리해뒀습니다. 
-
-### 정리된 링크
-https://hun-bot.dev/ko/blog/devlog/algorithm_bot_02/
-
----
-## Langchain FAISS
+**Last Updated**: 2026-01-08
