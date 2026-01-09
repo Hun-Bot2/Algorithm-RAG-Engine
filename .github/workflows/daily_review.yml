@@ -36,19 +36,18 @@ jobs:
 
       - name: Download FAISS index from Releases
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Downloading FAISS index..."
-          # v1.0.0-faiss-index 태그에서 faiss-index.tar.gz 다운로드
-          gh release download v1.0.0-faiss-index -p "faiss-index.tar.gz"
+          gh release download v1.0.0-faiss-index -p "faiss-index.tar.gz" || {
+            echo "Release download failed, proceeding without index"
+            exit 0
+          }
           
           echo "Extracting files..."
           tar -xzf faiss-index.tar.gz
           rm faiss-index.tar.gz
-          
-          echo "Verifying structure..."
-          # 디버깅: 압축 해제 후 indexes 폴더가 잘 있는지 확인
-          ls -R
+          echo "FAISS index ready"
 
       - name: Run daily review bot
         env:
