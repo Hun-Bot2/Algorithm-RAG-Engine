@@ -24,9 +24,12 @@ env/
 # Data files (large datasets)
 *.jsonl
 
-
 # FAISS indexes (binary)
 indexes/
+*.zip
+*.faiss
+*.pkl
+*.tar.*
 
 # Temporary files
 temp.md
@@ -34,3 +37,5 @@ p.ipynb
 
 # Reports
 Evaluation_100/docs/
+docs/
+

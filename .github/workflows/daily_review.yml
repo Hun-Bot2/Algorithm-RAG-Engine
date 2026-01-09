@@ -4,15 +4,20 @@ on:
   schedule:
     # 매일 22:00 UTC (한국 시간 07:00 KST)
     - cron: "0 22 * * *"
-  workflow_dispatch:  # 수동 트리거
+  workflow_dispatch:  # 수동 실행 버튼 (테스트용)
 
 env:
-  PYTHON_VERSION: "3.13"
+  # 안정성: faiss-cpu 및 ML 라이브러리 호환성을 위해 3.10 고정
+  PYTHON_VERSION: "3.10"
 
 jobs:
   daily-review:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
+    # GitHub CLI(gh)가 릴리즈를 읽기 위한 권한 설정
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -24,36 +29,43 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: "pip"
 
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download FAISS index
+      - name: Download FAISS index from Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -L https://github.com/Hun-Bot2/Algorithm-RAG-Engine/releases/download/v1.0.0-faiss-index/faiss-index.tar.gz -o faiss-index.tar.gz
-          tar -xzf faiss-index.tar.gz -C .
+          echo "Downloading FAISS index..."
+          # v1.0.0-faiss-index 태그에서 faiss-index.tar.gz 다운로드
+          gh release download v1.0.0-faiss-index -p "faiss-index.tar.gz"
+          
+          echo "Extracting files..."
+          tar -xzf faiss-index.tar.gz
           rm faiss-index.tar.gz
+          
+          echo "Verifying structure..."
+          # 디버깅: 압축 해제 후 indexes 폴더가 잘 있는지 확인
+          ls -R
 
       - name: Run daily review bot
         env:
+          # 필수 API 키 (GitHub Secrets)
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+          
+          # 환경 설정
           LANGCHAIN_TRACING_V2: "true"
           LANGCHAIN_PROJECT: "Algorithm-RAG-Engine"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REVIEW_CYCLES: "1,3,7,14,30"
+          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Running Bot Script..."
           python src/main/slack_bot_daily_review.py
 
       - name: Upload logs
