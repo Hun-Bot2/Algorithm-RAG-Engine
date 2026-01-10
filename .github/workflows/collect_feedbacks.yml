@@ -1,10 +1,6 @@
 name: Collect Slack Feedbacks
 
-on:
-  schedule:
-    # 매주 일요일 20:00 UTC (한국 시간 월요일 05:00 KST)
-    - cron: "0 20 * * 0"
-  workflow_dispatch:  # 수동 트리거
+on: []
 
 env:
   PYTHON_VERSION: "3.13"
