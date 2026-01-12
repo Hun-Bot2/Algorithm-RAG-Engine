@@ -1,0 +1,24 @@
+# Heavy dependencies for FAISS indexing & embedding generation
+# Used in Docker stage 1: Heavy Builder
+
+# Core dependencies
+python-dotenv>=1.0.0
+python-dateutil>=2.8.2
+tqdm>=4.66.0
+
+# Data processing
+pandas>=2.1.0
+numpy>=1.24.0
+beautifulsoup4>=4.12.0
+
+# Vector search & embeddings (Heavy libraries)
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.0
+openai>=1.0.0
+torch>=2.0.0
+
+# LLM Framework
+langchain>=0.1.0
+langchain-openai>=0.0.2
+langchain-community>=0.0.10
+langsmith>=0.1.0

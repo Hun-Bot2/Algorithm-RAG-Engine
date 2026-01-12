@@ -1,0 +1,88 @@
+name: Algorithm Review Pipeline
+
+on:
+  schedule:
+    - cron: "0 22 * * *"  # Korea time 7 AM
+  workflow_dispatch:      # Manual trigger
+
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET_NAME: hunbot-algo-rag-data
+
+jobs:
+  # ==================================================
+  # Job 1: Heavy Computation (Upload recent data to S3)
+  # ==================================================
+  generate-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Docker Build (Heavy Target)
+      - name: Build Heavy Image
+        run: docker build --target heavy -t algo-heavy .
+
+      # Docker Run & Extract Artifacts
+      # (Container internal /app/artifacts -> Host ./artifacts mapping)
+      - name: Generate Artifacts
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+        run: |
+          mkdir -p artifacts
+          docker run --rm \
+            -e OPENAI_API_KEY=$OPENAI_API_KEY \
+            -e LANGSMITH_API_KEY=$LANGSMITH_API_KEY \
+            -v $(pwd)/artifacts:/app/artifacts \
+            algo-heavy
+
+      # S3 Upload (artifacts folder contents -> S3 root)
+      - name: Upload to S3
+        run: |
+          aws s3 sync ./artifacts s3://${{ env.S3_BUCKET_NAME }}/ --delete
+          echo "Upload Complete!"
+
+  # ==================================================
+  # Job 2: Light Notification (Download on S3 & Notify)
+  # ==================================================
+  daily-notify:
+    needs: generate-map  # After job 1 completes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # S3 Download
+      - name: Download Artifacts
+        run: |
+          aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/recommendation_map.json .
+          echo "Download Complete!"
+
+      # Docker Build (Light Target) - Very Fast
+      - name: Build Light Image
+        run: docker build --target light -t algo-light .
+
+      # Docker Run (Mount downloaded JSON to container)
+      - name: Send Slack Notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+        run: |
+          docker run --rm \
+            -e SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL \
+            -e LANGSMITH_API_KEY=$LANGSMITH_API_KEY \
+            -v $(pwd)/recommendation_map.json:/app/recommendation_map.json \
+            algo-light

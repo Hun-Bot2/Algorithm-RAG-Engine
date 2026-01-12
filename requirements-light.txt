@@ -1,0 +1,20 @@
+# Light dependencies for daily Slack notifications
+# Used in Docker stage 2: Light Runner
+# Excludes heavy ML libraries (FAISS, PyTorch, transformers)
+
+# Core dependencies
+python-dotenv>=1.0.0
+python-dateutil>=2.8.2
+requests>=2.31.0
+
+# Slack integration
+slack-sdk>=3.19.0
+
+# Lightweight LLM integration
+langchain>=0.1.0
+langchain-openai>=0.0.2
+langsmith>=0.1.0
+
+# Utilities
+PyGithub>=2.1.1
+python-json-logger>=2.0.0
