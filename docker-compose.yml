@@ -1,0 +1,73 @@
+services:
+  # -------------------------------------------------------
+  # Service 1: Heavy Job (Sparse Checkout)
+  # Fetches only the 'Algorithm' folder from the remote repo.
+  # -------------------------------------------------------
+  heavy-job:
+    build:
+      context: .
+      target: heavy
+    volumes:
+      # [Artifacts] Save the output JSON locally
+      - ./artifacts:/app/artifacts
+      
+      # [Cache] Persist downloaded data to speed up future runs
+      - repo_cache:/app/repo
+      - ./indexes:/app/indexes
+      
+    environment:
+      # Repository Configuration
+      - REPO_URL=https://github.com/Hun-Bot2/Hun-Bot2.github.io.git
+      - BRANCH_NAME=main
+      
+      # Target Path for Sparse Checkout
+      # Note: This must match the relative path in the repo exactly
+      - TARGET_FOLDER=study/docs/Algorithm/
+      
+      # Path for Python script to analyze
+      - DATA_DIR=/app/repo/study/docs/Algorithm
+      - OUTPUT_DIR=/app/artifacts
+
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      
+    # [Command Logic]
+    # 1. Create repo directory.
+    # 2. If .git is missing (First Run):
+    #    - Initialize git, enable sparse-checkout, set target folder, and pull.
+    # 3. If .git exists (Subsequent Runs):
+    #    - Just pull the latest changes for that specific folder.
+    command: >
+      sh -c "
+      mkdir -p /app/repo && cd /app/repo &&
+      if [ ! -d .git ]; then
+        echo '[INFO] Initializing Sparse Checkout...';
+        git init;
+        git remote add -f origin \$REPO_URL;
+        git config core.sparseCheckout true;
+        echo \"\$TARGET_FOLDER\" >> .git/info/sparse-checkout;
+        git pull origin \$BRANCH_NAME;
+      else
+        echo '[INFO] Updating existing Sparse Checkout...';
+        git pull origin \$BRANCH_NAME;
+      fi &&
+      echo '[INFO] Starting Analysis on: ' \$DATA_DIR &&
+      cd /app && python src/main/generate_index_map.py
+      "
+
+  # -------------------------------------------------------
+  # Service 2: Light Bot (Slack Alert)
+  # -------------------------------------------------------
+  light-bot:
+    build:
+      context: .
+      target: light
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+    environment:
+      - ARTIFACT_PATH=/app/artifacts/recommendation_map.json
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+
+# Define the persistent volume
+volumes:
+  repo_cache:

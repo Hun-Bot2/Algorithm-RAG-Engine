@@ -1,0 +1,114 @@
+{
+  "lc-974": {
+    "id": "lc-974",
+    "title": "974. Subarray Sums Divisible by K",
+    "tags": [],
+    "recommendations": [
+      {
+        "id": "1016",
+        "title": "Subarray Sums Divisible by K",
+        "difficulty": "Medium",
+        "similarity": 0.6762,
+        "ai_comment": "이 문제는 부분 배열의 합이 K로 나누어 떨어지는지를 판단하는 방식으로, 해시맵을 이용한 누적 합의 개념을 활용하여 효율적인 알고리즘을 연습할 수 있는 좋은 후속 문제입니다."
+      },
+      {
+        "id": "3653",
+        "title": "Maximum Subarray Sum With Length Divisible by K",
+        "difficulty": "Medium",
+        "similarity": 0.7904,
+        "ai_comment": "\"974. Subarray Sums Divisible by K\" 문제를 해결한 후, \"Maximum Subarray Sum With Length Divisible by K\" 문제는 부분 배열의 합과 길이의 나눗셈 성질을 활용하는 유사한 알고리즘적 개념을 다루기 때문에 좋은 후속 문제입니다."
+      },
+      {
+        "id": "2670",
+        "title": "Make K-Subarray Sums Equal",
+        "difficulty": "Medium",
+        "similarity": 0.8283,
+        "ai_comment": "\"Make K-Subarray Sums Equal\" 문제는 K로 나누어 떨어지는 부분 배열의 합을 다루는 문제로, 이전 문제에서 배운 나머지 연산과 부분 배열의 합을 활용하여 더 복잡한 조건을 이해하고 해결하는 데 도움이 됩니다."
+      }
+    ]
+  },
+  "bj-11003": {
+    "id": "bj-11003",
+    "title": "11003 - category [Level]",
+    "tags": [],
+    "recommendations": [
+      {
+        "id": "1727",
+        "title": "Cat and Mouse II",
+        "difficulty": "Hard",
+        "similarity": 1.3714,
+        "ai_comment": "\"Cat and Mouse II\"는 그래프 이론과 최적화 문제를 다루며, \"11003 - category [Level]\"에서 배운 알고리즘적 사고를 확장하는 데 도움이 됩니다."
+      },
+      {
+        "id": "591",
+        "title": "Tag Validator",
+        "difficulty": "Hard",
+        "similarity": 1.3741,
+        "ai_comment": "\"Tag Validator\" 문제는 문자열 처리와 유효성 검사 알고리즘을 연습할 수 있어, \"11003 - category [Level]\" 문제에서 배운 개념을 확장하는 데 도움이 됩니다."
+      },
+      {
+        "id": "2619",
+        "title": "Categorize Box According to Criteria",
+        "difficulty": "Easy",
+        "similarity": 1.3846,
+        "ai_comment": "\"Categorize Box According to Criteria\" 문제는 주어진 조건에 따라 데이터를 분류하는 알고리즘적 사고를 요구하므로, \"11003 - category [Level]\" 문제와 유사한 분류 및 정렬 개념을 연습할 수 있는 좋은 후속 문제입니다."
+      }
+    ]
+  },
+  "bj-11660": {
+    "id": "bj-11660",
+    "title": "11660 - 구간 합 구하기 5 [Silver 1]",
+    "tags": [],
+    "recommendations": [
+      {
+        "id": "3095",
+        "title": "Maximum Number of Alloys",
+        "difficulty": "Medium",
+        "similarity": 1.4384,
+        "ai_comment": "\"Maximum Number of Alloys\" 문제는 구간 합 구하기와 유사한 배열의 처리 및 최적화 문제로, 효율적인 탐색 및 조합을 통해 최적의 해를 찾는 알고리즘적 사고를 더욱 발전시킬 수 있습니다."
+      },
+      {
+        "id": "312",
+        "title": "Burst Balloons",
+        "difficulty": "Hard",
+        "similarity": 1.4691,
+        "ai_comment": "\"버스트 풍선\" 문제는 동적 프로그래밍을 활용하여 최적의 해를 구하는 방법을 연습할 수 있어, 구간 합을 다루는 문제와 유사한 접근 방식을 요구합니다."
+      },
+      {
+        "id": "2250",
+        "title": "K Highest Ranked Items Within a Price Range",
+        "difficulty": "Medium",
+        "similarity": 1.4694,
+        "ai_comment": "\"구간 합 구하기 5\" 문제에서 배운 구간 합 계산 기법을 활용하여, 가격 범위 내에서 상위 K개의 아이템을 찾는 문제를 해결할 수 있기 때문에 좋은 후속 문제입니다."
+      }
+    ]
+  },
+  "bj-10986": {
+    "id": "bj-10986",
+    "title": "10986 - 나머지 합 [Gold 3]",
+    "tags": [],
+    "recommendations": [
+      {
+        "id": "1522",
+        "title": "Stone Game III",
+        "difficulty": "Hard",
+        "similarity": 1.487,
+        "ai_comment": "\"Stone Game III\"는 동적 계획법을 활용하여 최적의 선택을 통해 점수를 극대화하는 문제로, \"나머지 합\" 문제에서 배운 누적 합과 최적화 기법을 적용할 수 있어 좋은 후속 문제입니다."
+      },
+      {
+        "id": "529",
+        "title": "Minesweeper",
+        "difficulty": "Medium",
+        "similarity": 1.4902,
+        "ai_comment": "\"Minesweeper\" 문제는 나머지 연산과 누적 합을 활용하여 효율적으로 문제를 해결하는 방법을 연습할 수 있어, \"10986 - 나머지 합\" 문제와 연관된 알고리즘적 개념을 심화하는 데 도움이 됩니다."
+      },
+      {
+        "id": "1727",
+        "title": "Cat and Mouse II",
+        "difficulty": "Hard",
+        "similarity": 1.4951,
+        "ai_comment": "\"Cat and Mouse II\"는 나머지 연산과 관련된 문제로, 주어진 조건을 만족하는 최적의 경로를 찾는 알고리즘적 사고를 요구하므로, 나머지 합 문제에서 배운 개념을 확장하는 데 도움이 됩니다."
+      }
+    ]
+  }
+}

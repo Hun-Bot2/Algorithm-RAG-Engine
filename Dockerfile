@@ -18,14 +18,15 @@ FROM base as heavy
 COPY requirements-heavy.txt .
 RUN pip install --no-cache-dir -r requirements-heavy.txt
 
-# Copy source code and data
-COPY src/ ./src/
-COPY study/ ./study/
+# Create directories for Volume Mounts (fixes "not found" error)
+# We do NOT copy 'study' here. We mount it at runtime.
+RUN mkdir -p /app/study /app/artifacts
 
-# Create directory for artifacts
-RUN mkdir -p /app/artifacts
+# Copy source code
+COPY src/ ./src/
 
 # Command to run indexing script
+# Ensure your script uses os.getenv('DATA_DIR', './study')
 CMD ["python", "src/main/generate_index_map.py"]
 
 # ==========================================
@@ -37,8 +38,11 @@ FROM base as light
 COPY requirements-light.txt .
 RUN pip install --no-cache-dir -r requirements-light.txt
 
-# Copy source code (Light bot does not need data/index, only code)
-COPY src/main/slack_bot_daily_review.py ./src/main/
+# Create artifacts directory (to read the json map)
+RUN mkdir -p /app/artifacts
+
+# Copy source code
+COPY src/ ./src/
 
 # Command to run: Read mapped JSON and send to Slack
 CMD ["python", "src/main/slack_bot_daily_review.py"]
