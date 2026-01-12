@@ -101,7 +101,7 @@ class DailyReviewBot:
                 
                 # Add AI Comment if exists
                 if r_comment:
-                     line += f"\n  > 💡 {r_comment}"
+                     line += f"\n  > {r_comment}"
                 
                 rec_lines.append(line)
             rec_str = "\n".join(rec_lines)
