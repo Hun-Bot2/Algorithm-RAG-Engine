@@ -1,207 +1,194 @@
-import json
 import os
+import glob
+import json
+import re
 import sys
-from pathlib import Path
-from typing import Dict, List
-from datetime import datetime
-from dotenv import load_dotenv
-import logging
+from typing import List, Dict, Optional, Tuple
 
-# Load environment variables
-load_dotenv()
-
-# Add project root to path
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.append(str(ROOT))
-
-from src.rag.faiss_recommendation_engine import FAISSRecommendationEngine
-from src.utils.file_io import load_jsonl
-
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+# Constants (aligned with Docker volume mount: /app/artifacts)
+DATA_DIR = "./study"
+OUTPUT_DIR = "./artifacts"
+ARTIFACT_FILE = "recommendation_map.json"
+MAX_RECOMMENDATIONS = 3
 
 
-class RecommendationMapGenerator:
+def parse_frontmatter(content: str) -> Optional[Dict]:
     """
-    Heavy Job: Pre-compute recommendation map using FAISS index
-    
-    This runs once per day/week and generates a static JSON file
-    containing recommendations for all Baekjoon problems.
+    Parse YAML-like frontmatter from MDX content without extra deps.
+    Expects content starting with '---' and ending with the next '---'.
     """
-    
-    def __init__(self, 
-                 baekjoon_data_path: str = "Evaluation_100/data/baekjoon_refined.jsonl",
-                 faiss_index_dir: str = "indexes/faiss_production",
-                 output_dir: str = "/app/artifacts"):
-        """
-        Args:
-            baekjoon_data_path: Path to refined Baekjoon problems
-            faiss_index_dir: Path to FAISS index directory
-            output_dir: Output directory for artifacts (must be /app/artifacts for Docker)
-        """
-        self.baekjoon_data_path = baekjoon_data_path
-        self.faiss_index_dir = faiss_index_dir
-        self.output_dir = output_dir
-        
-        # Initialize FAISS engine
-        logger.info("Initializing FAISS Recommendation Engine...")
-        self.engine = FAISSRecommendationEngine(
-            index_dir=self.faiss_index_dir,
-            model_type="openai",
-            llm_reranking=True  # Use LLM for quality QA
-        )
-        
-        logger.info("✓ FAISS Engine initialized")
-    
-    def load_baekjoon_problems(self) -> List[Dict]:
-        """Load refined Baekjoon problems"""
-        logger.info(f"Loading Baekjoon problems from {self.baekjoon_data_path}...")
-        
+    try:
+        match = re.search(r'^---\n(.*?)\n---', content, re.DOTALL)
+        if not match:
+            return None
+
+        frontmatter_raw = match.group(1)
+        metadata: Dict[str, object] = {}
+
+        for line in frontmatter_raw.split('\n'):
+            if ':' not in line:
+                continue
+            key, value = line.split(':', 1)
+            key = key.strip()
+            value = value.strip()
+
+            if value.startswith('[') and value.endswith(']'):
+                value = [v.strip() for v in value[1:-1].split(',') if v.strip()]
+
+            metadata[key] = value
+
+        return metadata
+    except Exception as e:
+        print(f"[WARN] Failed to parse frontmatter. Error: {e}")
+        return None
+
+
+def normalize_tags(raw_tags) -> List[str]:
+    """Ensure tags are a lowercase list."""
+    if raw_tags is None:
+        return []
+    if isinstance(raw_tags, str):
+        return [raw_tags.strip().lower()] if raw_tags.strip() else []
+    if isinstance(raw_tags, list):
+        return [str(t).strip().lower() for t in raw_tags if str(t).strip()]
+    return []
+
+
+def jaccard_score(a: List[str], b: List[str]) -> float:
+    """Simple Jaccard similarity for tag overlap."""
+    set_a, set_b = set(a), set(b)
+    if not set_a and not set_b:
+        return 0.0
+    return len(set_a & set_b) / len(set_a | set_b)
+
+
+def token_overlap(title_a: str, title_b: str) -> float:
+    """Lightweight overlap score using token intersection in titles."""
+    tokens_a = set(re.findall(r"\w+", title_a.lower()))
+    tokens_b = set(re.findall(r"\w+", title_b.lower()))
+    if not tokens_a or not tokens_b:
+        return 0.0
+    return len(tokens_a & tokens_b) / len(tokens_a | tokens_b)
+
+
+def load_mdx_files(base_path: str) -> List[Dict]:
+    """Recursively load .mdx files and extract frontmatter."""
+    print(f"[INFO] Scanning directory: {base_path}...")
+
+    search_pattern = os.path.join(base_path, "**", "*.mdx")
+    files = glob.glob(search_pattern, recursive=True)
+    print(f"[INFO] Found {len(files)} .mdx files.")
+
+    problems: List[Dict] = []
+    for file_path in files:
         try:
-            problems = load_jsonl(self.baekjoon_data_path)
-            logger.info(f"✓ Loaded {len(problems)} Baekjoon problems")
-            return problems
-        except FileNotFoundError:
-            logger.error(f"Baekjoon data file not found: {self.baekjoon_data_path}")
-            return []
-    
-    def generate_recommendations(self, baekjoon_problem: Dict, top_k: int = 5) -> List[Dict]:
-        """
-        Generate LeetCode recommendations for a single Baekjoon problem
-        
-        Args:
-            baekjoon_problem: Baekjoon problem dict
-            top_k: Number of recommendations to generate
-        
-        Returns:
-            List of recommended LeetCode problems with scores
-        """
-        try:
-            # Create query text from problem description
-            query_text = f"{baekjoon_problem.get('title', '')} {baekjoon_problem.get('description', '')}"
-            
-            # Get embedding from FAISS engine
-            query_embedding = self.engine.get_embedding(query_text)
-            
-            # Search similar problems
-            candidates = self.engine.search_similar(query_embedding, k=top_k * 2)
-            
-            # Rerank with LLM (for quality assurance)
-            reranked = self.engine.rerank_with_llm(candidates, query_text)
-            
-            # Format recommendations
-            recommendations = []
-            for rank, problem in enumerate(reranked[:top_k], 1):
-                rec = {
-                    "rank": rank,
-                    "leetcode_id": problem.get('problem_id'),
-                    "title": problem.get('title'),
-                    "difficulty": problem.get('difficulty'),
-                    "tags": problem.get('tags', []),
-                    "l2_distance": problem.get('l2_distance'),
-                    "llm_score": problem.get('llm_score', 0.0),
-                    "llm_reason": problem.get('llm_reason', '')
-                }
-                recommendations.append(rec)
-            
-            return recommendations
-            
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            metadata = parse_frontmatter(content)
+
+            if metadata and "id" in metadata:
+                metadata["file_path"] = file_path
+                metadata["tags"] = normalize_tags(metadata.get("tags"))
+                metadata["title"] = metadata.get("title", "Unknown Title")
+                problems.append(metadata)
+            else:
+                print(f"[WARN] Skipping {file_path}: No valid 'id' in frontmatter.")
+
         except Exception as e:
-            logger.error(f"Error generating recommendations for {baekjoon_problem.get('problem_id')}: {e}")
-            return []
-    
-    def generate_map(self) -> Dict:
-        """
-        Main method: Generate complete recommendation map
-        
-        Returns:
-            recommendation_map: {baekjoon_id -> {metadata + recommendations}}
-        """
-        logger.info("[Heavy Job] Starting Pre-computation of Recommendation Map...")
-        
-        # Load Baekjoon problems
-        baekjoon_problems = self.load_baekjoon_problems()
-        if not baekjoon_problems:
-            logger.error("No Baekjoon problems loaded. Aborting.")
-            return {}
-        
-        # Generate recommendation map
-        recommendation_map = {}
-        total = len(baekjoon_problems)
-        
-        for idx, problem in enumerate(baekjoon_problems, 1):
-            problem_id = problem.get('problem_id')
-            
-            if idx % 10 == 0 or idx == 1:
-                logger.info(f"Processing [{idx}/{total}] {problem_id}...")
-            
-            # Generate recommendations for this problem
-            recommendations = self.generate_recommendations(problem, top_k=5)
-            
-            # Build map entry
-            map_entry = {
-                "baekjoon_id": problem_id,
-                "title": problem.get('title'),
-                "difficulty": problem.get('difficulty'),
-                "description": problem.get('description', '')[:500],  # Truncate for size
-                "tags": problem.get('tags', []),
-                "recommendations": recommendations,
-                "generated_at": datetime.utcnow().isoformat()
+            print(f"[ERROR] Error reading {file_path}: {e}")
+
+    print(f"[INFO] Loaded {len(problems)} valid problem records.")
+    return problems
+
+
+def build_recommendations(problems: List[Dict], idx: int, top_k: int = MAX_RECOMMENDATIONS) -> List[Dict]:
+    """
+    Build lightweight recommendations using tag + title overlap.
+    This is a placeholder until FAISS/embedding logic is wired.
+    """
+    target = problems[idx]
+    target_tags = target.get("tags", [])
+    target_title = target.get("title", "")
+
+    scored: List[Tuple[float, Dict]] = []
+    for j, cand in enumerate(problems):
+        if j == idx:
+            continue
+
+        score_tags = jaccard_score(target_tags, cand.get("tags", []))
+        score_title = token_overlap(target_title, cand.get("title", ""))
+        score = 0.7 * score_tags + 0.3 * score_title
+
+        scored.append((score, cand))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    recommendations: List[Dict] = []
+    for rank, (score, cand) in enumerate(scored[:top_k], 1):
+        recommendations.append(
+            {
+                "rank": rank,
+                "id": cand.get("id"),
+                "title": cand.get("title"),
+                "tags": cand.get("tags", []),
+                "similarity": round(score, 4),
+                "source": "tag+title overlap (placeholder)"
             }
-            
-            recommendation_map[problem_id] = map_entry
-        
-        logger.info(f"✓ Generated recommendations for {len(recommendation_map)} problems")
-        return recommendation_map
-    
-    def save_artifacts(self, recommendation_map: Dict):
-        """
-        Save artifacts to /app/artifacts directory
-        
-        Important: Docker volume mount maps /app/artifacts to host ./artifacts
-        """
-        os.makedirs(self.output_dir, exist_ok=True)
-        
-        # Save recommendation map
-        map_path = os.path.join(self.output_dir, "recommendation_map.json")
-        with open(map_path, "w", encoding="utf-8") as f:
-            json.dump(recommendation_map, f, ensure_ascii=False, indent=2)
-        logger.info(f"✓ Saved recommendation_map.json ({len(recommendation_map)} entries)")
-        
-        # Save metadata
-        metadata_path = os.path.join(self.output_dir, "metadata.json")
-        metadata = {
-            "generated_at": datetime.utcnow().isoformat(),
-            "total_problems": len(recommendation_map),
-            "index_info": self.engine.index_info
+        )
+
+    return recommendations
+
+
+def generate_index_and_map() -> int:
+    print("[INFO] [Heavy Job] Starting Indexing & Map Generation Process...")
+
+    if not os.path.exists(DATA_DIR):
+        print(f"[ERROR] Data directory '{DATA_DIR}' not found. Ensure it is checked out or mounted.")
+        return 1
+
+    problems = load_mdx_files(DATA_DIR)
+    if not problems:
+        print("[ERROR] No problems found to index. Exiting.")
+        return 1
+
+    print("[INFO] Building recommendation map (placeholder heuristic)...")
+
+    recommendation_map: Dict[str, Dict] = {}
+    total = len(problems)
+
+    for idx, prob in enumerate(problems, 1):
+        prob_id = prob.get("id")
+        if not prob_id:
+            continue
+
+        if idx == 1 or idx % 10 == 0:
+            print(f"[INFO] Processing {idx}/{total}: {prob_id}")
+
+        recs = build_recommendations(problems, idx - 1, top_k=MAX_RECOMMENDATIONS)
+
+        recommendation_map[prob_id] = {
+            "id": prob_id,
+            "title": prob.get("title", "Unknown Title"),
+            "date": prob.get("date"),
+            "tags": prob.get("tags", []),
+            "recommendations": recs,
         }
-        with open(metadata_path, "w", encoding="utf-8") as f:
-            json.dump(metadata, f, ensure_ascii=False, indent=2)
-        logger.info(f"✓ Saved metadata.json")
-        
-        logger.info(f"✓ All artifacts saved to {self.output_dir}")
+
+    print(f"[INFO] Saving artifacts to {OUTPUT_DIR}...")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    output_path = os.path.join(OUTPUT_DIR, ARTIFACT_FILE)
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(recommendation_map, f, ensure_ascii=False, indent=2)
+
+    print(f"[INFO] Artifact generated successfully: {output_path}")
+    return 0
 
 
-def main():
-    """Main entry point for Docker container"""
-    
-    # Initialize generator
-    generator = RecommendationMapGenerator()
-    
-    # Generate recommendation map
-    recommendation_map = generator.generate_map()
-    
-    # Save artifacts
-    if recommendation_map:
-        generator.save_artifacts(recommendation_map)
-        logger.info("[Heavy Job] Pre-computation completed successfully!")
-    else:
-        logger.error("[Heavy Job] Failed to generate recommendation map")
-        sys.exit(1)
+def main() -> None:
+    exit_code = generate_index_and_map()
+    sys.exit(exit_code)
 
 
 if __name__ == "__main__":
