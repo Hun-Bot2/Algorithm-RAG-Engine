@@ -67,7 +67,7 @@ jobs:
 
       - name: Run Light Bot via Compose
         run: |
-          docker-compose run --rm \
+          docker compose run --rm \
             -e SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }} \
             light-bot
         env:
