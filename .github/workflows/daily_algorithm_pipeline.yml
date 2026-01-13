@@ -8,7 +8,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: hunbot-algo-rag-data
-  FAISS_INDEX_PATH: indexes/faiss_leetcode
+  # S3 버킷 내 실제 경로와 일치하도록 수정
+  FAISS_INDEX_PATH: faiss_leetcode
   ARTIFACT_PATH: artifacts
 
 jobs:
@@ -28,22 +29,19 @@ jobs:
       - name: Download FAISS Index from S3
         run: |
           mkdir -p indexes/faiss_leetcode
-          aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/${{ env.FAISS_INDEX_PATH }} ./indexes/faiss_leetcode --recursive
+          aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/${{ env.FAISS_INDEX_PATH }}/ ./indexes/faiss_leetcode/ --recursive
 
-      - name: Build Heavy Image
-        run: |
-          docker build --target heavy -t algo-heavy .
-
-      - name: Run Heavy Job Container
+      - name: Run Heavy Job via Compose
         run: |
           mkdir -p artifacts
-          docker run --rm \
+          # docker-compose.yml의 logic을 사용하기 위해 run 명령 사용
+          docker-compose run --rm \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
             -e LANGSMITH_API_KEY=${{ secrets.LANGSMITH_API_KEY }} \
-            -v $(pwd)/artifacts:/app/artifacts \
-            -v $(pwd)/indexes:/app/indexes \
-            algo-heavy
-        # Important: Added /app/indexes volume mount to fix 'Index not found' error
+            heavy-job
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
 
       - name: Upload Recommendation Map to S3
         run: |
@@ -68,13 +66,10 @@ jobs:
           mkdir -p artifacts
           aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/artifacts/recommendation_map.json ./artifacts/recommendation_map.json
 
-      - name: Build Light Image
+      - name: Run Light Bot via Compose
         run: |
-          docker build --target light -t algo-light .
-
-      - name: Run Light Bot Container
-        run: |
-          docker run --rm \
+          docker-compose run --rm \
             -e SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }} \
-            -v $(pwd)/artifacts:/app/artifacts:ro \
-            algo-light
+            light-bot
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

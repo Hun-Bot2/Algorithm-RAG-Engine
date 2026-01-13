@@ -11,9 +11,11 @@ services:
       # [Artifacts] Save the output JSON locally
       - ./artifacts:/app/artifacts
       
+      # FAISS Indexes Load (Downloaded from S3 in the GitHub Action)
+      - ./indexes:/app/indexes
+      
       # [Cache] Persist downloaded data to speed up future runs
       - repo_cache:/app/repo
-      - ./indexes:/app/indexes
       
     environment:
       # Repository Configuration
@@ -29,28 +31,23 @@ services:
       - OUTPUT_DIR=/app/artifacts
 
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
       
-    # [Command Logic]
-    # 1. Create repo directory.
-    # 2. If .git is missing (First Run):
-    #    - Initialize git, enable sparse-checkout, set target folder, and pull.
-    # 3. If .git exists (Subsequent Runs):
-    #    - Just pull the latest changes for that specific folder.
     command: >
       sh -c "
       mkdir -p /app/repo && cd /app/repo &&
       if [ ! -d .git ]; then
         echo '[INFO] Initializing Sparse Checkout...';
         git init;
-        git remote add -f origin \$REPO_URL;
+        git remote add -f origin $$REPO_URL;
         git config core.sparseCheckout true;
-        echo \"\$TARGET_FOLDER\" >> .git/info/sparse-checkout;
-        git pull origin \$BRANCH_NAME;
+        echo \"$$TARGET_FOLDER\" >> .git/info/sparse-checkout;
+        git pull origin $$BRANCH_NAME;
       else
         echo '[INFO] Updating existing Sparse Checkout...';
-        git pull origin \$BRANCH_NAME;
+        git pull origin $$BRANCH_NAME;
       fi &&
-      echo '[INFO] Starting Analysis on: ' \$DATA_DIR &&
+      echo '[INFO] Starting Analysis on: ' $$DATA_DIR &&
       cd /app && python src/main/generate_index_map.py
       "
 
