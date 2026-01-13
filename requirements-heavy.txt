@@ -1,30 +1,35 @@
 # ---------------------------------------------------------
-# Full RAG Architecture Dependencies
-# Stack: LangChain + FAISS + OpenAI + LangSmith
+# [CRITICAL] PyTorch CPU Index URL (Must be at the top)
+# This forces pip to look for CPU-optimized wheels first
 # ---------------------------------------------------------
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# 1. Core & Utils
+# Core & Utils
 python-dotenv>=1.0.0
 tqdm>=4.66.0
 requests>=2.31.0
 gitpython>=3.1.0
 
-# 2. Vector Store (Retrieval Engine)
+# Vector Store (Retrieval Engine)
 faiss-cpu>=1.7.4
 
-# 3. LLM Framework & Monitoring
+# LLM Framework & Monitoring
 langchain>=0.1.0
 langchain-core>=0.1.10
 langchain-community>=0.0.10
 langchain-openai>=0.0.5
 langsmith>=0.1.0
 
-# 4. Data Processing & Embeddings
+# Data Processing & Embeddings
 openai>=1.10.0
 tiktoken>=0.5.0
+
+# Note: sentence-transformers depends on torch. 
+# Since torch is defined below with the CPU index, it will use the CPU version.
 sentence-transformers>=2.2.2
 numpy>=1.24.0
 scikit-learn>=1.3.0
 
-# 5. Pytorch (CPU Optimized)
-torch>=2.0.0 --extra-index-url https://download.pytorch.org/whl/cpu
+# Pytorch (CPU Optimized)
+# The URL flag is moved to the top, so we just list the package here
+torch>=2.0.0
