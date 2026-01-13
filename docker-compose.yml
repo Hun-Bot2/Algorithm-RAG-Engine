@@ -4,6 +4,7 @@ services:
   # Fetches only the 'Algorithm' folder from the remote repo.
   # -------------------------------------------------------
   heavy-job:
+    image: ghcr.io/Hun-Bot2/algo-heavy:latest
     build:
       context: .
       target: heavy
