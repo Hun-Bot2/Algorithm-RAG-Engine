@@ -34,8 +34,7 @@ jobs:
       - name: Run Heavy Job via Compose
         run: |
           mkdir -p artifacts
-          # docker-compose.yml의 logic을 사용하기 위해 run 명령 사용
-          docker-compose run --rm \
+          docker compose run --rm \
             -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
             -e LANGSMITH_API_KEY=${{ secrets.LANGSMITH_API_KEY }} \
             heavy-job
