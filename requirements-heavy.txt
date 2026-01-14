@@ -1,17 +1,8 @@
-# ---------------------------------------------------------
-# [CRITICAL] PyTorch CPU Index URL (Must be at the top)
-# This forces pip to look for CPU-optimized wheels first
-# ---------------------------------------------------------
---extra-index-url https://download.pytorch.org/whl/cpu
-
 # Core & Utils
 python-dotenv>=1.0.0
 tqdm>=4.66.0
 requests>=2.31.0
 gitpython>=3.1.0
-
-# Vector Store (Retrieval Engine)
-faiss-cpu>=1.7.4
 
 # LLM Framework & Monitoring
 langchain>=0.1.0
@@ -24,12 +15,12 @@ langsmith>=0.1.0
 openai>=1.10.0
 tiktoken>=0.5.0
 
-# Note: sentence-transformers depends on torch. 
-# Since torch is defined below with the CPU index, it will use the CPU version.
-sentence-transformers>=2.2.2
+# Vector Search & Math (Replacing FAISS)
 numpy>=1.24.0
 scikit-learn>=1.3.0
 
-# Pytorch (CPU Optimized)
-# The URL flag is moved to the top, so we just list the package here
-torch>=2.0.0
+# [REMOVED for Optimization]
+# Vector Search & Math (FAISS and related heavy libraries)
+# faiss-cpu>=1.7.4
+# sentence-transformers>=2.2.2
+# torch>=2.0.0
