@@ -1,8 +1,9 @@
 name: Algorithm RAG Engine Pipeline
 
 on:
-  schedule:
-    - cron: '0 22 * * *'
+  # schedule disabled
+  # schedule:
+  #   - cron: '0 22 * * *'
   workflow_dispatch:
 
 env:

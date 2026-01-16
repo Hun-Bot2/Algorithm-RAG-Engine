@@ -1,10 +1,11 @@
 name: Build and Publish Heavy Image
 
 on:
-  push:
-    paths:
-      - 'Dockerfile'
-      - 'requirements-heavy.txt' 
+  # push trigger disabled
+  # push:
+  #   paths:
+  #     - 'Dockerfile'
+  #     - 'requirements-heavy.txt' 
   workflow_dispatch:
 
 env:
