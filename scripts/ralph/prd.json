@@ -1,0 +1,64 @@
+{
+  "project": "Algorithm RAG Engine",
+  "branchName": "ralph/sdd-production-recommender",
+  "description": "Bootstrap Ralph for SDD-guided production recommender work. Initial stories intentionally create specs and validation scaffolding before production code changes.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create production recommender requirements",
+      "description": "Create the initial SDD requirements document for refactoring the production recommender into reusable modules.",
+      "acceptanceCriteria": [
+        "Create specs/production-recommender/requirements.md",
+        "Use SHALL, MUST, and WHEN ... THE SYSTEM SHALL ... wording",
+        "Cover source problem parsing, retrieval, scoring, explanation, artifact output, and Slack compatibility",
+        "State that score components MUST be inspectable",
+        "Do not change production Python code"
+      ],
+      "validation": [
+        "test -f specs/production-recommender/requirements.md",
+        "grep -q \"SHALL\\|MUST\" specs/production-recommender/requirements.md"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Create production recommender design",
+      "description": "Create a design document for the production recommender refactor based on the approved requirements.",
+      "acceptanceCriteria": [
+        "Create specs/production-recommender/design.md",
+        "Include architecture, constraints, data flow, tradeoffs, and affected modules",
+        "Distinguish current NumPy production path from Evaluation_100 experiments",
+        "Include validation strategy and observability notes",
+        "Do not change production Python code"
+      ],
+      "validation": [
+        "test -f specs/production-recommender/design.md",
+        "grep -q \"Architecture\\|Data Flow\\|Tradeoffs\" specs/production-recommender/design.md"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Create production recommender task breakdown",
+      "description": "Create a deterministic task list for implementing the production recommender refactor safely.",
+      "acceptanceCriteria": [
+        "Create specs/production-recommender/tasks.md",
+        "Use checkbox-based sequential tasks",
+        "Each task is independently testable",
+        "Tasks start with tests or validation scaffolding before behavior changes",
+        "Do not change production Python code"
+      ],
+      "validation": [
+        "test -f specs/production-recommender/tasks.md",
+        "grep -q \"^- \\[ \\]\" specs/production-recommender/tasks.md"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

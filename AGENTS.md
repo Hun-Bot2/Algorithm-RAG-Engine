@@ -62,6 +62,53 @@ For large features, output these sections before implementation:
 For small tasks, keep responses concise and deterministic, but still identify
 the exact task, affected files, and validation strategy before modifying code.
 
+## Ralph Usage
+
+Ralph is approved for this repository as an iterative execution loop, not as a
+replacement for architecture review. Use it only after a feature has a clear PRD
+or SDD task set.
+
+Recommended Ralph layout:
+
+```text
+scripts/ralph/ralph.sh
+scripts/ralph/CODEX.md
+scripts/ralph/prd.json
+scripts/ralph/progress.txt
+```
+
+This is a Codex-first repository. Use the Ralph files manually with Codex unless
+the local `codex` CLI and stable non-interactive invocation have been confirmed.
+Do not assume Claude Code or Amp prompt files are part of the default scaffold.
+
+Ralph iterations must follow these rules:
+
+- Work on exactly one user story per iteration.
+- Prefer human-in-the-loop runs before unattended loops.
+- Keep each story small enough to complete, validate, document, and commit in one
+  iteration.
+- Use `prd.json` for task state and `progress.txt` for append-only learnings.
+- Update `AGENTS.md` when a reusable repository pattern or gotcha is discovered.
+- Do not mark a story as passing unless validation was run or the reason it could
+  not run is documented.
+- Do not let Ralph implement online-judge execution, AI problem generation, or
+  database migrations without explicit requirements, design, and validation
+  tasks.
+
+Before starting a Ralph iteration:
+
+1. Clean or intentionally commit/stash unrelated working tree changes.
+2. Confirm `prd.json` has a feature branch name and small stories.
+3. Confirm quality-check commands are listed in `scripts/ralph/CODEX.md`.
+4. Confirm secrets and live delivery actions are disabled unless explicitly
+   required.
+
+Suggested first Ralph target for this repo:
+
+1. Create SDD docs for the production recommender refactor.
+2. Add deterministic offline tests for parser/scoring helpers.
+3. Refactor one small production module at a time.
+
 ## Source of Truth
 
 Treat these as the source of truth, in priority order:
@@ -301,31 +348,31 @@ Run the heavy generator locally, assuming required environment variables and
 index paths are configured:
 
 ```bash
-python src/main/generate_index_map.py
+python3 src/main/generate_index_map.py
 ```
 
 Run the Slack delivery job locally:
 
 ```bash
-python src/main/slack_bot_daily_review.py
+python3 src/main/slack_bot_daily_review.py
 ```
 
 Check for new LeetCode problems without GraphQL:
 
 ```bash
-python scripts/collection/leetcode_check_new_fast.py
+python3 scripts/collection/leetcode_check_new_fast.py
 ```
 
 Collect LeetCode details when new problems exist:
 
 ```bash
-python scripts/collection/leetcode_data_collection.py
+python3 scripts/collection/leetcode_data_collection.py
 ```
 
 Run retrieval evaluation:
 
 ```bash
-python scripts/evaluation/evaluate_retrieval.py
+python3 scripts/evaluation/evaluate_retrieval.py
 ```
 
 ## Testing and Verification
