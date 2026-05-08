@@ -10,9 +10,14 @@ design review, validation, or repository memory.
 ## Files
 
 - `ralph.sh` - local validator/status helper.
-- `CODEX.md` - manual Codex-first Ralph instructions.
 - `prd.json` - current Ralph story state.
 - `progress.txt` - append-only learnings and iteration history.
+
+Reusable Codex instructions live in:
+
+```text
+.agents/skills/ralph-sdd/SKILL.md
+```
 
 ## Prerequisites
 
@@ -21,7 +26,9 @@ design review, validation, or repository memory.
 
 ## Manual Codex-First Flow
 
-1. Open `scripts/ralph/CODEX.md`.
+1. Ask Codex to use `$ralph-sdd`, or read
+   `.agents/skills/ralph-sdd/SKILL.md` manually if the skill has not been picked
+   up yet.
 2. Read `scripts/ralph/prd.json`.
 3. Run:
 

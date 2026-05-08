@@ -11,7 +11,7 @@ Usage:
 
 This repository is Codex-first. Ralph is used manually through:
 
-  scripts/ralph/CODEX.md
+  .agents/skills/ralph-sdd/SKILL.md
   scripts/ralph/prd.json
   scripts/ralph/progress.txt
 
@@ -21,9 +21,10 @@ USAGE
 }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 PRD_FILE="$SCRIPT_DIR/prd.json"
-CODEX_FILE="$SCRIPT_DIR/CODEX.md"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
+SKILL_FILE="$REPO_ROOT/.agents/skills/ralph-sdd/SKILL.md"
 
 require_command() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -42,8 +43,8 @@ require_file() {
 validate() {
   require_command jq
   require_file "$PRD_FILE"
-  require_file "$CODEX_FILE"
   require_file "$PROGRESS_FILE"
+  require_file "$SKILL_FILE"
 
   jq empty "$PRD_FILE" >/dev/null
 

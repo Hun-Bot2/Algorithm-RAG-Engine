@@ -1,28 +1,39 @@
-# Ralph Instructions for Codex
+---
+name: ralph-sdd
+description: Run Codex-first Ralph-style Spec-Driven Development iterations in this repository. Use when the user asks to use Ralph, execute the next prd.json story, update progress.txt, run an SDD iteration, or manage small validated stories through scripts/ralph.
+---
 
-Use this file for manual Codex-first Ralph-style execution. The root
+# Ralph SDD
+
+Use this skill for manual Codex-first Ralph-style execution. The root
 `AGENTS.md` remains the repository-level operating memory and takes precedence.
 
-Automatic Codex CLI execution is not assumed yet. Until the local `codex` CLI
-and its stable non-interactive invocation are confirmed, use this file manually
+Automatic Codex CLI execution is not assumed. Until the local `codex` CLI and
+its stable non-interactive invocation are confirmed, use this skill manually
 inside Codex.
+
+## Required Files
+
+- `AGENTS.md` - repository-level operating memory.
+- `scripts/ralph/prd.json` - active story state.
+- `scripts/ralph/progress.txt` - active iteration memory.
+- `scripts/ralph/ralph.sh` - local validation/status helper.
 
 ## Manual Iteration Loop
 
 1. Read root `AGENTS.md`.
 2. Read `scripts/ralph/prd.json`.
 3. Read `scripts/ralph/progress.txt`, especially `## Codebase Patterns`.
-4. Pick exactly one highest-priority user story where `passes` is `false`.
-5. Before modifying files, state:
-   - Exact task.
-   - Affected files.
-   - Validation strategy.
-6. Implement only that one story.
-7. Run the story's validation commands.
-8. Update docs or `AGENTS.md` if reusable repository memory was discovered.
-9. Update `scripts/ralph/prd.json` only after validation passes.
-10. Append a progress entry to `scripts/ralph/progress.txt`.
-11. Suggest a focused commit message.
+4. Run `./scripts/ralph/ralph.sh next` to identify the next story.
+5. Pick exactly one highest-priority user story where `passes` is `false`.
+6. Before modifying files, state the exact task, affected files, and validation
+   strategy.
+7. Implement only that one story.
+8. Run the story's validation commands.
+9. Update docs or `AGENTS.md` if reusable repository memory was discovered.
+10. Update `scripts/ralph/prd.json` only after validation passes.
+11. Append a progress entry to `scripts/ralph/progress.txt`.
+12. Suggest a focused commit message.
 
 If all stories already pass, respond with:
 

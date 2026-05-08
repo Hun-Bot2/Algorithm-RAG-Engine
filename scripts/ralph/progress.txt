@@ -8,5 +8,8 @@ Started: 2026-05-08
 - Current production recommendation path is NumPy-based through `src/main/generate_index_map.py`; `Evaluation_100` is experimental benchmark work.
 - Live OpenAI, Slack, S3, Docker push, and code-execution side effects require explicit approval before Ralph runs them.
 - Use `python3`, not `python`, for local validation commands in this environment.
+- Reusable Codex-first Ralph instructions live in `.agents/skills/ralph-sdd/SKILL.md`; `scripts/ralph/prd.json` and `scripts/ralph/progress.txt` remain live project state.
+- Creating the root `.agents` directory may require escalated filesystem approval in this sandbox.
+- The system `python3` lacks `PyYAML`; run skill-creator `quick_validate.py` with `.venv/bin/python` in this repo.
 
 ---

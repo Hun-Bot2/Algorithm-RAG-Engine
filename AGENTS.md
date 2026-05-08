@@ -71,15 +71,16 @@ or SDD task set.
 Recommended Ralph layout:
 
 ```text
+.agents/skills/ralph-sdd/SKILL.md
 scripts/ralph/ralph.sh
-scripts/ralph/CODEX.md
 scripts/ralph/prd.json
 scripts/ralph/progress.txt
 ```
 
 This is a Codex-first repository. Use the Ralph files manually with Codex unless
 the local `codex` CLI and stable non-interactive invocation have been confirmed.
-Do not assume Claude Code or Amp prompt files are part of the default scaffold.
+Reusable Ralph instructions live in the repo-scoped `$ralph-sdd` skill. Do not
+assume Claude Code or Amp prompt files are part of the default scaffold.
 
 Ralph iterations must follow these rules:
 
@@ -99,7 +100,8 @@ Before starting a Ralph iteration:
 
 1. Clean or intentionally commit/stash unrelated working tree changes.
 2. Confirm `prd.json` has a feature branch name and small stories.
-3. Confirm quality-check commands are listed in `scripts/ralph/CODEX.md`.
+3. Confirm quality-check commands are listed in
+   `.agents/skills/ralph-sdd/SKILL.md`.
 4. Confirm secrets and live delivery actions are disabled unless explicitly
    required.
 
