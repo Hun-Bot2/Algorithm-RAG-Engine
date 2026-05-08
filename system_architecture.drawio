@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" modified="2026-04-11T00:00:00.000Z" agent="Codex" version="24.7.17">
+  <diagram id="algo-rag-core-flow" name="Core Flow">
+    <mxGraphModel dx="1400" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Algorithm RAG Engine - Core Flow" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="24" width="500" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="note" value="Current workflow: manual dispatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="30" width="230" height="36" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gh_actions" value="GitHub Actions&#xa;workflow_dispatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.github.github;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="150" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="ghcr" value="GHCR&#xa;heavy image" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="150" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="heavy" value="Heavy Docker Job&#xa;generate_index_map.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.gear;" vertex="1" parent="1">
+          <mxGeometry x="290" y="150" width="180" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="study_repo" value="Study Repo&#xa;Baekjoon MDX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.github.github;" vertex="1" parent="1">
+          <mxGeometry x="300" y="30" width="160" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="git_diff" value="GitPython&#xa;changed files" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="535" y="150" width="145" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="langchain" value="LangChain&#xa;Embeddings + Chat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.hexagon;" vertex="1" parent="1">
+          <mxGeometry x="735" y="150" width="155" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="openai_embed" value="OpenAI&#xa;Embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.cloud;" vertex="1" parent="1">
+          <mxGeometry x="740" y="70" width="145" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="numpy_index" value="NumPy Index&#xa;vectors + metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;spacingTop=8;shape=cylinder3d;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="735" y="240" width="155" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3_index" value="S3&#xa;index storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.aws4.bucket;" vertex="1" parent="1">
+          <mxGeometry x="535" y="275" width="145" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="search" value="NumPy Search&#xa;Top-N pool" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="950" y="155" width="150" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="gpt_reason" value="GPT-4o-mini&#xa;AI comment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.cloud;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="155" width="150" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="langsmith" value="LangSmith&#xa;trace / feedback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.eye;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="35" width="150" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="artifact" value="recommendation_map.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;spacingTop=8;shape=document;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="155" width="170" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3_artifact" value="S3&#xa;artifact" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.aws4.bucket;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="315" width="140" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="light" value="Light Docker Job&#xa;slack_bot_daily_review.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.gear;" vertex="1" parent="1">
+          <mxGeometry x="950" y="490" width="190" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="slack" value="Slack&#xa;Webhook Message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;spacingTop=8;shape=mxgraph.basic.cloud;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="490" width="160" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="gh_actions" target="heavy">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="pull" style="endArrow=block;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="ghcr" target="heavy">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="sparse checkout" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="study_repo" target="heavy">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="heavy" target="git_diff">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="git_diff" target="langchain">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5a" value="embed query" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="langchain" target="openai_embed">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="download" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="s3_index" target="numpy_index">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="openai_embed" target="search">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="numpy_index" target="search">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="search" target="gpt_reason">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9a" value="prompt chain" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="langchain" target="gpt_reason">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9b" value="optional tracing" style="endArrow=block;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="langchain" target="langsmith">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9c" value="feedback helper" style="endArrow=block;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="slack" target="langsmith">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="gpt_reason" target="artifact">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e11" value="sync" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="artifact" target="s3_artifact">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" value="download JSON" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="s3_artifact" target="light">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=block;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="light" target="slack">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
