@@ -1,7 +1,7 @@
 {
   "project": "Algorithm RAG Engine",
   "branchName": "ralph/sdd-production-recommender",
-  "description": "Bootstrap Ralph for SDD-guided production recommender work. Initial stories intentionally create specs and validation scaffolding before production code changes.",
+  "description": "SDD-guided production recommender work. US-001 through US-003 completed the initial requirements, design, and task breakdown; this batch starts implementation with offline validation scaffolding before behavior changes.",
   "userStories": [
     {
       "id": "US-001",
@@ -59,6 +59,141 @@
       "priority": 3,
       "passes": true,
       "notes": "Created specs/production-recommender/tasks.md with sequential independently testable tasks that start with validation scaffolding."
+    },
+    {
+      "id": "US-004",
+      "title": "Add recommendation artifact schema fixture and validation",
+      "description": "Add offline fixture and validation coverage for the existing recommendation_map.json contract before any production behavior changes.",
+      "acceptanceCriteria": [
+        "Create a production recommender fixture directory under tests/fixtures/production_recommender",
+        "Add a sample Slack-compatible recommendation_map fixture with top-level id, title, tags, and recommendations fields",
+        "Add offline validation that checks recommendation item fields id, title, difficulty, similarity, and ai_comment",
+        "Do not modify production Python code",
+        "Do not require OpenAI, Slack, S3, Docker, FAISS, PyTorch, or sentence-transformers"
+      ],
+      "validation": [
+        "test -d tests/fixtures/production_recommender",
+        "python3 -m unittest tests.test_production_recommender_artifact"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Add Slack compatibility validation for recommendation_map.json",
+      "description": "Add offline Slack formatter validation that proves the light job can consume the current recommendation artifact contract without sending live Slack messages.",
+      "acceptanceCriteria": [
+        "Add tests for DailyReviewBot.build_slack_block using the fixture recommendation map",
+        "Verify empty or missing recommendations are handled safely",
+        "Verify additive recommendation fields do not break Slack formatting",
+        "Do not send live Slack messages or require SLACK_WEBHOOK_URL",
+        "Preserve existing recommendation_map.json compatibility"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_slack_recommendation_compatibility"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Extract recommender schemas",
+      "description": "Add standard-library recommender schemas for source problems, index records, score components, recommendation items, and recommendation maps.",
+      "acceptanceCriteria": [
+        "Create src/rag/schemas.py with typed or dataclass-style contracts",
+        "Preserve current artifact fields required by Slack",
+        "Support additive score fields without breaking current JSON consumers",
+        "Add schema serialization tests",
+        "Do not introduce Pydantic unless separately justified"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_recommender_schemas",
+        "python3 -m compileall src scripts"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Extract retriever module while preserving NumPy behavior",
+      "description": "Extract NumPy index loading and dense retrieval into a reusable retriever module while preserving current squared L2 behavior.",
+      "acceptanceCriteria": [
+        "Create src/rag/retriever.py",
+        "Load vectors.npy and metadata.json from configurable paths",
+        "Validate missing files and vector/metadata length mismatches clearly",
+        "Preserve squared L2 retrieval behavior and expose raw dense distance",
+        "Support deterministic top-k retrieval for tests",
+        "Do not introduce FAISS, PyTorch, or sentence-transformers"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_retriever_numpy",
+        "python3 -m compileall src scripts"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Extract scoring and explanation components",
+      "description": "Extract duplicate filtering, inspectable score mapping, and explanation fallback behavior into reusable components without changing production ranking.",
+      "acceptanceCriteria": [
+        "Create or update src/rag/scoring.py for duplicate filtering and score component mapping",
+        "Create src/rag/explainer.py for Korean explanation generation and stable fallback behavior",
+        "Preserve current title-cleaning and duplicate-title filtering behavior",
+        "Preserve existing similarity and ai_comment artifact fields",
+        "Add offline tests using fake explainer or fake LLM clients",
+        "Do not require live OpenAI calls"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_scoring_and_explainer",
+        "python3 -m compileall src scripts"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Wire generate_index_map.py through the production recommender module",
+      "description": "Introduce the recommender orchestration module and make the heavy job call it while preserving current artifact output and environment compatibility.",
+      "acceptanceCriteria": [
+        "Create src/rag/recommender.py orchestration for recommend_many",
+        "Update src/main/generate_index_map.py as a thin wrapper around the recommender",
+        "Preserve REPO_ROOT, TARGET_SUBDIR, OUTPUT_DIR, ARTIFACT_FILE, and current exit-code behavior",
+        "Preserve Slack-compatible recommendation_map.json fields",
+        "Validate with offline fixtures and fake embeddings; do not require live OpenAI calls"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_recommender_integration",
+        "python3 -m unittest tests.test_production_recommender_artifact",
+        "python3 -m compileall src scripts"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Add production evaluation entrypoint",
+      "description": "Add a deterministic production evaluation entrypoint or adapter that calls the production recommender path without treating Evaluation_100 as production code.",
+      "acceptanceCriteria": [
+        "Add an evaluation adapter or script for deterministic production recommender evaluation",
+        "Document the ground truth input and deterministic mode requirement",
+        "Keep Evaluation_100 clearly separated from production implementation",
+        "Do not change production ranking behavior in this story",
+        "Do not require live OpenAI calls for unit-level validation"
+      ],
+      "validation": [
+        "python3 -m unittest tests.test_production_evaluation_entrypoint",
+        "python3 -m compileall src scripts"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
     }
   ]
 }
