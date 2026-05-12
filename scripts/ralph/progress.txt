@@ -13,3 +13,10 @@ Started: 2026-05-08
 - The system `python3` lacks `PyYAML`; run skill-creator `quick_validate.py` with `.venv/bin/python` in this repo.
 
 ---
+
+## 2026-05-12 13:29 - US-001 - Create production recommender requirements
+- What was implemented: Created the initial SDD requirements document for the production recommender refactor.
+- Files changed: `specs/production-recommender/requirements.md`, `scripts/ralph/prd.json`, `scripts/ralph/progress.txt`.
+- Validation: `test -f specs/production-recommender/requirements.md`; `grep -q "SHALL\\|MUST" specs/production-recommender/requirements.md`; `./scripts/ralph/ralph.sh validate`; `python3 -m json.tool scripts/ralph/prd.json`.
+- Learnings for future iterations: Requirements must preserve the current Slack artifact contract while allowing additive score fields for explainable hybrid ranking.
+---
