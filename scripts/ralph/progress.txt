@@ -20,3 +20,10 @@ Started: 2026-05-08
 - Validation: `test -f specs/production-recommender/requirements.md`; `grep -q "SHALL\\|MUST" specs/production-recommender/requirements.md`; `./scripts/ralph/ralph.sh validate`; `python3 -m json.tool scripts/ralph/prd.json`.
 - Learnings for future iterations: Requirements must preserve the current Slack artifact contract while allowing additive score fields for explainable hybrid ranking.
 ---
+
+## 2026-05-12 13:46 - US-002 - Create production recommender design
+- What was implemented: Created the production recommender design document for a behavior-preserving modular refactor.
+- Files changed: `specs/production-recommender/design.md`, `scripts/ralph/prd.json`, `scripts/ralph/progress.txt`.
+- Validation: `test -f specs/production-recommender/design.md`; `grep -q "Architecture\\|Data Flow\\|Tradeoffs" specs/production-recommender/design.md`; `./scripts/ralph/ralph.sh validate`; `python3 -m json.tool scripts/ralph/prd.json`.
+- Learnings for future iterations: The safest first implementation path is schema and offline fixture tests before moving production logic out of `generate_index_map.py`.
+---
