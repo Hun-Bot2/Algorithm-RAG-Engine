@@ -502,3 +502,16 @@ Keep these distinctions clear in summaries and docs:
   catalog/statements. Only three similarity query groups support conditional
   ranking; observed nearest neighbors include narrative/technique mismatches.
   No quality promotion or inference service follows from a successful model run.
+
+## Statement sources and terms (2026-10-16)
+
+- Read research/full_catalog/terms-review.v1.json before any statement or LeetCode
+  fetch. LeetCode terms forbid crawling/scraping and robots.txt disallows /graphql
+  and /api/; the stored 3,053 LeetCode statements came from /graphql. Codeforces
+  robots.txt limits scraping tools to /api/ (no statements there). AtCoder task
+  pages are robots-allowed but opt out of AI-training crawlers. No collection is
+  approved; the CF/AtCoder catalogs have titles/metadata only.
+- 2026-10-16 decision: all statement collection rejected/skipped. Stored LeetCode
+  `content`/`content_clean` and vectors derived from them are quarantined: keep the
+  files byte-identical (production still uses them) but never read them in new
+  research. Full-catalog work follows specs/adaptive-learning/full-catalog-similarity.md.

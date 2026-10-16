@@ -1,0 +1,108 @@
+{
+  "external": {
+    "input": {
+      "path": "private-learning/catalogs/2026-10-16-api-v1-reviewed-identities/problems.jsonl",
+      "sha256": "2f5058aefefc9ec99e7b8189e6b7b037687312fef03b281492f9f8db73aea8d0"
+    },
+    "malformed_lines": 0,
+    "platforms": {
+      "atcoder": {
+        "full_statement_present": 0,
+        "native_difficulty_null": 9787,
+        "paid_status": "not applicable (public problemset metadata)",
+        "records": 9787,
+        "rows_in_title_duplicate_groups": 960,
+        "statement_status": {
+          "not_provided": 9787
+        },
+        "tags_empty_list": 0,
+        "tags_null": 9787,
+        "title_duplicate_groups": 407,
+        "title_empty": 0,
+        "title_non_latin": 2218,
+        "url_missing": 0
+      },
+      "codeforces": {
+        "full_statement_present": 0,
+        "native_difficulty_null": 305,
+        "paid_status": "not applicable (public problemset metadata)",
+        "records": 11457,
+        "rows_in_title_duplicate_groups": 1102,
+        "statement_status": {
+          "not_provided": 11457
+        },
+        "tags_empty_list": 180,
+        "tags_null": 0,
+        "title_duplicate_groups": 435,
+        "title_empty": 0,
+        "title_non_latin": 42,
+        "url_missing": 0
+      }
+    },
+    "unique_keys": 21244
+  },
+  "leetcode": {
+    "difficulty": {
+      "Easy": 792,
+      "Hard": 723,
+      "Medium": 1538
+    },
+    "exact_duplicates": {
+      "normalized_statement_groups": [],
+      "title_groups": []
+    },
+    "id_range": [
+      1,
+      4195
+    ],
+    "ids_absent_below_max": 1142,
+    "inputs": {
+      "processed": {
+        "path": "data/processed/leetcode_processed.jsonl",
+        "sha256": "281f8e3d9f2a4642a98f625f6fdca7e03b509ca884b95548abe4c0a60589ff40"
+      },
+      "raw": {
+        "path": "data/raw/leetcode_raw_data.jsonl",
+        "sha256": "ee130b9eaeee21b5976eba7e4083dbfadbacf605f7ce96b067d99dd956c11447"
+      }
+    },
+    "malformed_lines": {
+      "processed": 0,
+      "raw": 0
+    },
+    "paid_only": {
+      "collector_filters_isPaidOnly": true,
+      "paid_status_of_absent_ids": "unknown: no persisted problem list or skip log",
+      "persisted_field_present": false,
+      "records_with_premium_gate_text": 0
+    },
+    "raw_processed_slug_sets_equal": true,
+    "records": {
+      "processed": 3053,
+      "raw": 3053
+    },
+    "statement": {
+      "contains_img": 718,
+      "html_chars_min_median_p95_max": [
+        431,
+        1963,
+        4001,
+        25400
+      ],
+      "language": "English (0 records with Cyrillic/CJK/Hangul characters)",
+      "non_empty": 3053
+    },
+    "tags": {
+      "distinct": 72,
+      "empty": 61,
+      "non_algorithmic": {
+        "Concurrency": 6,
+        "Database": 94,
+        "Shell": 4
+      }
+    },
+    "unique_ids": 3053,
+    "unique_slugs": 3053
+  },
+  "schema": "full-catalog-audit.v1"
+}
