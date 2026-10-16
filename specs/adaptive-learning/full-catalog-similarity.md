@@ -223,7 +223,20 @@ the same blockwise top-K.
     - Random-only: 499 pairs.
     - Overlap with the 180 prior judgments: 0 pairs.
   - The blind label sheet is private (`private-learning/full-catalog/pool-v1/label_sheet.jsonl`).
-- [ ] 7b. Labeling round. The labeling method and budget are a user decision: tier 1 enables K ≤ 5 metrics, and all pairs enable K ≤ 10.
+- [x] 7b. Tier-1 labeling round (`LABELING.md`, `labels.py` with 5 tests). The 3,647 tier-1 pairs are labeled `ai_reviewed`.
+  - Process: a blind Sonnet draft and a blind, independent Opus review, then Opus adjudication of 562 disputes. 2,840 pairs agreed, and 245 were settled by the conservative-min rule.
+  - Agreement before adjudication: 88% exact, quadratic-weighted κ 0.75.
+  - Final labels: 0 = 2,443, 1 = 399, 2 = 40, 3 = 4. 761 pairs are unjudged (null), and 803 are flagged deceptive.
+  - Only 23 of the 150 queries have any pair labeled ≥ 2, and 24 queries are fully abstained (mostly AtCoder).
+
+  Outputs: `labels.v1.jsonl` and `receipts/labels.v1.json`.
+
+  Limitations:
+  - The `recognized_problem` basis is applied inconsistently across agents (from 9 to 304 pairs per batch), so it is not reliable as a measure of recognition.
+  - `deceptive` was the main source of disagreement.
+  - Many rationales from the first two passes are empty or generic.
+  - One drafter wrongly believed Codeforces query tags were hidden.
+  - Tier 2 (K 6–10) is unlabeled, so only K ≤ 5 metrics are supported.
 - [ ] 8. `evaluate.py`: judged-pool metrics, CIs, diagnostics; notebook and plots.
 - [ ] 9. REPORT.md and architecture proposal; update AGENTS.md and tasks.md.
 

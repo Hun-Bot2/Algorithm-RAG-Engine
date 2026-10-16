@@ -536,3 +536,7 @@ Keep these distinctions clear in summaries and docs:
 - The judged pool (research/full_catalog/pool.v1.json) is frozen. Never regenerate it
   after labeling starts. A new pool needs a new version, and labels must reference
   pair_id. Unjudged pairs are not negatives.
+- Labeling via subagents: label validators must reject empty rationales for labeled
+  pairs (v1 did not). Self-reported `basis: recognized_problem` is unreliable across
+  agents. `deceptive` is the least reliable field; adjudicators needed a stricter
+  definition. Agents can misread batch fields, so spot-check their claims against the files.
