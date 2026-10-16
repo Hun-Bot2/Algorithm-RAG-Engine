@@ -194,7 +194,17 @@ the same blockwise top-K.
   - 0 mismatches against a float64 brute force on 500 sampled queries;
   - 0 same-platform leaks;
   - byte-identical output on rerun.
-- [ ] 4. `baselines.py` and tests: TF-IDF/Jaccard/random on identical rows; top-K for all methods.
+- [x] 4. `inputs.py` (the shared row and text builder for every method) and `baselines.py`, with 10 fixture tests. Cross-platform runs completed and are byte-identical on rerun. Receipts: `receipts/baselines-{A1,A1-all,A2}-cross.v1.json`.
+  - A1 (21,297 rows): TF-IDF word and char, random.
+  - A1-all (23,454 rows): TF-IDF char, random.
+  - A2 (13,590 LeetCode/Codeforces rows): TF-IDF word and char, tag-Jaccard, random.
+
+  Each run took ≤ 20 s and about 1 GB peak RSS.
+
+  Observed limits, to report in Phase 5:
+  - 7 A1 titles have no word tokens.
+  - 403 A2 rows have an empty concept set: LeetCode tags that are only unmapped, such as Array or Hash Table. Their lists are pure key-order ties.
+  - Tag-Jaccard produces large score-1.0 tie blocks. Its within-tie order is key order, not relevance, so evaluate.py must report tie-block size per query.
 - [ ] 5. `embed.py`: A1 and A2 vectors with resource receipt; replay hash check.
 - [ ] 6. Run P4 for all methods; commit top-K receipts (hashes, counts), keeping results private.
 - [ ] 7. `pool.py`: freeze the query sample and pooled pairs (committed key list); labeling round.

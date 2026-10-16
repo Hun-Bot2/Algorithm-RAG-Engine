@@ -526,3 +526,6 @@ Keep these distinctions clear in summaries and docs:
   numpy 2.1.3 + Accelerate emits spurious divide/overflow RuntimeWarnings on finite
   float32 matmul. dense_cosine suppresses them with errstate, and topk rejects
   non-finite blocks. Do not "fix" this by switching to float64.
+- Phase 3-5 methods must take rows and text from research/full_catalog/inputs.py
+  (variants A1, A1-all, A2) so that inputs stay matched. baselines.py imports its
+  sibling modules by name, so run it as a script or through discover -s research/full_catalog.
