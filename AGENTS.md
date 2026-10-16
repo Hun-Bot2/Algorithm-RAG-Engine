@@ -485,3 +485,11 @@ Keep these distinctions clear in summaries and docs:
   Use Euclidean neighborhoods for t-SNE/UMAP coordinates: their arbitrary origin
   makes coordinate cosine similarity inappropriate. Projection plots and neighbor
   preservation do not establish algorithmic relationships or learner outcomes.
+- Catalog collection is a separate stdlib CLI: scripts/learning/collect_catalogs.py.
+  Both source responses and normalized metadata remain under private-learning/;
+  public source/hash/missingness receipts are in assets/cross_platform_sources.v1.json.
+- AtCoder ABC/ARC shared tasks use native arc IDs: legacy abc049_c, abc086_c,
+  abc095_c map to arc065_a, arc089_a, arc096_a. Official-source mappings live in
+  assets/problem_identity_aliases.v1.json. Offline coverage resolves them, but
+  hosted URLs/import reconciliation remains a release gate; never silently rewrite
+  frozen labels or historical learner keys. The catalog APIs contain no statements.

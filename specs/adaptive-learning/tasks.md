@@ -78,3 +78,12 @@ Do not equate completed local code with the still-open release/research gates.
 
 - [x] Execute the notebook and inspect exact-search timings, compression/neighbor preservation and 2D projection artifacts.
 - [x] Retain source hashes, environment, parameters, PNGs and interpretation without promoting models or releasing historical content.
+
+## Cross-platform corpus ingestion (2026-10-16)
+
+- [x] Implement opt-in bounded Codeforces/AtCoder metadata collection and hash-verified offline replay.
+- [x] Download both public catalogs: 11,457 Codeforces + 9,787 AtCoder metadata records; raw/private captures excluded from release.
+- [x] Verify unique keys, missingness, historical hashes and 30-problem seed coverage (27 direct, 3 reviewed legacy aliases).
+- [ ] Before M8 release, integrate the three AtCoder native identity mappings into hosted URLs and submission/evidence lookup with backward compatibility.
+- [ ] Freeze equal input representation and review optional shared-encoder download before cross-platform vector experiments.
+- [ ] Full-statement corpus ingestion, if selected, needs explicit source/coverage design; API metadata snapshots contain no statements.

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "source_verified_identity_mapping",
+  "observed_at": "2026-10-16",
+  "boundary": "Legacy curriculum identifiers only; native catalog IDs remain unchanged. Not a semantic relationship label or automatic hosted migration.",
+  "aliases": [
+    {
+      "legacy_key": "atcoder:abc049_c",
+      "native_key": "atcoder:arc065_a",
+      "title": "Daydream",
+      "source_url": "https://atcoder.jp/contests/abc049/tasks/arc065_a",
+      "evidence": "Official ABC049 task C uses arc065_a; confirmed against downloaded AtCoder Problems catalog."
+    },
+    {
+      "legacy_key": "atcoder:abc086_c",
+      "native_key": "atcoder:arc089_a",
+      "title": "Traveling",
+      "source_url": "https://atcoder.jp/contests/abc086/tasks/arc089_a",
+      "evidence": "Official ABC086 task C uses arc089_a; confirmed against downloaded AtCoder Problems catalog."
+    },
+    {
+      "legacy_key": "atcoder:abc095_c",
+      "native_key": "atcoder:arc096_a",
+      "title": "Half and Half",
+      "source_url": "https://atcoder.jp/contests/abc095/tasks/arc096_a",
+      "evidence": "Official ABC095 task C uses arc096_a; confirmed against downloaded AtCoder Problems catalog."
+    }
+  ]
+}
