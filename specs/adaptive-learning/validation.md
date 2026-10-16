@@ -27,3 +27,25 @@ The CLI is a trusted local tool, not an authenticated multi-user service.
 Existing modified Ralph files and pre-existing tests were preserved. No commit
 or staging was performed. Suggested commit (only intended foundation paths):
 `feat(learning): add no-AI specifications and auditable local event storage`.
+
+
+## M4 validation tooling receipt
+
+Implemented the first small M4 step with Luna for the validator and repetitive
+fixture cases, followed by parent review and fixes. This does not complete M4.
+
+- `python3 -m unittest tests.learning.test_curriculum -v`: 14 tests passed.
+- `python3 -W error::ResourceWarning -m unittest discover -s tests -q`: 36 tests
+  passed, including existing foundation and legacy artifact fixture tests.
+- `python3 scripts/learning/assets.py verify`: 7 present hashes match, 1 missing.
+- `git diff --check`: passed.
+
+Checks include platform-specific hosts, malformed envelopes, review evidence,
+endpoint integrity, typed edge identity, proposal cycles, a 1,100-node chain and
+free/approved release constraints. Fixture reviewer/evidence strings are synthetic
+test inputs, not approved curriculum records. No real curriculum or evaluation
+judgments were created. No external actions or optional model work were performed.
+
+M1-M3 were committed as `b80d8e1`; unrelated Ralph changes and pre-existing tests
+were excluded. The M4 validator is an unused offline helper and changes neither
+legacy ranking nor stored learner events.

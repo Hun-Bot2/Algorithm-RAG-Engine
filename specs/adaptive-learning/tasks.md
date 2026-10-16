@@ -29,3 +29,8 @@ Checkboxes indicate local implementation, not deployment or human approval.
 See `validation.md` for executed checks and limits. Do not mark downstream gates
 passing from these local foundations. No curriculum approvals, live deployment,
 notification delivery, model downloads or training are represented by M1-M3.
+
+## M4 first small step
+
+- [x] Add offline draft/release validation under `curriculum-contract.md`.
+  This does not complete human review or the held-out evaluation set.
