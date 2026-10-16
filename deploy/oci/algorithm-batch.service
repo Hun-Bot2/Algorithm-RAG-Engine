@@ -1,0 +1,30 @@
+[Unit]
+Description=Offline algorithm curriculum batch checks
+Documentation=file:/opt/algorithm-rag-engine/specs/adaptive-learning/oci.md
+
+[Service]
+Type=oneshot
+User=algorithm-batch
+Group=algorithm-batch
+WorkingDirectory=/opt/algorithm-rag-engine
+StateDirectory=algorithm-batch
+StateDirectoryMode=0700
+Environment=PYTHONDONTWRITEBYTECODE=1
+EnvironmentFile=-/etc/algorithm-batch.env
+ExecStart=/usr/bin/python3 /opt/algorithm-rag-engine/scripts/learning/oci_batch.py --repo /opt/algorithm-rag-engine --state-dir /var/lib/algorithm-batch --max-runs 14
+
+TimeoutStartSec=180
+MemoryHigh=192M
+MemoryMax=256M
+MemorySwapMax=0
+CPUQuota=25%
+TasksMax=32
+Nice=10
+UMask=0077
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictAddressFamilies=AF_UNIX
+PrivateNetwork=yes

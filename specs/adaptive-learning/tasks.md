@@ -64,3 +64,17 @@ notification delivery, model downloads or training are represented by M1-M3.
   actual fitting, independent evaluation and shadow deployment. No model trained.
 
 Do not equate completed local code with the still-open release/research gates.
+
+## OCI optional batch extension (2026-10-16)
+
+- [x] Record Cloudflare/OCI responsibilities and the reported 1 GB VM boundary in ADR 002.
+- [x] Build a deterministic standard-library-only allowlisted bundle and bounded offline runner.
+- [x] Add hardened, disabled systemd service/timer and operator recovery instructions.
+- [x] Verify extracted-bundle execution, hashes, retention, lock and negative cases locally (5 tests).
+- [ ] Select/contact the target VM and verify actual Ubuntu systemd/cgroup resource limits.
+- [ ] Activate the optional timer only after successful manual verification.
+
+## Private vector study extension (2026-10-16)
+
+- [ ] Execute the notebook and inspect exact-search timings, compression/neighbor preservation and 2D projection artifacts.
+- [ ] Retain source hashes, environment, parameters, PNGs and interpretation without promoting models or releasing historical content.
