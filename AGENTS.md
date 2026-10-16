@@ -557,3 +557,26 @@ Keep these distinctions clear in summaries and docs:
 - The frozen full-catalog labels contain 3,647 distinct pair records: 2,886 non-null
   judgments and 761 abstentions. Reuse their evidence/basis faithfully; do not treat
   abstentions as negatives or relabel title-pooled judgments as statement-grounded.
+
+## Full-catalog research continuation (2026-10-16)
+
+- `specs/algorithm-system/` extends statement-first research. Publisher non-code
+  dataset imports are admitted privately under the scoped decision in
+  `research/algorithm_system/CHECKPOINT2.md`; the earlier acquisition review stays
+  historical. LeetCode text remains quarantined. No direct platform scraping or
+  public statement redistribution is authorized by that decision.
+- Hugging Face CodeContests revision `802411c3010cb00d1b05bad57ca77365a3c699d6`
+  uses source ClassLabel AtCoder=5/Aizu=6, unlike the original protobuf 6/7.
+  Bare Parquet int64 values require the pinned, hash-checked dataset_infos.json;
+  never infer the enum from prose or reuse the protobuf mapping.
+- `research/algorithm_system/verify_capture.py` reconstructs selected statement
+  columns from hashed local HTTP ranges without network. Whole Parquet shards,
+  solution archives, private tests, and generated tests are unnecessary.
+- The CodeNet small description archive lacks metadata/native URLs in this
+  snapshot. Its pNNNNN IDs remain unresolved, not guessed AtCoder task IDs.
+  AtCoder CodeContests rows likewise retain dataset identities when IDs are absent.
+- Similarity judgments are not difficulty-ordering labels. Native percentile
+  alignment is provisional, not an equality of cross-platform learner effort.
+- Run the new scientific suite with `.venv/bin/python -m unittest discover -s
+  research/algorithm_system -v`. Compression requires the complete hash-bound
+  384D chunk baseline. Neighbor preservation alone cannot promote a model.

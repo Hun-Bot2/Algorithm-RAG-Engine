@@ -1,0 +1,1641 @@
+{
+  "schema": "algorithm-taxonomy.v1",
+  "version": "1.0.0",
+  "status": "ai_reviewed_not_human_gold",
+  "source": "private-learning/full-catalog/catalog-v1/catalog.v1.jsonl (metadata tag fields only)",
+  "source_snapshot_sha256": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "relation_semantics": {
+    "equivalent": "same primary algorithmic concept",
+    "narrower": "source tag denotes a narrower concept than target",
+    "broader": "source tag denotes a broader concept than target",
+    "related": "meaningful overlap without same core concept",
+    "unmapped": "retained source label without a shared concept assignment"
+  },
+  "concepts": [
+    {
+      "id": "2-sat",
+      "label": "2-sat",
+      "parents": []
+    },
+    {
+      "id": "array",
+      "label": "Array",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "backtracking",
+      "label": "Backtracking",
+      "parents": [
+        "search"
+      ]
+    },
+    {
+      "id": "biconnected-component",
+      "label": "Biconnected Component",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "binary-indexed-tree",
+      "label": "Binary Indexed Tree",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "binary-search",
+      "label": "binary search",
+      "parents": [
+        "search"
+      ]
+    },
+    {
+      "id": "binary-search-tree",
+      "label": "Binary Search Tree",
+      "parents": [
+        "trees"
+      ]
+    },
+    {
+      "id": "binary-tree",
+      "label": "Binary Tree",
+      "parents": [
+        "trees"
+      ]
+    },
+    {
+      "id": "bit-manipulation",
+      "label": "Bit Manipulation",
+      "parents": [
+        "bit-operations"
+      ]
+    },
+    {
+      "id": "bit-operations",
+      "label": "Bit Operations",
+      "parents": []
+    },
+    {
+      "id": "bitmask",
+      "label": "bitmasks",
+      "parents": [
+        "bit-operations"
+      ]
+    },
+    {
+      "id": "brainteaser",
+      "label": "Brainteaser",
+      "parents": []
+    },
+    {
+      "id": "breadth-first-search",
+      "label": "Breadth-First Search",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "brute-force",
+      "label": "brute force",
+      "parents": []
+    },
+    {
+      "id": "bucket-sort",
+      "label": "Bucket Sort",
+      "parents": [
+        "sorting"
+      ]
+    },
+    {
+      "id": "cf-matrices",
+      "label": "Codeforces matrix algorithms",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "chinese-remainder-theorem",
+      "label": "chinese remainder theorem",
+      "parents": []
+    },
+    {
+      "id": "combinatorics",
+      "label": "combinatorics",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "communication",
+      "label": "communication",
+      "parents": []
+    },
+    {
+      "id": "computational-geometry",
+      "label": "Computational Geometry",
+      "parents": [
+        "geometry"
+      ]
+    },
+    {
+      "id": "concurrency",
+      "label": "Concurrency",
+      "parents": []
+    },
+    {
+      "id": "constructive-algorithms",
+      "label": "constructive algorithms",
+      "parents": []
+    },
+    {
+      "id": "counting",
+      "label": "Counting",
+      "parents": []
+    },
+    {
+      "id": "counting-sort",
+      "label": "Counting Sort",
+      "parents": [
+        "sorting"
+      ]
+    },
+    {
+      "id": "data-stream",
+      "label": "Data Stream",
+      "parents": []
+    },
+    {
+      "id": "data-structures",
+      "label": "data structures",
+      "parents": []
+    },
+    {
+      "id": "database",
+      "label": "Database",
+      "parents": []
+    },
+    {
+      "id": "depth-first-search",
+      "label": "dfs and similar",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "design",
+      "label": "Design",
+      "parents": []
+    },
+    {
+      "id": "divide-and-conquer",
+      "label": "divide and conquer",
+      "parents": []
+    },
+    {
+      "id": "doubly-linked-list",
+      "label": "Doubly-Linked List",
+      "parents": [
+        "linked-list"
+      ]
+    },
+    {
+      "id": "dynamic-programming",
+      "label": "dp",
+      "parents": []
+    },
+    {
+      "id": "enumeration",
+      "label": "Enumeration",
+      "parents": [
+        "search"
+      ]
+    },
+    {
+      "id": "eulerian-circuit",
+      "label": "Eulerian Circuit",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "expression-parsing",
+      "label": "expression parsing",
+      "parents": []
+    },
+    {
+      "id": "fft",
+      "label": "fft",
+      "parents": []
+    },
+    {
+      "id": "flows",
+      "label": "flows",
+      "parents": []
+    },
+    {
+      "id": "game-theory",
+      "label": "games",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "geometry",
+      "label": "geometry",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "graph-matchings",
+      "label": "graph matchings",
+      "parents": []
+    },
+    {
+      "id": "graphs",
+      "label": "graphs",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "greedy",
+      "label": "greedy",
+      "parents": []
+    },
+    {
+      "id": "hash-function",
+      "label": "Hash Function",
+      "parents": [
+        "hashing"
+      ]
+    },
+    {
+      "id": "hash-table",
+      "label": "Hash Table",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "hashing",
+      "label": "hashing",
+      "parents": []
+    },
+    {
+      "id": "heap-priority-queue",
+      "label": "Heap (Priority Queue)",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "implementation",
+      "label": "implementation",
+      "parents": []
+    },
+    {
+      "id": "interactive-problems",
+      "label": "interactive",
+      "parents": []
+    },
+    {
+      "id": "iterator",
+      "label": "Iterator",
+      "parents": []
+    },
+    {
+      "id": "line-sweep",
+      "label": "Line Sweep",
+      "parents": [
+        "computational-geometry"
+      ]
+    },
+    {
+      "id": "linked-list",
+      "label": "Linked List",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "math",
+      "label": "math",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "mathematics",
+      "label": "Mathematics",
+      "parents": []
+    },
+    {
+      "id": "matrices",
+      "label": "matrices",
+      "parents": []
+    },
+    {
+      "id": "matrix",
+      "label": "Matrix",
+      "parents": []
+    },
+    {
+      "id": "meet-in-the-middle",
+      "label": "meet-in-the-middle",
+      "parents": []
+    },
+    {
+      "id": "memoization",
+      "label": "Memoization",
+      "parents": [
+        "dynamic-programming"
+      ]
+    },
+    {
+      "id": "merge-sort",
+      "label": "Merge Sort",
+      "parents": [
+        "sorting"
+      ]
+    },
+    {
+      "id": "minimum-spanning-tree",
+      "label": "Minimum Spanning Tree",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "monotonic-queue",
+      "label": "Monotonic Queue",
+      "parents": [
+        "queue"
+      ]
+    },
+    {
+      "id": "monotonic-stack",
+      "label": "Monotonic Stack",
+      "parents": [
+        "stack"
+      ]
+    },
+    {
+      "id": "number-theory",
+      "label": "number theory",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "optimization",
+      "label": "Optimization",
+      "parents": []
+    },
+    {
+      "id": "ordered-set",
+      "label": "Ordered Set",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "ordering",
+      "label": "Ordering",
+      "parents": []
+    },
+    {
+      "id": "prefix-sum",
+      "label": "Prefix Sum",
+      "parents": []
+    },
+    {
+      "id": "probability-and-statistics",
+      "label": "probabilities",
+      "parents": [
+        "mathematics"
+      ]
+    },
+    {
+      "id": "queue",
+      "label": "Queue",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "quickselect",
+      "label": "Quickselect",
+      "parents": [
+        "selection"
+      ]
+    },
+    {
+      "id": "radix-sort",
+      "label": "Radix Sort",
+      "parents": [
+        "sorting"
+      ]
+    },
+    {
+      "id": "randomized",
+      "label": "Randomized",
+      "parents": []
+    },
+    {
+      "id": "recursion",
+      "label": "Recursion",
+      "parents": []
+    },
+    {
+      "id": "rejection-sampling",
+      "label": "Rejection Sampling",
+      "parents": []
+    },
+    {
+      "id": "reservoir-sampling",
+      "label": "Reservoir Sampling",
+      "parents": []
+    },
+    {
+      "id": "rolling-hash",
+      "label": "Rolling Hash",
+      "parents": [
+        "hashing"
+      ]
+    },
+    {
+      "id": "schedules",
+      "label": "schedules",
+      "parents": []
+    },
+    {
+      "id": "search",
+      "label": "Search",
+      "parents": []
+    },
+    {
+      "id": "segment-tree",
+      "label": "Segment Tree",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "selection",
+      "label": "Selection",
+      "parents": [
+        "ordering"
+      ]
+    },
+    {
+      "id": "shell",
+      "label": "Shell",
+      "parents": []
+    },
+    {
+      "id": "shortest-path",
+      "label": "shortest paths",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "simulation",
+      "label": "Simulation",
+      "parents": []
+    },
+    {
+      "id": "sliding-window",
+      "label": "Sliding Window",
+      "parents": [
+        "two-pointers"
+      ]
+    },
+    {
+      "id": "sorting",
+      "label": "sortings",
+      "parents": [
+        "ordering"
+      ]
+    },
+    {
+      "id": "stack",
+      "label": "Stack",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "string-algorithms",
+      "label": "String Algorithms",
+      "parents": [
+        "strings"
+      ]
+    },
+    {
+      "id": "string-matching",
+      "label": "String Matching",
+      "parents": [
+        "string-algorithms"
+      ]
+    },
+    {
+      "id": "string-suffix-structures",
+      "label": "string suffix structures",
+      "parents": [
+        "string-algorithms"
+      ]
+    },
+    {
+      "id": "strings",
+      "label": "strings",
+      "parents": []
+    },
+    {
+      "id": "strongly-connected-component",
+      "label": "Strongly Connected Component",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "suffix-array",
+      "label": "Suffix Array",
+      "parents": [
+        "string-algorithms"
+      ]
+    },
+    {
+      "id": "ternary-search",
+      "label": "ternary search",
+      "parents": [
+        "search"
+      ]
+    },
+    {
+      "id": "topological-sort",
+      "label": "Topological Sort",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "trees",
+      "label": "trees",
+      "parents": [
+        "graphs"
+      ]
+    },
+    {
+      "id": "trie",
+      "label": "Trie",
+      "parents": [
+        "data-structures"
+      ]
+    },
+    {
+      "id": "two-pointers",
+      "label": "two pointers",
+      "parents": []
+    },
+    {
+      "id": "union-find",
+      "label": "dsu",
+      "parents": [
+        "data-structures"
+      ]
+    }
+  ],
+  "tag_mappings": [
+    {
+      "platform": "leetcode",
+      "tag": "Array",
+      "concept_id": "array",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Backtracking",
+      "concept_id": "backtracking",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Biconnected Component",
+      "concept_id": "biconnected-component",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Binary Indexed Tree",
+      "concept_id": "binary-indexed-tree",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Binary Search",
+      "concept_id": "binary-search",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Binary Search Tree",
+      "concept_id": "binary-search-tree",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Binary Tree",
+      "concept_id": "binary-tree",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Bit Manipulation",
+      "concept_id": "bit-manipulation",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Bitmask",
+      "concept_id": "bitmask",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Brainteaser",
+      "concept_id": "brainteaser",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Breadth-First Search",
+      "concept_id": "breadth-first-search",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Bucket Sort",
+      "concept_id": "bucket-sort",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Combinatorics",
+      "concept_id": "combinatorics",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Concurrency",
+      "concept_id": "concurrency",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Counting",
+      "concept_id": "counting",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Counting Sort",
+      "concept_id": "counting-sort",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Data Stream",
+      "concept_id": "data-stream",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Database",
+      "concept_id": "database",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Depth-First Search",
+      "concept_id": "depth-first-search",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Design",
+      "concept_id": "design",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Divide and Conquer",
+      "concept_id": "divide-and-conquer",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Doubly-Linked List",
+      "concept_id": "doubly-linked-list",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Dynamic Programming",
+      "concept_id": "dynamic-programming",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Enumeration",
+      "concept_id": "enumeration",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Eulerian Circuit",
+      "concept_id": "eulerian-circuit",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Game Theory",
+      "concept_id": "game-theory",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Geometry",
+      "concept_id": "geometry",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Graph",
+      "concept_id": "graphs",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Greedy",
+      "concept_id": "greedy",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Hash Function",
+      "concept_id": "hash-function",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Hash Table",
+      "concept_id": "hash-table",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Heap (Priority Queue)",
+      "concept_id": "heap-priority-queue",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Interactive",
+      "concept_id": "interactive-problems",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Iterator",
+      "concept_id": "iterator",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Line Sweep",
+      "concept_id": "line-sweep",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Linked List",
+      "concept_id": "linked-list",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Math",
+      "concept_id": "math",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Matrix",
+      "concept_id": "matrix",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Memoization",
+      "concept_id": "memoization",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Merge Sort",
+      "concept_id": "merge-sort",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Minimum Spanning Tree",
+      "concept_id": "minimum-spanning-tree",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Monotonic Queue",
+      "concept_id": "monotonic-queue",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Monotonic Stack",
+      "concept_id": "monotonic-stack",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Number Theory",
+      "concept_id": "number-theory",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Ordered Set",
+      "concept_id": "ordered-set",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Prefix Sum",
+      "concept_id": "prefix-sum",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Probability and Statistics",
+      "concept_id": "probability-and-statistics",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Queue",
+      "concept_id": "queue",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Quickselect",
+      "concept_id": "quickselect",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Radix Sort",
+      "concept_id": "radix-sort",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Randomized",
+      "concept_id": "randomized",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Recursion",
+      "concept_id": "recursion",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Rejection Sampling",
+      "concept_id": "rejection-sampling",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Reservoir Sampling",
+      "concept_id": "reservoir-sampling",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Rolling Hash",
+      "concept_id": "rolling-hash",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Segment Tree",
+      "concept_id": "segment-tree",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Shell",
+      "concept_id": "shell",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Shortest Path",
+      "concept_id": "shortest-path",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Simulation",
+      "concept_id": "simulation",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Sliding Window",
+      "concept_id": "sliding-window",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Sort",
+      "concept_id": "sorting",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Sorting",
+      "concept_id": "sorting",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Stack",
+      "concept_id": "stack",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "String",
+      "concept_id": "strings",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "String Matching",
+      "concept_id": "string-matching",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Strongly Connected Component",
+      "concept_id": "strongly-connected-component",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Suffix Array",
+      "concept_id": "suffix-array",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Topological Sort",
+      "concept_id": "topological-sort",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Tree",
+      "concept_id": "trees",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Trie",
+      "concept_id": "trie",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Two Pointers",
+      "concept_id": "two-pointers",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "leetcode",
+      "tag": "Union Find",
+      "concept_id": "union-find",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "*special",
+      "concept_id": null,
+      "relation": "unmapped",
+      "confidence": 0.99,
+      "rationale": "Codeforces eligibility marker, not an algorithm concept."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "2-sat",
+      "concept_id": "2-sat",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "binary search",
+      "concept_id": "binary-search",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "bitmasks",
+      "concept_id": "bitmask",
+      "relation": "equivalent",
+      "confidence": 0.96,
+      "rationale": "Bitmask state representation; distinct from the broader bit-manipulation topic."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "brute force",
+      "concept_id": "brute-force",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Native label directly names the brute-force strategy; enumeration is a related but narrower implementation pattern."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "chinese remainder theorem",
+      "concept_id": "chinese-remainder-theorem",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "combinatorics",
+      "concept_id": "combinatorics",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "communication",
+      "concept_id": "communication",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "constructive algorithms",
+      "concept_id": "constructive-algorithms",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "data structures",
+      "concept_id": "data-structures",
+      "relation": "equivalent",
+      "confidence": 0.99,
+      "rationale": "Broad Codeforces category; it does not imply any particular data structure."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "dfs and similar",
+      "concept_id": "depth-first-search",
+      "relation": "equivalent",
+      "confidence": 0.88,
+      "rationale": "The source label groups DFS and similar traversal; mapping preserves the broad source wording."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "divide and conquer",
+      "concept_id": "divide-and-conquer",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "dp",
+      "concept_id": "dynamic-programming",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "dsu",
+      "concept_id": "union-find",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "expression parsing",
+      "concept_id": "expression-parsing",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "fft",
+      "concept_id": "fft",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "flows",
+      "concept_id": "flows",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "games",
+      "concept_id": "game-theory",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "geometry",
+      "concept_id": "geometry",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "graph matchings",
+      "concept_id": "graph-matchings",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "graphs",
+      "concept_id": "graphs",
+      "relation": "equivalent",
+      "confidence": 0.99,
+      "rationale": "Broad graph-problem category; specific graph techniques are not inferred."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "greedy",
+      "concept_id": "greedy",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "hashing",
+      "concept_id": "hashing",
+      "relation": "equivalent",
+      "confidence": 0.9,
+      "rationale": "Hashing is broad; no specific hash technique is inferred."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "implementation",
+      "concept_id": "implementation",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "interactive",
+      "concept_id": "interactive-problems",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "math",
+      "concept_id": "math",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "matrices",
+      "concept_id": "cf-matrices",
+      "relation": "equivalent",
+      "confidence": 0.99,
+      "rationale": "Codeforces matrix algorithms, often algebraic; distinct from LeetCode 2D-grid Matrix."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "meet-in-the-middle",
+      "concept_id": "meet-in-the-middle",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "number theory",
+      "concept_id": "number-theory",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "probabilities",
+      "concept_id": "probability-and-statistics",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "schedules",
+      "concept_id": "schedules",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "shortest paths",
+      "concept_id": "shortest-path",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "sortings",
+      "concept_id": "sorting",
+      "relation": "equivalent",
+      "confidence": 0.98,
+      "rationale": "Sorting category."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "string suffix structures",
+      "concept_id": "string-suffix-structures",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Native category includes multiple suffix structures; it does not imply suffix arrays specifically."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "strings",
+      "concept_id": "strings",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Broad string-problem category."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "ternary search",
+      "concept_id": "ternary-search",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "trees",
+      "concept_id": "trees",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Tree algorithms category."
+    },
+    {
+      "platform": "codeforces",
+      "tag": "two pointers",
+      "concept_id": "two-pointers",
+      "relation": "equivalent",
+      "confidence": 0.97,
+      "rationale": "Maps to its source-label concept; any ancestor categories are emitted separately."
+    }
+  ],
+  "platform_coverage": {
+    "leetcode": {
+      "records": 3053,
+      "native_tag_status": "available",
+      "null_tag_records": 0,
+      "empty_list_records": 61,
+      "distinct_observed_tags": 72,
+      "tag_document_frequency": {
+        "Array": 1774,
+        "Backtracking": 92,
+        "Biconnected Component": 1,
+        "Binary Indexed Tree": 34,
+        "Binary Search": 281,
+        "Binary Search Tree": 29,
+        "Binary Tree": 130,
+        "Bit Manipulation": 238,
+        "Bitmask": 47,
+        "Brainteaser": 17,
+        "Breadth-First Search": 200,
+        "Bucket Sort": 6,
+        "Combinatorics": 51,
+        "Concurrency": 6,
+        "Counting": 163,
+        "Counting Sort": 9,
+        "Data Stream": 14,
+        "Database": 94,
+        "Depth-First Search": 255,
+        "Design": 95,
+        "Divide and Conquer": 52,
+        "Doubly-Linked List": 9,
+        "Dynamic Programming": 558,
+        "Enumeration": 129,
+        "Eulerian Circuit": 3,
+        "Game Theory": 25,
+        "Geometry": 38,
+        "Graph": 143,
+        "Greedy": 404,
+        "Hash Function": 31,
+        "Hash Table": 653,
+        "Heap (Priority Queue)": 175,
+        "Interactive": 5,
+        "Iterator": 5,
+        "Line Sweep": 6,
+        "Linked List": 66,
+        "Math": 568,
+        "Matrix": 227,
+        "Memoization": 41,
+        "Merge Sort": 11,
+        "Minimum Spanning Tree": 3,
+        "Monotonic Queue": 18,
+        "Monotonic Stack": 56,
+        "Number Theory": 81,
+        "Ordered Set": 60,
+        "Prefix Sum": 209,
+        "Probability and Statistics": 6,
+        "Queue": 40,
+        "Quickselect": 8,
+        "Radix Sort": 3,
+        "Randomized": 12,
+        "Recursion": 42,
+        "Rejection Sampling": 2,
+        "Reservoir Sampling": 4,
+        "Rolling Hash": 25,
+        "Segment Tree": 65,
+        "Shell": 4,
+        "Shortest Path": 30,
+        "Simulation": 179,
+        "Sliding Window": 139,
+        "Sort": 1,
+        "Sorting": 426,
+        "Stack": 144,
+        "String": 725,
+        "String Matching": 33,
+        "Strongly Connected Component": 3,
+        "Suffix Array": 5,
+        "Topological Sort": 28,
+        "Tree": 195,
+        "Trie": 45,
+        "Two Pointers": 199,
+        "Union Find": 79
+      }
+    },
+    "codeforces": {
+      "records": 11457,
+      "native_tag_status": "available",
+      "null_tag_records": 0,
+      "empty_list_records": 180,
+      "distinct_observed_tags": 38,
+      "tag_document_frequency": {
+        "*special": 560,
+        "2-sat": 42,
+        "binary search": 1305,
+        "bitmasks": 720,
+        "brute force": 2014,
+        "chinese remainder theorem": 26,
+        "combinatorics": 850,
+        "communication": 10,
+        "constructive algorithms": 2135,
+        "data structures": 2063,
+        "dfs and similar": 1083,
+        "divide and conquer": 368,
+        "dp": 2547,
+        "dsu": 420,
+        "expression parsing": 41,
+        "fft": 117,
+        "flows": 162,
+        "games": 310,
+        "geometry": 431,
+        "graph matchings": 106,
+        "graphs": 1235,
+        "greedy": 3592,
+        "hashing": 239,
+        "implementation": 3071,
+        "interactive": 313,
+        "math": 3527,
+        "matrices": 142,
+        "meet-in-the-middle": 52,
+        "number theory": 909,
+        "probabilities": 269,
+        "schedules": 16,
+        "shortest paths": 295,
+        "sortings": 1262,
+        "string suffix structures": 102,
+        "strings": 827,
+        "ternary search": 71,
+        "trees": 982,
+        "two pointers": 661
+      }
+    },
+    "atcoder": {
+      "records": 9787,
+      "native_tag_status": "unavailable",
+      "null_tag_records": 9787,
+      "empty_list_records": 0,
+      "distinct_observed_tags": 0,
+      "tag_document_frequency": {}
+    }
+  },
+  "notes": [
+    "AtCoder has 9,787 null native tag fields; no inferred tags are generated.",
+    "Codeforces matrices is kept separate from LeetCode Matrix.",
+    "Codeforces data structures maps only to a broad category and never implies Segment Tree.",
+    "Codeforces bitmasks remains distinct from LeetCode Bit Manipulation.",
+    "Hierarchy omits non-entailing links: recursion does not imply search; two pointers does not imply arrays; generic methods do not imply optimization."
+  ],
+  "review": "checkpoint1-review.md"
+}

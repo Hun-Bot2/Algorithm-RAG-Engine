@@ -1,0 +1,661 @@
+{
+  "baseline": {
+    "corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+    "dimensions": 384,
+    "method": "minilm_chunk",
+    "top50_path": "minilm_chunk/top50.jsonl",
+    "top50_sha256": "ae10bf99efd2b79b6425223402a7ea1ee62ffd98dd488632d905bfb551c6f419",
+    "vector_sha256": "0113098f36a52da16b834dbdf85997f9f641874245315a9948eced1455ab8e0c"
+  },
+  "comparison": "per-query TopK overlap only; neighborhood preservation is not relevance or recommendation quality",
+  "environment": {
+    "machine": "arm64",
+    "numpy": "2.1.3",
+    "python": "3.13.2"
+  },
+  "ks": [
+    10,
+    20,
+    50
+  ],
+  "methods": {
+    "original384": {
+      "array_bytes": 14475264,
+      "array_file_bytes": 14475392,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 384,
+      "disk_bytes_total": 98534851,
+      "fit_population": "none; original baseline vectors",
+      "incremental_process_peak_rss_bytes": 28213248,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 1.0,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 1.0,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 1.0,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 98534851,
+      "outputs": {
+        "top10.jsonl": "0913ab18bc6124799e9c9cacbf85398ea461952a56f358c9e0a9fd26d4e7c564",
+        "top20.jsonl": "9757aefb1a809e6a0431692445e3583d0eaf3480770d0ebdf8d1e58d07f3a477",
+        "top50.jsonl": "ae10bf99efd2b79b6425223402a7ea1ee62ffd98dd488632d905bfb551c6f419"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 520028160,
+      "query_latency": {
+        "mean_ms": 0.11103876562500001,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.09868750000000001,
+        "p95_ms": 0.18755405,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "retrieval_seconds": 0.49066666699945927,
+      "rows": 9424,
+      "status": "complete",
+      "transform_bytes": 0,
+      "transform_seconds": 7.499475032091141e-07,
+      "vector_sha256": "0113098f36a52da16b834dbdf85997f9f641874245315a9948eced1455ab8e0c"
+    },
+    "pca128": {
+      "array_bytes": 4825088,
+      "array_file_bytes": 4825216,
+      "center_bytes": 1536,
+      "components_bytes": 196608,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 128,
+      "disk_bytes_total": 89084399,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.14263170899357647,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6524724108658744,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6709093803056029,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.691723259762309,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 89084399,
+      "outputs": {
+        "top10.jsonl": "a84289c07a62a71ec7bc58b793c9c8efea42f06c5f15e941f6df76fc700007db",
+        "top20.jsonl": "1c3198d7087cb06bd4f0d19421ad21b04dc0fc53b0d6bb251268deddc5ec87a6",
+        "top50.jsonl": "d7f2b036d189a26e16bfc80400338e4adc677ed117869199804a5e738610cb7a"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.07559244531249999,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.0658755,
+        "p95_ms": 0.1439704,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.4604168329387903,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components",
+        "mean"
+      ],
+      "transform_bytes": 198144,
+      "transform_file_bytes": 198618,
+      "transform_path": "pca128.transform.npz",
+      "transform_seconds": 0.003223291947506368,
+      "transform_sha256": "0bd72103afd0c2a9beb79bfebd39c2e599ae3d8734ec1067d576a5928814fe06",
+      "vector_sha256": "a4dbf268092eda342a5b6e46a1f1058a330b65aa61c91b8d461a5fbd7a0f7025"
+    },
+    "pca256": {
+      "array_bytes": 9650176,
+      "array_file_bytes": 9650304,
+      "center_bytes": 1536,
+      "components_bytes": 393216,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 256,
+      "disk_bytes_total": 94109315,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.14263170899357647,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6794991511035653,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6919673174872665,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.7079117147707981,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 94109315,
+      "outputs": {
+        "top10.jsonl": "b1cad27f0c5eb7508d272f64c2aeb345cd25491348e4e7b1ee44ee1bd4f31afb",
+        "top20.jsonl": "5a30afa8799293ae32d2b759646e7cbeb142652df33d3cc12b92b68d5f695a2b",
+        "top50.jsonl": "7fefd366fc94a1bfc7efc7f43945f66a0c8adb766bfd7d3a91c46cd8596ac806"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.0816969296875,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.07175,
+        "p95_ms": 0.1485795,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.47026741597801447,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components",
+        "mean"
+      ],
+      "transform_bytes": 394752,
+      "transform_file_bytes": 395226,
+      "transform_path": "pca256.transform.npz",
+      "transform_seconds": 0.002776958979666233,
+      "transform_sha256": "905428be665eea72da83eed9e63967b8bf35795c4dd2de29e0bf8b36b04bada3",
+      "vector_sha256": "dcc3e1cade7ffa0e54a4cd88fec737b489ed7871cb1d39db157500bb3e90fe00"
+    },
+    "pca64": {
+      "array_bytes": 2412544,
+      "array_file_bytes": 2412672,
+      "center_bytes": 1536,
+      "components_bytes": 98304,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 64,
+      "disk_bytes_total": 86570639,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.14263170899357647,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.5752016129032257,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6067115874363328,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6454838709677421,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 86570639,
+      "outputs": {
+        "top10.jsonl": "4e25ef9dd3ecb1573f0fbf7706b07f890d5cf5488cf01b41ffd578d88893e5c1",
+        "top20.jsonl": "2745f3dc5bc62bae3379c61bfaf75fbda0d8edabd04da6f0ac4339f87b78a39a",
+        "top50.jsonl": "9cb074ee59a3381d8f8034f95fb21cf816f6ff8fd625f25de1987571f4fa08e1"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.073047203125,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.06264549999999999,
+        "p95_ms": 0.14328529999999998,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.45696424995549023,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components",
+        "mean"
+      ],
+      "transform_bytes": 99840,
+      "transform_file_bytes": 100314,
+      "transform_path": "pca64.transform.npz",
+      "transform_seconds": 0.001777708064764738,
+      "transform_sha256": "c28ca56ccd72453c5c037e2d4d0214a6d7686ac9ac43a56df764b74db22e2aea",
+      "vector_sha256": "4e2c70eaf9b37e99978b667b5398227a1476faebd07ccde2d84046687eca125e"
+    },
+    "rp128_seed17": {
+      "array_bytes": 4825088,
+      "array_file_bytes": 4825216,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 128,
+      "disk_bytes_total": 89080802,
+      "fit_population": "none; fixed seeded random matrix",
+      "incremental_process_peak_rss_bytes": 0,
+      "matrix_bytes": 196608,
+      "matrix_distribution": "independent standard normal / sqrt(dimensions)",
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.4674448217317488,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.497203947368421,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.5413073005093378,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 89080802,
+      "outputs": {
+        "top10.jsonl": "5bddf7ea2e786aea865d4ae5f7906af0ad7486b8bfc31462b1940600b501756b",
+        "top20.jsonl": "9b2317d449243066a72c4545a85cba728b90e86ad2428b7780a0e1c950d9ec11",
+        "top50.jsonl": "2d65a88328aa7b5256d0a8da90072b0515b4e5a63a59d5b3b8d72eb8e710924d"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.07620474999999999,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.066104,
+        "p95_ms": 0.14357324999999996,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.467240291996859,
+      "rows": 9424,
+      "seed": 17,
+      "status": "complete",
+      "transform_arrays": [
+        "matrix"
+      ],
+      "transform_bytes": 196608,
+      "transform_file_bytes": 196854,
+      "transform_path": "rp128_seed17.transform.npz",
+      "transform_seconds": 0.0023548329481855035,
+      "transform_sha256": "903ffa44c41e6c760c0ce1cc5f4da780bd84dfdb89d1895467756ebc6b7d7d97",
+      "vector_sha256": "7844bb9bd0f9c4a4fad6da59896c008c5c144ea82f049137c97145632d973f73"
+    },
+    "rp256_seed17": {
+      "array_bytes": 9650176,
+      "array_file_bytes": 9650304,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 256,
+      "disk_bytes_total": 94108616,
+      "fit_population": "none; fixed seeded random matrix",
+      "incremental_process_peak_rss_bytes": 0,
+      "matrix_bytes": 393216,
+      "matrix_distribution": "independent standard normal / sqrt(dimensions)",
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.5983764855687606,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6271646859083192,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6614431239388795,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 94108616,
+      "outputs": {
+        "top10.jsonl": "21ff48e12a74df983e5a2a0881536da00837249b96507571e126423e752d7457",
+        "top20.jsonl": "010287405cd376bcfc68151606924c4df725b6df930c9142fd39d444bd38435e",
+        "top50.jsonl": "0c0e0d0ceafc6ee51c64f2f256aa1d1d8686eb0d4d0a48363138bf38bfade998"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.0805729375,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.070625,
+        "p95_ms": 0.14966654999999998,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.4806699170731008,
+      "rows": 9424,
+      "seed": 17,
+      "status": "complete",
+      "transform_arrays": [
+        "matrix"
+      ],
+      "transform_bytes": 393216,
+      "transform_file_bytes": 393462,
+      "transform_path": "rp256_seed17.transform.npz",
+      "transform_seconds": 0.0036201670300215483,
+      "transform_sha256": "4a516dc14871a9e341a7b5c45cd2055073c8b7d168bbfdf19443c6e1d716235b",
+      "vector_sha256": "984938ba7bab13cbcec3d9af08beb839df79b3531e04df5f58e85382ee42a85e"
+    },
+    "rp64_seed17": {
+      "array_bytes": 2412544,
+      "array_file_bytes": 2412672,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 64,
+      "disk_bytes_total": 86569011,
+      "fit_population": "none; fixed seeded random matrix",
+      "incremental_process_peak_rss_bytes": 0,
+      "matrix_bytes": 98304,
+      "matrix_distribution": "independent standard normal / sqrt(dimensions)",
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.32406621392190155,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.35522601867572157,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.4086099320882853,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 86569011,
+      "outputs": {
+        "top10.jsonl": "f18dfcd55435e781af81bcadaf791b9deccd5858ea2cf83d258b3001a0631a4e",
+        "top20.jsonl": "f2e597f58a313b020bfeb9c4d75bf9d2b6f8eac3bb21605fd69a808761afd55d",
+        "top50.jsonl": "bfa40e7a9b63138858d8b2f7cc8bc5638ce3e032fc03b9f73fb37e87e90d3fa5"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.07260940625,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.0636665,
+        "p95_ms": 0.13354604999999997,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.45810587506275624,
+      "rows": 9424,
+      "seed": 17,
+      "status": "complete",
+      "transform_arrays": [
+        "matrix"
+      ],
+      "transform_bytes": 98304,
+      "transform_file_bytes": 98550,
+      "transform_path": "rp64_seed17.transform.npz",
+      "transform_seconds": 0.0013805420603603125,
+      "transform_sha256": "95a4fe84970880224b338c3a875c79d2f10311535cf82e92e32b114b31569d9e",
+      "vector_sha256": "002d01f293d575c00d3ea627cec3d3b0e66399fa91937249bda876c6df544058"
+    },
+    "svd128": {
+      "array_bytes": 4825088,
+      "array_file_bytes": 4825216,
+      "components_bytes": 196608,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 128,
+      "disk_bytes_total": 89078009,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.11467254103627056,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.842763157894737,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.8637839558573854,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.8884995755517828,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 89078009,
+      "outputs": {
+        "top10.jsonl": "6d9d5a639bb52e85934c5622f68b6c150b243dbe454e1385c108ce9afb7569c5",
+        "top20.jsonl": "af5239e7b72e6e33887b55b25a4deb2519eb504ec680287695d5b128b9e6cb90",
+        "top50.jsonl": "85ce77d4565ccf157c13c499d7aadf219189970004fb69b355780e03320f489e"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.07689260156250001,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.066875,
+        "p95_ms": 0.14739585,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.4744934579357505,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components"
+      ],
+      "transform_bytes": 196608,
+      "transform_file_bytes": 196862,
+      "transform_path": "svd128.transform.npz",
+      "transform_seconds": 0.0018447500187903643,
+      "transform_sha256": "b73384acf92cf25d6ffc9f27a1fa68d9f83b68d6f81b8ed2589ea356ce7b5647",
+      "vector_sha256": "5502fe1d2330e5246f05f8810ba986eb88547c3da7b71806fa6bfb057a9acfaa"
+    },
+    "svd256": {
+      "array_bytes": 9650176,
+      "array_file_bytes": 9650304,
+      "components_bytes": 393216,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 256,
+      "disk_bytes_total": 94101511,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.11467254103627056,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.9738752122241086,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.9760929541595924,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.9812542444821734,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 94101511,
+      "outputs": {
+        "top10.jsonl": "a9d71d08b6e69727d51e7ac79fcd9c5992a2ab44a211ae9eaf3325b739d7ae36",
+        "top20.jsonl": "af93465fb022ae01042ca82feae91dea266a87fc08a75ca2323557d9f17fb3b8",
+        "top50.jsonl": "983aaab3ed4ac78d72dbca445f073bd4196d4b6eff137145c8a57c799f8d7249"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.08288249218749999,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.0712915,
+        "p95_ms": 0.15644614999999998,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.482610416947864,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components"
+      ],
+      "transform_bytes": 393216,
+      "transform_file_bytes": 393470,
+      "transform_path": "svd256.transform.npz",
+      "transform_seconds": 0.0027730829315260053,
+      "transform_sha256": "bbe36f423b194ab51854472d8c1173245b9b5f4ae8f4eaa7fb17841680df84e5",
+      "vector_sha256": "aff2435089802fe7ff62e5fddddfb151c5d734c2ff5a17548dc01c33d958b937"
+    },
+    "svd64": {
+      "array_bytes": 2412544,
+      "array_file_bytes": 2412672,
+      "components_bytes": 98304,
+      "counts": {
+        "queries": 9424,
+        "short_lists": 0
+      },
+      "dimensions": 64,
+      "disk_bytes_total": 86563566,
+      "fit_population": "all corpus queries and candidates (transductive)",
+      "fit_seconds_shared": 0.11467254103627056,
+      "incremental_process_peak_rss_bytes": 0,
+      "neighbor_overlap": {
+        "top10": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.6813348896434634,
+          "queries": 9424
+        },
+        "top20": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.7196466468590833,
+          "queries": 9424
+        },
+        "top50": {
+          "comparable_query_count": 9424,
+          "mean_fraction": 0.7675382003395586,
+          "queries": 9424
+        }
+      },
+      "output_tree_bytes": 86563566,
+      "outputs": {
+        "top10.jsonl": "80b63b49fbfa9a90e142e2d2d550c6d0a1181d645e9b6b4ac23d9d49da9f5235",
+        "top20.jsonl": "f130f482ad31380462b678fbf9f2a39383a8f1a4d50749d78ede1b7236accd61",
+        "top50.jsonl": "a235826f22fe1a212b4a7d1bad605a22aac3d5f7d1011a35213091bd3a3829cd"
+      },
+      "process_peak_rss_bytes": 548241408,
+      "process_peak_rss_bytes_before_method": 548241408,
+      "query_latency": {
+        "mean_ms": 0.073228875,
+        "measurement": "single-query exact blockwise cosine+mask+stable-top50 after warmup",
+        "median_ms": 0.0624585,
+        "p95_ms": 0.14115219999999992,
+        "sample_queries": 128,
+        "seed": 17,
+        "warmup_queries": 5
+      },
+      "rank": 382,
+      "retrieval_seconds": 0.46716166695114225,
+      "rows": 9424,
+      "status": "complete",
+      "transform_arrays": [
+        "components"
+      ],
+      "transform_bytes": 98304,
+      "transform_file_bytes": 98558,
+      "transform_path": "svd64.transform.npz",
+      "transform_seconds": 0.0011299169855192304,
+      "transform_sha256": "e7026b194e855e32cd574c88e6841ad1f53411d718f293145d0aa9f03f956cf4",
+      "vector_sha256": "4e7dbbbca98b60ff565639a86660c096d2ad2e2fcd23f3a0159091859c0a492f"
+    }
+  },
+  "no_embedding_or_training": true,
+  "no_model_promotion": true,
+  "no_umap": true,
+  "pca_fit": {
+    "fit_rows": 9424,
+    "fit_seconds": 0.14263170899357647,
+    "leakage_limit": "PCA fit includes every corpus row; not a held-out inductive transform.",
+    "population": "all corpus queries and candidates (transductive)",
+    "rank": 382
+  },
+  "platform_counts": {
+    "atcoder": 1323,
+    "codeforces": 8101
+  },
+  "query_latency_sample_seed": 17,
+  "retrieval": "exact cross-platform cosine; stable key tie order; same Rows and exclusions as research/full_catalog/retrieve.py",
+  "rows": 9424,
+  "schema": "statement-compression-receipt.v1",
+  "source_manifest_sha256": "e846c80cfa571fb83df3e897e5c7f2caaea0aaea3726a032c2b6aa0a851570a6",
+  "source_run": "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/algorithm-system/statement-run-v1",
+  "svd_fit": {
+    "centering": "none",
+    "fit_rows": 9424,
+    "fit_seconds": 0.11467254103627056,
+    "leakage_limit": "SVD fit includes every corpus row; not a held-out inductive transform.",
+    "population": "all corpus queries and candidates (transductive)",
+    "rank": 382
+  }
+}
