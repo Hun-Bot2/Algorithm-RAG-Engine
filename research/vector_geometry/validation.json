@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-10-16T08:09:20.517787+00:00",
+  "notebook_code_cells_executed": 2,
+  "notebook_errors": 0,
+  "research_numerical_tests": 3,
+  "stdlib_repository_tests": 65,
+  "visual_inspection": "PNG figures inspected directly; notebook HTML opening viewport rendered and inspected in headless Chrome. This is local artifact verification, not hosted or OCI evidence.",
+  "source_hashes_unchanged": true,
+  "library_warning_messages": [
+    {
+      "category": "RuntimeWarning",
+      "message": "divide by zero encountered in matmul",
+      "count": 628
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "invalid value encountered in matmul",
+      "count": 628
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "overflow encountered in matmul",
+      "count": 628
+    }
+  ],
+  "artifacts_sha256": {
+    "experiment.py": "7310bfb92a968ac4072921f77ef6ec9e9b217716ffdd0e09e3887a2b8723f4a6",
+    "build_notebook.py": "7397b9123cc0ef98614e042bd9eb81b91a832083d23bf6130abbe8cdc68280e9",
+    "report.py": "88c11baeae3d9dbf9a627112d55aba51a255434d70dffbd1f5780817b1eec066",
+    "results.json": "d894d64fa7c41ee1894522c55454d5f7738947d8a4afa748e1368f1e32554eb3",
+    "vector_geometry.ipynb": "b25de8fd4e73d5c7662166f36c88ce596ce67e69e3c18a1d8ebd41e676516d6f",
+    "vector_geometry.html": "87cada3d04c44223fcf6eeaa11167e26f3f26003e33bb40f161699a863175088",
+    "projections.png": "c496b4974c166fab73a30c6b65e1ef0b80a611d0ebfdeacf2ff90398533ae131",
+    "overlap.png": "ce31a4d5b6e09bac920bc50d2f79d9003ba2bea3ce33da440ccbad434b7ec6f5",
+    "search_latency.png": "dd368e9ee9de878e0fc629a662f707f935ee8a76c7ebac676fa558d523c35694",
+    "REPORT.md": "b3f3c8969970e63bebfec99ffab71130ed42508c5e75e77c6e98300a412d7732"
+  }
+}

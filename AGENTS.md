@@ -472,3 +472,16 @@ Keep these distinctions clear in summaries and docs:
   model promotion. No training labels or deployed quota/30-day proof exist yet.
 - Preserve original asset hashes and unrelated Ralph changes. Optional encoders
   load only explicit hash-verified local directories; no server/download fallback.
+
+## Optional OCI and vector diagnostics (2026-10-16)
+
+- OCI is an optional stdlib offline batch worker, not a mission/Slack dependency.
+  Package only the explicit allowlist in scripts/learning/package_oci.py. The
+  systemd timer stays disabled pending actual Ubuntu cgroup/manual-run checks.
+- Private vector experiments live in research/vector_geometry/, outside hosted
+  release assets. Use its research requirements, never production dependencies.
+  Notebook execution needs a local .venv kernel and loopback socket permission.
+- Compare production raw squared-L2 separately from cosine compression geometry.
+  Use Euclidean neighborhoods for t-SNE/UMAP coordinates: their arbitrary origin
+  makes coordinate cosine similarity inappropriate. Projection plots and neighbor
+  preservation do not establish algorithmic relationships or learner outcomes.

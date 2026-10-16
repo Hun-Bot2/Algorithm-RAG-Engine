@@ -76,5 +76,5 @@ Do not equate completed local code with the still-open release/research gates.
 
 ## Private vector study extension (2026-10-16)
 
-- [ ] Execute the notebook and inspect exact-search timings, compression/neighbor preservation and 2D projection artifacts.
-- [ ] Retain source hashes, environment, parameters, PNGs and interpretation without promoting models or releasing historical content.
+- [x] Execute the notebook and inspect exact-search timings, compression/neighbor preservation and 2D projection artifacts.
+- [x] Retain source hashes, environment, parameters, PNGs and interpretation without promoting models or releasing historical content.

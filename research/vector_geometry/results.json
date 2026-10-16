@@ -1,0 +1,356 @@
+{
+  "purpose": "offline index engineering and geometric diagnostics; no recommendation accuracy claim",
+  "input_sha256_before": {
+    "vectors.npy": "1e84645444d39777bb47a1130aa1ad80ed6abdc477f7336c0baab593cb5aadfe",
+    "metadata.json": "98fba8b4525ba8d8558e7c7606a55a899388336f5aabfadf167cedfe0ea84953"
+  },
+  "shape": [
+    3053,
+    1536
+  ],
+  "dtype": "float32",
+  "raw_vector_bytes": 18757632,
+  "vector_norm_range": [
+    0.9999998807907104,
+    1.0000001192092896
+  ],
+  "metadata_missingness": {
+    "difficulty_counts": {
+      "Easy": 792,
+      "Medium": 1538,
+      "Hard": 723
+    },
+    "missing_id": 0,
+    "missing_tags": 61,
+    "missing_title": 0
+  },
+  "query_row_ids": [
+    2947,
+    36,
+    680,
+    2459,
+    517,
+    2783,
+    1258,
+    2068,
+    254,
+    1041,
+    2637,
+    2407,
+    1804,
+    1507,
+    1710,
+    1133,
+    108,
+    937,
+    2736,
+    805,
+    1036,
+    1924,
+    1531,
+    2964,
+    67,
+    1663,
+    2962,
+    1972,
+    2015,
+    2738,
+    2550,
+    2233,
+    1482,
+    1371,
+    605,
+    1341,
+    2573,
+    2298,
+    267,
+    2689,
+    1634,
+    473,
+    1,
+    1876,
+    1684,
+    1439,
+    364,
+    147,
+    1815,
+    1591,
+    530,
+    1245,
+    105,
+    2167,
+    1631,
+    2887,
+    20,
+    895,
+    461,
+    419,
+    1068,
+    1964,
+    745,
+    1978,
+    1666,
+    3046,
+    708,
+    1442,
+    2856,
+    2458,
+    1887,
+    2218,
+    693,
+    314,
+    2334,
+    1423,
+    2016,
+    1797,
+    2216,
+    489,
+    1543,
+    471,
+    1866,
+    2144,
+    1079,
+    313,
+    1343,
+    1926,
+    135,
+    2069,
+    2168,
+    45,
+    1679,
+    1195,
+    2017,
+    630,
+    2473,
+    1724,
+    659,
+    1339,
+    1217,
+    757,
+    247,
+    837,
+    2384,
+    1140,
+    658,
+    1974,
+    3001,
+    893,
+    1692,
+    3026,
+    51,
+    1272,
+    1020,
+    167,
+    1781,
+    2420,
+    2946,
+    1066,
+    2562,
+    1225,
+    1891,
+    730,
+    2426,
+    11,
+    1055,
+    748
+  ],
+  "software": {
+    "python": "3.13.2",
+    "numpy": "2.1.3",
+    "scipy": "1.14.1",
+    "sklearn": "1.8.0",
+    "faiss": "1.13.2",
+    "umap": "0.5.9.post2",
+    "matplotlib": "3.10.8",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "parameters": {
+    "seed": 17,
+    "repeat_seed": 29,
+    "threads": 1,
+    "neighbors": 10,
+    "pca_svd_dimensions": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "tsne_perplexity": 30,
+    "tsne_max_iter": 750,
+    "tsne_init": "random",
+    "umap_n_neighbors": 15,
+    "umap_min_dist": 0.1
+  },
+  "search": {
+    "independent_float64_query_count": 16,
+    "independent_float64_max_distance_error": 3.6829124394621715e-07,
+    "metric": "raw squared L2, exact, self excluded",
+    "query_count": 128,
+    "repeats": 3,
+    "numpy_production_expression": {
+      "median_ms": 1.9846249999999999,
+      "p95_ms": 2.0547187499999997
+    },
+    "faiss_flat_l2": {
+      "median_ms": 0.374771,
+      "p95_ms": 0.3956659999999999
+    },
+    "numpy_norm_dot_identity": {
+      "median_ms": 0.210542,
+      "p95_ms": 0.24927495
+    },
+    "numpy_faiss_identical_order_fraction": 1.0,
+    "numpy_dot_identical_top10_set_fraction": 1.0,
+    "max_abs_top10_squared_distance_difference": 2.384185791015625e-07,
+    "faiss_build_ms": 0.950875,
+    "faiss_index_bytes": 18757632
+  },
+  "reductions": [
+    {
+      "method": "PCA",
+      "dimensions": 32,
+      "fit_transform_seconds": 0.028339583077467978,
+      "vector_storage_bytes": 390784,
+      "storage_fraction_of_original": 0.020833333333333332,
+      "explained_variance_ratio_sum": 0.4885304570198059,
+      "cosine_overlap_at_10": 0.5041270881100557
+    },
+    {
+      "method": "PCA",
+      "dimensions": 64,
+      "fit_transform_seconds": 0.038481916999444366,
+      "vector_storage_bytes": 781568,
+      "storage_fraction_of_original": 0.041666666666666664,
+      "explained_variance_ratio_sum": 0.6208982467651367,
+      "cosine_overlap_at_10": 0.6413691451031772
+    },
+    {
+      "method": "PCA",
+      "dimensions": 128,
+      "fit_transform_seconds": 0.05520816694479436,
+      "vector_storage_bytes": 1563136,
+      "storage_fraction_of_original": 0.08333333333333333,
+      "explained_variance_ratio_sum": 0.7549790143966675,
+      "cosine_overlap_at_10": 0.7421225024566
+    },
+    {
+      "method": "PCA",
+      "dimensions": 256,
+      "fit_transform_seconds": 0.0780484169954434,
+      "vector_storage_bytes": 3126272,
+      "storage_fraction_of_original": 0.16666666666666666,
+      "explained_variance_ratio_sum": 0.8713516592979431,
+      "cosine_overlap_at_10": 0.7963969865705863
+    },
+    {
+      "method": "TruncatedSVD",
+      "dimensions": 32,
+      "fit_transform_seconds": 0.018442917033098638,
+      "vector_storage_bytes": 390784,
+      "storage_fraction_of_original": 0.020833333333333332,
+      "explained_variance_ratio_sum": 0.48391589522361755,
+      "cosine_overlap_at_10": 0.4970193252538487
+    },
+    {
+      "method": "TruncatedSVD",
+      "dimensions": 64,
+      "fit_transform_seconds": 0.028101917007006705,
+      "vector_storage_bytes": 781568,
+      "storage_fraction_of_original": 0.041666666666666664,
+      "explained_variance_ratio_sum": 0.6181913018226624,
+      "cosine_overlap_at_10": 0.6625941696691778
+    },
+    {
+      "method": "TruncatedSVD",
+      "dimensions": 128,
+      "fit_transform_seconds": 0.046802249969914556,
+      "vector_storage_bytes": 1563136,
+      "storage_fraction_of_original": 0.08333333333333333,
+      "explained_variance_ratio_sum": 0.7536869645118713,
+      "cosine_overlap_at_10": 0.7990501146413364
+    },
+    {
+      "method": "TruncatedSVD",
+      "dimensions": 256,
+      "fit_transform_seconds": 0.08657116594258696,
+      "vector_storage_bytes": 3126272,
+      "storage_fraction_of_original": 0.16666666666666666,
+      "explained_variance_ratio_sum": 0.8717557191848755,
+      "cosine_overlap_at_10": 0.9012446773665247
+    }
+  ],
+  "pca50_euclidean_overlap_at_10": 0.5457582705535539,
+  "tsne_seed_neighbor_overlap_at_10": 0.7966262692433673,
+  "umap_seed_neighbor_overlap_at_10": 0.5824762528660334,
+  "projections": {
+    "PCA 2D": {
+      "fit_seconds": 0.01469670794904232,
+      "euclidean_overlap_at_10": 0.042188011791680316
+    },
+    "SVD 2D": {
+      "fit_seconds": 0.012013958068564534,
+      "euclidean_overlap_at_10": 0.03193580085162136
+    },
+    "Difficulty LDA 2D": {
+      "fit_seconds": 0.9653939580311999,
+      "euclidean_overlap_at_10": 0.004651162790697674,
+      "fitted_rows": 3053,
+      "in_sample_supervised_leakage": true
+    },
+    "t-SNE 2D": {
+      "fit_seconds": 10.903751916019246,
+      "euclidean_overlap_at_10": 0.3684572551588602,
+      "euclidean_overlap_at_10_vs_pca50": 0.46927612184736317,
+      "kl_divergence": 1.4557608366012573
+    },
+    "t-SNE 2D repeat": {
+      "fit_seconds": 9.717349249986,
+      "euclidean_overlap_at_10": 0.3669505404520144,
+      "euclidean_overlap_at_10_vs_pca50": 0.4702587618735669,
+      "kl_divergence": 1.4583704471588135
+    },
+    "UMAP 2D": {
+      "fit_seconds": 9.836854874971323,
+      "euclidean_overlap_at_10": 0.2817884048476908,
+      "euclidean_overlap_at_10_vs_pca50": 0.3533901080904029
+    },
+    "UMAP 2D repeat": {
+      "fit_seconds": 6.540925708017312,
+      "euclidean_overlap_at_10": 0.27903701277432036,
+      "euclidean_overlap_at_10_vs_pca50": 0.35126105470029484
+    }
+  },
+  "input_sha256_after": {
+    "vectors.npy": "1e84645444d39777bb47a1130aa1ad80ed6abdc477f7336c0baab593cb5aadfe",
+    "metadata.json": "98fba8b4525ba8d8558e7c7606a55a899388336f5aabfadf167cedfe0ea84953"
+  },
+  "total_wall_seconds": 46.6315883329371,
+  "projection_neighbor_metric": "Euclidean in 2D vs cosine in original; seeds compared using Euclidean",
+  "compression_neighbor_metric": "Cosine in reduced space vs cosine in original; centered PCA changes origin",
+  "search_timing_scope": "Warm resident arrays; no file loading, imports, network, query encoding, concurrency or OCI measurement; fixed method order; index build reported separately",
+  "figures": [
+    "projections.png",
+    "overlap.png",
+    "search_latency.png"
+  ],
+  "runtime_warnings": [
+    {
+      "category": "RuntimeWarning",
+      "message": "divide by zero encountered in matmul",
+      "count": 628
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "invalid value encountered in matmul",
+      "count": 628
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "overflow encountered in matmul",
+      "count": 628
+    }
+  ],
+  "numerical_validation": "All cosine/Euclidean neighbor matrices and reductions finite; reduction components orthonormal via float64 non-BLAS einsum; 16 sampled raw L2 queries cross-checked with direct float64 elementwise distances"
+}
