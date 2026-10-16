@@ -533,3 +533,6 @@ Keep these distinctions clear in summaries and docs:
   LocalEmbeddingBackend. Its outputs are private-learning/full-catalog/embeddings-v1/.
   CPU with 1 thread is bitwise-reproducible here. Titles are short (max 48 tokens
   in A2), so B/C statement variants stay unmeasured by decision D1, not by truncation.
+- The judged pool (research/full_catalog/pool.v1.json) is frozen. Never regenerate it
+  after labeling starts. A new pool needs a new version, and labels must reference
+  pair_id. Unjudged pairs are not negatives.

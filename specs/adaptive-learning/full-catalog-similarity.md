@@ -216,7 +216,14 @@ the same blockwise top-K.
   - Baselines: see task 4.
 
   The same-platform diagnostic has not been run; it is optional. Top-K lists stay private.
-- [ ] 7. `pool.py`: freeze the query sample and pooled pairs (committed key list); labeling round.
+- [x] 7a. `pool.py` with 5 fixture tests (43 total). The frozen `pool.v1.json` is keys only and byte-identical on rerun.
+  - 150 queries, 50 per platform, in 13 difficulty or contest-family strata.
+  - Pooled pairs are the union of each non-random method's top-10 plus the top-2 of each random run: 6,667 pairs.
+    - Tier 1 (min rank ≤ 5, or random): 3,647 pairs.
+    - Random-only: 499 pairs.
+    - Overlap with the 180 prior judgments: 0 pairs.
+  - The blind label sheet is private (`private-learning/full-catalog/pool-v1/label_sheet.jsonl`).
+- [ ] 7b. Labeling round. The labeling method and budget are a user decision: tier 1 enables K ≤ 5 metrics, and all pairs enable K ≤ 10.
 - [ ] 8. `evaluate.py`: judged-pool metrics, CIs, diagnostics; notebook and plots.
 - [ ] 9. REPORT.md and architecture proposal; update AGENTS.md and tasks.md.
 
