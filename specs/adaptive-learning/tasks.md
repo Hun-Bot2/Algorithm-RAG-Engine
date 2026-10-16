@@ -87,3 +87,11 @@ Do not equate completed local code with the still-open release/research gates.
 - [ ] Before M8 release, integrate the three AtCoder native identity mappings into hosted URLs and submission/evidence lookup with backward compatibility.
 - [ ] Freeze equal input representation and review optional shared-encoder download before cross-platform vector experiments.
 - [ ] Full-statement corpus ingestion, if selected, needs explicit source/coverage design; API metadata snapshots contain no statements.
+
+## MiniLM pilot (2026-10-16)
+
+- [x] User authorized a pinned MiniLM download and CPU-local inference; 11 allowlisted files acquired and upstream weight SHA verified.
+- [x] Encode equal-input 90-problem English annotations across three platforms, with title-only ablation and same-input TF-IDF baseline.
+- [x] Execute and inspect notebook/HTML/PNG reports; preserve token/resource/hash/warning evidence and numerical cross-checks.
+- [x] Record semantic failure examples and sparse evaluation limits; no model training or promotion.
+- [ ] Expand independent query-level judgments and input coverage before any deployable quality claim. The current similarity diagnostic has only three rankable groups.

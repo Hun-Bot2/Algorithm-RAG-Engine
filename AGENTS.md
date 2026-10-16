@@ -493,3 +493,12 @@ Keep these distinctions clear in summaries and docs:
   assets/problem_identity_aliases.v1.json. Offline coverage resolves them, but
   hosted URLs/import reconciliation remains a release gate; never silently rewrite
   frozen labels or historical learner keys. The catalog APIs contain no statements.
+- MiniLM was explicitly authorized and executed on 2026-10-16. Its pinned
+  allowlisted downloader is scripts/learning/download_minilm.py; research results
+  are under research/minilm_pilot/. Keep weights outside Git and hosted assets.
+  Model manifests must be outside the model directory because the offline backend
+  verifies exact directory membership. Compare only equal-input embedding spaces.
+- The first MiniLM run uses 90 authored English annotations, not the full API
+  catalog/statements. Only three similarity query groups support conditional
+  ranking; observed nearest neighbors include narrative/technique mismatches.
+  No quality promotion or inference service follows from a successful model run.

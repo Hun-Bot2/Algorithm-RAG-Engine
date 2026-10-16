@@ -38,3 +38,8 @@ The output path must be new. Fetches are opt-in and serialized with a 2.1-second
 ## Next experiment gate
 
 A fair semantic comparison requires one frozen input representation and a shared encoder across platforms. The old OpenAI-space vectors cannot be combined with a new local model space. Start with the reviewed 90-problem pilot and equal English annotations; a larger statement corpus requires a separate source/coverage review. Optional model download approval is still pending. No claims about cross-platform retrieval quality follow from catalog presence.
+
+Update: the user authorized MiniLM download and local inference on 2026-10-16.
+The [90-annotation pilot](../minilm_pilot/REPORT.md) is now executed. This does not
+change the metadata-only scope of the downloaded catalogs or authorize statements
+as a complete, reviewed corpus.

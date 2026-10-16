@@ -1,0 +1,3935 @@
+{
+  "executed_at": "2026-10-16T08:37:17.278580+00:00",
+  "diagnostic_only": true,
+  "model": {
+    "dimensions": 384,
+    "files_sha256": {
+      "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+      "README.md": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "config_sentence_transformers.json": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "license_reference": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/blob/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md",
+    "max_tokens": 256,
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "namespace": "minilm-english-summary-v1",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "schema_version": 1
+  },
+  "inputs_sha256": {
+    "curriculum/seed.v1.json": "e5406b367c15736b312706c848cc6c9cc748b725cb2c630bf3e0dd71044535d1",
+    "curriculum/annotations.v1.json": "d14205fcf7f2a958a4e3e9c9dab61da537a4d524d57871870610a06a2a832ba6",
+    "research/relationship-judgments.v1.json": "3fe417325e608a56d374f9d5187335de965585be5509eb028aa0f2ef2131c6e3",
+    "assets/problem_identity_aliases.v1.json": "58979a9cf1d34d5f6d9bd6ca05433691890c3acac2f7883f8128394148273b63",
+    "assets/cross_platform_sources.v1.json": "a69e3331b48f806b14840f5a35024544f8783708401d0bd953f2476659acabc8"
+  },
+  "cohort_counts": {
+    "atcoder": 20,
+    "codeforces": 10,
+    "leetcode": 60
+  },
+  "scope": "90 reviewed English annotations, not 21,244 downloaded metadata records or full statements",
+  "model_load_seconds": 5.01156470796559,
+  "load_timing_scope": "LocalEmbeddingBackend construction plus first Torch/SentenceTransformers/UMAP imports; not model-file I/O in isolation",
+  "variants": {
+    "title_rationale": {
+      "fields": [
+        "title",
+        "concept_rationale"
+      ],
+      "text_sha256": "2b46961326be081817c7df129d85bbbc1021827e59a75bec8c2f05cc8257e04f",
+      "encode_seconds": 0.16600424994248897,
+      "vector_bytes": 138240,
+      "token_lengths": {
+        "min": 10,
+        "max": 32,
+        "median": 17.0,
+        "over_256": 0
+      },
+      "non_blas_float64_cosine_max_error": 7.596387250341508e-07,
+      "norm_range": [
+        0.9999998807907104,
+        1.0000001192092896
+      ],
+      "scoring": {
+        "query_count": 35,
+        "ranking_query_groups": 3,
+        "single_candidate_query_groups_excluded_from_ranking": 32,
+        "metrics": {
+          "tfidf": {
+            "recall_at_10": 1.0,
+            "ndcg_at_5": 1.0,
+            "query_groups": 35,
+            "ranking_query_groups": 3,
+            "direction_tested": 0
+          },
+          "minilm": {
+            "recall_at_10": 1.0,
+            "ndcg_at_5": 0.8769765845238192,
+            "query_groups": 35,
+            "ranking_query_groups": 3,
+            "direction_tested": 0
+          }
+        },
+        "per_query": [
+          {
+            "source": "atcoder:abc049_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:word-break",
+                  "rank": 1,
+                  "score": 0.1223930814507537,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:word-break",
+                  "rank": 1,
+                  "score": 0.3950599133968353,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc075_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:number-of-islands",
+                  "rank": 1,
+                  "score": 0.05414924596929441,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:number-of-islands",
+                  "rank": 1,
+                  "score": 0.2685401439666748,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc081_a",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:231A",
+                  "rank": 1,
+                  "score": 0.07127057095394762,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:231A",
+                  "rank": 1,
+                  "score": 0.21487341821193695,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc081_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:climbing-stairs",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:climbing-stairs",
+                  "rank": 1,
+                  "score": 0.14536836743354797,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc083_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-consecutive-sequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-consecutive-sequence",
+                  "rank": 1,
+                  "score": 0.08880671113729477,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc085_d",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:jump-game",
+                  "rank": 1,
+                  "score": 0.016961815917361206,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:jump-game",
+                  "rank": 1,
+                  "score": 0.1780707985162735,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc086_a",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:4A",
+                  "rank": 1,
+                  "score": 0.03676788839240816,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:4A",
+                  "rank": 1,
+                  "score": 0.3342703580856323,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc086_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.2652429938316345,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc087_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:combination-sum",
+                  "rank": 1,
+                  "score": 0.08105449917101099,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:combination-sum",
+                  "rank": 1,
+                  "score": 0.28066542744636536,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc088_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.18115068972110748,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc095_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.08021745612001736,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.2365577667951584,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc103_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:product-of-array-except-self",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:product-of-array-except-self",
+                  "rank": 1,
+                  "score": 0.14213278889656067,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc104_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.18528655171394348,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:158A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.023145019835296737,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.26613742113113403,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:263A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.35539114475250244,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:282A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:791A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:791A",
+                  "rank": 1,
+                  "score": 0.17220011353492737,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:339A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc079_c",
+                  "rank": 1,
+                  "score": 0.016021017514182487,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc079_c",
+                  "rank": 1,
+                  "score": 0.3118683397769928,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:4A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.03374071473113503,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.15866899490356445,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:50A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 1,
+                  "score": 0.08668938750713723,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 1,
+                  "score": 0.2787344455718994,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:71A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:339A",
+                  "rank": 1,
+                  "score": 0.013687215387341932,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:339A",
+                  "rank": 1,
+                  "score": 0.20241595804691315,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:3sum",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 2,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc085_c",
+                  "rank": 1,
+                  "score": 0.03114133573424855,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 2,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc085_c",
+                  "rank": 1,
+                  "score": 0.26591983437538147,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 2,
+                  "score": 0.12078911066055298,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              }
+            }
+          },
+          {
+            "source": "leetcode:binary-search",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:158A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:158A",
+                  "rank": 1,
+                  "score": 0.23785127699375153,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:clone-graph",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:course-schedule",
+                  "rank": 1,
+                  "score": 0.019119807266975812,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:course-schedule",
+                  "rank": 1,
+                  "score": 0.1633627712726593,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:container-with-most-water",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.08668938750713723,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.2787344455718994,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:course-schedule",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 2,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.016953822463795322,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:network-delay-time",
+                  "rank": 2,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.17582571506500244,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:network-delay-time",
+                  "rank": 2,
+                  "score": 0.1614295095205307,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              }
+            }
+          },
+          {
+            "source": "leetcode:house-robber",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.022086886342850432,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.19252273440361023,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:implement-trie-prefix-tree",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:valid-palindrome",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:valid-palindrome",
+                  "rank": 1,
+                  "score": 0.31815704703330994,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:longest-increasing-subsequence",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.19921856386019796,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.6338558793067932,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:longest-substring-without-repeating-characters",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:daily-temperatures",
+                  "rank": 1,
+                  "score": 0.018183007756320264,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:daily-temperatures",
+                  "rank": 1,
+                  "score": 0.0027851227205246687,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:merge-intervals",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:non-overlapping-intervals",
+                  "rank": 1,
+                  "score": 0.14442666973298235,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:non-overlapping-intervals",
+                  "rank": 1,
+                  "score": 0.5413386225700378,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:merge-two-sorted-lists",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:merge-intervals",
+                  "rank": 1,
+                  "score": 0.19415071055381813,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:merge-intervals",
+                  "rank": 1,
+                  "score": 0.40562430024147034,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc073_b",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc073_b",
+                  "rank": 1,
+                  "score": 0.28122079372406006,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:number-of-islands",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 1,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.05414924596929441,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "atcoder:abc086_c",
+                  "rank": 2,
+                  "score": 0.03218380041423695,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc086_c",
+                  "rank": 1,
+                  "score": 0.2848525643348694,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 2,
+                  "score": 0.2685401439666748,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 0.6309297535714575
+              }
+            }
+          },
+          {
+            "source": "leetcode:unique-paths",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.2977832853794098,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:valid-anagram",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:112A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:112A",
+                  "rank": 1,
+                  "score": 0.47467124462127686,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          }
+        ],
+        "paired_uncertainty": {
+          "minilm": {
+            "by_source_problem": {
+              "recall_at_10": {
+                "n_query_groups": 3,
+                "n_clusters": 3,
+                "cluster_unit": "source_problem",
+                "delta_mean": 0.0,
+                "interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              },
+              "ndcg_at_5": {
+                "n_query_groups": 3,
+                "n_clusters": 3,
+                "cluster_unit": "source_problem",
+                "delta_mean": -0.12302341547618083,
+                "interval_95": [
+                  -0.36907024642854247,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              }
+            },
+            "by_review_family": {
+              "recall_at_10": {
+                "n_query_groups": 2,
+                "n_clusters": 2,
+                "cluster_unit": "review_family",
+                "delta_mean": 0.0,
+                "interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              },
+              "ndcg_at_5": {
+                "n_query_groups": 2,
+                "n_clusters": 2,
+                "cluster_unit": "review_family",
+                "delta_mean": -0.18453512321427123,
+                "interval_95": [
+                  -0.36907024642854247,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              }
+            }
+          }
+        },
+        "paired_uncertainty_cluster_unit": "source problem and review family; paired by the same evaluated query groups",
+        "subgroups": {
+          "atcoder->codeforces|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "atcoder->leetcode|cross-platform-foundations": {
+            "judgments": 11,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->atcoder|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->codeforces|within-platform-methods": {
+            "judgments": 3,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->leetcode|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->atcoder|cross-platform-foundations": {
+            "judgments": 4,
+            "metrics": {
+              "minilm.ndcg_at_5": 0.6309297535714575,
+              "minilm.recall_at_10": 1.0,
+              "tfidf.ndcg_at_5": 1.0,
+              "tfidf.recall_at_10": 1.0
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->codeforces|cross-platform-foundations": {
+            "judgments": 3,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->leetcode|within-platform-methods": {
+            "judgments": 11,
+            "metrics": {
+              "minilm.ndcg_at_5": 1.0,
+              "minilm.recall_at_10": 1.0,
+              "tfidf.ndcg_at_5": 1.0,
+              "tfidf.recall_at_10": 1.0
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          }
+        },
+        "platform_pair_coverage": [
+          {
+            "platform_pair": "atcoder->atcoder",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "atcoder->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "atcoder->codeforces",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "atcoder->leetcode",
+            "judgments": 11,
+            "status": "available"
+          },
+          {
+            "platform_pair": "baekjoon->atcoder",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->codeforces",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->leetcode",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "codeforces->atcoder",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "codeforces->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "codeforces->codeforces",
+            "judgments": 3,
+            "status": "available"
+          },
+          {
+            "platform_pair": "codeforces->leetcode",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->atcoder",
+            "judgments": 4,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "leetcode->codeforces",
+            "judgments": 3,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->leetcode",
+            "judgments": 11,
+            "status": "available"
+          }
+        ],
+        "candidate_coverage": 0.012199036918138041,
+        "candidate_coverage_note": "fraction of non-source catalog keys with a reviewed candidate label, macro-averaged by source and relationship type; unjudged candidates were excluded from ranking, not treated as negatives",
+        "direction_coverage": {
+          "reviewed_direction_rows": 0,
+          "eligible_direction_rows": 0,
+          "accuracy_definition": "top-5 predicts source_to_target; a judged row is positive only when relevance >= 2 and its reviewed direction is source_to_target; all other labels are none",
+          "accuracy": null,
+          "reverse_direction_boundary": "This evaluates forward proposal versus none for the supplied ordered pair; it does not compare both orientations unless the dataset includes independently reviewed reverse candidates."
+        },
+        "directional_precision_threshold": 2,
+        "concept_evidence_overlap": {
+          "rows_with_token_overlap": 0,
+          "rows_total": 38,
+          "rate": 0.0,
+          "interpretation": "lexical overlap diagnostic only; it does not show causal leakage or correct for shared information"
+        },
+        "seed_graph_overlap_rows_excluded": 22,
+        "seed_graph_overlap_pairs_excluded": 22
+      }
+    },
+    "title_only": {
+      "fields": [
+        "title"
+      ],
+      "text_sha256": "245b4f5a3bb78625cdf68d23accd0f1249a02489333d55d5dae923b8233e8e4d",
+      "encode_seconds": 0.05835537507664412,
+      "vector_bytes": 138240,
+      "token_lengths": {
+        "min": 3,
+        "max": 15,
+        "median": 5.0,
+        "over_256": 0
+      },
+      "non_blas_float64_cosine_max_error": 9.295494207695043e-07,
+      "norm_range": [
+        0.9999998807907104,
+        1.0000001192092896
+      ],
+      "scoring": {
+        "query_count": 35,
+        "ranking_query_groups": 3,
+        "single_candidate_query_groups_excluded_from_ranking": 32,
+        "metrics": {
+          "tfidf": {
+            "recall_at_10": 1.0,
+            "ndcg_at_5": 1.0,
+            "query_groups": 35,
+            "ranking_query_groups": 3,
+            "direction_tested": 0
+          },
+          "minilm": {
+            "recall_at_10": 1.0,
+            "ndcg_at_5": 0.8769765845238192,
+            "query_groups": 35,
+            "ranking_query_groups": 3,
+            "direction_tested": 0
+          }
+        },
+        "per_query": [
+          {
+            "source": "atcoder:abc049_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:word-break",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:word-break",
+                  "rank": 1,
+                  "score": 0.1369071751832962,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc075_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:number-of-islands",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:number-of-islands",
+                  "rank": 1,
+                  "score": -0.0008266621152870357,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc081_a",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:231A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:231A",
+                  "rank": 1,
+                  "score": 0.0962110236287117,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc081_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:climbing-stairs",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:climbing-stairs",
+                  "rank": 1,
+                  "score": 0.15416273474693298,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc083_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-consecutive-sequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-consecutive-sequence",
+                  "rank": 1,
+                  "score": 0.115720734000206,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc085_d",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:jump-game",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:jump-game",
+                  "rank": 1,
+                  "score": 0.27134957909584045,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc086_a",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:4A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:4A",
+                  "rank": 1,
+                  "score": 0.3109830915927887,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc086_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 1,
+                  "score": 0.13410186767578125,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc087_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:combination-sum",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:combination-sum",
+                  "rank": 1,
+                  "score": 0.2942914068698883,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc088_b",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.008155903778970242,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc095_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.18292304873466492,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc103_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:product-of-array-except-self",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:product-of-array-except-self",
+                  "rank": 1,
+                  "score": 0.09342575818300247,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "atcoder:abc104_c",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.008151738904416561,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:158A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:top-k-frequent-elements",
+                  "rank": 1,
+                  "score": 0.13320469856262207,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:263A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.11404044181108475,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:282A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:791A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:791A",
+                  "rank": 1,
+                  "score": 0.2538968622684479,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:339A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc079_c",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc079_c",
+                  "rank": 1,
+                  "score": 0.10865776985883713,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:4A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.26731035113334656,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:50A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 1,
+                  "score": 0.07756423950195312,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "codeforces:71A",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:339A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:339A",
+                  "rank": 1,
+                  "score": 0.08714018762111664,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:3sum",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 2,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc085_c",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 2,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc085_c",
+                  "rank": 1,
+                  "score": 0.2611663043498993,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:container-with-most-water",
+                  "rank": 2,
+                  "score": 0.17790216207504272,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              }
+            }
+          },
+          {
+            "source": "leetcode:binary-search",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:158A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:158A",
+                  "rank": 1,
+                  "score": 0.13398416340351105,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:clone-graph",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:course-schedule",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:course-schedule",
+                  "rank": 1,
+                  "score": 0.0295579731464386,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:container-with-most-water",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:50A",
+                  "rank": 1,
+                  "score": 0.07756423950195312,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:course-schedule",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 2,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:network-delay-time",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 2,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:network-delay-time",
+                  "rank": 1,
+                  "score": 0.13886111974716187,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "leetcode:redundant-connection",
+                  "rank": 2,
+                  "score": 0.06415481120347977,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              }
+            }
+          },
+          {
+            "source": "leetcode:house-robber",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:coin-change",
+                  "rank": 1,
+                  "score": 0.14504826068878174,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:implement-trie-prefix-tree",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:valid-palindrome",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:valid-palindrome",
+                  "rank": 1,
+                  "score": 0.22820264101028442,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:longest-increasing-subsequence",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.6194810186351511,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.8231677412986755,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:longest-substring-without-repeating-characters",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:daily-temperatures",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:daily-temperatures",
+                  "rank": 1,
+                  "score": 0.037907280027866364,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:merge-intervals",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:non-overlapping-intervals",
+                  "rank": 1,
+                  "score": 0.3843612548584417,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:non-overlapping-intervals",
+                  "rank": 1,
+                  "score": 0.769310474395752,
+                  "relevance": 2,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:merge-two-sorted-lists",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:merge-intervals",
+                  "rank": 1,
+                  "score": 0.3562382076356027,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:merge-intervals",
+                  "rank": 1,
+                  "score": 0.48392441868782043,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 0,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc073_b",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc073_b",
+                  "rank": 1,
+                  "score": 0.0555996410548687,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:number-of-islands",
+            "type": "similarity",
+            "judged_candidates": 2,
+            "positive_candidates": 1,
+            "rankable": true,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "atcoder:abc086_c",
+                  "rank": 2,
+                  "score": 0.0,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "atcoder:abc086_c",
+                  "rank": 1,
+                  "score": 0.08295636624097824,
+                  "relevance": 0,
+                  "direction": "source_to_target"
+                },
+                {
+                  "problem_key": "atcoder:abc075_b",
+                  "rank": 2,
+                  "score": -0.0008266621152870357,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 1.0
+              },
+              "minilm": {
+                "recall_at_10": 1.0,
+                "ndcg_at_5": 0.6309297535714575
+              }
+            }
+          },
+          {
+            "source": "leetcode:unique-paths",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "leetcode:longest-common-subsequence",
+                  "rank": 1,
+                  "score": 0.18886049091815948,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          },
+          {
+            "source": "leetcode:valid-anagram",
+            "type": "similarity",
+            "judged_candidates": 1,
+            "positive_candidates": 1,
+            "rankable": false,
+            "rankings": {
+              "tfidf": [
+                {
+                  "problem_key": "codeforces:112A",
+                  "rank": 1,
+                  "score": 0.0,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ],
+              "minilm": [
+                {
+                  "problem_key": "codeforces:112A",
+                  "rank": 1,
+                  "score": 0.23238001763820648,
+                  "relevance": 1,
+                  "direction": "source_to_target"
+                }
+              ]
+            },
+            "metrics": {
+              "tfidf": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              },
+              "minilm": {
+                "recall_at_10": null,
+                "ndcg_at_5": null
+              }
+            }
+          }
+        ],
+        "paired_uncertainty": {
+          "minilm": {
+            "by_source_problem": {
+              "recall_at_10": {
+                "n_query_groups": 3,
+                "n_clusters": 3,
+                "cluster_unit": "source_problem",
+                "delta_mean": 0.0,
+                "interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              },
+              "ndcg_at_5": {
+                "n_query_groups": 3,
+                "n_clusters": 3,
+                "cluster_unit": "source_problem",
+                "delta_mean": -0.12302341547618083,
+                "interval_95": [
+                  -0.36907024642854247,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              }
+            },
+            "by_review_family": {
+              "recall_at_10": {
+                "n_query_groups": 2,
+                "n_clusters": 2,
+                "cluster_unit": "review_family",
+                "delta_mean": 0.0,
+                "interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              },
+              "ndcg_at_5": {
+                "n_query_groups": 2,
+                "n_clusters": 2,
+                "cluster_unit": "review_family",
+                "delta_mean": -0.18453512321427123,
+                "interval_95": [
+                  -0.36907024642854247,
+                  0.0
+                ],
+                "samples": 1000,
+                "seed": 17,
+                "status": "computed"
+              }
+            }
+          }
+        },
+        "paired_uncertainty_cluster_unit": "source problem and review family; paired by the same evaluated query groups",
+        "subgroups": {
+          "atcoder->codeforces|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "atcoder->leetcode|cross-platform-foundations": {
+            "judgments": 11,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->atcoder|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->codeforces|within-platform-methods": {
+            "judgments": 3,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "codeforces->leetcode|cross-platform-foundations": {
+            "judgments": 2,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->atcoder|cross-platform-foundations": {
+            "judgments": 4,
+            "metrics": {
+              "minilm.ndcg_at_5": 0.6309297535714575,
+              "minilm.recall_at_10": 1.0,
+              "tfidf.ndcg_at_5": 1.0,
+              "tfidf.recall_at_10": 1.0
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->codeforces|cross-platform-foundations": {
+            "judgments": 3,
+            "metrics": {
+              "minilm.ndcg_at_5": null,
+              "minilm.recall_at_10": null,
+              "tfidf.ndcg_at_5": null,
+              "tfidf.recall_at_10": null
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 0,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          },
+          "leetcode->leetcode|within-platform-methods": {
+            "judgments": 11,
+            "metrics": {
+              "minilm.ndcg_at_5": 1.0,
+              "minilm.recall_at_10": 1.0,
+              "tfidf.ndcg_at_5": 1.0,
+              "tfidf.recall_at_10": 1.0
+            },
+            "paired_uncertainty": {
+              "minilm": {
+                "recall_at_10": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                },
+                "ndcg_at_5": {
+                  "n_query_groups": 1,
+                  "n_clusters": 0,
+                  "cluster_unit": "review_family",
+                  "delta_mean": null,
+                  "interval_95": null,
+                  "status": "insufficient_query_groups"
+                }
+              }
+            }
+          }
+        },
+        "platform_pair_coverage": [
+          {
+            "platform_pair": "atcoder->atcoder",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "atcoder->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "atcoder->codeforces",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "atcoder->leetcode",
+            "judgments": 11,
+            "status": "available"
+          },
+          {
+            "platform_pair": "baekjoon->atcoder",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->codeforces",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "baekjoon->leetcode",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "codeforces->atcoder",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "codeforces->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "codeforces->codeforces",
+            "judgments": 3,
+            "status": "available"
+          },
+          {
+            "platform_pair": "codeforces->leetcode",
+            "judgments": 2,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->atcoder",
+            "judgments": 4,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->baekjoon",
+            "judgments": 0,
+            "status": "unavailable_no_reviewed_candidates"
+          },
+          {
+            "platform_pair": "leetcode->codeforces",
+            "judgments": 3,
+            "status": "available"
+          },
+          {
+            "platform_pair": "leetcode->leetcode",
+            "judgments": 11,
+            "status": "available"
+          }
+        ],
+        "candidate_coverage": 0.012199036918138041,
+        "candidate_coverage_note": "fraction of non-source catalog keys with a reviewed candidate label, macro-averaged by source and relationship type; unjudged candidates were excluded from ranking, not treated as negatives",
+        "direction_coverage": {
+          "reviewed_direction_rows": 0,
+          "eligible_direction_rows": 0,
+          "accuracy_definition": "top-5 predicts source_to_target; a judged row is positive only when relevance >= 2 and its reviewed direction is source_to_target; all other labels are none",
+          "accuracy": null,
+          "reverse_direction_boundary": "This evaluates forward proposal versus none for the supplied ordered pair; it does not compare both orientations unless the dataset includes independently reviewed reverse candidates."
+        },
+        "directional_precision_threshold": 2,
+        "concept_evidence_overlap": {
+          "rows_with_token_overlap": 0,
+          "rows_total": 38,
+          "rate": 0.0,
+          "interpretation": "lexical overlap diagnostic only; it does not show causal leakage or correct for shared information"
+        },
+        "seed_graph_overlap_rows_excluded": 22,
+        "seed_graph_overlap_pairs_excluded": 22
+      }
+    }
+  },
+  "ordered_keys": [
+    "atcoder:abc049_c",
+    "atcoder:abc058_a",
+    "atcoder:abc072_b",
+    "atcoder:abc073_b",
+    "atcoder:abc074_b",
+    "atcoder:abc075_b",
+    "atcoder:abc079_c",
+    "atcoder:abc081_a",
+    "atcoder:abc081_b",
+    "atcoder:abc083_b",
+    "atcoder:abc085_b",
+    "atcoder:abc085_c",
+    "atcoder:abc085_d",
+    "atcoder:abc086_a",
+    "atcoder:abc086_c",
+    "atcoder:abc087_b",
+    "atcoder:abc088_b",
+    "atcoder:abc095_c",
+    "atcoder:abc103_c",
+    "atcoder:abc104_c",
+    "codeforces:112A",
+    "codeforces:158A",
+    "codeforces:231A",
+    "codeforces:263A",
+    "codeforces:282A",
+    "codeforces:339A",
+    "codeforces:4A",
+    "codeforces:50A",
+    "codeforces:71A",
+    "codeforces:791A",
+    "leetcode:3sum",
+    "leetcode:best-time-to-buy-and-sell-stock",
+    "leetcode:binary-search",
+    "leetcode:binary-tree-level-order-traversal",
+    "leetcode:climbing-stairs",
+    "leetcode:clone-graph",
+    "leetcode:coin-change",
+    "leetcode:combination-sum",
+    "leetcode:construct-binary-tree-from-preorder-and-inorder-traversal",
+    "leetcode:container-with-most-water",
+    "leetcode:contains-duplicate",
+    "leetcode:course-schedule",
+    "leetcode:daily-temperatures",
+    "leetcode:find-minimum-in-rotated-sorted-array",
+    "leetcode:group-anagrams",
+    "leetcode:house-robber",
+    "leetcode:implement-trie-prefix-tree",
+    "leetcode:insert-interval",
+    "leetcode:invert-binary-tree",
+    "leetcode:jump-game",
+    "leetcode:kth-smallest-element-in-a-bst",
+    "leetcode:largest-rectangle-in-histogram",
+    "leetcode:linked-list-cycle",
+    "leetcode:longest-common-subsequence",
+    "leetcode:longest-consecutive-sequence",
+    "leetcode:longest-increasing-subsequence",
+    "leetcode:longest-substring-without-repeating-characters",
+    "leetcode:lowest-common-ancestor-of-a-binary-search-tree",
+    "leetcode:maximum-depth-of-binary-tree",
+    "leetcode:merge-intervals",
+    "leetcode:merge-two-sorted-lists",
+    "leetcode:min-stack",
+    "leetcode:minimum-number-of-arrows-to-burst-balloons",
+    "leetcode:minimum-window-substring",
+    "leetcode:network-delay-time",
+    "leetcode:non-overlapping-intervals",
+    "leetcode:number-of-islands",
+    "leetcode:pacific-atlantic-water-flow",
+    "leetcode:permutations",
+    "leetcode:product-of-array-except-self",
+    "leetcode:redundant-connection",
+    "leetcode:remove-nth-node-from-end-of-list",
+    "leetcode:reorder-list",
+    "leetcode:reverse-linked-list",
+    "leetcode:rotting-oranges",
+    "leetcode:search-a-2d-matrix",
+    "leetcode:search-in-rotated-sorted-array",
+    "leetcode:subsets",
+    "leetcode:subsets-ii",
+    "leetcode:top-k-frequent-elements",
+    "leetcode:trapping-rain-water",
+    "leetcode:two-sum",
+    "leetcode:unique-paths",
+    "leetcode:valid-anagram",
+    "leetcode:valid-palindrome",
+    "leetcode:valid-parentheses",
+    "leetcode:valid-sudoku",
+    "leetcode:validate-binary-search-tree",
+    "leetcode:word-break",
+    "leetcode:word-search"
+  ],
+  "environment": {
+    "torch": "2.9.1",
+    "sentence-transformers": "5.2.0",
+    "transformers": "4.57.3",
+    "numpy": "2.1.3",
+    "scikit-learn": "1.8.0",
+    "umap-learn": "0.5.9.post2"
+  },
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "threads": 1,
+  "training": false,
+  "promotion": false,
+  "cross_platform_examples": [
+    {
+      "source": "leetcode:two-sum",
+      "title": "Two Sum",
+      "neighbors": [
+        {
+          "problem_key": "atcoder:abc083_b",
+          "title": "Some Sums",
+          "cosine": 0.4425024688243866
+        },
+        {
+          "problem_key": "atcoder:abc087_b",
+          "title": "Coins",
+          "cosine": 0.428264319896698
+        },
+        {
+          "problem_key": "atcoder:abc058_a",
+          "title": "Arithmetic Progression Check",
+          "cosine": 0.4235031008720398
+        }
+      ]
+    },
+    {
+      "source": "leetcode:valid-parentheses",
+      "title": "Valid Parentheses",
+      "neighbors": [
+        {
+          "problem_key": "codeforces:112A",
+          "title": "Petya and Strings",
+          "cosine": 0.3431742191314697
+        },
+        {
+          "problem_key": "atcoder:abc072_b",
+          "title": "OddString",
+          "cosine": 0.2693612575531006
+        },
+        {
+          "problem_key": "codeforces:71A",
+          "title": "Way Too Long Words",
+          "cosine": 0.26137372851371765
+        }
+      ]
+    },
+    {
+      "source": "leetcode:coin-change",
+      "title": "Coin Change",
+      "neighbors": [
+        {
+          "problem_key": "atcoder:abc087_b",
+          "title": "Coins",
+          "cosine": 0.5520807504653931
+        },
+        {
+          "problem_key": "codeforces:282A",
+          "title": "Bit++",
+          "cosine": 0.34465664625167847
+        },
+        {
+          "problem_key": "codeforces:158A",
+          "title": "Next Round",
+          "cosine": 0.30594906210899353
+        }
+      ]
+    },
+    {
+      "source": "atcoder:abc086_a",
+      "title": "Product",
+      "neighbors": [
+        {
+          "problem_key": "leetcode:product-of-array-except-self",
+          "title": "Product of Array Except Self",
+          "cosine": 0.37664276361465454
+        },
+        {
+          "problem_key": "codeforces:4A",
+          "title": "Watermelon",
+          "cosine": 0.3342703580856323
+        },
+        {
+          "problem_key": "leetcode:valid-palindrome",
+          "title": "Valid Palindrome",
+          "cosine": 0.21271756291389465
+        }
+      ]
+    },
+    {
+      "source": "atcoder:abc086_c",
+      "title": "Traveling",
+      "neighbors": [
+        {
+          "problem_key": "leetcode:non-overlapping-intervals",
+          "title": "Non-overlapping Intervals",
+          "cosine": 0.4162660539150238
+        },
+        {
+          "problem_key": "codeforces:263A",
+          "title": "Beautiful Matrix",
+          "cosine": 0.37854689359664917
+        },
+        {
+          "problem_key": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+          "title": "Minimum Number of Arrows to Burst Balloons",
+          "cosine": 0.34585022926330566
+        }
+      ]
+    },
+    {
+      "source": "atcoder:abc085_c",
+      "title": "Otoshidama",
+      "neighbors": [
+        {
+          "problem_key": "leetcode:climbing-stairs",
+          "title": "Climbing Stairs",
+          "cosine": 0.2880769968032837
+        },
+        {
+          "problem_key": "leetcode:top-k-frequent-elements",
+          "title": "Top K Frequent Elements",
+          "cosine": 0.27953457832336426
+        },
+        {
+          "problem_key": "leetcode:number-of-islands",
+          "title": "Number of Islands",
+          "cosine": 0.2729254961013794
+        }
+      ]
+    },
+    {
+      "source": "codeforces:4A",
+      "title": "Watermelon",
+      "neighbors": [
+        {
+          "problem_key": "atcoder:abc086_a",
+          "title": "Product",
+          "cosine": 0.3342703580856323
+        },
+        {
+          "problem_key": "leetcode:trapping-rain-water",
+          "title": "Trapping Rain Water",
+          "cosine": 0.22532564401626587
+        },
+        {
+          "problem_key": "atcoder:abc104_c",
+          "title": "All Green",
+          "cosine": 0.21656139194965363
+        }
+      ]
+    },
+    {
+      "source": "codeforces:112A",
+      "title": "Petya and Strings",
+      "neighbors": [
+        {
+          "problem_key": "leetcode:valid-anagram",
+          "title": "Valid Anagram",
+          "cosine": 0.47467124462127686
+        },
+        {
+          "problem_key": "leetcode:valid-palindrome",
+          "title": "Valid Palindrome",
+          "cosine": 0.45870551466941833
+        },
+        {
+          "problem_key": "leetcode:implement-trie-prefix-tree",
+          "title": "Implement Trie (Prefix Tree)",
+          "cosine": 0.40768614411354065
+        }
+      ]
+    },
+    {
+      "source": "codeforces:339A",
+      "title": "Helpful Maths",
+      "neighbors": [
+        {
+          "problem_key": "atcoder:abc083_b",
+          "title": "Some Sums",
+          "cosine": 0.42790016531944275
+        },
+        {
+          "problem_key": "atcoder:abc079_c",
+          "title": "Train Ticket",
+          "cosine": 0.3118683397769928
+        },
+        {
+          "problem_key": "leetcode:longest-common-subsequence",
+          "title": "Longest Common Subsequence",
+          "cosine": 0.284009724855423
+        }
+      ]
+    }
+  ],
+  "example_boundary": "Fixed queries, model proposals only; cosine is not relevance probability or approved relationship.",
+  "top5_cross_platform_fraction": 0.3755555555555556,
+  "title_ablation_top5_overlap": 0.4244444444444444,
+  "projection_parameters": {
+    "seed": 17,
+    "tsne_perplexity": 15,
+    "tsne_iterations": 750,
+    "tsne_init": "random",
+    "umap_neighbors": 10,
+    "umap_min_dist": 0.1,
+    "umap_metric": "cosine"
+  },
+  "vectors_sha256": "b19dd5edc65aad3898a2e403f609c8d3b882ca0a003baffade9a97c32d5eaaf8",
+  "input_hashes_unchanged": true,
+  "process_peak_rss_bytes": 812040192,
+  "memory_boundary": "Whole notebook kernel peak including imports, model and plotting; not incremental model memory or OCI proof.",
+  "figures": [
+    "similarity.png",
+    "projections.png"
+  ],
+  "offline_boundary": "HF/Transformers offline mode and Python socket connect guards during load/inference; not an OS-level egress firewall test",
+  "warnings": [
+    {
+      "category": "TqdmWarning",
+      "message": "IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html",
+      "count": 1
+    },
+    {
+      "category": "ImportWarning",
+      "message": "Tensorflow not installed; ParametricUMAP will be unavailable",
+      "count": 1
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "divide by zero encountered in matmul",
+      "count": 2
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "overflow encountered in matmul",
+      "count": 2
+    },
+    {
+      "category": "RuntimeWarning",
+      "message": "invalid value encountered in matmul",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-16T08:40:31.099540+00:00",
+  "notebook_code_cells_executed": 2,
+  "notebook_errors": 0,
+  "focused_tests": 5,
+  "repository_stdlib_tests": 78,
+  "inference": "CPU local; HF/Transformers offline environment plus Python socket guards; not OS egress enforcement",
+  "data_scope": "90 English annotation inputs, two variants; no problem statements/full-catalog encoding",
+  "visual_inspection": "Both PNG figures inspected directly; notebook HTML opening viewport rendered and inspected in headless Chrome.",
+  "source_hashes_unchanged": true,
+  "artifacts_sha256": {
+    "experiment.py": "436ffeeac734d572c67b44e1737f86a3bb3d866088a31f24dda0536b44a61eb6",
+    "build_notebook.py": "4d6ddeed68a9493fc47d7e4bab42c838e1585527f845f799f8a980a67f54a364",
+    "report.py": "728b0252c20472c32e8792b394dd8703c2501d661359b03b7c82e44028396538",
+    "model.manifest.json": "b4475d8f573844b730b695cdd8e65ce4a558b9f24da47184f1a2d14057430c1a",
+    "download-receipt.json": "287f81b50e71d50cbc25f580c657622c9a09a0af78bb4a2dbd16cab88a40110b",
+    "results.json": "a5f2bf375d73b0bc7a655637ce119d01d23d052a2c12e82ee497bc882d5fa00a",
+    "minilm_pilot.ipynb": "9eca17ec2c99a094981b622cecf9728002da1bdec87beafad8d102b764ac055f",
+    "minilm_pilot.html": "8d8ff946452d31abc7115d763e101a7e0cafb459c147b1ae2d86de6607021257",
+    "projections.png": "f58f70accdea63f5fcf7485b1c16513fb2c946d274998654b0247747e7041cd0",
+    "similarity.png": "576e98f1feecfe180503265f72e1b45ca8ea1b319f9fcc03f97d3c15bf7dfbf2",
+    "REPORT.md": "19f71302f8fdb9a3736625ec2cdbbe9158a2bfc831f011fe8bcf17418ccd102f"
+  }
+}
