@@ -50,7 +50,12 @@ Kinds and payloads:
 | timer_stopped | interval_id |
 | timer_confirmed | interval_id, started_at, ended_at |
 
-Problem keys use `leetcode:slug`, `atcoder:task_id`, `codeforces:contest-index`,
+Attempt payloads additionally allow explicit `activity_type` (practice/review/transfer);
+transfer requires a different platform-qualified `transfer_from` key. Omission means
+unspecified context, not an assumed review or transfer. This additive v1 payload
+extension does not alter existing SQL or original events.
+
+Problem keys use `leetcode:slug`, `atcoder:task_id`, `codeforces:contestIdIndex` (for example `codeforces:4A`),
 or `baekjoon:id`. Stop and confirmation require prior active start evidence;
 confirmation also requires stop evidence. Confirmation may correct an interrupted
 interval after explicit stop; end cannot exceed confirmation occurrence time.

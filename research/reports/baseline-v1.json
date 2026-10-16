@@ -1,0 +1,4985 @@
+{
+  "catalog": {
+    "input_sha256": "391c9c9eb0d892181a3de3da57b5559bebb84ea6984d6790b3a37f75bf34cb4d",
+    "problems": 90,
+    "text_fields": [
+      "annotation.title",
+      "annotation.concept_rationale",
+      "curriculum.problem.concepts"
+    ]
+  },
+  "comparison_boundary": "Metadata and TF-IDF share judged candidates but use different input fields; treat their comparison as an input ablation, not an equal-information algorithm comparison.",
+  "diagnostic_only": true,
+  "graph_leakage_boundary": "Judgment pairs present in the supplied curriculum relationship graph are excluded from held-out scoring regardless of relationship type.",
+  "label_admission": {
+    "adjudication_counts": {
+      "accepted": 180
+    },
+    "permitted": true,
+    "purpose": "evaluation",
+    "rows_blocked_or_draft": 0,
+    "rows_reviewed_eligible": 180,
+    "rows_total": 180
+  },
+  "limitations": [
+    "Unjudged candidates are excluded from each ranking and are not treated as negatives.",
+    "Coverage is conditional on the reviewed candidate set; it is not full-catalog retrieval recall.",
+    "Concept overlap with judgment evidence is reported as a diagnostic and is not causally corrected.",
+    "Relationship ranking quality does not show improved learning or transfer."
+  ],
+  "metrics_definition": {
+    "direction_accuracy": "top-five forward-edge versus none classification; does not compare reverse orientations unless independently labeled",
+    "ndcg_at_5": "graded gain 2^relevance-1 against the ideal ordering of judged candidates only",
+    "precision_at_5": "prerequisite/transfer top-five precision at relevance >= 2",
+    "recall_at_10": "graded labels with relevance > 0 retrieved in the top 10, divided by judged positive candidates"
+  },
+  "provenance": {
+    "artifact_sizes_bytes": {},
+    "cash_cost": null,
+    "cash_cost_boundary": "No billing receipt is available; cost is not measured.",
+    "config": {
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 17,
+      "directional_cutoff": 5,
+      "directional_precision_relevance_threshold": 2,
+      "feature_names": [
+        "concept_jaccard",
+        "same_platform",
+        "same_native_difficulty",
+        "title_tfidf",
+        "rationale_tfidf",
+        "concept_text_tfidf"
+      ],
+      "metadata_weights": {
+        "concept_jaccard": 0.6,
+        "same_native_difficulty": 0.15,
+        "same_platform": 0.25
+      },
+      "methods": [
+        "metadata",
+        "tfidf"
+      ],
+      "ndcg_cutoff": 5,
+      "neighbor_namespace": null,
+      "neighbor_status": "not_supplied",
+      "ranking_min_judged_candidates": 2,
+      "recall_cutoff": 10,
+      "relevance_positive": 1,
+      "research_version": "relationship-research-v1",
+      "tokenizer": "unicode-words-casefold-v1",
+      "training_alpha": 1.0,
+      "training_loss": "ridge_mse",
+      "training_seed": 17
+    },
+    "config_sha256": "79060607e6571718f6ef8b8e9840a110bbf6090c19c4d9c1fb98a8ec5e840cf3",
+    "elapsed_seconds": 0.009142,
+    "input_sizes_bytes": {
+      "/Users/jeonghun/Algorithm-RAG-Engine/curriculum/annotations.v1.json": 56015,
+      "/Users/jeonghun/Algorithm-RAG-Engine/curriculum/seed.v1.json": 63207,
+      "/Users/jeonghun/Algorithm-RAG-Engine/research/relationship-judgments.v1.json": 92519
+    },
+    "inputs_sha256": {
+      "/Users/jeonghun/Algorithm-RAG-Engine/curriculum/annotations.v1.json": "d14205fcf7f2a958a4e3e9c9dab61da537a4d524d57871870610a06a2a832ba6",
+      "/Users/jeonghun/Algorithm-RAG-Engine/curriculum/seed.v1.json": "e5406b367c15736b312706c848cc6c9cc748b725cb2c630bf3e0dd71044535d1",
+      "/Users/jeonghun/Algorithm-RAG-Engine/research/relationship-judgments.v1.json": "3fe417325e608a56d374f9d5187335de965585be5509eb028aa0f2ef2131c6e3"
+    },
+    "machine": "arm64",
+    "peak_rss": {
+      "source": "resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "unit": "bytes",
+      "value": 26705920
+    },
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.5"
+  },
+  "report_type": "offline_relationship_benchmark",
+  "research_version": "relationship-research-v1",
+  "review_boundary": "Accepted adjudicator labels are evaluation records; this report does not establish human gold quality or learner benefit.",
+  "schema_version": 1,
+  "scoring": {
+    "candidate_coverage": 0.012199036918138041,
+    "candidate_coverage_note": "fraction of non-source catalog keys with a reviewed candidate label, macro-averaged by source and relationship type; unjudged candidates were excluded from ranking, not treated as negatives",
+    "concept_evidence_overlap": {
+      "interpretation": "lexical overlap diagnostic only; it does not show causal leakage or correct for shared information",
+      "rate": 0.7105263157894737,
+      "rows_total": 114,
+      "rows_with_token_overlap": 81
+    },
+    "direction_coverage": {
+      "accuracy": 0.14285714285714285,
+      "accuracy_definition": "top-5 predicts source_to_target; a judged row is positive only when relevance >= 2 and its reviewed direction is source_to_target; all other labels are none",
+      "eligible_direction_rows": 76,
+      "reverse_direction_boundary": "This evaluates forward proposal versus none for the supplied ordered pair; it does not compare both orientations unless the dataset includes independently reviewed reverse candidates.",
+      "reviewed_direction_rows": 76
+    },
+    "directional_precision_threshold": 2,
+    "metrics": {
+      "metadata": {
+        "direction_accuracy": 0.14285714285714285,
+        "direction_tested": 76,
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 0.14285714285714285,
+        "query_groups": 105,
+        "ranking_query_groups": 6,
+        "recall_at_10": 1.0
+      },
+      "tfidf": {
+        "direction_accuracy": 0.14285714285714285,
+        "direction_tested": 76,
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 0.14285714285714285,
+        "query_groups": 105,
+        "ranking_query_groups": 6,
+        "recall_at_10": 1.0
+      }
+    },
+    "paired_uncertainty": {
+      "tfidf": {
+        "by_review_family": {
+          "ndcg_at_5": {
+            "cluster_unit": "review_family",
+            "delta_mean": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "n_clusters": 2,
+            "n_query_groups": 4,
+            "samples": 1000,
+            "seed": 17,
+            "status": "computed"
+          },
+          "recall_at_10": {
+            "cluster_unit": "review_family",
+            "delta_mean": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "n_clusters": 2,
+            "n_query_groups": 4,
+            "samples": 1000,
+            "seed": 17,
+            "status": "computed"
+          }
+        },
+        "by_source_problem": {
+          "ndcg_at_5": {
+            "cluster_unit": "source_problem",
+            "delta_mean": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "n_clusters": 3,
+            "n_query_groups": 6,
+            "samples": 1000,
+            "seed": 17,
+            "status": "computed"
+          },
+          "recall_at_10": {
+            "cluster_unit": "source_problem",
+            "delta_mean": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "n_clusters": 3,
+            "n_query_groups": 6,
+            "samples": 1000,
+            "seed": 17,
+            "status": "computed"
+          }
+        }
+      }
+    },
+    "paired_uncertainty_cluster_unit": "source problem and review family; paired by the same evaluated query groups",
+    "per_query": [
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.09765719172492272
+            }
+          ]
+        },
+        "source": "atcoder:abc049_c",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.09765719172492272
+            }
+          ]
+        },
+        "source": "atcoder:abc049_c",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:word-break",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.09765719172492272
+            }
+          ]
+        },
+        "source": "atcoder:abc049_c",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1346490071282991
+            }
+          ]
+        },
+        "source": "atcoder:abc075_b",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1346490071282991
+            }
+          ]
+        },
+        "source": "atcoder:abc075_b",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:number-of-islands",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.1346490071282991
+            }
+          ]
+        },
+        "source": "atcoder:abc075_b",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.1299252056943963
+            }
+          ]
+        },
+        "source": "atcoder:abc081_a",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1299252056943963
+            }
+          ]
+        },
+        "source": "atcoder:abc081_a",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:231A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.1299252056943963
+            }
+          ]
+        },
+        "source": "atcoder:abc081_a",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc081_b",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc081_b",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:climbing-stairs",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc081_b",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc083_b",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc083_b",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-consecutive-sequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc083_b",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.05848955677148768
+            }
+          ]
+        },
+        "source": "atcoder:abc085_d",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.05848955677148768
+            }
+          ]
+        },
+        "source": "atcoder:abc085_d",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:jump-game",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.05848955677148768
+            }
+          ]
+        },
+        "source": "atcoder:abc085_d",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.12127020036516628
+            }
+          ]
+        },
+        "source": "atcoder:abc086_a",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.12127020036516628
+            }
+          ]
+        },
+        "source": "atcoder:abc086_a",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:4A",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.12127020036516628
+            }
+          ]
+        },
+        "source": "atcoder:abc086_a",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc086_c",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc086_c",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc086_c",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.19323037489698142
+            }
+          ]
+        },
+        "source": "atcoder:abc087_b",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19323037489698142
+            }
+          ]
+        },
+        "source": "atcoder:abc087_b",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:combination-sum",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19323037489698142
+            }
+          ]
+        },
+        "source": "atcoder:abc087_b",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc088_b",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc088_b",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc088_b",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.06324180633140046
+            }
+          ]
+        },
+        "source": "atcoder:abc095_c",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.06324180633140046
+            }
+          ]
+        },
+        "source": "atcoder:abc095_c",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.06324180633140046
+            }
+          ]
+        },
+        "source": "atcoder:abc095_c",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc103_c",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc103_c",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:product-of-array-except-self",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc103_c",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc104_c",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc104_c",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "atcoder:abc104_c",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.06468015464410512
+            }
+          ]
+        },
+        "source": "codeforces:158A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.06468015464410512
+            }
+          ]
+        },
+        "source": "codeforces:158A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:top-k-frequent-elements",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.06468015464410512
+            }
+          ]
+        },
+        "source": "codeforces:158A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.09008553912795694
+            }
+          ]
+        },
+        "source": "codeforces:263A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.09008553912795694
+            }
+          ]
+        },
+        "source": "codeforces:263A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.3
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.09008553912795694
+            }
+          ]
+        },
+        "source": "codeforces:263A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.05942719990735802
+            }
+          ]
+        },
+        "source": "codeforces:282A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.05942719990735802
+            }
+          ]
+        },
+        "source": "codeforces:282A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:791A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.05942719990735802
+            }
+          ]
+        },
+        "source": "codeforces:282A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.01324140715622852
+            }
+          ]
+        },
+        "source": "codeforces:339A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.01324140715622852
+            }
+          ]
+        },
+        "source": "codeforces:339A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc079_c",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.01324140715622852
+            }
+          ]
+        },
+        "source": "codeforces:339A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.028233636355862294
+            }
+          ]
+        },
+        "source": "codeforces:4A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.028233636355862294
+            }
+          ]
+        },
+        "source": "codeforces:4A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.028233636355862294
+            }
+          ]
+        },
+        "source": "codeforces:4A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "codeforces:50A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "codeforces:50A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "codeforces:50A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.04584391806415551
+            }
+          ]
+        },
+        "source": "codeforces:71A",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.04584391806415551
+            }
+          ]
+        },
+        "source": "codeforces:71A",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:339A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.04584391806415551
+            }
+          ]
+        },
+        "source": "codeforces:71A",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.08358072280571173
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.05643920920689634
+            }
+          ]
+        },
+        "source": "leetcode:3sum",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 2,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.08358072280571173
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.05643920920689634
+            }
+          ]
+        },
+        "source": "leetcode:3sum",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 2,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:container-with-most-water",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.08358072280571173
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc085_c",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.05643920920689634
+            }
+          ]
+        },
+        "source": "leetcode:3sum",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:binary-search",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:binary-search",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:158A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:binary-search",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.07961367301217459
+            }
+          ]
+        },
+        "source": "leetcode:clone-graph",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.07961367301217459
+            }
+          ]
+        },
+        "source": "leetcode:clone-graph",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:course-schedule",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.07961367301217459
+            }
+          ]
+        },
+        "source": "leetcode:clone-graph",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "leetcode:container-with-most-water",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "leetcode:container-with-most-water",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:50A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.14602117901477119
+            }
+          ]
+        },
+        "source": "leetcode:container-with-most-water",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.1815871342369472
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.03969169417970196
+            }
+          ]
+        },
+        "source": "leetcode:course-schedule",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 2,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1815871342369472
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.03969169417970196
+            }
+          ]
+        },
+        "source": "leetcode:course-schedule",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 2,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:redundant-connection",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1815871342369472
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:network-delay-time",
+              "rank": 2,
+              "relevance": 1,
+              "score": 0.03969169417970196
+            }
+          ]
+        },
+        "source": "leetcode:course-schedule",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.08740812843553973
+            }
+          ]
+        },
+        "source": "leetcode:house-robber",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.08740812843553973
+            }
+          ]
+        },
+        "source": "leetcode:house-robber",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:coin-change",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.08740812843553973
+            }
+          ]
+        },
+        "source": "leetcode:house-robber",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:implement-trie-prefix-tree",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:implement-trie-prefix-tree",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:valid-palindrome",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            }
+          ]
+        },
+        "source": "leetcode:implement-trie-prefix-tree",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.26238232411737644
+            }
+          ]
+        },
+        "source": "leetcode:longest-increasing-subsequence",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.26238232411737644
+            }
+          ]
+        },
+        "source": "leetcode:longest-increasing-subsequence",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.26238232411737644
+            }
+          ]
+        },
+        "source": "leetcode:longest-increasing-subsequence",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.01261605893778437
+            }
+          ]
+        },
+        "source": "leetcode:longest-substring-without-repeating-characters",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.01261605893778437
+            }
+          ]
+        },
+        "source": "leetcode:longest-substring-without-repeating-characters",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.4
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:daily-temperatures",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.01261605893778437
+            }
+          ]
+        },
+        "source": "leetcode:longest-substring-without-repeating-characters",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.19054609538373282
+            }
+          ]
+        },
+        "source": "leetcode:merge-intervals",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19054609538373282
+            }
+          ]
+        },
+        "source": "leetcode:merge-intervals",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:non-overlapping-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.19054609538373282
+            }
+          ]
+        },
+        "source": "leetcode:merge-intervals",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.23333137059047807
+            }
+          ]
+        },
+        "source": "leetcode:merge-two-sorted-lists",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.23333137059047807
+            }
+          ]
+        },
+        "source": "leetcode:merge-two-sorted-lists",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.25
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:merge-intervals",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.23333137059047807
+            }
+          ]
+        },
+        "source": "leetcode:merge-two-sorted-lists",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.09821008950283053
+            }
+          ]
+        },
+        "source": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.09821008950283053
+            }
+          ]
+        },
+        "source": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc073_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.09821008950283053
+            }
+          ]
+        },
+        "source": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.0
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.1346490071282991
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.02396541624667608
+            }
+          ]
+        },
+        "source": "leetcode:number-of-islands",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "ndcg_at_5": 1.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1346490071282991
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.02396541624667608
+            }
+          ]
+        },
+        "source": "leetcode:number-of-islands",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 2,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 2,
+            "ndcg_at_5": 1.0,
+            "precision_at_5": 0.0,
+            "recall_at_10": 1.0
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": true,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.0
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.0
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc075_b",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.1346490071282991
+            },
+            {
+              "direction": "source_to_target",
+              "problem_key": "atcoder:abc086_c",
+              "rank": 2,
+              "relevance": 0,
+              "score": 0.02396541624667608
+            }
+          ]
+        },
+        "source": "leetcode:number-of-islands",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.10489352735846054
+            }
+          ]
+        },
+        "source": "leetcode:unique-paths",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.10489352735846054
+            }
+          ]
+        },
+        "source": "leetcode:unique-paths",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 1.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 1.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.6
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "leetcode:longest-common-subsequence",
+              "rank": 1,
+              "relevance": 2,
+              "score": 0.10489352735846054
+            }
+          ]
+        },
+        "source": "leetcode:unique-paths",
+        "type": "transfer"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 0,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 0,
+              "score": 0.04942571150456452
+            }
+          ]
+        },
+        "source": "leetcode:valid-anagram",
+        "type": "prerequisite"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "ndcg_at_5": null,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.04942571150456452
+            }
+          ]
+        },
+        "source": "leetcode:valid-anagram",
+        "type": "similarity"
+      },
+      {
+        "judged_candidates": 1,
+        "metrics": {
+          "metadata": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          },
+          "tfidf": {
+            "direction_accuracy": 0.0,
+            "direction_tested": 1,
+            "ndcg_at_5": null,
+            "precision_at_5": 0.0,
+            "recall_at_10": null
+          }
+        },
+        "positive_candidates": 1,
+        "rankable": false,
+        "rankings": {
+          "metadata": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.19999999999999998
+            }
+          ],
+          "tfidf": [
+            {
+              "direction": "source_to_target",
+              "problem_key": "codeforces:112A",
+              "rank": 1,
+              "relevance": 1,
+              "score": 0.04942571150456452
+            }
+          ]
+        },
+        "source": "leetcode:valid-anagram",
+        "type": "transfer"
+      }
+    ],
+    "platform_pair_coverage": [
+      {
+        "judgments": 0,
+        "platform_pair": "atcoder->atcoder",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "atcoder->baekjoon",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 6,
+        "platform_pair": "atcoder->codeforces",
+        "status": "available"
+      },
+      {
+        "judgments": 33,
+        "platform_pair": "atcoder->leetcode",
+        "status": "available"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "baekjoon->atcoder",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "baekjoon->baekjoon",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "baekjoon->codeforces",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "baekjoon->leetcode",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 6,
+        "platform_pair": "codeforces->atcoder",
+        "status": "available"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "codeforces->baekjoon",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 9,
+        "platform_pair": "codeforces->codeforces",
+        "status": "available"
+      },
+      {
+        "judgments": 6,
+        "platform_pair": "codeforces->leetcode",
+        "status": "available"
+      },
+      {
+        "judgments": 12,
+        "platform_pair": "leetcode->atcoder",
+        "status": "available"
+      },
+      {
+        "judgments": 0,
+        "platform_pair": "leetcode->baekjoon",
+        "status": "unavailable_no_reviewed_candidates"
+      },
+      {
+        "judgments": 9,
+        "platform_pair": "leetcode->codeforces",
+        "status": "available"
+      },
+      {
+        "judgments": 33,
+        "platform_pair": "leetcode->leetcode",
+        "status": "available"
+      }
+    ],
+    "query_count": 105,
+    "ranking_query_groups": 9,
+    "seed_graph_overlap_pairs_excluded": 22,
+    "seed_graph_overlap_rows_excluded": 66,
+    "single_candidate_query_groups_excluded_from_ranking": 96,
+    "subgroups": {
+      "atcoder->codeforces|cross-platform-foundations": {
+        "judgments": 6,
+        "metrics": {
+          "metadata.direction_accuracy": 0.75,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.75,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.75,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.75,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "atcoder->leetcode|cross-platform-foundations": {
+        "judgments": 33,
+        "metrics": {
+          "metadata.direction_accuracy": 0.13636363636363635,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.13636363636363635,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.13636363636363635,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.13636363636363635,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "codeforces->atcoder|cross-platform-foundations": {
+        "judgments": 6,
+        "metrics": {
+          "metadata.direction_accuracy": 0.0,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.0,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.0,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.0,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "codeforces->codeforces|within-platform-methods": {
+        "judgments": 9,
+        "metrics": {
+          "metadata.direction_accuracy": 0.0,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.0,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.0,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.0,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "codeforces->leetcode|cross-platform-foundations": {
+        "judgments": 6,
+        "metrics": {
+          "metadata.direction_accuracy": 0.0,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.0,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.0,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.0,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "leetcode->atcoder|cross-platform-foundations": {
+        "judgments": 12,
+        "metrics": {
+          "metadata.direction_accuracy": 0.0,
+          "metadata.ndcg_at_5": 1.0,
+          "metadata.precision_at_5": 0.0,
+          "metadata.recall_at_10": 1.0,
+          "tfidf.direction_accuracy": 0.0,
+          "tfidf.ndcg_at_5": 1.0,
+          "tfidf.precision_at_5": 0.0,
+          "tfidf.recall_at_10": 1.0
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 1,
+              "n_query_groups": 2,
+              "status": "insufficient_clusters"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 1,
+              "n_query_groups": 2,
+              "status": "insufficient_clusters"
+            }
+          }
+        }
+      },
+      "leetcode->codeforces|cross-platform-foundations": {
+        "judgments": 9,
+        "metrics": {
+          "metadata.direction_accuracy": 0.0,
+          "metadata.ndcg_at_5": null,
+          "metadata.precision_at_5": 0.0,
+          "metadata.recall_at_10": null,
+          "tfidf.direction_accuracy": 0.0,
+          "tfidf.ndcg_at_5": null,
+          "tfidf.precision_at_5": 0.0,
+          "tfidf.recall_at_10": null
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 0,
+              "n_query_groups": 0,
+              "status": "insufficient_query_groups"
+            }
+          }
+        }
+      },
+      "leetcode->leetcode|within-platform-methods": {
+        "judgments": 33,
+        "metrics": {
+          "metadata.direction_accuracy": 0.2,
+          "metadata.ndcg_at_5": 1.0,
+          "metadata.precision_at_5": 0.2,
+          "metadata.recall_at_10": 1.0,
+          "tfidf.direction_accuracy": 0.2,
+          "tfidf.ndcg_at_5": 1.0,
+          "tfidf.precision_at_5": 0.2,
+          "tfidf.recall_at_10": 1.0
+        },
+        "paired_uncertainty": {
+          "tfidf": {
+            "ndcg_at_5": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 1,
+              "n_query_groups": 2,
+              "status": "insufficient_clusters"
+            },
+            "recall_at_10": {
+              "cluster_unit": "review_family",
+              "delta_mean": null,
+              "interval_95": null,
+              "n_clusters": 1,
+              "n_query_groups": 2,
+              "status": "insufficient_clusters"
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": "scored"
+}

@@ -1,0 +1,1748 @@
+{
+  "schema_version": 1,
+  "curriculum_version": "seed.v1",
+  "problems": [
+    {
+      "problem_key": "leetcode:two-sum",
+      "canonical_url": "https://leetcode.com/problems/two-sum/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "hash-map",
+        "complement lookup"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A complement map finds a prior partner in one pass while keeping distinct indices. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:contains-duplicate",
+      "canonical_url": "https://leetcode.com/problems/contains-duplicate/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "hash-set",
+        "membership"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A set is enough because only prior membership matters, not duplicate frequency. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:valid-anagram",
+      "canonical_url": "https://leetcode.com/problems/valid-anagram/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "frequency-count",
+        "string"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Character counts preserve multiplicity, which simple membership would lose. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:group-anagrams",
+      "canonical_url": "https://leetcode.com/problems/group-anagrams/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "canonicalization",
+        "hash-map"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A permutation-invariant signature partitions all words into equivalence classes. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:top-k-frequent-elements",
+      "canonical_url": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "frequency-count",
+        "heap"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Counting and selecting the largest counts are two separate steps. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:product-of-array-except-self",
+      "canonical_url": "https://leetcode.com/problems/product-of-array-except-self/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "prefix-suffix",
+        "in-place-state"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Left and right products exclude the current factor without division. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:longest-consecutive-sequence",
+      "canonical_url": "https://leetcode.com/problems/longest-consecutive-sequence/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "hash-set",
+        "sequence-boundary"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Only starts with no predecessor need a forward scan, avoiding repeated run work. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:valid-sudoku",
+      "canonical_url": "https://leetcode.com/problems/valid-sudoku/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "set-invariant",
+        "grid"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Row, column and box constraints must each be checked independently. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:valid-palindrome",
+      "canonical_url": "https://leetcode.com/problems/valid-palindrome/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "two-pointers",
+        "normalization"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Two endpoints can skip punctuation after normalization and compare inward. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:3sum",
+      "canonical_url": "https://leetcode.com/problems/3sum/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "sorting",
+        "two-pointers"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Sorting makes pair-sum movement monotone and enables duplicate suppression. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:container-with-most-water",
+      "canonical_url": "https://leetcode.com/problems/container-with-most-water/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "two-pointers",
+        "greedy-elimination"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The shorter height bounds area, so advancing that side is safe. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:trapping-rain-water",
+      "canonical_url": "https://leetcode.com/problems/trapping-rain-water/",
+      "native_difficulty": "Hard",
+      "access_state": "free",
+      "concepts": [
+        "two-pointers",
+        "prefix-maximum"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: At each index, the lower of two boundary maxima caps stored water. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:best-time-to-buy-and-sell-stock",
+      "canonical_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "running-minimum",
+        "one-pass"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The best earlier purchase price is a sufficient one-pass state. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:longest-substring-without-repeating-characters",
+      "canonical_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "sliding-window",
+        "last-seen-index"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A repeated character forces the left boundary past its last occurrence. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:minimum-window-substring",
+      "canonical_url": "https://leetcode.com/problems/minimum-window-substring/",
+      "native_difficulty": "Hard",
+      "access_state": "free",
+      "concepts": [
+        "sliding-window",
+        "frequency-coverage"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The window may shrink only after every required multiplicity is covered. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:valid-parentheses",
+      "canonical_url": "https://leetcode.com/problems/valid-parentheses/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "stack",
+        "nested-structure"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Last-in-first-out matching enforces nesting, including mismatched closing types. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:min-stack",
+      "canonical_url": "https://leetcode.com/problems/min-stack/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "stack",
+        "auxiliary-invariant"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The minimum must be recoverable after removing the present top element. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:daily-temperatures",
+      "canonical_url": "https://leetcode.com/problems/daily-temperatures/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "monotonic-stack",
+        "next-greater"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A decreasing unresolved stack reveals the next warmer day on pop. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:largest-rectangle-in-histogram",
+      "canonical_url": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+      "native_difficulty": "Hard",
+      "access_state": "free",
+      "concepts": [
+        "monotonic-stack",
+        "span-boundary"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A lower bar closes the span of taller bars whose area can then be evaluated. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:binary-search",
+      "canonical_url": "https://leetcode.com/problems/binary-search/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "binary-search",
+        "interval-invariant"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The candidate interval must shrink without discarding an untested possible answer. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:search-in-rotated-sorted-array",
+      "canonical_url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "binary-search",
+        "partition-invariant"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: One side remains ordered, allowing a justified half-interval rejection. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:find-minimum-in-rotated-sorted-array",
+      "canonical_url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "binary-search",
+        "rotation-pivot"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Comparison with the right boundary keeps the pivot in the candidate interval. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:search-a-2d-matrix",
+      "canonical_url": "https://leetcode.com/problems/search-a-2d-matrix/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "binary-search",
+        "flattened-order"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The row-major ordering supports binary search over virtual flat indices. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:reverse-linked-list",
+      "canonical_url": "https://leetcode.com/problems/reverse-linked-list/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "linked-list",
+        "pointer-rewiring"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each pointer rewrite must retain access to the unprocessed suffix. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:merge-two-sorted-lists",
+      "canonical_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "linked-list",
+        "stable-merge"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Advancing the smaller head preserves the sorted prefix invariant. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:linked-list-cycle",
+      "canonical_url": "https://leetcode.com/problems/linked-list-cycle/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "linked-list",
+        "fast-slow-pointers"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Two speeds eventually meet on a cycle without node storage. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:remove-nth-node-from-end-of-list",
+      "canonical_url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "linked-list",
+        "two-pointer-gap"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A fixed lead gap places the trailing pointer at the removal predecessor. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:reorder-list",
+      "canonical_url": "https://leetcode.com/problems/reorder-list/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "linked-list",
+        "split-reverse-merge"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The task composes midpoint finding, second-half reversal and alternating merge. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:invert-binary-tree",
+      "canonical_url": "https://leetcode.com/problems/invert-binary-tree/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "tree",
+        "recursive-traversal"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Every node is visited once and its child references are exchanged. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:maximum-depth-of-binary-tree",
+      "canonical_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "tree",
+        "postorder-height"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Subtree depths combine recursively with one additional parent level. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:lowest-common-ancestor-of-a-binary-search-tree",
+      "canonical_url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "bst",
+        "ordered-ancestry"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: BST ordering identifies the first ancestor where target search paths split. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:binary-tree-level-order-traversal",
+      "canonical_url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "tree",
+        "breadth-first-search"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Processing queue size by layer prevents adjacent depths from mixing. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:validate-binary-search-tree",
+      "canonical_url": "https://leetcode.com/problems/validate-binary-search-tree/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "bst",
+        "value-bounds"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Inherited strict ancestor bounds catch violations beyond direct children. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:kth-smallest-element-in-a-bst",
+      "canonical_url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "bst",
+        "inorder-order"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: An inorder visit orders BST keys and can stop at rank k. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:construct-binary-tree-from-preorder-and-inorder-traversal",
+      "canonical_url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "tree",
+        "traversal-reconstruction"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Preorder chooses roots while inorder determines each subtree partition. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:network-delay-time",
+      "canonical_url": "https://leetcode.com/problems/network-delay-time/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "graph",
+        "dijkstra"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Nonnegative weights permit minimum-distance settlement through Dijkstra relaxation. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:number-of-islands",
+      "canonical_url": "https://leetcode.com/problems/number-of-islands/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "grid-graph",
+        "flood-fill"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Flood fill marks each connected land component exactly once. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:clone-graph",
+      "canonical_url": "https://leetcode.com/problems/clone-graph/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "graph",
+        "identity-mapping"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: An identity map is needed before following neighbors so cycles preserve shared nodes. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:course-schedule",
+      "canonical_url": "https://leetcode.com/problems/course-schedule/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "directed-graph",
+        "cycle-detection"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A directed dependency cycle prevents any complete topological ordering. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:rotting-oranges",
+      "canonical_url": "https://leetcode.com/problems/rotting-oranges/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "grid-graph",
+        "multi-source-bfs"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Simultaneous initial sources require BFS layers to measure the spread time. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:pacific-atlantic-water-flow",
+      "canonical_url": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "grid-graph",
+        "reverse-reachability"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Reversing flow from each coast reduces the task to two reachability sets. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:redundant-connection",
+      "canonical_url": "https://leetcode.com/problems/redundant-connection/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "undirected-graph",
+        "cycle-detection"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: An edge closing an existing undirected path is the edge to remove. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:word-search",
+      "canonical_url": "https://leetcode.com/problems/word-search/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "backtracking",
+        "path-local-visited"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Visited cells belong to one active path and must be restored on backtrack. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:subsets",
+      "canonical_url": "https://leetcode.com/problems/subsets/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "backtracking",
+        "include-exclude"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each input element independently contributes an include or exclude branch. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:combination-sum",
+      "canonical_url": "https://leetcode.com/problems/combination-sum/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "backtracking",
+        "bounded-remainder"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A monotone choice index avoids permutation duplicates while allowing repeated picks. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:permutations",
+      "canonical_url": "https://leetcode.com/problems/permutations/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "backtracking",
+        "used-elements"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Order changes the result, so branch state must track used positions. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:subsets-ii",
+      "canonical_url": "https://leetcode.com/problems/subsets-ii/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "backtracking",
+        "duplicate-branch-pruning"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Sorting enables duplicate pruning at the same decision depth only. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:implement-trie-prefix-tree",
+      "canonical_url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "trie",
+        "prefix-state"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Shared prefix nodes answer both complete-word and prefix existence queries. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:coin-change",
+      "canonical_url": "https://leetcode.com/problems/coin-change/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "unbounded-minimization"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The optimal amount state considers every allowable final coin. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:climbing-stairs",
+      "canonical_url": "https://leetcode.com/problems/climbing-stairs/",
+      "native_difficulty": "Easy",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "fibonacci-state"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: One-step and two-step predecessors exhaust the final-step cases. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:house-robber",
+      "canonical_url": "https://leetcode.com/problems/house-robber/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "nonadjacent-choice"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: At each house, taking and skipping lead to different prior-state dependencies. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:longest-increasing-subsequence",
+      "canonical_url": "https://leetcode.com/problems/longest-increasing-subsequence/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "subsequence"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The state must preserve order and a strict value increase. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:longest-common-subsequence",
+      "canonical_url": "https://leetcode.com/problems/longest-common-subsequence/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "two-sequence-prefixes"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Prefix-pair states handle matching ends or dropping one sequence end. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:word-break",
+      "canonical_url": "https://leetcode.com/problems/word-break/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "prefix-segmentation"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A reachable prefix extends only across a matching dictionary token. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:unique-paths",
+      "canonical_url": "https://leetcode.com/problems/unique-paths/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "dynamic-programming",
+        "grid-path-count"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each cell count is the sum of its reachable predecessor counts. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:jump-game",
+      "canonical_url": "https://leetcode.com/problems/jump-game/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "greedy",
+        "reachable-frontier"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The farthest reachable frontier subsumes all earlier jump choices. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:merge-intervals",
+      "canonical_url": "https://leetcode.com/problems/merge-intervals/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "intervals",
+        "sort-and-coalesce"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Sorted starts let one active interval absorb every overlap. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:insert-interval",
+      "canonical_url": "https://leetcode.com/problems/insert-interval/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "intervals",
+        "ordered-sweep"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The new range can be folded once between unaffected left and right ranges. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:non-overlapping-intervals",
+      "canonical_url": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "intervals",
+        "greedy-scheduling"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Selecting earliest finishing intervals leaves maximal space for later choices. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+      "canonical_url": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+      "native_difficulty": "Medium",
+      "access_state": "free",
+      "concepts": [
+        "intervals",
+        "greedy-endpoint"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: An earliest right endpoint stabs the current overlap group with one arrow. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc086_a",
+      "canonical_url": "https://atcoder.jp/contests/abc086/tasks/abc086_a",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "parity",
+        "arithmetic"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Product parity follows from operand parity without multiplying large values. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc081_a",
+      "canonical_url": "https://atcoder.jp/contests/abc081/tasks/abc081_a",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "counting",
+        "string"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The fixed three-character record needs a count of marked positions. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc081_b",
+      "canonical_url": "https://atcoder.jp/contests/abc081/tasks/abc081_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "simulation",
+        "termination-invariant"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Repeated halving stops at the first round in which some value is odd. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc087_b",
+      "canonical_url": "https://atcoder.jp/contests/abc087/tasks/abc087_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "brute-force-enumeration",
+        "bounded-search"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Small bounded denomination counts permit exact exhaustive enumeration. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc083_b",
+      "canonical_url": "https://atcoder.jp/contests/abc083/tasks/abc083_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "iteration",
+        "digit-sum"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Digit sums are recomputed for candidate integers before range accumulation. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc088_b",
+      "canonical_url": "https://atcoder.jp/contests/abc088/tasks/abc088_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "sorting",
+        "greedy-choice"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Taking the largest remaining card is locally optimal for alternating picks. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc085_b",
+      "canonical_url": "https://atcoder.jp/contests/abc085/tasks/abc085_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "set",
+        "distinct-count"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Only distinct diameters matter for the possible stack height. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc085_c",
+      "canonical_url": "https://atcoder.jp/contests/abc085/tasks/abc085_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "brute-force-enumeration",
+        "equation"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Two note counts determine the third, reducing the finite search space. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc049_c",
+      "canonical_url": "https://atcoder.jp/contests/abc049/tasks/abc049_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "string",
+        "suffix-recognition"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Whole suffix tokens can be consumed without confusing overlapping prefixes. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc086_c",
+      "canonical_url": "https://atcoder.jp/contests/abc086/tasks/abc086_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "simulation",
+        "parity-reachability"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each move needs enough Manhattan time and a matching parity remainder. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc058_a",
+      "canonical_url": "https://atcoder.jp/contests/abc058/tasks/abc058_a",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "arithmetic-progression"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Three values form an arithmetic progression when adjacent differences match. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc072_b",
+      "canonical_url": "https://atcoder.jp/contests/abc072/tasks/abc072_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "string"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Index parity alone selects the requested characters. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc073_b",
+      "canonical_url": "https://atcoder.jp/contests/abc073/tasks/abc073_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "interval-counting"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Inclusive endpoint arithmetic gives each independent seat range length. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc074_b",
+      "canonical_url": "https://atcoder.jp/contests/abc074/tasks/abc074_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "greedy-distance"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each ball independently chooses its nearer available endpoint. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc075_b",
+      "canonical_url": "https://atcoder.jp/contests/abc075/tasks/abc075_b",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "grid"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: For each non-mine cell, bounded neighboring coordinates determine the count. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc079_c",
+      "canonical_url": "https://atcoder.jp/contests/abc079/tasks/abc079_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "bitmask-enumeration"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Three binary operator slots give only eight cases to test. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc085_d",
+      "canonical_url": "https://atcoder.jp/contests/abc085/tasks/abc085_d",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "greedy"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Use one-time throws stronger than the repeatable strike before repeating that strike. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc095_c",
+      "canonical_url": "https://atcoder.jp/contests/abc095/tasks/abc095_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "greedy-cost-comparison"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Compare mixed bundles with separate units under two fixed demands. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc103_c",
+      "canonical_url": "https://atcoder.jp/contests/abc103/tasks/abc103_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "number-theory"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each modulus contributes at most one less than itself to the total. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "atcoder:abc104_c",
+      "canonical_url": "https://atcoder.jp/contests/abc104/tasks/abc104_c",
+      "native_difficulty": "unranked",
+      "access_state": "free",
+      "concepts": [
+        "enumeration"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Enumerate completed score groups, then use the strongest incomplete group if needed. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:4A",
+      "canonical_url": "https://codeforces.com/problemset/problem/4/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "parity",
+        "constructive-check"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Even division requires two positive even pieces, ruling out weight two. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:71A",
+      "canonical_url": "https://codeforces.com/problemset/problem/71/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "string-formatting",
+        "length-condition"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The threshold is strict, and shortening keeps both boundary letters. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:231A",
+      "canonical_url": "https://codeforces.com/problemset/problem/231/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "counting",
+        "threshold"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: A row counts only when at least two of three solvers agree. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:158A",
+      "canonical_url": "https://codeforces.com/problemset/problem/158/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "sorting",
+        "threshold-count"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: The kth score sets the cutoff but zero scores never advance. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:50A",
+      "canonical_url": "https://codeforces.com/problemset/problem/50/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "greedy-counting",
+        "integer-division"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each domino covers two cells, so floor of board area over two is attainable. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:282A",
+      "canonical_url": "https://codeforces.com/problemset/problem/282/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "simulation",
+        "string-operation"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Each parsed instruction contributes plus or minus one to one scalar state. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:263A",
+      "canonical_url": "https://codeforces.com/problemset/problem/263/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "grid",
+        "manhattan-distance"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Row and column displacements sum to the minimum adjacent swaps. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:112A",
+      "canonical_url": "https://codeforces.com/problemset/problem/112/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "string",
+        "case-normalization"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Case normalization precedes a lexicographic, position-sensitive comparison. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:339A",
+      "canonical_url": "https://codeforces.com/problemset/problem/339/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "string-parsing",
+        "sorting"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Sorting the parsed single-digit addends preserves the plus-delimited format. Source and access scope: curriculum-sources.md."
+      }
+    },
+    {
+      "problem_key": "codeforces:791A",
+      "canonical_url": "https://codeforces.com/problemset/problem/791/A",
+      "native_difficulty": "800",
+      "access_state": "free",
+      "concepts": [
+        "simulation",
+        "growth-rate"
+      ],
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Independent method check: Tripling versus doubling is simulated until strict inequality first holds. Source and access scope: curriculum-sources.md."
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "leetcode:binary-search",
+      "target": "leetcode:find-minimum-in-rotated-sorted-array",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Ordinary binary-search interval maintenance supports finding the rotation minimum."
+      }
+    },
+    {
+      "source": "leetcode:binary-search",
+      "target": "leetcode:search-in-rotated-sorted-array",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Ordinary binary-search interval maintenance supports target search with a rotated sorted half."
+      }
+    },
+    {
+      "source": "leetcode:climbing-stairs",
+      "target": "leetcode:house-robber",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "The two-prior-state recurrence supports the take-or-skip recurrence."
+      }
+    },
+    {
+      "source": "leetcode:contains-duplicate",
+      "target": "leetcode:longest-consecutive-sequence",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Set membership is reused, then extended to identify run starts and ends."
+      }
+    },
+    {
+      "source": "leetcode:daily-temperatures",
+      "target": "leetcode:largest-rectangle-in-histogram",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "A monotonic stack first resolves next-greater spans, then rectangle boundaries."
+      }
+    },
+    {
+      "source": "leetcode:longest-substring-without-repeating-characters",
+      "target": "leetcode:minimum-window-substring",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "The simpler sliding-window invariant prepares for a multiset coverage window."
+      }
+    },
+    {
+      "source": "leetcode:maximum-depth-of-binary-tree",
+      "target": "leetcode:validate-binary-search-tree",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Recursive tree traversal prepares for ancestor-bound validation."
+      }
+    },
+    {
+      "source": "leetcode:merge-intervals",
+      "target": "leetcode:insert-interval",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Sorted interval coalescing directly prepares for inserting one interval."
+      }
+    },
+    {
+      "source": "leetcode:merge-two-sorted-lists",
+      "target": "leetcode:reorder-list",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Sorted-list merging contributes the alternating merge phase of reorder-list."
+      }
+    },
+    {
+      "source": "leetcode:reverse-linked-list",
+      "target": "leetcode:reorder-list",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Reversing links is an explicit phase of reorder-list."
+      }
+    },
+    {
+      "source": "leetcode:subsets",
+      "target": "leetcode:combination-sum",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Subset decision trees prepare for recursive choice construction with a remainder."
+      }
+    },
+    {
+      "source": "leetcode:subsets",
+      "target": "leetcode:permutations",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Subset enumeration introduces branch state before order-sensitive permutation choices."
+      }
+    },
+    {
+      "source": "leetcode:subsets",
+      "target": "leetcode:subsets-ii",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Subset enumeration is the baseline before equal-value branch pruning."
+      }
+    },
+    {
+      "source": "leetcode:valid-anagram",
+      "target": "leetcode:group-anagrams",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Single-word character signatures prepare for grouping by the same signature."
+      }
+    },
+    {
+      "source": "leetcode:validate-binary-search-tree",
+      "target": "leetcode:kth-smallest-element-in-a-bst",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "BST ordering motivates inorder rank selection; validation teaches global ordering bounds."
+      }
+    },
+    {
+      "source": "leetcode:binary-search",
+      "target": "leetcode:search-a-2d-matrix",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Binary-search interval reasoning transfers to flattened matrix indices."
+      }
+    },
+    {
+      "source": "leetcode:contains-duplicate",
+      "target": "leetcode:valid-sudoku",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Set membership prepares for repeated row, column and box checks."
+      }
+    },
+    {
+      "source": "leetcode:number-of-islands",
+      "target": "leetcode:rotting-oranges",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Grid traversal and visited-state handling prepare for layer-based spread."
+      }
+    },
+    {
+      "source": "leetcode:number-of-islands",
+      "target": "leetcode:pacific-atlantic-water-flow",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Grid traversal prepares for reverse reachability from two boundaries."
+      }
+    },
+    {
+      "source": "leetcode:climbing-stairs",
+      "target": "leetcode:unique-paths",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "One-dimensional path counting prepares for two-dimensional path counts."
+      }
+    },
+    {
+      "source": "leetcode:coin-change",
+      "target": "leetcode:word-break",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Reachable amount states prepare for reachable string-prefix states."
+      }
+    },
+    {
+      "source": "leetcode:subsets",
+      "target": "leetcode:word-search",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Basic backtracking branch state prepares for grid path-local visited state."
+      }
+    },
+    {
+      "source": "leetcode:merge-intervals",
+      "target": "leetcode:minimum-number-of-arrows-to-burst-balloons",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Interval overlap sorting prepares for endpoint-greedy coverage; greedy proof remains new."
+      }
+    },
+    {
+      "source": "atcoder:abc087_b",
+      "target": "atcoder:abc085_c",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Bounded coin-count enumeration prepares for a constrained note-count search."
+      }
+    },
+    {
+      "source": "leetcode:valid-parentheses",
+      "target": "leetcode:daily-temperatures",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "A stack of unresolved items introduces push and pop mechanics; monotonic order is new."
+      }
+    },
+    {
+      "source": "leetcode:rotting-oranges",
+      "target": "leetcode:network-delay-time",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Layered shortest distance in a unit-weight grid prepares for weighted relaxation."
+      }
+    },
+    {
+      "source": "leetcode:binary-tree-level-order-traversal",
+      "target": "leetcode:rotting-oranges",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Queue layers in a tree prepare for synchronized multi-source grid layers."
+      }
+    },
+    {
+      "source": "leetcode:product-of-array-except-self",
+      "target": "leetcode:trapping-rain-water",
+      "type": "prerequisite",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Left and right aggregates prepare for two-direction water bounds, with different operation."
+      }
+    },
+    {
+      "source": "leetcode:longest-substring-without-repeating-characters",
+      "target": "leetcode:minimum-window-substring",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both maintain a valid contiguous window, though validity conditions differ."
+      }
+    },
+    {
+      "source": "leetcode:daily-temperatures",
+      "target": "leetcode:largest-rectangle-in-histogram",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both resolve spans at a monotonic-stack pop event."
+      }
+    },
+    {
+      "source": "leetcode:search-in-rotated-sorted-array",
+      "target": "leetcode:find-minimum-in-rotated-sorted-array",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both use sorted-half evidence to shrink a rotated array search interval."
+      }
+    },
+    {
+      "source": "leetcode:binary-tree-level-order-traversal",
+      "target": "leetcode:rotting-oranges",
+      "type": "transfer",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Queue layers transfer from tree BFS to multi-source grid BFS."
+      }
+    },
+    {
+      "source": "leetcode:word-search",
+      "target": "leetcode:subsets",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both use recursive branch-local state, though grid adjacency adds constraints."
+      }
+    },
+    {
+      "source": "leetcode:coin-change",
+      "target": "leetcode:climbing-stairs",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both use a recurrence over smaller states, with counting versus minimization."
+      }
+    },
+    {
+      "source": "leetcode:insert-interval",
+      "target": "leetcode:non-overlapping-intervals",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both sort intervals, but insertion coalesces while removal schedules."
+      }
+    },
+    {
+      "source": "leetcode:network-delay-time",
+      "target": "leetcode:rotting-oranges",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both compute propagation distance, with weighted versus unit edges."
+      }
+    },
+    {
+      "source": "leetcode:product-of-array-except-self",
+      "target": "leetcode:trapping-rain-water",
+      "type": "transfer",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both combine information from positions to the left and right."
+      }
+    },
+    {
+      "source": "atcoder:abc085_c",
+      "target": "leetcode:combination-sum",
+      "type": "transfer",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both enumerate discrete choices toward a target sum under different constraints."
+      }
+    },
+    {
+      "source": "atcoder:abc079_c",
+      "target": "leetcode:subsets",
+      "type": "transfer",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both enumerate binary choices; operator slots replace subset membership."
+      }
+    },
+    {
+      "source": "codeforces:231A",
+      "target": "codeforces:158A",
+      "type": "similarity",
+      "review": {
+        "status": "approved",
+        "reviewer": "sol-independent-review",
+        "evidence": "Both count records satisfying a threshold predicate, with different record shapes."
+      }
+    }
+  ]
+}

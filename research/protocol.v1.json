@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "protocol_version": "diagnostic-v1",
+  "config": {
+    "research_version": "relationship-research-v1",
+    "tokenizer": "unicode-words-casefold-v1",
+    "metadata_weights": {
+      "concept_jaccard": 0.6,
+      "same_platform": 0.25,
+      "same_native_difficulty": 0.15
+    },
+    "relevance_positive": 1,
+    "directional_precision_relevance_threshold": 2,
+    "recall_cutoff": 10,
+    "ndcg_cutoff": 5,
+    "ranking_min_judged_candidates": 2,
+    "directional_cutoff": 5,
+    "bootstrap_seed": 17,
+    "bootstrap_samples": 1000,
+    "feature_names": [
+      "concept_jaccard",
+      "same_platform",
+      "same_native_difficulty",
+      "title_tfidf",
+      "rationale_tfidf",
+      "concept_text_tfidf"
+    ],
+    "training_loss": "ridge_mse",
+    "training_alpha": 1.0,
+    "training_seed": 17
+  },
+  "label_use": "evaluation_only",
+  "status": "implementation_diagnostic_not_unopened_test",
+  "comparison": "partial judged sets; metadata vs authored-text TF-IDF is an information ablation",
+  "promotion_enabled": false
+}

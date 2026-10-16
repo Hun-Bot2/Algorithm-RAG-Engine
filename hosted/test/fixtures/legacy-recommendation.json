@@ -1,0 +1,17 @@
+{
+  "input": {
+    "id": "bj-10986",
+    "title": "Prefix Sum Modulo",
+    "tags": ["prefix sum", "modulo"],
+    "recommendations": [
+      {
+        "id": "974",
+        "title": "Subarray Sums Divisible by K",
+        "difficulty": "Medium",
+        "similarity": 0.1234,
+        "ai_comment": "Practice the same prefix-sum modulo counting pattern."
+      }
+    ]
+  },
+  "expected_text": "*[bj-10986] Prefix Sum Modulo*\nTags: `prefix sum`, `modulo`\n*Similar LeetCode Problems:*\n• <https://leetcode.com/problems/subarray-sums-divisible-by-k/|Subarray Sums Divisible by K> (Sim: 0.1234)\n  > Practice the same prefix-sum modulo counting pattern."
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-16T06:50:08.533Z",
+  "runtime": "local Cloudflare workerd via pinned Wrangler/Miniflare",
+  "elapsed_wall_ms": 407.65212499999996,
+  "checks": [
+    "D1 migrations",
+    "Access JWT+JWKS signature",
+    "authenticated assets",
+    "state API",
+    "owner-bound append",
+    "idempotency",
+    "atomic conflicting restore",
+    "full D1 learning backup",
+    "nonempty restore refusal",
+    "privacy-preserving operation counters",
+    "no inference/Slack calls"
+  ],
+  "limitations": "Local workerd/D1 emulation; not deployed Access, free-tier CPU measurement, delivery or phone alert proof."
+}

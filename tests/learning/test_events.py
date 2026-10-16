@@ -86,6 +86,19 @@ class StorageTest(unittest.TestCase):
                 self.store.append('alice', e)
         self.assertEqual(self.store.events('alice'), [])
 
+    def test_optional_activity_context_is_explicit_and_validated(self):
+        e = attempt(payload={'problem_key': 'leetcode:two-sum', 'outcome': 'independent',
+                             'hints': False, 'activity_type': 'review'})
+        self.store.append('alice', e)
+        self.assertEqual(self.store.events('alice')[0].payload['activity_type'], 'review')
+        for payload in [dict(e.payload, activity_type='transfer'),
+                        dict(e.payload, activity_type='transfer', transfer_from='leetcode:two-sum'),
+                        dict(e.payload, activity_type=[]), dict(e.payload, transfer_from='atcoder:abc001_a')]:
+            with self.subTest(payload=payload), self.assertRaises(ValueError):
+                self.store.append('alice', attempt('bad', payload=payload))
+        transfer = dict(e.payload, activity_type='transfer', transfer_from='atcoder:abc001_a')
+        self.store.append('alice', attempt('transfer', payload=transfer))
+
     def test_import_is_reported_not_mastery(self):
         e = attempt(source='platform_import', payload={
             'problem_key': 'leetcode:two-sum', 'outcome': 'reported_completion',

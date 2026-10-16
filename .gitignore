@@ -46,3 +46,10 @@ docs/
 *.sqlite3-*
 *.sqlite-*
 private-learning/
+
+# Hosted tooling caches; source and lockfile remain reviewable
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+hosted/dist/

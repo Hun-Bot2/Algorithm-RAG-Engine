@@ -1,0 +1,19 @@
+# Private learning-data recovery contract
+
+## Research and requirements
+
+The M3 `adaptive-learning-events` export covers evidence only. A private hosted learner also has preferences, manually entered contests, and participation records. Those four categories SHALL be exported together and restored atomically to an empty owner partition. Delivery receipts are not safe to replay: a scheduled or accepted message may exist at Slack even when the local response was lost. A restored owner SHALL carry a durable delivery reconciliation gate that blocks dispatch until a human reconciles the prior outbox and Slack history. There is no automatic gate-clearing route.
+
+The app backup is `adaptive-learning-backup` version 1. It contains `learner_id`, the existing event document, preferences, manual contests, contest participation, `delivery_reconciliation_required: true`, and read-only mission/outbox archive receipts for inspection. Import validates the whole envelope and creates no live outbox rows or frozen mission rows. For a complete operational D1 backup, including live outbox and provider cache, use a controlled database export outside the static asset tree; the app backup is a learning-data restore format. Cloudflare documents `wrangler d1 export <database> --remote --output=<path>` for a full schema-and-data SQL export. For this repository, an operator would use `npx wrangler d1 export algorithm-learning-private --config hosted/wrangler.jsonc --remote --output=<private-directory>/database.sql` after setting up Wrangler and an actual database binding. The placeholder configuration is not deployable; this command was not run. Store the SQL export in a private directory and verify it before any restore. See [Cloudflare D1 import/export documentation](https://developers.cloudflare.com/d1/best-practices/import-export-data/).
+
+Contest participation is append-only v1 evidence: `schema_version`, globally unique `entry_id`, `learner_id`, `contest_id`, `mode` (`live`, `virtual`, `upsolve`), `occurred_at`, `recorded_at`, `outcome` (`completed`, `partial`, `abandoned`, `unknown`), `confirmed_minutes` (finite nonnegative number or null), `source: manual`, and optional `supersedes`. Corrections SHALL preserve owner, contest identity and nondecreasing recording time, and SHALL not branch. Neither planned contest duration nor submission timestamps SHALL fill `confirmed_minutes`.
+
+## Design and tasks
+
+`004_contest_history.sql` adds immutable participation rows, an additive learner reconciliation gate, and a version receipt. `contest-history.mjs` validates, replays and conditionally appends owner-scoped records using the same learner revision guard as events. `backup.mjs` preflights every event, preference, contest and participation record, checks the target owner is empty, then applies the restore with one D1 batch. Any conflict rolls back all categories. Restored event IDs retain global uniqueness and correction order. Repeated import is rejected because the owner is no longer empty.
+
+`runDispatcher` SHALL include manual contests in its frozen policy input and SHALL skip any owner with the reconciliation gate. The gate requires an explicit operator procedure: compare the archived receipts, the original full D1 backup and Slack scheduled/history records; only then clear the gate through a controlled database change. No app API clears it.
+
+## Validation and rollout
+
+SQLite-backed backup and participation tests passed 4 of 4, covering ownership, duplicate IDs, correction chains, preflight errors, SQL conflict rollback, round-trip restoration of all four learning categories, the durable reconciliation gate, and manual contest policy input. The combined core, notification, backup, provider and UI suites passed 44 of 44. No test proves live D1 export, Slack reconciliation or release-ready backup operations. Keep the source database and its full export until a restored private instance has been independently checked.

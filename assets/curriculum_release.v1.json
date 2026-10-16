@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "scope": "private hosted curriculum: canonical identifiers/links and independently authored annotations only",
+  "provenance": "Luna draft; independent Sol review per user authorization; not human empirical gold",
+  "statement_text_included": false,
+  "legacy_assets_included": false,
+  "evaluation_labels_included": false,
+  "files": {
+    "curriculum/seed.v1.json": "e5406b367c15736b312706c848cc6c9cc748b725cb2c630bf3e0dd71044535d1",
+    "curriculum/annotations.v1.json": "d14205fcf7f2a958a4e3e9c9dab61da537a4d524d57871870610a06a2a832ba6"
+  }
+}

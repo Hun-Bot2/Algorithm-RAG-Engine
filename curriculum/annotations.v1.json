@@ -1,0 +1,906 @@
+{
+  "schema_version": 1,
+  "dataset_version": "annotations.v1",
+  "annotations": {
+    "leetcode:two-sum": {
+      "title": "Two Sum",
+      "concept_rationale": "Stores prior values so each complement is checked once.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/two-sum/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:contains-duplicate": {
+      "title": "Contains Duplicate",
+      "concept_rationale": "Tests whether a set captures the only state needed for duplicate detection.",
+      "estimated_minutes": 20,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/contains-duplicate/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:valid-anagram": {
+      "title": "Valid Anagram",
+      "concept_rationale": "Compares character multiplicities rather than positions.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/valid-anagram/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:group-anagrams": {
+      "title": "Group Anagrams",
+      "concept_rationale": "Maps each word to a signature that is invariant under permutation.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/group-anagrams/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:top-k-frequent-elements": {
+      "title": "Top K Frequent Elements",
+      "concept_rationale": "Separates counting from selection of the largest frequencies.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/top-k-frequent-elements/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:product-of-array-except-self": {
+      "title": "Product of Array Except Self",
+      "concept_rationale": "Combines products on either side without division.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/product-of-array-except-self/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/product-of-array-except-self/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:longest-consecutive-sequence": {
+      "title": "Longest Consecutive Sequence",
+      "concept_rationale": "Starts runs only at values with no predecessor.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/longest-consecutive-sequence/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/longest-consecutive-sequence/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:valid-sudoku": {
+      "title": "Valid Sudoku",
+      "concept_rationale": "Tracks row, column, and box constraints independently.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/valid-sudoku/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:3sum": {
+      "title": "3Sum",
+      "concept_rationale": "Sorts to reduce one dimension and handles duplicate value runs.",
+      "estimated_minutes": 50,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/3sum/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:container-with-most-water": {
+      "title": "Container With Most Water",
+      "concept_rationale": "Moves the shorter boundary because it limits current area.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/container-with-most-water/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/container-with-most-water/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:trapping-rain-water": {
+      "title": "Trapping Rain Water",
+      "concept_rationale": "Water at a position is limited by the smaller side maximum.",
+      "estimated_minutes": 55,
+      "platform": "leetcode",
+      "difficulty_band": "advanced",
+      "source_url": "https://leetcode.com/problems/trapping-rain-water/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Hard difficulty inspected at https://leetcode.com/problems/trapping-rain-water/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:best-time-to-buy-and-sell-stock": {
+      "title": "Best Time to Buy and Sell Stock",
+      "concept_rationale": "Maintains the cheapest earlier buy while scanning prices.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/best-time-to-buy-and-sell-stock/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:longest-substring-without-repeating-characters": {
+      "title": "Longest Substring Without Repeating Characters",
+      "concept_rationale": "Moves a valid window past the last conflicting occurrence.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/longest-substring-without-repeating-characters/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:minimum-window-substring": {
+      "title": "Minimum Window Substring",
+      "concept_rationale": "Expands for missing counts and contracts only while coverage holds.",
+      "estimated_minutes": 60,
+      "platform": "leetcode",
+      "difficulty_band": "advanced",
+      "source_url": "https://leetcode.com/problems/minimum-window-substring/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Hard difficulty inspected at https://leetcode.com/problems/minimum-window-substring/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:valid-parentheses": {
+      "title": "Valid Parentheses",
+      "concept_rationale": "The most recent unmatched opener determines a valid close.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/valid-parentheses/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/valid-parentheses/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:min-stack": {
+      "title": "Min Stack",
+      "concept_rationale": "Stores enough historical minima to answer in constant time.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/min-stack/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/min-stack/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:daily-temperatures": {
+      "title": "Daily Temperatures",
+      "concept_rationale": "Unresolved indices are popped when a warmer day arrives.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/daily-temperatures/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/daily-temperatures/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:largest-rectangle-in-histogram": {
+      "title": "Largest Rectangle in Histogram",
+      "concept_rationale": "Each bar is evaluated when a lower bar closes its maximal span.",
+      "estimated_minutes": 60,
+      "platform": "leetcode",
+      "difficulty_band": "advanced",
+      "source_url": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Hard difficulty inspected at https://leetcode.com/problems/largest-rectangle-in-histogram/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:binary-search": {
+      "title": "Binary Search",
+      "concept_rationale": "Maintains a shrinking sorted search interval.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/binary-search/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/binary-search/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:search-in-rotated-sorted-array": {
+      "title": "Search in Rotated Sorted Array",
+      "concept_rationale": "Uses the sorted half to decide which interval can contain the target.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/search-in-rotated-sorted-array/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:find-minimum-in-rotated-sorted-array": {
+      "title": "Find Minimum in Rotated Sorted Array",
+      "concept_rationale": "Compares a midpoint against the sorted right endpoint to retain the pivot.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:search-a-2d-matrix": {
+      "title": "Search a 2D Matrix",
+      "concept_rationale": "Treats row-major sorted coordinates as one monotone index space.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/search-a-2d-matrix/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/search-a-2d-matrix/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:reverse-linked-list": {
+      "title": "Reverse Linked List",
+      "concept_rationale": "Reverses one next pointer at a time while preserving the suffix.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/reverse-linked-list/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/reverse-linked-list/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:merge-two-sorted-lists": {
+      "title": "Merge Two Sorted Lists",
+      "concept_rationale": "Chooses the smaller head and advances only that source.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/merge-two-sorted-lists/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:linked-list-cycle": {
+      "title": "Linked List Cycle",
+      "concept_rationale": "Different pointer speeds expose a repeated node without extra storage.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/linked-list-cycle/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/linked-list-cycle/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:remove-nth-node-from-end-of-list": {
+      "title": "Remove Nth Node From End of List",
+      "concept_rationale": "A fixed pointer gap locates the predecessor in one pass.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/remove-nth-node-from-end-of-list/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:reorder-list": {
+      "title": "Reorder List",
+      "concept_rationale": "Combines midpoint detection, reversal, and alternating merge.",
+      "estimated_minutes": 50,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/reorder-list/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/reorder-list/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:invert-binary-tree": {
+      "title": "Invert Binary Tree",
+      "concept_rationale": "Swaps children at each node while visiting the whole tree.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/invert-binary-tree/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/invert-binary-tree/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:maximum-depth-of-binary-tree": {
+      "title": "Maximum Depth of Binary Tree",
+      "concept_rationale": "Parent height is one plus the larger child height.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/maximum-depth-of-binary-tree/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:lowest-common-ancestor-of-a-binary-search-tree": {
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "concept_rationale": "The first value split between targets is their shared ancestor.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:binary-tree-level-order-traversal": {
+      "title": "Binary Tree Level Order Traversal",
+      "concept_rationale": "A queue processes exactly the current depth before the next.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/binary-tree-level-order-traversal/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:validate-binary-search-tree": {
+      "title": "Validate Binary Search Tree",
+      "concept_rationale": "Each subtree inherits strict bounds from all ancestors.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/validate-binary-search-tree/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/validate-binary-search-tree/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:kth-smallest-element-in-a-bst": {
+      "title": "Kth Smallest Element in a BST",
+      "concept_rationale": "Inorder visits keys in sorted order and can stop at rank k.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/kth-smallest-element-in-a-bst/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:construct-binary-tree-from-preorder-and-inorder-traversal": {
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "concept_rationale": "Preorder selects each root while inorder partitions its subtrees.",
+      "estimated_minutes": 55,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:network-delay-time": {
+      "title": "Network Delay Time",
+      "concept_rationale": "Nonnegative edge weights call for repeated minimum-distance settlement.",
+      "estimated_minutes": 55,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/network-delay-time/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/network-delay-time/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:number-of-islands": {
+      "title": "Number of Islands",
+      "concept_rationale": "Marks each connected land component once with a traversal.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/number-of-islands/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:clone-graph": {
+      "title": "Clone Graph",
+      "concept_rationale": "A node map preserves cycles and shared neighbor identity.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/clone-graph/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/clone-graph/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:course-schedule": {
+      "title": "Course Schedule",
+      "concept_rationale": "A directed cycle means no ordering can satisfy every dependency.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/course-schedule/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/course-schedule/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:rotting-oranges": {
+      "title": "Rotting Oranges",
+      "concept_rationale": "All initially active sources advance in synchronized distance layers.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/rotting-oranges/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/rotting-oranges/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:pacific-atlantic-water-flow": {
+      "title": "Pacific Atlantic Water Flow",
+      "concept_rationale": "Reverse uphill reachability from each ocean finds shared cells.",
+      "estimated_minutes": 55,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/pacific-atlantic-water-flow/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:word-search": {
+      "title": "Word Search",
+      "concept_rationale": "Searches a path while marking cells only for the active branch.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/word-search/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/word-search/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:subsets": {
+      "title": "Subsets",
+      "concept_rationale": "Each input position makes one include-or-skip decision.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/subsets/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/subsets/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:combination-sum": {
+      "title": "Combination Sum",
+      "concept_rationale": "A nondecreasing choice index avoids permutation duplicates.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/combination-sum/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/combination-sum/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:permutations": {
+      "title": "Permutations",
+      "concept_rationale": "A used marker distinguishes choices in the current construction.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/permutations/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/permutations/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:subsets-ii": {
+      "title": "Subsets II",
+      "concept_rationale": "Sorted equal values are skipped only at the same recursion depth.",
+      "estimated_minutes": 40,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/subsets-ii/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/subsets-ii/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:implement-trie-prefix-tree": {
+      "title": "Implement Trie (Prefix Tree)",
+      "concept_rationale": "Shared prefix nodes support exact word and prefix queries.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/implement-trie-prefix-tree/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:coin-change": {
+      "title": "Coin Change",
+      "concept_rationale": "For each amount, considers a final coin and a smaller solved amount.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/coin-change/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/coin-change/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:climbing-stairs": {
+      "title": "Climbing Stairs",
+      "concept_rationale": "The final step comes from one or two previously reachable heights.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/climbing-stairs/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Easy difficulty inspected at https://leetcode.com/problems/climbing-stairs/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:house-robber": {
+      "title": "House Robber",
+      "concept_rationale": "Each index compares skipping it with taking it after the prior-prior state.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/house-robber/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/house-robber/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:longest-increasing-subsequence": {
+      "title": "Longest Increasing Subsequence",
+      "concept_rationale": "Tracks the best increasing subsequence ending before each position.",
+      "estimated_minutes": 50,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/longest-increasing-subsequence/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/longest-increasing-subsequence/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:longest-common-subsequence": {
+      "title": "Longest Common Subsequence",
+      "concept_rationale": "Prefix states either match final symbols or discard one side.",
+      "estimated_minutes": 50,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/longest-common-subsequence/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/longest-common-subsequence/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:word-break": {
+      "title": "Word Break",
+      "concept_rationale": "A valid prefix can extend across any dictionary word ending there.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/word-break/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/word-break/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:unique-paths": {
+      "title": "Unique Paths",
+      "concept_rationale": "Each cell aggregates paths from its two predecessor directions.",
+      "estimated_minutes": 30,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/unique-paths/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/unique-paths/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:jump-game": {
+      "title": "Jump Game",
+      "concept_rationale": "The farthest reachable index summarizes all prior jumps.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/jump-game/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/jump-game/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:merge-intervals": {
+      "title": "Merge Intervals",
+      "concept_rationale": "Sorted starts let each interval merge into one active endpoint.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/merge-intervals/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/merge-intervals/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:insert-interval": {
+      "title": "Insert Interval",
+      "concept_rationale": "Emits disjoint ranges and folds every overlapping interval.",
+      "estimated_minutes": 35,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/insert-interval/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/insert-interval/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "leetcode:non-overlapping-intervals": {
+      "title": "Non-overlapping Intervals",
+      "concept_rationale": "Keeping the earliest finishing compatible interval maximizes room.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and Medium difficulty inspected at https://leetcode.com/problems/non-overlapping-intervals/ on 2026-10-16; no Premium gate on this page. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc086_a": {
+      "title": "Product",
+      "concept_rationale": "Parity of a product is determined by whether both factors are odd.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc086/tasks/abc086_a",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc086/tasks/abc086_a on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc081_a": {
+      "title": "Placing Marbles",
+      "concept_rationale": "Counts marked positions in a short fixed-width string.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc081/tasks/abc081_a",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc081/tasks/abc081_a on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc081_b": {
+      "title": "Shift only",
+      "concept_rationale": "Repeatedly divides all values while every value remains even.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc081/tasks/abc081_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc081/tasks/abc081_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc087_b": {
+      "title": "Coins",
+      "concept_rationale": "Enumerates three bounded coin counts and checks the target sum.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc087/tasks/abc087_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc087/tasks/abc087_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc083_b": {
+      "title": "Some Sums",
+      "concept_rationale": "Filters an integer range by a computed decimal digit sum.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc083/tasks/abc083_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc083/tasks/abc083_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc088_b": {
+      "title": "Card Game for Two",
+      "concept_rationale": "Descending order models optimal alternating picks.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc088/tasks/abc088_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc088/tasks/abc088_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc085_b": {
+      "title": "Kagami Mochi",
+      "concept_rationale": "Distinct diameters determine the stack height.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc085/tasks/abc085_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc085/tasks/abc085_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc085_c": {
+      "title": "Otoshidama",
+      "concept_rationale": "Enumerates two counts and derives the third from total count.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc085/tasks/abc085_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc085/tasks/abc085_c on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc049_c": {
+      "title": "Daydream",
+      "concept_rationale": "Consumes the string using a finite set of whole-word suffixes.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc049/tasks/abc049_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Direct task page was inaccessible to the web inspector, but official public English statement and task title were inspected at https://atcoder.jp/contests/abc049/tasks_print on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc086_c": {
+      "title": "Traveling",
+      "concept_rationale": "Each checkpoint requires enough time and matching Manhattan parity.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc086/tasks/abc086_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Direct task page was inaccessible to the web inspector, but official public English statement and task title were inspected at https://atcoder.jp/contests/abc086/tasks_print on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc058_a": {
+      "title": "Arithmetic Progression Check",
+      "concept_rationale": "Checks equal spacing among three values.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc058/tasks/abc058_a",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc058/tasks/abc058_a on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc072_b": {
+      "title": "OddString",
+      "concept_rationale": "Selects alternating character positions.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc072/tasks/abc072_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc072/tasks/abc072_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc073_b": {
+      "title": "Theater",
+      "concept_rationale": "Adds inclusive lengths for independent seat intervals.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc073/tasks/abc073_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc073/tasks/abc073_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc074_b": {
+      "title": "Collecting Balls",
+      "concept_rationale": "Chooses the nearer endpoint for each independent position.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc074/tasks/abc074_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc074/tasks/abc074_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc075_b": {
+      "title": "Minesweeper",
+      "concept_rationale": "Counts neighboring mines for each cell in a small grid.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "beginner",
+      "source_url": "https://atcoder.jp/contests/abc075/tasks/abc075_b",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc075/tasks/abc075_b on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc079_c": {
+      "title": "Train Ticket",
+      "concept_rationale": "Enumerates the three operator choices between four digits.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc079/tasks/abc079_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc079/tasks/abc079_c on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc085_d": {
+      "title": "Katana Thrower",
+      "concept_rationale": "Uses one-use throws above the repeatable attack threshold.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "advanced",
+      "source_url": "https://atcoder.jp/contests/abc085/tasks/abc085_d",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc085/tasks/abc085_d on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc095_c": {
+      "title": "Half and Half",
+      "concept_rationale": "Compares bundled and separate purchases for two demand types.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc095/tasks/abc095_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Direct task page was inaccessible to the web inspector, but official public English statement and task title were inspected at https://atcoder.jp/contests/abc095/tasks_print on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc103_c": {
+      "title": "Modulo Summation",
+      "concept_rationale": "Uses each modulus contribution independently to maximize the sum.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc103/tasks/abc103_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc103/tasks/abc103_c on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "atcoder:abc104_c": {
+      "title": "All Green",
+      "concept_rationale": "Enumerates fully completed groups and solves the remaining score greedily.",
+      "estimated_minutes": 30,
+      "platform": "atcoder",
+      "difficulty_band": "intermediate",
+      "source_url": "https://atcoder.jp/contests/abc104/tasks/abc104_c",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public English task statement and title inspected at https://atcoder.jp/contests/abc104/tasks/abc104_c on 2026-10-16. Free means statement access; account submission was not tested."
+    },
+    "codeforces:4A": {
+      "title": "Watermelon",
+      "concept_rationale": "Positive even parts exist exactly when total weight is even and at least four.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/4/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:71A": {
+      "title": "Way Too Long Words",
+      "concept_rationale": "Applies an abbreviation only past the stated length threshold.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/71/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:231A": {
+      "title": "Team",
+      "concept_rationale": "Counts rows with at least two committed solvers.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/231/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:158A": {
+      "title": "Next Round",
+      "concept_rationale": "The advancement rule depends on the kth score and positive-score constraint.",
+      "estimated_minutes": 25,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/158/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:50A": {
+      "title": "Domino Piling",
+      "concept_rationale": "Each domino covers two cells, so the maximum is floor of area over two.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/50/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:282A": {
+      "title": "Bit++",
+      "concept_rationale": "Each operation changes a single integer by one.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/282/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:263A": {
+      "title": "Beautiful Matrix",
+      "concept_rationale": "Minimum adjacent moves equal Manhattan distance to the center.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/263/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:112A": {
+      "title": "Petya and Strings",
+      "concept_rationale": "Case normalization precedes lexicographic comparison.",
+      "estimated_minutes": 20,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/112/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:339A": {
+      "title": "Helpful Maths",
+      "concept_rationale": "Extracts single-digit terms, sorts them, and rebuilds the expression.",
+      "estimated_minutes": 25,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/339/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "codeforces:791A": {
+      "title": "Bear and Big Brother",
+      "concept_rationale": "Repeated unequal multiplicative growth reaches the stopping condition.",
+      "estimated_minutes": 25,
+      "platform": "codeforces",
+      "difficulty_band": "beginner",
+      "source_url": "https://codeforces.com/problemset/problem/791/A",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native rating 800 inspected on 2026-10-16. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:valid-palindrome": {
+      "title": "Valid Palindrome",
+      "concept_rationale": "Compares normalized alphanumeric characters from opposite ends.",
+      "estimated_minutes": 25,
+      "platform": "leetcode",
+      "difficulty_band": "beginner",
+      "source_url": "https://leetcode.com/problems/valid-palindrome/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:redundant-connection": {
+      "title": "Redundant Connection",
+      "concept_rationale": "A new edge is redundant when its endpoints are already connected.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/redundant-connection/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    },
+    "leetcode:minimum-number-of-arrows-to-burst-balloons": {
+      "title": "Minimum Number of Arrows to Burst Balloons",
+      "concept_rationale": "Choosing an earliest feasible right endpoint covers every current overlapping interval.",
+      "estimated_minutes": 45,
+      "platform": "leetcode",
+      "difficulty_band": "intermediate",
+      "source_url": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+      "observed_at": "2026-10-16",
+      "access_provenance": "Official public problem statement and native difficulty inspected on 2026-10-16; no Premium gate on the inspected page. Free describes statement access; account-based submission was not tested."
+    }
+  }
+}

@@ -1,0 +1,53 @@
+/** Loopback-only development service. Never bundled into the production Worker. */
+import {createServer} from 'node:http';
+import {readFile, mkdir, chmod} from 'node:fs/promises';
+import {resolve, dirname, extname} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createApp} from './core/app.mjs';
+import {createDatabase} from './test/helpers/d1.mjs';
+
+const PUBLIC = new URL('./public/',import.meta.url);
+const TYPES = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
+export async function startLocal({port=8787,database='private-learning/hosted.sqlite3',learnerId='local-owner',
+  curriculum,annotations={}}={}) {
+  const databasePath = database === ':memory:' ? database : resolve(database);
+  if (databasePath !== ':memory:') await mkdir(dirname(databasePath),{recursive:true,mode:0o700});
+  const db = createDatabase(databasePath);
+  if (databasePath !== ':memory:') await chmod(databasePath,0o600);
+  const assets = {async fetch(request) {
+    const pathname = new URL(request.url).pathname;
+    const filename = pathname === '/' ? 'index.html' : pathname.slice(1);
+    if (!['index.html','app.mjs','styles.css'].includes(filename)) return new Response('Not found',{status:404});
+    try { return new Response(await readFile(new URL(filename,PUBLIC)),{headers:{'content-type':TYPES[extname(filename)]}}); }
+    catch { return new Response('Not found',{status:404}); }
+  }};
+  const app = createApp({db,curriculum,annotations,assets,authenticate:async()=>({learner_id:learnerId})});
+  const server = createServer(async (incoming,outgoing) => {
+    try {
+      const host = incoming.headers.host;
+      if (!/^127\.0\.0\.1:\d+$/.test(host ?? '')) { outgoing.writeHead(403);outgoing.end();return; }
+      const base = `http://${host}`, url = new URL(incoming.url,base);
+      if (url.origin !== base) { outgoing.writeHead(403);outgoing.end();return; }
+      const headers = new Headers();
+      for (const [key,value] of Object.entries(incoming.headers)) if (value !== undefined) headers.set(key,Array.isArray(value)?value.join(','):value);
+      if (!['GET','HEAD'].includes(incoming.method) && headers.get('origin') !== base) {
+        outgoing.writeHead(403);outgoing.end('Same-origin required');return;
+      }
+      const response = await app.fetch(new Request(url,{method:incoming.method,headers,
+        ...(!['GET','HEAD'].includes(incoming.method)?{body:incoming,duplex:'half'}:{})}));
+      outgoing.writeHead(response.status,Object.fromEntries(response.headers));
+      outgoing.end(Buffer.from(await response.arrayBuffer()));
+    } catch { outgoing.writeHead(500);outgoing.end('Local service error'); }
+  });
+  await new Promise((resolve,reject)=>server.once('error',reject).listen(port,'127.0.0.1',resolve));
+  return {url:`http://127.0.0.1:${server.address().port}`,db,server,
+    async close(){ await new Promise(resolve=>server.close(resolve));db.close(); }};
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const {curriculum,annotations} = await import('./generated/curriculum.mjs');
+  const service = await startLocal({port:Number(process.env.PORT ?? 8787),database:process.env.LOCAL_DATABASE ?? 'private-learning/hosted.sqlite3',learnerId:process.env.LOCAL_LEARNER_ID ?? 'local-owner',curriculum,annotations});
+  console.log(`Private development service: ${service.url} (loopback only; not Access authentication)`);
+  const stop = async()=>{await service.close();process.exit(0);};
+  process.once('SIGINT',stop);process.once('SIGTERM',stop);
+}

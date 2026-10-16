@@ -103,3 +103,19 @@ This foundation does not yet generate adaptive missions or supply a hosted mobil
 dashboard, reviewed curriculum or new Slack transport. Deployment, schedules,
 public registration and optional model training remain gated. Existing production
 jobs retain their current OpenAI dependency and manual workflow trigger.
+
+
+## Private adaptive pilot implementation
+
+The no-AI pilot now includes a reviewed 90-problem curriculum, deterministic
+practice/review/transfer policy, configurable weekly rhythm, mobile dashboard,
+explicit study intervals and contest records, private backups and a durable
+Slack outbox. Worker/D1/Access deployment code and local verification tools are
+under [hosted/](hosted/); start with [deployment instructions](specs/adaptive-learning/deployment.md).
+The existing batch production application is unchanged.
+
+Local checks cover Python/Node, actual Chrome mobile flows and local workerd/D1.
+The service is not deployed and Slack/schedules remain disabled pending account,
+identity and destination selection. The optional [research tools](specs/adaptive-learning/research-contract.md)
+retain sparse-label limitations and prevent current evaluation data from training
+a model. No trained model, 30-day delivery result or learning benefit is claimed.

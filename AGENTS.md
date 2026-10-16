@@ -443,3 +443,32 @@ Keep these distinctions clear in summaries and docs:
   new version. Historical rights and precise embedding-run provenance are unknown.
 - Private event databases/exports belong outside release/static assets. Local
   learner IDs are partitions, not authentication; Access/D1 remains a release gate.
+
+
+## Hosted pilot and research integration (2026-10-16)
+
+- M4-M7 local implementations now live under `curriculum/`, `hosted/`, and
+  `specs/adaptive-learning/`. The earlier M1-M3 boundary above is historical;
+  hosting, live Slack activation and optional model fitting remain gated.
+- User explicitly accepts Luna drafts followed by independent Sol review. Record
+  these as AI-reviewed algorithm judgments, never human gold or learning outcomes.
+- Generate the allowlisted module with `python3 scripts/learning/build_hosted.py`.
+  Only `hosted/public/` is a static asset directory; never upload repository roots.
+- Use Node with built-in SQLite (26.8.1 verified), `npm ci` in hosted/, then
+  `node --test hosted/test/*.test.mjs` from root. Loopback tests need socket access.
+  Real-browser and workerd smoke commands are in deployment.md; Node tests alone
+  are not browser or deployed-runtime proof.
+- Wrangler 4.151.0 uses Miniflare 5; runtime tests use its exported
+  convertV4MiniflareOptions helper. Set task-local Wrangler log/config paths when
+  the global preferences folder is outside the sandbox. Do not repurpose HOME.
+- Freeze at 05:40 KST; scheduled != posted != observed phone alert. Ambiguous
+  accepted sends stay unknown and must not be blindly retried. Restores set a
+  durable delivery-reconciliation pause; archives never restore a ready outbox.
+- Codeforces keys use the native form codeforces:4A in both seed and imports.
+  Confirmed timer intervals are distinct from manual contest minutes; do not add
+  them into one elapsed total because the evidence can overlap.
+- The initial 180 judgments have sparse query coverage: only six multi-candidate
+  groups after graph-overlap exclusion. Conditional perfect scores cannot justify
+  model promotion. No training labels or deployed quota/30-day proof exist yet.
+- Preserve original asset hashes and unrelated Ralph changes. Optional encoders
+  load only explicit hash-verified local directories; no server/download fallback.

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-16T06:44:48.792Z",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/154.0.8037.100",
+    "revision": "@81ab43db91f352ce9134362efe32529b9761c4eb",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "jsVersion": "15.4.80.20"
+  },
+  "viewport": [
+    390,
+    844
+  ],
+  "checks": [
+    "mobile layout",
+    "accessible form labels",
+    "manual attempt storage",
+    "history rendering",
+    "timer recovery and explicit confirmation",
+    "offline reload and stable-ID retry",
+    "learner-scoped pending writes",
+    "manual contest storage",
+    "participation missing-time preservation",
+    "full learning backup export"
+  ],
+  "errors": []
+}

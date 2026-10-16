@@ -50,7 +50,8 @@ class Event:
         identifier(self.learner_id)
         if type(self.schema_version) is not int or self.schema_version != 1:
             raise ValueError('unsupported event version')
-        if self.kind not in KINDS or self.source not in {'manual', 'platform_import'}:
+        if (not isinstance(self.kind, str) or self.kind not in KINDS
+                or not isinstance(self.source, str) or self.source not in {'manual', 'platform_import'}):
             raise ValueError('unsupported kind/source')
         occurred, recorded = timestamp(self.occurred_at), timestamp(self.recorded_at)
         if occurred > recorded:
@@ -64,14 +65,25 @@ class Event:
         p = dict(self.payload)
         if self.kind == 'attempt':
             expected = {'problem_key', 'outcome', 'hints'}
+            if 'activity_type' in p:
+                if self.source != 'manual':
+                    raise ValueError('activity context requires manual evidence')
+                if not isinstance(p['activity_type'], str) or p['activity_type'] not in {'practice', 'review', 'transfer'}:
+                    raise ValueError('invalid activity type')
+                expected.add('activity_type')
+            if p.get('activity_type') == 'transfer':
+                problem_key(p.get('transfer_from'))
+                if p['transfer_from'] == p.get('problem_key'):
+                    raise ValueError('transfer must use a different source problem')
+                expected.add('transfer_from')
             if self.source == 'platform_import':
                 expected |= {'platform', 'external_id'}
                 if p.get('outcome') != 'reported_completion':
                     raise ValueError('imports are reported completion only')
                 identifier(p.get('external_id'))
-                if p.get('platform') != p.get('problem_key', '').split(':')[0]:
+                if not isinstance(p.get('problem_key'), str) or p.get('platform') != p['problem_key'].split(':')[0]:
                     raise ValueError('import platform mismatch')
-            if p.get('outcome') not in {'independent', 'assisted', 'failed', 'reported_completion'}:
+            if not isinstance(p.get('outcome'), str) or p['outcome'] not in {'independent', 'assisted', 'failed', 'reported_completion'}:
                 raise ValueError('invalid outcome')
             if p.get('hints') is not None and type(p['hints']) is not bool:
                 raise ValueError('hints must be boolean or null')
