@@ -205,8 +205,17 @@ the same blockwise top-K.
   - 7 A1 titles have no word tokens.
   - 403 A2 rows have an empty concept set: LeetCode tags that are only unmapped, such as Array or Hash Table. Their lists are pure key-order ties.
   - Tag-Jaccard produces large score-1.0 tie blocks. Its within-tie order is key order, not relevance, so evaluate.py must report tie-block size per query.
-- [ ] 5. `embed.py`: A1 and A2 vectors with resource receipt; replay hash check.
-- [ ] 6. Run P4 for all methods; commit top-K receipts (hashes, counts), keeping results private.
+- [x] 5. `embed.py` with 5 fixture tests (38 total in research/full_catalog).
+  - Model: pinned MiniLM, hash-verified, offline, CPU, 1 thread, batch 64.
+  - A1 (21,297 titles): 3–33 tokens (p95 10), 0 truncated, 1,538 texts/s, about 0.88 GB peak RSS.
+  - A2 (13,590 rows): 8–48 tokens (p95 28), 0 truncated, 648 texts/s, about 0.95 GB peak RSS.
+  - Both encodes replayed to byte-identical vectors with no warnings.
+  - Receipts: `receipts/embeddings-{A1,A2}.v1.json`. The vectors stay private.
+- [x] 6. Cross-platform P4 has been run for every method:
+  - MiniLM: `receipts/retrieval-minilm-{A1,A2}-cross.v1.json`. Each run took ≤ 5 s and was byte-identical on rerun.
+  - Baselines: see task 4.
+
+  The same-platform diagnostic has not been run; it is optional. Top-K lists stay private.
 - [ ] 7. `pool.py`: freeze the query sample and pooled pairs (committed key list); labeling round.
 - [ ] 8. `evaluate.py`: judged-pool metrics, CIs, diagnostics; notebook and plots.
 - [ ] 9. REPORT.md and architecture proposal; update AGENTS.md and tasks.md.

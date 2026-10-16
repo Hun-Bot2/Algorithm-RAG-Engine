@@ -529,3 +529,7 @@ Keep these distinctions clear in summaries and docs:
 - Phase 3-5 methods must take rows and text from research/full_catalog/inputs.py
   (variants A1, A1-all, A2) so that inputs stay matched. baselines.py imports its
   sibling modules by name, so run it as a script or through discover -s research/full_catalog.
+- research/full_catalog/embed.py loads MiniLM only through the hash-verified
+  LocalEmbeddingBackend. Its outputs are private-learning/full-catalog/embeddings-v1/.
+  CPU with 1 thread is bitwise-reproducible here. Titles are short (max 48 tokens
+  in A2), so B/C statement variants stay unmeasured by decision D1, not by truncation.
