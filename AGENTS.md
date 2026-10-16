@@ -515,3 +515,10 @@ Keep these distinctions clear in summaries and docs:
   `content`/`content_clean` and vectors derived from them are quarantined: keep the
   files byte-identical (production still uses them) but never read them in new
   research. Full-catalog work follows specs/adaptive-learning/full-catalog-similarity.md.
+- Full-catalog Phase 2: `python3 research/full_catalog/catalog.py --private-output
+  private-learning/full-catalog/<new> --receipt <new>.json`. Outputs refuse to
+  overwrite, and the script fails if input hashes differ from audit.json. LeetCode
+  statement fields are dropped while parsing via object_pairs_hook. Run its tests with
+  `python3 -m unittest discover -s research/full_catalog -v`. Kenkoooo AtCoder task IDs
+  are already unique across reused contests (ADT and ABC/ARC share task IDs), so
+  contest reuse is not a duplicate.

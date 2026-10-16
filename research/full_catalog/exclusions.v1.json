@@ -1,0 +1,52 @@
+{
+  "schema": "full-catalog-exclusions.v1",
+  "status": "agent_draft_pending_user_review",
+  "spec": "specs/adaptive-learning/full-catalog-similarity.md#phase-2--identity-and-duplicates",
+  "boundary": "Eligibility rules for algorithm-similarity evaluation only. Excluded rows stay in catalog.v1 with every matching reason code; no record is deleted.",
+  "matching": "Tags match exactly. Contest prefixes and IDs are compared case-insensitively against the contest parsed from the stored URL (AtCoder) or key (Codeforces). Titles are compared after NFKC + casefold + whitespace collapse.",
+  "rules": [
+    {
+      "code": "lc_non_algorithmic_tag",
+      "platform": "leetcode",
+      "tags_any": ["Database", "Shell", "Concurrency"],
+      "rationale": "SQL, shell and threading exercises are outside algorithm-concept similarity."
+    },
+    {
+      "code": "cf_special_problem",
+      "platform": "codeforces",
+      "tags_any": ["*special"],
+      "rationale": "Codeforces' own tag for non-standard problems (April Fools, language-restricted or unusual rounds). Uses source metadata instead of a hand-written contest list."
+    },
+    {
+      "code": "at_tutorial_contest",
+      "platform": "atcoder",
+      "contest_prefixes": ["apg4b"],
+      "rationale": "APG4b is a programming tutorial; its entries are lessons, not algorithm problems."
+    },
+    {
+      "code": "at_practice_contest",
+      "platform": "atcoder",
+      "contest_ids": ["practice"],
+      "rationale": "Site-onboarding practice contest. 'practice2' (AtCoder Library Practice) is algorithmic and intentionally kept."
+    },
+    {
+      "code": "at_heuristic_contest",
+      "platform": "atcoder",
+      "contest_prefixes": ["ahc"],
+      "rationale": "AtCoder Heuristic Contest optimisation tasks have no exact-answer algorithm concept."
+    },
+    {
+      "code": "at_non_problem_page",
+      "platform": "atcoder",
+      "titles": ["ビジュアライザ"],
+      "rationale": "Visualizer pages attached to heuristic contests are not problems."
+    }
+  ],
+  "known_gaps": [
+    "Other AtCoder heuristic/marathon contests (for example future-contest qualifiers) are not identified without contest metadata; they remain eligible and must be reported as a limitation.",
+    "Codeforces problems lacking the *special tag but from unusual rounds remain eligible."
+  ],
+  "encoder_flags": {
+    "non_latin_title": "Title contains Cyrillic, kana, CJK or Hangul characters. Not an exclusion; MiniLM (English) runs skip flagged rows (decision D3)."
+  }
+}
