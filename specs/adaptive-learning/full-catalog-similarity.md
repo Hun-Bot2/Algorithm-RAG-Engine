@@ -188,7 +188,12 @@ the same blockwise top-K.
   - Exclusions: 104 LeetCode, 560 Codeforces and 179 AtCoder.
   - Duplicate candidates: 842 same-title groups and 379 cross-platform exact-title matches (evidence only). There are 0 exact duplicates.
   - Only 4 Codeforces same-title groups fall in adjacent contests. The one inspected (505B/506D) has different indices, so it is likely an easy/hard pair rather than a mirror. This needs review; it is not merged.
-- [ ] 3. `retrieve.py` and tests: blockwise top-K equals brute force on a fixture, plus tie order and exclusions.
+- [x] 3. `retrieve.py` and 9 fixture tests: brute-force equality across modes, block sizes and candidate settings; exact boundary ties; exclusions; non-finite guard; prefix outputs.
+  Full-scale synthetic check (23,454 eligible keys, random 384-d vectors, not an embedding):
+  - 6.2 s and about 520 MB peak RSS at block size 1,024;
+  - 0 mismatches against a float64 brute force on 500 sampled queries;
+  - 0 same-platform leaks;
+  - byte-identical output on rerun.
 - [ ] 4. `baselines.py` and tests: TF-IDF/Jaccard/random on identical rows; top-K for all methods.
 - [ ] 5. `embed.py`: A1 and A2 vectors with resource receipt; replay hash check.
 - [ ] 6. Run P4 for all methods; commit top-K receipts (hashes, counts), keeping results private.
@@ -198,7 +203,7 @@ the same blockwise top-K.
 
 ## 6. Validation plan
 
-- `python3 -m unittest discover -s research/full_catalog -v`: fixture-only, no private data, no sockets.
+- `.venv/bin/python -m unittest discover -s research/full_catalog -v`: fixture-only, no private data, no sockets. Retrieval tests need numpy; the catalog tests are stdlib-only.
 - `python3 -m unittest discover -s tests -v` and `python3 scripts/learning/assets.py verify` still pass.
 - Determinism: every script run twice gives identical output hashes.
 - Brute-force cross-check of blockwise top-K on a 500-row random sample per method.

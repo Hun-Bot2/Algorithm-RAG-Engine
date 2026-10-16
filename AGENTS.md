@@ -522,3 +522,7 @@ Keep these distinctions clear in summaries and docs:
   `python3 -m unittest discover -s research/full_catalog -v`. Kenkoooo AtCoder task IDs
   are already unique across reused contests (ADT and ABC/ARC share task IDs), so
   contest reuse is not a duplicate.
+- research/full_catalog/retrieve.py needs numpy, so run its tests with .venv/bin/python.
+  numpy 2.1.3 + Accelerate emits spurious divide/overflow RuntimeWarnings on finite
+  float32 matmul. dense_cosine suppresses them with errstate, and topk rejects
+  non-finite blocks. Do not "fix" this by switching to float64.
