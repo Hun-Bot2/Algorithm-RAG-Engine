@@ -1,5 +1,12 @@
 # Production Recommender Requirements
 
+## Scope amendment (2026-10-16)
+
+This specification applies to the legacy batch compatibility path. The new
+private adaptive product follows `../adaptive-learning/requirements.md`, whose
+core has no mandatory AI dependency and includes event storage. This amendment
+does not change legacy runtime behavior.
+
 ## Purpose
 
 This specification defines requirements for refactoring the current production

@@ -86,3 +86,20 @@ Repository Settings → Secrets and variables → Actions → New repository sec
 
 
 **Last Updated**: 2026-01-15
+
+## Adaptive learning foundation (M1-M3)
+
+The new private learning product has a mandatory no-AI core, separate from the
+legacy batch pipeline above. Its [specifications](specs/adaptive-learning/requirements.md),
+[architecture](specs/adaptive-learning/design.md) and
+[milestones](specs/adaptive-learning/tasks.md) define the migration boundary.
+Local append-only learner events, explicit confirmed timers and JSON restore now
+use standard-library SQLite; see [local usage](specs/adaptive-learning/local-history.md).
+[Asset manifests](assets/README.md) preserve originals and exclude unreviewed data
+from hosted bundles. Run `python3 -m unittest discover -s tests -v` and
+`python3 scripts/learning/assets.py verify` offline.
+
+This foundation does not yet generate adaptive missions or supply a hosted mobile
+dashboard, reviewed curriculum or new Slack transport. Deployment, schedules,
+public registration and optional model training remain gated. Existing production
+jobs retain their current OpenAI dependency and manual workflow trigger.

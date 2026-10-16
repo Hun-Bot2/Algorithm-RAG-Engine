@@ -39,3 +39,10 @@ p.ipynb
 Evaluation_100/docs/
 docs/
 
+
+# Private adaptive learner state and exports
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.sqlite-*
+private-learning/

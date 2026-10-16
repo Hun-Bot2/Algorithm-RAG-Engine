@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-16",
+  "boundary": "Integrity and provenance inventory, not rights approval. No historical content released.",
+  "assets": [
+    {
+      "path": "data/raw/leetcode_raw_data.jsonl",
+      "status": "present",
+      "sha256": "ee130b9eaeee21b5976eba7e4083dbfadbacf605f7ce96b067d99dd956c11447",
+      "size_bytes": 7496979,
+      "provenance": "historical third-party catalog",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "data/processed/leetcode_processed.jsonl",
+      "status": "present",
+      "sha256": "281f8e3d9f2a4642a98f625f6fdca7e03b509ca884b95548abe4c0a60589ff40",
+      "size_bytes": 7660006,
+      "provenance": "derived historical catalog",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "data/raw/leetcode_slugs.txt",
+      "status": "missing",
+      "sha256": null,
+      "size_bytes": null,
+      "provenance": "historical slug manifest",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "indexes/numpy_leetcode/vectors.npy",
+      "status": "present",
+      "sha256": "1e84645444d39777bb47a1130aa1ad80ed6abdc477f7336c0baab593cb5aadfe",
+      "size_bytes": 18757760,
+      "provenance": "historical OpenAI-compatible vectors; exact revision/input not established",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "indexes/numpy_leetcode/metadata.json",
+      "status": "present",
+      "sha256": "98fba8b4525ba8d8558e7c7606a55a899388336f5aabfadf167cedfe0ea84953",
+      "size_bytes": 938516,
+      "provenance": "ordered legacy index metadata",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "Evaluation_100/data/ground_truth_v2.json",
+      "status": "present",
+      "sha256": "d855dde7d1fafc4f40236e045f377cea60d9358c5172a98f8c6b7f23d836295a",
+      "size_bytes": 3134,
+      "provenance": "historical benchmark; independent review not established",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "Evaluation_100/data/potential_gt.json",
+      "status": "present",
+      "sha256": "efef4a3b48a2c4423abd6cce34e34ecc05aeb044fc43e553e8ab85f346cb3109",
+      "size_bytes": 9082,
+      "provenance": "LLM-proposed relationships; unverified, not ground truth",
+      "rights_status": "unreviewed",
+      "rights_reference": "https://leetcode.com/terms/",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    },
+    {
+      "path": "assets/legacy_numpy.manifest.v1.json",
+      "status": "present",
+      "sha256": "03e2c5e4eb6cb968565e392d4f82e7e033c66c039861ed0300dc4fda712f8669",
+      "size_bytes": 149467,
+      "provenance": "manifest derived locally from historical assets",
+      "rights_status": "unreviewed",
+      "permitted_uses": [
+        "private_preservation",
+        "integrity_verification"
+      ],
+      "hosted_release": false
+    }
+  ]
+}

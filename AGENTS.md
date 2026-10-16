@@ -423,3 +423,23 @@ Keep these distinctions clear in summaries and docs:
 - "FAISS" means legacy or alternate indexing unless a task explicitly revives it.
 - "Daily schedule" should be described as disabled/manual unless the workflow is
   changed and verified.
+
+## Adaptive learning foundation (2026-10-16)
+
+- `specs/adaptive-learning/` governs the new no-AI product; the older
+  `specs/production-recommender/` governs legacy batch compatibility only.
+- M1-M3 are local foundations. No hosted Worker, mission policy, reviewed
+  curriculum, live Slack delivery or model training is implemented by them.
+- Run `python3 -m unittest discover -s tests -v` and
+  `python3 scripts/learning/assets.py verify` for the foundation changes.
+- `src/learning` uses only the standard library. Never import the legacy jobs
+  to use event storage. SQLite `executescript` commits implicitly: migrations
+  execute complete statements inside an explicit transaction instead.
+- Timers require explicit start, stop and confirmation. Open/unconfirmed intervals
+  have unavailable elapsed evidence; never infer time from submission timestamps.
+- Existing `docs/` is ignored; put new governing SDD/ADRs under `specs/`.
+  `improve.md` and `data/raw/leetcode_slugs.txt` were absent in this checkout.
+- Do not regenerate asset manifests automatically; a mismatch needs review and a
+  new version. Historical rights and precise embedding-run provenance are unknown.
+- Private event databases/exports belong outside release/static assets. Local
+  learner IDs are partitions, not authentication; Access/D1 remains a release gate.
