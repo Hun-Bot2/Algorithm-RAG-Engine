@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "tests": {
+    "command": "python3 -m unittest discover -s research/verification_workbench -v",
+    "passed": 12,
+    "failed": 0,
+    "HTTP_tests_use_synthetic_fixtures": true
+  },
+  "javascript_syntax_check": "node --check research/verification_workbench/static/app.js passed",
+  "browser_smoke": {
+    "real_pilot_read_only": true,
+    "real_pilot_pairs": 40,
+    "synthetic_only_writes": true,
+    "two_reviewers_and_third_adjudicator": true,
+    "reviewer_form_reset_checked": true,
+    "mobile_horizontal_overflow": false,
+    "browser_exceptions": [],
+    "screenshots_private": true
+  },
+  "real_pilot_audit": {
+    "records": 0,
+    "chain_head": "0000000000000000000000000000000000000000000000000000000000000000",
+    "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+    "exposures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "real_human_reviews_created": 0,
+  "actual_empty_export_restore_verified": true,
+  "protected_baseline_files_unchanged": 191,
+  "independent_review": "REVIEW.md",
+  "production_changed": false,
+  "code_sha256": {
+    "server.py": "dd05ad88e897c5b807d30fdd74741e2651a1e0be129c9fc0939f0a56be66f82b",
+    "browser_smoke.mjs": "a347b4bb95eaf683d835a6b9a2b119763d59a210493feb4f996a3ebe0bd8eadf",
+    "test_core.py": "2e028cbc9cdbbd94aad273ece82651c10fd05aa3008a03dc72bfedbd71496123",
+    "core.py": "7f80145d6c1d8b7c98c4ca7fb65a7c51f282f73eabc16fb8e0fc72027d583738",
+    "test_server.py": "e0bc5455cd6781388725bb04ef3ba8a372b46a421402869b1046a9c97eba6ea2",
+    "static/index.html": "f500403100671aa457fd8bad784cd1db343e864cb6de256788b9878bb7cae043",
+    "static/style.css": "064c069722aecedb3c750ea211e50f6f90cc0d588572616d0c5db8d6015e4f2c",
+    "static/app.js": "309822129486eaec69655b9942a626a64c2d8d0e56c77a60a9f0f8c108271c4f"
+  }
+}

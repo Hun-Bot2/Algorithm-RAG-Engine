@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algorithm Pair Review</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">LOCAL RESEARCH WORKBENCH</p>
+      <h1>Algorithm pair review</h1>
+    </div>
+    <div class="session-fields">
+      <label>Reviewer name <span class="required">required</span>
+        <input id="reviewer" autocomplete="name" placeholder="Enter your reviewer name">
+      </label>
+      <label>Reviewer role <span class="required">choose one</span>
+        <select id="role">
+          <option value="">Choose role</option>
+          <option value="human">Human reviewer</option>
+          <option value="ai">AI reviewer</option>
+        </select>
+      </label>
+      <span id="role-note" class="role-note" aria-live="polite">Choose a role before submitting. Roles are self-reported.</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="queue panel" aria-label="Pilot queue">
+      <div class="panel-heading">
+        <div><p class="eyebrow">PILOT QUEUE</p><h2>Pairs</h2></div>
+        <button id="refresh" class="button button-quiet" type="button">Refresh</button>
+      </div>
+      <div id="progress" class="progress" aria-live="polite">Loading queue…</div>
+      <div id="queue-list" class="queue-list" aria-live="polite"></div>
+    </aside>
+
+    <section class="workbench" aria-label="Pair review">
+      <div id="empty-state" class="panel empty-state">
+        <span class="empty-mark" aria-hidden="true">↖</span>
+        <h2>Select a pair to review</h2>
+        <p>The queue shows the pilot pairs. Each pair opens its source details and side-by-side statements.</p>
+      </div>
+
+      <div id="pair-view" hidden>
+        <section class="panel pair-heading">
+          <div>
+            <p class="eyebrow">CURRENT PAIR</p>
+            <h2 id="pair-title">Pair</h2>
+            <p id="pair-meta" class="muted"></p>
+          </div>
+          <div class="pair-nav">
+            <div class="reveal-control"><button id="reveal-reviews" class="button button-caution" type="button">Reveal reviews</button><p id="reveal-warning" class="reveal-warning">Reveal reviews for adjudication; you cannot submit a new independent review for this pair afterward.</p></div>
+            <button id="previous" class="button button-quiet" type="button">Previous</button>
+            <button id="next" class="button button-dark" type="button">Next pair <span aria-hidden="true">→</span></button>
+          </div>
+        </section>
+
+        <section class="statement-grid" aria-label="Problem statements">
+          <article class="statement panel">
+            <div class="statement-top"><span class="side-label">QUERY</span><a id="query-link" target="_blank" rel="noreferrer">Open source ↗</a></div>
+            <h3 id="query-title">Loading…</h3>
+            <p id="query-meta" class="problem-meta"></p>
+            <p id="query-source" class="form-note"></p>
+            <div id="query-tags" class="tag-list"></div>
+            <pre id="query-statement" class="statement-text">Loading statement…</pre>
+            <details class="identity-box">
+              <summary>Identity candidates <span id="query-candidate-count"></span></summary>
+              <div id="query-candidates" class="candidate-list"></div>
+            </details>
+          </article>
+          <article class="statement panel">
+            <div class="statement-top"><span class="side-label side-target">TARGET</span><a id="target-link" target="_blank" rel="noreferrer">Open source ↗</a></div>
+            <h3 id="target-title">Loading…</h3>
+            <p id="target-meta" class="problem-meta"></p>
+            <p id="target-source" class="form-note"></p>
+            <div id="target-tags" class="tag-list"></div>
+            <pre id="target-statement" class="statement-text">Loading statement…</pre>
+            <details class="identity-box">
+              <summary>Identity candidates <span id="target-candidate-count"></span></summary>
+              <div id="target-candidates" class="candidate-list"></div>
+            </details>
+          </article>
+        </section>
+
+        <section class="panel methods-panel">
+          <div class="panel-heading"><div><p class="eyebrow">MODEL OUTPUT CONTEXT</p><h2>Methods in pilot</h2></div></div>
+          <div id="methods" class="method-list"></div>
+        </section>
+
+        <section class="panel review-panel">
+          <div class="panel-heading review-heading">
+            <div><p class="eyebrow">YOUR REVIEW</p><h2>Record an assessment</h2></div>
+            <div id="submission-identity" class="submission-identity">Reviewer and role required</div>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Assessment type">
+            <button class="tab active" data-tab="relationship" role="tab" aria-selected="true" type="button">Relationship</button>
+            <button class="tab" data-tab="identity" role="tab" aria-selected="false" type="button">Identity proposal</button>
+            <button class="tab" data-tab="adjudication" role="tab" aria-selected="false" type="button">Adjudication</button>
+          </div>
+
+          <form id="relationship-form" class="review-form">
+            <input type="hidden" name="kind" value="relationship">
+            <div class="field-grid">
+              <label>Similarity
+                <select name="similarity"><option value="">Choose</option><option value="0">0 · Unrelated algorithms</option><option value="1">1 · Broad concept only</option><option value="2">2 · Shared core technique</option><option value="3">3 · Near-equivalent algorithmic practice</option><option value="null">Unable to judge</option></select>
+              </label>
+              <label>Prerequisite direction
+                <select name="prerequisite"><option value="">Choose</option><option value="query_before_target">Query before target</option><option value="target_before_query">Target before query</option><option value="neither">Neither</option><option value="unknown">Unknown</option></select>
+              </label>
+              <label>Transfer potential
+                <select name="transfer"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select>
+              </label>
+              <label>Relative difficulty
+                <select name="difficulty"><option value="">Choose</option><option value="query_easier">Query easier</option><option value="similar">Similar</option><option value="target_easier">Target easier</option><option value="unknown">Unknown</option></select>
+              </label>
+            </div>
+            <label>Rationale <textarea name="rationale" rows="3" required placeholder="Explain the evidence behind your assessment"></textarea></label>
+            <label>Evidence <span class="field-hint">One item per line</span><textarea name="evidence" rows="2" placeholder="Statement details, constraints, or algorithmic observations"></textarea></label>
+            <label class="check-label"><input name="independent" type="checkbox"> I made this judgment independently before seeing other reviews</label>
+            <div class="form-footer"><p class="form-note">Reviewer role and independence are self-attested. Other reviewers’ relationship judgments stay hidden until this human reviewer has an independent relationship judgment.</p><button class="button button-dark" type="submit">Save relationship</button></div>
+          </form>
+
+          <form id="identity-form" class="review-form" hidden>
+            <input type="hidden" name="kind" value="identity">
+            <p class="form-note">Propose a native problem identity for either side. A proposal is not an approval and will remain pending review.</p>
+            <div class="field-grid">
+              <label>Subject
+                <select name="subject_side"><option value="">Choose side</option><option value="query">Query</option><option value="target">Target</option></select>
+              </label>
+              <label>Proposed native ID<input name="native_key" required placeholder="e.g. atcoder:abc123_a"></label>
+              <label>Proposal status
+                <input value="Proposed · pending review" readonly aria-readonly="true">
+              </label>
+            </div>
+            <label>Rationale <textarea name="rationale" rows="3" required placeholder="Why does this native ID match the problem?"></textarea></label>
+            <label>Evidence <span class="field-hint">One item per line</span><textarea name="evidence" rows="2" placeholder="Source URL, title match, or other evidence"></textarea></label>
+            <label>Canonical native problem URL <input name="canonical_url" type="url" required placeholder="https://…"><span class="field-hint">Must exactly match the catalog URL; it will be added to evidence.</span></label>
+            <label class="check-label"><input name="independent" type="checkbox"> I made this identity judgment independently</label>
+            <div class="form-footer"><p class="form-note">Reviewer role and independence are self-attested. Only a proposal is recorded; the UI does not approve identity mappings automatically.</p><button class="button button-dark" type="submit">Save identity proposal</button></div>
+          </form>
+
+          <form id="adjudication-form" class="review-form" hidden>
+            <input type="hidden" name="kind" value="adjudication">
+            <div class="field-grid">
+              <label>Review type<select name="task"><option value="relationship">Relationship</option><option value="identity">Identity</option></select></label>
+              <label>Review record IDs <span class="field-hint">Comma separated</span><input name="review_ids" required placeholder="IDs from available records"></label>
+              <label>Outcome<select name="outcome"><option value="">Choose</option><option value="accept">Accept</option><option value="reject">Reject</option></select></label>
+            </div>
+            <label>Decision details <span class="field-hint">JSON object with all four relationship dimensions, or identity subject_key and native_key</span><textarea id="decision" name="decision" rows="3" required placeholder='{"similarity":2,"prerequisite":"neither","transfer":"yes","difficulty":"similar"}'></textarea></label>
+            <label>Rationale <textarea name="rationale" rows="3" required></textarea></label>
+            <label>Evidence <span class="field-hint">One item per line</span><textarea name="evidence" rows="2"></textarea></label>
+            <label id="adjudication-canonical-wrap" hidden>Canonical native problem URL <input name="canonical_url" type="url" placeholder="https://…"><span class="field-hint">Required for identity adjudication; must exactly match the catalog URL.</span></label>
+            <div class="form-footer"><p class="form-note">Adjudication records preserve the selected source review IDs and your decision.</p><button class="button button-dark" type="submit">Save adjudication</button></div>
+          </form>
+          <div id="save-status" class="save-status" role="status" aria-live="polite"></div>
+        </section>
+
+        <section class="panel records-panel">
+          <div class="panel-heading"><div><p class="eyebrow">VISIBLE TO YOU</p><h2>Available records</h2></div><span class="muted small">Server applies reviewer blindness</span></div>
+          <div id="records" class="records-list"><p class="muted">No records loaded.</p></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

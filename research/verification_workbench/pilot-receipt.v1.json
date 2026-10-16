@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+  "pairs": 40,
+  "strata": {
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_chunk\",\"platform_pair\":\"atcoder>codeforces\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_chunk\",\"platform_pair\":\"codeforces>atcoder\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_title\",\"platform_pair\":\"atcoder>codeforces\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_title\",\"platform_pair\":\"codeforces>atcoder\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_title_statement\",\"platform_pair\":\"atcoder>codeforces\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"minilm_title_statement\",\"platform_pair\":\"codeforces>atcoder\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"tfidf_char\",\"platform_pair\":\"atcoder>codeforces\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"tfidf_char\",\"platform_pair\":\"codeforces>atcoder\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"tfidf_word\",\"platform_pair\":\"atcoder>codeforces\",\"topic\":\"unknown\"}": 4,
+    "{\"difficulty\":\"unavailable\",\"method\":\"tfidf_word\",\"platform_pair\":\"codeforces>atcoder\",\"topic\":\"unknown\"}": 4
+  },
+  "distinct_problem_keys": 74,
+  "unresolved_native_problem_keys": 37,
+  "unresolved_candidate_count_distribution": {
+    "1": 33,
+    "0": 1,
+    "2": 1,
+    "5": 1,
+    "3": 1
+  },
+  "candidate_rule": "normalized title equality only, not verified identities",
+  "records": 0,
+  "pending_human_relationship_pairs": 40,
+  "sources": {
+    "queue": {
+      "path": "/Users/jeonghun/Algorithm-RAG-Engine/research/algorithm_system/evaluation.v1.json",
+      "sha256": "7a388b0cea8ace3806c5504358cd869d159ca5535c01176333a149e4308cbac0"
+    },
+    "corpus": {
+      "path": "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/algorithm-system/statement-run-v1/corpus.jsonl",
+      "sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b"
+    },
+    "catalog": {
+      "path": "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/full-catalog/catalog-v1/catalog.v1.jsonl",
+      "sha256": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a"
+    }
+  },
+  "no_human_judgments_created": true,
+  "production_changed": false
+}

@@ -580,3 +580,19 @@ Keep these distinctions clear in summaries and docs:
 - Run the new scientific suite with `.venv/bin/python -m unittest discover -s
   research/algorithm_system -v`. Compression requires the complete hash-bound
   384D chunk baseline. Neighbor preservation alone cannot promote a model.
+
+## Local verification pilot (2026-10-16)
+
+- `research/verification_workbench/server.py serve` opens the loopback-only
+  identity/relationship workbench; its frozen 40-pair pilot and SQLite evidence
+  live under `private-learning/verification-workbench/pilot-v1/`.
+- Role and independence are self-attestations, not authenticated human proof.
+  Two independent human reviews plus a third adjudicator gate accepted overlays;
+  AI reviews, title candidates and direct assertions never resolve source IDs.
+- Reveal mode logs exposure and blocks later independent claims for that pair.
+  Browser forms clear across reviewers/problems; stale responses are discarded.
+  Corrections suspend accepted overlays that referenced an earlier review.
+- Workbench tests use authored fixtures: `python3 -m unittest discover -s
+  research/verification_workbench -v`; two tests require loopback socket access.
+  Browser test writes MUST use the disposable synthetic server, not the real pilot.
+  Real statement screenshots and exports stay private. Production import is absent.
