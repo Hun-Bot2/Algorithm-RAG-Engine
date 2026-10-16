@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-16T10:11:21.133301+00:00",
+  "validation": {
+    "audit_script_compiles": true,
+    "audit_reruns_byte_identical": true,
+    "baseline_files_hash_verified": 191,
+    "frozen_pair_records": 3647,
+    "nonnull_judgments": 2886,
+    "null_judgments": 761,
+    "baseline_git_diff_empty": true,
+    "robots_documents_live_http_200": 3,
+    "statement_requests": 0,
+    "retrieval_runs": 0,
+    "model_promotions": 0
+  },
+  "boundary": "Audit availability only; no extraction/collection/inference or source-use approval is implied.",
+  "artifacts_sha256": {
+    "acquisition-review.v2.json": "81f2c1d7dd1a7c3cb0728de8e6e4e219739d60980172a54333a110a59fa8bbfd",
+    "availability-audit.v1.json": "d525da327b3284f57fc9c2bc38ea0c19d693e8f48d4ab50bddc264b24a88ac42",
+    "audit_availability.py": "cfa2f8d33ad5359fb2d5715956f91886b5b8036e78c828eca5dcb9149487a2a0",
+    "BASELINE-PRESERVATION.v1.json": "29a518ee52a03a13c89acdb14d0b7a0efc947ef0c8f09170e3fad6a729edcca1",
+    "AVAILABILITY-AND-FEASIBILITY.md": "af0843dbdf4f602f0f0b9ad7a05d1d0a171ffb529b82fa501038d4b270efc029"
+  }
+}

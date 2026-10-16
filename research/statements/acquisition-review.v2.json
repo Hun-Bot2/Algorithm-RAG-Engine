@@ -1,0 +1,112 @@
+{
+  "schema_version": 2,
+  "reviewed_at": "2026-10-16T10:05:58.071926+00:00",
+  "scope": "Statement acquisition feasibility only; no statement collection or retrieval run",
+  "previous_decision": {
+    "path": "research/full_catalog/terms-review.v1.json",
+    "sha256": "9a7074efe2e70bfbbf32ba151eaed5ae5aa34dabe07630e58835acabc49fd35f",
+    "preserved": true
+  },
+  "current_user_instruction": "Investigate legitimate statement access and collect only sources with verified permitted access; preserve all baselines.",
+  "research_use": "fixed-model inference/retrieval; no model training or redistribution",
+  "robots_evidence": [
+    {
+      "name": "leetcode-robots",
+      "url": "https://leetcode.com/robots.txt",
+      "status": 200,
+      "final_url": "https://leetcode.com/robots.txt",
+      "bytes": 514,
+      "sha256": "c09c8c0bfb00a5ab3de9d1fd8e9fd8c1b3307dd37fbd688cd1196ec0a934708d"
+    },
+    {
+      "name": "codeforces-robots",
+      "url": "https://codeforces.com/robots.txt",
+      "status": 200,
+      "final_url": "https://codeforces.com/robots.txt",
+      "bytes": 3518,
+      "sha256": "7d930df0b686fb0b52a5a41273832543e0cd5e87d67d19e5766c20be847e8e71"
+    },
+    {
+      "name": "atcoder-robots",
+      "url": "https://atcoder.jp/robots.txt",
+      "status": 200,
+      "final_url": "https://atcoder.jp/robots.txt",
+      "bytes": 350,
+      "sha256": "ac6bc56f9ecbcb004f92c462d2c569aeea84077aaf32eaf34767947a51d84210"
+    }
+  ],
+  "decisions": [
+    {
+      "platform": "leetcode",
+      "local_statement_records": 3053,
+      "local_use_status": "quarantined_not_released_by_this_audit",
+      "documented_statement_api_identified": false,
+      "historical_endpoint": "undocumented_graphql",
+      "new_statement_collection": "not_cleared",
+      "reason": "Current scraping restriction and preserved source rejection. Need an appropriate authorized export/use basis.",
+      "sources": [
+        "https://leetcode.com/terms/",
+        "https://leetcode.com/robots.txt"
+      ]
+    },
+    {
+      "platform": "codeforces",
+      "local_statement_records": 0,
+      "documented_api": "metadata_and_tags_only",
+      "new_statement_collection": "not_cleared",
+      "reason": "Prior rejection retained; robots scraper/AI-agent restrictions and intended reuse clearance unresolved. Wildcard group does not itself disallow /problemset/problem/.",
+      "sources": [
+        "https://codeforces.com/apiHelp",
+        "https://codeforces.com/apiHelp/objects#Problem",
+        "https://codeforces.com/robots.txt",
+        "https://codeforces.com/terms"
+      ]
+    },
+    {
+      "platform": "atcoder",
+      "local_statement_records": 0,
+      "community_api": "metadata_only_not_official",
+      "new_statement_collection": "not_cleared",
+      "reason": "Task-page robots allowance is not a statement license. First-party dataset licensing route identified; no contract held. Training opt-out alone does not establish a fixed-model inference ban.",
+      "sources": [
+        "https://atcoder.jp/tos?lang=en",
+        "https://atcoder.jp/robots.txt",
+        "https://datasets.atcoder.jp/",
+        "https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md"
+      ]
+    }
+  ],
+  "dataset_candidates": [
+    {
+      "name": "CodeContests",
+      "source": "https://github.com/google-deepmind/code_contests/blob/main/README.md#license",
+      "published_noncode_license": "CC-BY-4.0",
+      "code_license": "Apache-2.0",
+      "clearance_status": "needs_scope_review_under_existing_project_gate",
+      "condition": "Preserve attribution and express third-party-terms/right-representation caveat; not blanket original-platform permission.",
+      "listed_target_platforms": [
+        "codeforces",
+        "atcoder"
+      ]
+    },
+    {
+      "name": "Project CodeNet",
+      "source": "https://github.com/IBM/Project_CodeNet#problem-descriptions",
+      "clearance_status": "dataset_and_description_license_scope_unverified",
+      "code_repo_license_not_data_clearance": true
+    },
+    {
+      "name": "APPS",
+      "source": "https://github.com/hendrycks/apps",
+      "clearance_status": "original_statement_license_scope_unverified"
+    },
+    {
+      "name": "TACO",
+      "source": "https://github.com/FlagOpen/TACO",
+      "clearance_status": "original_source_conditions_unresolved"
+    }
+  ],
+  "enabled_statement_collectors": [],
+  "policy": "Project clearance decisions, not a universal legal conclusion. Do not bypass access restrictions or infer permission from absent prohibitions.",
+  "report": "research/statements/AVAILABILITY-AND-FEASIBILITY.md"
+}

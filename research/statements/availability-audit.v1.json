@@ -1,0 +1,1439 @@
+{
+  "audit_date": "2026-10-16",
+  "decision_boundary": {
+    "atcoder": "existing metadata snapshot only; no statement text collected",
+    "codeforces": "existing metadata snapshot only; no statement text collected",
+    "leetcode": "3,053 stored statement-bearing records remain quarantined; this audit uses only aggregate availability, length, marker, and digest checks"
+  },
+  "existing_catalog_metadata": {
+    "malformed": 0,
+    "platforms": {
+      "atcoder": {
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "full_statement": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "native_difficulty": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "problem_key": {
+            "nonempty": 9787,
+            "null_or_missing": 0,
+            "present_nonnull": 9787
+          },
+          "retrieved_at": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "source": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "source_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 9787,
+            "null_or_missing": 0,
+            "present_nonnull": 9787
+          },
+          "tags": {
+            "nonempty": 0,
+            "null_or_missing": 9787,
+            "present_nonnull": 0
+          },
+          "title": {
+            "nonempty": 9787,
+            "null_or_missing": 0,
+            "present_nonnull": 9787
+          },
+          "url": {
+            "nonempty": 9787,
+            "null_or_missing": 0,
+            "present_nonnull": 9787
+          }
+        },
+        "provenance_fields": {
+          "retrieved_at": "absent_from_record_schema",
+          "source": "absent_from_record_schema",
+          "source_sha256": "absent_from_record_schema",
+          "source_url": "absent_from_record_schema"
+        },
+        "record_keys": [
+          "full_statement",
+          "native_difficulty",
+          "platform",
+          "problem_key",
+          "statement_status",
+          "tags",
+          "title",
+          "url"
+        ],
+        "rows": 9787,
+        "statement_status_counts": {
+          "not_provided": 9787
+        },
+        "tag_cardinality": {
+          "distinct_tags": 0,
+          "nonempty_rows": 0
+        }
+      },
+      "codeforces": {
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "full_statement": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "native_difficulty": {
+            "nonempty": 11152,
+            "null_or_missing": 305,
+            "present_nonnull": 11152
+          },
+          "problem_key": {
+            "nonempty": 11457,
+            "null_or_missing": 0,
+            "present_nonnull": 11457
+          },
+          "retrieved_at": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "source": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "source_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 11457,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 11457,
+            "null_or_missing": 0,
+            "present_nonnull": 11457
+          },
+          "tags": {
+            "nonempty": 11277,
+            "null_or_missing": 0,
+            "present_nonnull": 11457
+          },
+          "title": {
+            "nonempty": 11457,
+            "null_or_missing": 0,
+            "present_nonnull": 11457
+          },
+          "url": {
+            "nonempty": 11457,
+            "null_or_missing": 0,
+            "present_nonnull": 11457
+          }
+        },
+        "provenance_fields": {
+          "retrieved_at": "absent_from_record_schema",
+          "source": "absent_from_record_schema",
+          "source_sha256": "absent_from_record_schema",
+          "source_url": "absent_from_record_schema"
+        },
+        "record_keys": [
+          "full_statement",
+          "native_difficulty",
+          "platform",
+          "problem_key",
+          "statement_status",
+          "tags",
+          "title",
+          "url"
+        ],
+        "rows": 11457,
+        "statement_status_counts": {
+          "not_provided": 11457
+        },
+        "tag_cardinality": {
+          "distinct_tags": 38,
+          "nonempty_rows": 11277
+        }
+      }
+    },
+    "rows": 21244,
+    "source_file": {
+      "path": "private-learning/catalogs/2026-10-16-api-v1-reviewed-identities/problems.jsonl",
+      "sha256": "2f5058aefefc9ec99e7b8189e6b7b037687312fef03b281492f9f8db73aea8d0"
+    }
+  },
+  "existing_labels": {
+    "distinct_pair_ids": 3647,
+    "judged_nonnull": 2886,
+    "malformed": 0,
+    "path": "research/full_catalog/labels.v1.jsonl",
+    "receipt_final_label_counts": {
+      "0": 2443,
+      "1": 399,
+      "2": 40,
+      "3": 4,
+      "None": 761
+    },
+    "receipt_path": "research/full_catalog/receipts/labels.v1.json",
+    "receipt_sha256": "7c2ff0b4f27e111235cdeddd6e92796684a597b1346a48745554f9c6255a1dbe",
+    "row_counts_match_receipt": true,
+    "rows": 3647,
+    "sha256": "f2ae204931195763ba745a2e0378b03518eaf3ca2bc19c958f191f4fe0c6e503",
+    "unjudged_null": 761
+  },
+  "leetcode": {
+    "field_availability": {
+      "processed": {
+        "constraints": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "content": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "content_clean": {
+          "nonempty": 3053,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "content_sha256": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "difficulty": {
+          "nonempty": 3053,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "language": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "provenance": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "samples": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "statement_status": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "tags": {
+          "nonempty": 2992,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "url": {
+          "nonempty": 3053,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        }
+      },
+      "raw": {
+        "constraints": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "content": {
+          "nonempty": 3053,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "content_clean": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "content_sha256": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "difficulty": {
+          "nonempty": 3053,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "language": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "provenance": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "samples": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "statement_status": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        },
+        "tags": {
+          "nonempty": 2992,
+          "null_or_missing": 0,
+          "present_nonnull": 3053
+        },
+        "url": {
+          "nonempty": 0,
+          "null_or_missing": 3053,
+          "present_nonnull": 0
+        }
+      }
+    },
+    "html_marker_counts": {
+      "counts": {
+        "heading_open": 2,
+        "image_open": 1443,
+        "input_output_label": 38654,
+        "list_open": 5474,
+        "math_marker": 1,
+        "paragraph_open": 33274,
+        "pre_open": 49869
+      },
+      "interpretation": "heuristics over stored HTML only; not verified field extraction or statement parsing"
+    },
+    "language_hash_status_provenance": {
+      "language_values": "no explicit language field is present in the record schema; historical audit found English text by character heuristic",
+      "per_record_statement_hash": "not stored as a field in the record schema",
+      "retrieval_provenance": "timestamps and raw response hashes unavailable in record files; collection date is documented as January 2026",
+      "statement_status": "not stored as an explicit field in the record schema"
+    },
+    "record_keys": {
+      "processed_union": [
+        "content_clean",
+        "difficulty",
+        "embedding_text",
+        "id",
+        "slug",
+        "tags",
+        "title",
+        "url"
+      ],
+      "raw_union": [
+        "content",
+        "difficulty",
+        "id",
+        "tags",
+        "title",
+        "titleSlug"
+      ]
+    },
+    "row_counts": {
+      "malformed_processed": 0,
+      "malformed_raw": 0,
+      "processed": 3053,
+      "raw": 3053
+    },
+    "source_files": {
+      "processed": {
+        "path": "data/processed/leetcode_processed.jsonl",
+        "sha256": "281f8e3d9f2a4642a98f625f6fdca7e03b509ca884b95548abe4c0a60589ff40"
+      },
+      "raw": {
+        "path": "data/raw/leetcode_raw_data.jsonl",
+        "sha256": "ee130b9eaeee21b5976eba7e4083dbfadbacf605f7ce96b067d99dd956c11447"
+      }
+    },
+    "statement_length_chars": {
+      "basis": "in-memory length count only; text is neither emitted nor used for retrieval",
+      "empty": 0,
+      "max": 25400,
+      "median_upper": 1963,
+      "min": 431,
+      "p95_nearest_rank": 4001
+    },
+    "tag_availability": {
+      "distinct_tags": 72,
+      "frequency": {
+        "Array": 1774,
+        "Backtracking": 92,
+        "Biconnected Component": 1,
+        "Binary Indexed Tree": 34,
+        "Binary Search": 281,
+        "Binary Search Tree": 29,
+        "Binary Tree": 130,
+        "Bit Manipulation": 238,
+        "Bitmask": 47,
+        "Brainteaser": 17,
+        "Breadth-First Search": 200,
+        "Bucket Sort": 6,
+        "Combinatorics": 51,
+        "Concurrency": 6,
+        "Counting": 163,
+        "Counting Sort": 9,
+        "Data Stream": 14,
+        "Database": 94,
+        "Depth-First Search": 255,
+        "Design": 95,
+        "Divide and Conquer": 52,
+        "Doubly-Linked List": 9,
+        "Dynamic Programming": 558,
+        "Enumeration": 129,
+        "Eulerian Circuit": 3,
+        "Game Theory": 25,
+        "Geometry": 38,
+        "Graph": 143,
+        "Greedy": 404,
+        "Hash Function": 31,
+        "Hash Table": 653,
+        "Heap (Priority Queue)": 175,
+        "Interactive": 5,
+        "Iterator": 5,
+        "Line Sweep": 6,
+        "Linked List": 66,
+        "Math": 568,
+        "Matrix": 227,
+        "Memoization": 41,
+        "Merge Sort": 11,
+        "Minimum Spanning Tree": 3,
+        "Monotonic Queue": 18,
+        "Monotonic Stack": 56,
+        "Number Theory": 81,
+        "Ordered Set": 60,
+        "Prefix Sum": 209,
+        "Probability and Statistics": 6,
+        "Queue": 40,
+        "Quickselect": 8,
+        "Radix Sort": 3,
+        "Randomized": 12,
+        "Recursion": 42,
+        "Rejection Sampling": 2,
+        "Reservoir Sampling": 4,
+        "Rolling Hash": 25,
+        "Segment Tree": 65,
+        "Shell": 4,
+        "Shortest Path": 30,
+        "Simulation": 179,
+        "Sliding Window": 139,
+        "Sort": 1,
+        "Sorting": 426,
+        "Stack": 144,
+        "String": 725,
+        "String Matching": 33,
+        "Strongly Connected Component": 3,
+        "Suffix Array": 5,
+        "Topological Sort": 28,
+        "Tree": 195,
+        "Trie": 45,
+        "Two Pointers": 199,
+        "Union Find": 79
+      },
+      "rows_empty_or_missing": 61,
+      "rows_with_nonempty_tags": 2992
+    }
+  },
+  "legacy_evaluation_secondary": {
+    "files": {
+      "baekjoon_normalized.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "cjk_japanese_korean": 18,
+            "mixed": 82
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "content_cleaned",
+          "difficulty",
+          "embedding_text",
+          "id",
+          "tags",
+          "title"
+        ],
+        "rows": 100,
+        "sha256": "74e1ca522120881547a92ca0f98742152072a4c65e09820661e6cb915a67f301",
+        "size_bytes": 244625,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 47,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "content_cleaned": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "embedding_text": {
+            "chars_max": 1469,
+            "chars_median_upper": 783,
+            "chars_min": 298,
+            "chars_p95_nearest_rank": 1148,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "baekjoon_preprocessed.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "cjk_japanese_korean": 18,
+            "mixed": 82
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "content_cleaned",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "embedding_text",
+          "id",
+          "tags",
+          "title"
+        ],
+        "rows": 100,
+        "sha256": "8a39d9b62b31a04a90197697887f6886030b28e07ef6b9404f463656a3211cdb",
+        "size_bytes": 6813736,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 47,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "content_cleaned": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "embedding_text": {
+            "chars_max": 1029,
+            "chars_median_upper": 350,
+            "chars_min": 81,
+            "chars_p95_nearest_rank": 937,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "baekjoon_raw_data.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "cjk_japanese_korean": 18,
+            "mixed": 82
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "id",
+          "tags",
+          "title"
+        ],
+        "rows": 100,
+        "sha256": "a821994db16c2cd93eca1a022fb44c09beb39ca9cb9e1b63ca3285cb1311f22e",
+        "size_bytes": 6652520,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 47,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "baekjoon_refined.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "cjk_japanese_korean": 18,
+            "mixed": 82
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "content_cleaned",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "embedding_text",
+          "id",
+          "tags",
+          "title"
+        ],
+        "rows": 100,
+        "sha256": "26597a0166dd2565475e7ed4cb048f9c53acb197f29d627653af436b1f7aaf5a",
+        "size_bytes": 6771022,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 47,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "content_cleaned": {
+            "chars_max": 958,
+            "chars_median_upper": 284,
+            "chars_min": 33,
+            "chars_p95_nearest_rank": 881,
+            "nonempty_rows": 100
+          },
+          "embedding_text": {
+            "chars_max": 1015,
+            "chars_median_upper": 407,
+            "chars_min": 149,
+            "chars_p95_nearest_rank": 641,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "leetcode_preprocessed.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "latin": 100
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "content_cleaned",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "embedding_text",
+          "id",
+          "tags",
+          "title",
+          "titleSlug"
+        ],
+        "rows": 100,
+        "sha256": "aa176138f2a78583d6a4796e3492eb1c1d289509a5238aca4030328c6df8bf57",
+        "size_bytes": 6917079,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 30,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 4402,
+            "chars_median_upper": 1308,
+            "chars_min": 541,
+            "chars_p95_nearest_rank": 3308,
+            "nonempty_rows": 100
+          },
+          "content_cleaned": {
+            "chars_max": 2244,
+            "chars_median_upper": 620,
+            "chars_min": 229,
+            "chars_p95_nearest_rank": 1692,
+            "nonempty_rows": 100
+          },
+          "embedding_text": {
+            "chars_max": 2298,
+            "chars_median_upper": 690,
+            "chars_min": 294,
+            "chars_p95_nearest_rank": 1758,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "leetcode_raw_data.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "latin": 100
+          }
+        },
+        "malformed": 0,
+        "production_leetcode_overlap": {
+          "distinct_legacy_ids": 100,
+          "distinct_legacy_slugs": 100,
+          "id_overlap_rows": 100,
+          "legacy_rows": 100,
+          "metadata_only_identity_comparison": true,
+          "note": "ID and slug overlap are separate; the 100 legacy rows are not additional unique LeetCode coverage when keys overlap.",
+          "slug_overlap_rows": 100
+        },
+        "record_keys": [
+          "content",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "id",
+          "tags",
+          "title",
+          "titleSlug"
+        ],
+        "rows": 100,
+        "sha256": "f02a3a0886184a0975857602d5a55b68325bcfcdbd3d84b1e932c04d20c48bf0",
+        "size_bytes": 6746044,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 30,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 4402,
+            "chars_median_upper": 1308,
+            "chars_min": 541,
+            "chars_p95_nearest_rank": 3308,
+            "nonempty_rows": 100
+          }
+        }
+      },
+      "leetcode_refined.jsonl": {
+        "explicit_constraints_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "explicit_samples_field": {
+          "nonempty": 0,
+          "null_or_missing": 100,
+          "present_nonnull": 0
+        },
+        "field_availability": {
+          "constraints": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "content": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_cleaned": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "content_sha256": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "embedding_text": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "id": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "language": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "provenance": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "samples": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "statement_status": {
+            "nonempty": 0,
+            "null_or_missing": 100,
+            "present_nonnull": 0
+          },
+          "tags": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          },
+          "titleSlug": {
+            "nonempty": 100,
+            "null_or_missing": 0,
+            "present_nonnull": 100
+          }
+        },
+        "language_heuristic_for_content_only": {
+          "basis": "Unicode script counts only; not a language detector",
+          "counts": {
+            "latin": 100
+          }
+        },
+        "malformed": 0,
+        "record_keys": [
+          "content",
+          "content_cleaned",
+          "difficulty",
+          "embedding",
+          "embedding_dim",
+          "embedding_jina",
+          "embedding_jina_dim",
+          "embedding_jina_model",
+          "embedding_model",
+          "embedding_openai",
+          "embedding_openai_dim",
+          "embedding_openai_model",
+          "embedding_text",
+          "id",
+          "tags",
+          "title",
+          "titleSlug"
+        ],
+        "rows": 100,
+        "sha256": "af3aad07abaa817ebc6082bfa90e0b0a74fde72c4eadfb9585143fa2295acede",
+        "size_bytes": 6869892,
+        "statement_text_fields": {
+          "content": "stored source statement field in this legacy artifact; aggregates only",
+          "content_cleaned": "derived cleaned text; not treated as source statement field",
+          "embedding_text": "derived/refined retrieval input; not treated as an original full statement"
+        },
+        "tag_availability": {
+          "distinct_tags": 30,
+          "rows_null_or_missing_tags": 0,
+          "rows_with_nonempty_tags": 100
+        },
+        "text_lengths_chars": {
+          "content": {
+            "chars_max": 4402,
+            "chars_median_upper": 1308,
+            "chars_min": 541,
+            "chars_p95_nearest_rank": 3308,
+            "nonempty_rows": 100
+          },
+          "content_cleaned": {
+            "chars_max": 2244,
+            "chars_median_upper": 620,
+            "chars_min": 229,
+            "chars_p95_nearest_rank": 1692,
+            "nonempty_rows": 100
+          },
+          "embedding_text": {
+            "chars_max": 812,
+            "chars_median_upper": 417,
+            "chars_min": 228,
+            "chars_p95_nearest_rank": 592,
+            "nonempty_rows": 100
+          }
+        }
+      }
+    },
+    "leetcode_index_metadata_tag_check": {
+      "distinct_tags": 72,
+      "matched_production_slugs": 3053,
+      "path": "indexes/numpy_leetcode/metadata.json",
+      "rows": 3053,
+      "rows_with_nonempty_tags": 2992,
+      "sha256": "98fba8b4525ba8d8558e7c7606a55a899388336f5aabfadf167cedfe0ea84953",
+      "tag_list_mismatch_slugs": 0,
+      "tag_lists_equal_on_matched_slugs": 3053
+    },
+    "scope": "legacy evaluation artifacts, secondary to the three-platform catalog; do not add Baekjoon rows to cross-platform coverage"
+  },
+  "preservation_check": {
+    "protected_file_count": 191,
+    "protected_file_manifest_sha256": "55d57e10cc3b4cff4091cac43069d0ed035cdd4b1a944b1ff546b4c3c75f0802",
+    "status": "unchanged_during_audit"
+  },
+  "provenance_registry": {
+    "cross_platform_registry": "assets/cross_platform_sources.v1.json",
+    "record_level_statement_provenance": "absent for LeetCode; external metadata provenance is in the source registry and capture manifests",
+    "source_registry": "assets/source_registry.v1.json"
+  },
+  "schema": "statement-availability-audit.v1",
+  "scope": "local offline availability and provenance audit only; no network, statement retrieval, embedding, or retrieval"
+}

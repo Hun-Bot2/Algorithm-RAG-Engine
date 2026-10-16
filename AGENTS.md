@@ -540,3 +540,20 @@ Keep these distinctions clear in summaries and docs:
   pairs (v1 did not). Self-reported `basis: recognized_problem` is unreliable across
   agents. `deceptive` is the least reliable field; adjudicators needed a stricter
   definition. Agents can misread batch fields, so spot-check their claims against the files.
+
+## Statement-first research priority (2026-10-16, supersedes next-work priority)
+
+- Follow specs/statement-similarity/ for new research. A1/A2 title/tag runs and
+  3,647 pair records remain frozen preliminary baselines; do not optimize those
+  baselines or start PCA/SVD before a permitted full-statement 384D baseline.
+- Availability/feasibility report: research/statements/AVAILABILITY-AND-FEASIBILITY.md.
+  The deterministic audit inspects aggregate availability only, including stored
+  quarantined content. It does not release that content for new retrieval work.
+- Current acquisition decisions are in research/statements/acquisition-review.v2.json.
+  Prior terms-review.v1.json stays historical and byte-identical. Do not equate
+  robots allowance, model-inference use or a code-repository license with verified
+  rights to collect/reuse every statement. CodeContests explicitly licenses non-code
+  CC BY 4.0 but also retains separate third-party conditions; preserve both facts.
+- The frozen full-catalog labels contain 3,647 distinct pair records: 2,886 non-null
+  judgments and 761 abstentions. Reuse their evidence/basis faithfully; do not treat
+  abstentions as negatives or relabel title-pooled judgments as statement-grounded.
