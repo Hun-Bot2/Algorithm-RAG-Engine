@@ -22,7 +22,7 @@ class AIAssistedViewTest(unittest.TestCase):
         root = Path(self.tmp.name)
         queue, corpus, catalog, pilot = (root / name for name in ("queue.json", "corpus.jsonl", "catalog.jsonl", "pilot.json"))
         corpus.write_text("".join(json.dumps(row) + "\n" for row in [
-            {"problem_key": "dataset:a", "platform": "atcoder", "title": "p00001 - 100 A + B"},
+            {"problem_key": "dataset:a", "platform": "atcoder", "title": "p00001 AtCoder Beginner Contest100 - A + B"},
             {"problem_key": "dataset:b", "platform": "codeforces", "title": "4A Watermelon"},
         ]))
         catalog.write_text("".join(json.dumps(row) + "\n" for row in [

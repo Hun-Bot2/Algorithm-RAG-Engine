@@ -602,3 +602,15 @@ Keep these distinctions clear in summaries and docs:
   exposure lock; assisted human judgments are allowed but cannot satisfy the
   independent-human verification gates. AI-only import validates exact pilot
   coverage before writing and is resumable/idempotent. Never call these drafts gold.
+
+## Bounded identity investigation (2026-10-17)
+
+- Preserve numeric problem-title prefixes when stripping publisher/contest
+  wrappers: “3 Steps” and “01 Unbalanced” are complete titles, not task labels.
+- `research/identity_resolution/` validates manually authored primary-source
+  comparison notes and emits only AI identity proposals. Cached web observations
+  are not live response receipts or bulk statement reuse permission. Native task
+  IDs may differ from displayed task letters; compare canonical links.
+- Identity agreement does not establish full statement fidelity. Keep language
+  discrepancies and inaccessible sources explicit; never infer an unavailable
+  statement from a title or editorial alone.

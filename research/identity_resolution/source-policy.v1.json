@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-10-17",
+  "scope": "37-problem bounded manual identity investigation, not a statement collector or indexing run",
+  "terms_url": "https://atcoder.jp/tos?lang=en",
+  "terms_observation": "Official terms retain ownership and intellectual-property rights with AtCoder or the respective rightsholder. Public page inspection does not confer a blanket reuse license.",
+  "access_method": "Manual public task/task-list reads through web tool; cached presentations may be older than observation date",
+  "fresh_robots_observation": "web tool could not read robots.txt; no robots permission inferred",
+  "existing_policy": "Earlier bulk/direct statement acquisition remains disabled; no official full-statement snapshots, solution archives, auth bypass, training or indexing",
+  "retained_material": "Independently authored short comparison notes, source URLs, publisher input hashes and AI proposals",
+  "not_measured": ["live official HTTP status", "full official response hashes", "independent human identity verification"],
+  "human_confirmation_scope": "Prior user bulk confirmation concerned the 40 relationship drafts, not these new identity proposals"
+}

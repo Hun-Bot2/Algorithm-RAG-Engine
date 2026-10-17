@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from core import Workbench, pair_id, prepare, restore
+from core import Workbench, pair_id, prepare, restore, title_core
 
 
 def relationship(pid, reviewer, *, role="human", independent=True, similarity=None):
@@ -41,12 +41,13 @@ class WorkbenchTest(unittest.TestCase):
         self.pilot = self.root / "pilot.json"
         self.db = self.root / "reviews.sqlite"
         rows = [
-            dict(problem_key="dataset:a", platform="atcoder", title="p00001 - 100 A + B"),
+            dict(problem_key="dataset:a", platform="atcoder", title="p00001 AtCoder Beginner Contest100 - A + B"),
             dict(problem_key="dataset:b", platform="codeforces", title="4A Watermelon"),
-            dict(problem_key="dataset:c", platform="atcoder", title="p00002 - 100 Other"),
+            dict(problem_key="dataset:c", platform="atcoder", title="p00002 AtCoder Beginner Contest100 - Other"),
         ]
         native = [
             dict(problem_key="atcoder:abc100_a", platform="atcoder", title="A + B", url="https://atcoder.jp/contests/abc100/tasks/abc100_a"),
+            dict(problem_key="atcoder:arc100_a", platform="atcoder", title="A + B", url="https://atcoder.jp/contests/arc100/tasks/arc100_a"),
             dict(problem_key="codeforces:4A", platform="codeforces", title="Watermelon", url="https://codeforces.com/problemset/problem/4/A"),
             dict(problem_key="atcoder:abc100_b", platform="atcoder", title="Other", url="https://atcoder.jp/contests/abc100/tasks/abc100_b"),
         ]
@@ -81,6 +82,11 @@ class WorkbenchTest(unittest.TestCase):
         candidate = view["identity_candidates"]["query"][0]
         self.assertEqual(candidate["problem_key"], "atcoder:abc100_a")
         self.assertEqual(candidate["status"], "unverified_candidate")
+        # A title duplicate from a different contest remains only a candidate.
+        candidates = view["identity_candidates"]["query"]
+        self.assertEqual({row["problem_key"] for row in candidates},
+                         {"atcoder:abc100_a", "atcoder:arc100_a"})
+        self.assertTrue(all(row["status"] == "unverified_candidate" for row in candidates))
         self.assertEqual(self.w.progress()["accepted_adjudications"], 0)
         self.assertEqual(self.w.export(self.root / "candidate-export.json")["accepted_overlay"], [])
         self.w.append(relationship(self.pid, "h1"))
@@ -90,6 +96,11 @@ class WorkbenchTest(unittest.TestCase):
         self.assertFalse(visible["blind"])
         self.assertIn("methods", visible["pair"])
         self.assertEqual(len(visible["records"]), 1)
+
+    def test_title_normalization_preserves_numeric_title_prefixes(self):
+        self.assertEqual(title_core("p12345 AtCoder Beginner Contest100 - 3 Steps"), "3 steps")
+        self.assertEqual(title_core("p67890 AtCoder Beginner Contest200 - 01 Unbalanced"), "01 unbalanced")
+        self.assertEqual(title_core("p00001 AtCoder Beginner Contest100 - A + B"), "a b")
 
     def test_dimensions_keep_unknown_distinct_and_reject_invalid(self):
         rec = relationship(self.pid, "h1")

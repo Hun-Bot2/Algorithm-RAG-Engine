@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "evidence_sha256": "f6f67e83f41240a235484885be07810687292f78034e1a885726f801f54c2426",
+  "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+  "source_corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+  "source_catalog_sha256": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "validation": {
+    "records": 37,
+    "source_keys": 37,
+    "positions": 37,
+    "status_counts": {
+      "ai_proposed": 36,
+      "unresolved": 1
+    }
+  },
+  "proposed_unique_identities": 36,
+  "proposal_records": 39,
+  "appended": true,
+  "new_records": 39,
+  "duplicate_records": 0,
+  "preserved_existing_records": 80,
+  "before_audit": {
+    "records": 80,
+    "chain_head": "6d7022c67d8127bc3f0b542e563edbea73f45a04e63e146ac26fea87425ab89e",
+    "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+    "exposures_sha256": "5a0b8c82514cff245304c59c593767b19c47b8bc119548988fd507f225f99884"
+  },
+  "after_audit": {
+    "records": 119,
+    "chain_head": "4f2184a08a47dd1ec9f3ed7943de5b87c0448944c6672d6b550bb3a0fec70195",
+    "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+    "exposures_sha256": "5a0b8c82514cff245304c59c593767b19c47b8bc119548988fd507f225f99884"
+  },
+  "human_records_before": 40,
+  "human_records_after": 40,
+  "accepted_overlay_before": 0,
+  "accepted_overlay_after": 0,
+  "comparison_statuses": {
+    "contest": {
+      "match": 36,
+      "unavailable": 1
+    },
+    "semantics": {
+      "match": 36,
+      "unavailable": 1
+    },
+    "constraints": {
+      "match": 36,
+      "unavailable": 1
+    },
+    "samples": {
+      "match": 36,
+      "unavailable": 1
+    }
+  },
+  "native_catalog_changed": false,
+  "source_statements_changed": false,
+  "official_full_statements_saved": false,
+  "outputs_sha256": {
+    "evidence.json": "f6f67e83f41240a235484885be07810687292f78034e1a885726f801f54c2426",
+    "proposals.json": "ab3d6c4c10d046cfc8a693b15d14e548675327c8e85eba246d7ef07a5f463e84",
+    "REVIEW-FOR-USER.md": "8d0b96eb30d629418adb8ba0bae3416163200632071facc9fb4dcf830ee9bc52"
+  },
+  "limits": "Manual AI comparison notes, not authenticated human verification or statement reuse permission. No native IDs promoted.",
+  "protected_files_verified": 191,
+  "validation_tests": {
+    "identity": 20,
+    "workbench": 17
+  },
+  "evidence_parts_sha256": {
+    "evidence-1.json": "5b3d3fe70c9caaee1b8680f9e008711ab73248437f788fa0bbbeefa5f31b3361",
+    "evidence-2.json": "9898c0400328670272390faacb7d4c379afbff42c94ac72de71a0efac0a76e01",
+    "evidence-3.json": "5d5d6ba273e24f29287aeda88999f024e2a231b5f1c97df7a869e83ed2c480d8"
+  }
+}

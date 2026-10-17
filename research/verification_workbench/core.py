@@ -44,11 +44,11 @@ def prepare(queue_path,corpus_path,catalog_path,output,size=40,seed=17):
     output.chmod(0o600);return pilot
 
 def title_core(title):
-    wrapped=bool(re.match(r'^p\d{5}\s+',title.strip(),flags=re.I))
-    title=re.sub(r'^p\d{5}\s+','',title.strip(),flags=re.I)
+    title=title.strip()
+    wrapped=bool(re.match(r'^p\d{5}\s+',title,flags=re.I))
     if wrapped:
-        title=re.split(r'(?:^|\s)-\s+',title,maxsplit=1)[-1]
-        title=re.sub(r'^\d+\s+','',title)
+        title=re.sub(r'^p\d{5}\s+','',title,count=1,flags=re.I)
+        title=re.split(r'\s+-\s+',title,maxsplit=1)[-1]
     return ' '.join(re.findall(r'\w+',title.casefold()))
 
 class Workbench:
