@@ -164,3 +164,7 @@ button { color: inherit; }
   .tabs { overflow-x: auto; }
   .tab { flex: 0 0 auto; padding-right: 8px; padding-left: 8px; }
 }
+
+.record-summary { font-size: 12px; font-weight: 600; line-height: 1.6; }
+.record-rationale { font-size: 14px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.record-evidence, .record-raw { margin-top: 12px; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }

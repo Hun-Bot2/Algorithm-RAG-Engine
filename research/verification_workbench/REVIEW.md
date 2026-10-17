@@ -56,3 +56,26 @@ targets the actual record class and checks that reviewer 2 sees no reviewer 1
 label before submitting. The browser smoke writes only to its synthetic fixture
 store; the real pilot stays at zero records. Actual independent human review
 remains an open external gate.
+
+## AI-first review extension — 2026-10-17
+
+The user requested AI drafts before judging them. The imported batch has 40 AI
+relationship records, no human records/adjudications, and no accepted overlays.
+The full private publisher-description packets bind 80 endpoint content hashes.
+Root review corrected four reversed difficulty enums before import (positions
+1,2,3,23). Initial/corrected artifacts are private; the first initial snapshot was
+reconstructed afterward and is explicitly marked as such in its receipt.
+
+Independent reasoning-agent audit found no concrete gate bug in AI-only import
+or assisted viewing. It rechecked the two DP/parity sketches at pilot positions
+28 and 34 against the provided statements. This is a spot check, not mathematical
+certification of all 40 solution sketches. Six pairs retain all-unknown judgments;
+several others include partial derivations and provisional dimensions for the user
+to accept or correct. No AI precision, difficulty calibration, or gold claim follows.
+
+Root validation: 16 workbench tests pass, including both loopback HTTP tests.
+The AI-assisted Chrome test uses actual-pilot read-only access plus disposable
+synthetic human submissions. It verifies AI+own visibility, other-human hiding,
+assisted save, no accepted decision, persistence across reload, and mobile width.
+AI explanation cards now display prose and separate dimensions, with references
+and raw JSON in expandable sections. See `validation.ai-first.v1.json`.

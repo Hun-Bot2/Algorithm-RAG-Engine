@@ -103,21 +103,30 @@ class Workbench:
         return sorted(result,key=lambda c:c['problem_key'])[:10]
     def pair(self,pid,reviewer='',mode='review'):
         p=self.pairs[pid]
-        if mode not in {'review','adjudicate'}:raise ValueError('invalid view mode')
-        if mode=='adjudicate':
-            if not isinstance(reviewer,str) or not reviewer.strip() or len(reviewer)>100 or reviewer!=reviewer.strip():raise ValueError('trimmed reviewer required before unblinding')
+        if mode not in {'review','adjudicate','ai_assisted'}:raise ValueError('invalid view mode')
+        if mode in {'adjudicate','ai_assisted'}:
+            if not isinstance(reviewer,str) or not reviewer.strip() or len(reviewer)>100 or reviewer!=reviewer.strip():raise ValueError('trimmed reviewer required before viewing exposed records')
             with self.connect() as c:c.execute('INSERT OR IGNORE INTO exposures VALUES(?,?,?)',(pid,reviewer,datetime.now(timezone.utc).isoformat()))
         records=[r for r in self.records() if r['pair_id']==pid]
         independent=any(r['reviewer']==reviewer and r['role']=='human' and r['kind']=='relationship' and r['independent'] for r in records)
         own_identity={r['subject_key'] for r in records if r['kind']=='identity' and r['reviewer']==reviewer and r['role']=='human' and r['independent']}
-        visible=[r for r in records if mode=='adjudicate' or r['reviewer']==reviewer or (r['kind']=='relationship' and independent) or (r['kind']=='identity' and r['subject_key'] in own_identity) or (r['kind']=='adjudication' and ((r['task']=='relationship' and independent) or (r['task']=='identity' and r['decision']['subject_key'] in own_identity)))]
-        publicpair=dict(p) if independent or mode=='adjudicate' else {k:v for k,v in p.items() if k not in {'methods','stratum'}}
+        if mode=='adjudicate':
+            visible=records
+        elif mode=='ai_assisted':
+            # Draft exposure is deliberately narrower than adjudication: AI records
+            # and this reviewer's own records only. It is still persistent exposure.
+            visible=[r for r in records if r['role']=='ai' or r['reviewer']==reviewer]
+        else:
+            visible=[r for r in records if r['reviewer']==reviewer or (r['kind']=='relationship' and independent) or (r['kind']=='identity' and r['subject_key'] in own_identity) or (r['kind']=='adjudication' and ((r['task']=='relationship' and independent) or (r['task']=='identity' and r['decision']['subject_key'] in own_identity)))]
+        exposed=mode=='adjudicate'
+        publicpair=dict(p) if (independent or exposed) and mode!='ai_assisted' else {k:v for k,v in p.items() if k not in {'methods','stratum'}}
+        reviewer_exposed=any(x['pair_id']==pid and x['reviewer']==reviewer for x in self.exposures())
         return {'pair':publicpair,'query':self.corpus[p['query']],'target':self.corpus[p['target']],
-                'identity_candidates':{s:self.candidates(p[s]) for s in ('query','target')},'records':visible,'blind':not independent and mode!='adjudicate','unblinded_for_adjudication':mode=='adjudicate'}
+                'identity_candidates':{s:self.candidates(p[s]) for s in ('query','target')},'records':visible,'blind':mode=='ai_assisted' or (not independent and mode!='adjudicate'),'ai_assisted':mode=='ai_assisted','reviewer_exposed':reviewer_exposed,'unblinded_for_adjudication':mode=='adjudicate'}
     def progress(self):
         all_records=self.records();counts=Counter(r['kind'] for r in all_records)
         accepted=self.accepted_overlay(all_records)
-        return {'total_pairs':len(self.pairs),'record_counts':dict(counts),'accepted_adjudications':len(accepted),
+        return {'total_pairs':len(self.pairs),'record_counts':dict(counts),'ai_draft_pairs':len({r['pair_id'] for r in all_records if r['kind']=='relationship' and r['role']=='ai'}),'accepted_adjudications':len(accepted),
                 'human_identity_authenticated':False,'pending_human_work':len(self.pairs)-len({r['pair_id'] for r in accepted if r['task']=='relationship'})}
     def _dimensions(self,r):
         sim=r.get('similarity')

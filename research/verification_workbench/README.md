@@ -50,7 +50,14 @@ source hashes; statements remain private.
    rates, missing statements, and guide ambiguities before expanding beyond 40.
    Do not use this pilot to tune and then claim final-test performance.
 
-AI assistance is stored under AI role and never satisfies independent human gates.
+A human may choose **View AI draft** before submitting. This shows AI records and
+that reviewer's own records only; other human labels and retrieval ranks remain
+hidden. Viewing a draft records persistent exposure and disables independence
+claims for that reviewer/pair, including after reload. The reviewer may still
+submit a human judgment marked non-independent. AI judgments never satisfy
+independent human or adjudication gates. **Reveal reviews** remains the separate
+adjudication view that exposes all records.
+
 A direct assertion marked verified is still only a review assertion; only accepted
 adjudication appears in the separate overlay. The software checks evidence fields
 and canonical URL membership, not the truth of the semantic evidence. A second
@@ -86,3 +93,20 @@ and a separate synthetic-fixture server on 8766. It reads the real pilot only;
 all test reviews use the synthetic store. Screenshot receipts stay private because
 real-pilot screenshots can contain licensed descriptions. See `validation.v1.json`
 and [independent review](REVIEW.md) for the measured evidence and remaining gates.
+
+## AI-first pilot review (2026-10-17)
+
+All 40 pairs now have an AI draft under `codex-ai-pilot-v1`. These do not close
+human-review gates. Enter your name, choose Human, and select **View AI draft**
+for a pair. Read its four judgments and explanation, then record your own assessment
+with independence disabled. Other humans' reviews and retrieval ranks stay hidden.
+Use Reveal reviews only for full adjudication, not merely to judge the AI draft.
+
+The complete private prose report is
+`private-learning/verification-workbench/ai-review-v1/REVIEW-FOR-USER.md`.
+Its summary is 3 shared-core candidates, 13 broad-overlap, 18 unrelated, and 6
+unknown; none is near-equivalent. These are provisional AI judgments, not precision
+measurements. Pairs 25, 26 and 28 are the three shared-core proposals; all need your
+assessment. Unknown cases 6, 13, 16, 17, 19 and 22 expose incomplete derivations or
+missing statement content. Source packets, initial/corrected drafts, correction
+receipts and the final imported batch are preserved privately.

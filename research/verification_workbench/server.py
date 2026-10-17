@@ -36,7 +36,8 @@ class Handler(BaseHTTPRequestHandler):
         url=urlsplit(self.path);query=parse_qs(url.query);wb=self.server.workbench
         try:
             if url.path=='/api/pilot':
-                # Hide retrieval methods and strata before independent annotation.
+                # Keep method/rank metadata off the queue; pair() applies the
+                # selected blind, AI-assisted, or adjudication visibility rules.
                 pilot={k:v for k,v in wb.pilot.items() if k not in {'sources','strata','items'}}
                 pilot['items']=[{k:r[k] for k in ('pair_id','query','target')} for r in wb.pilot['items']]
                 return self.respond(200,{'pilot':pilot,'progress':wb.progress(),'write_token':self.server.token})

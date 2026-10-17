@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "workbench_tests": {
+    "passed": 16,
+    "failed": 0,
+    "command": "python3 -m unittest discover -s research/verification_workbench -q"
+  },
+  "browser": {
+    "actual_pilot_read_only": true,
+    "actual_first_pair_ai_draft_visible": true,
+    "synthetic_ai_draft_visible": true,
+    "mobile_no_horizontal_overflow": true,
+    "other_human_review_hidden": true,
+    "assisted_human_submission_saved": true,
+    "independence_lock_survives_reload": true,
+    "accepted_adjudications": 0,
+    "browser_exceptions": []
+  },
+  "real_store": {
+    "records": 40,
+    "chain_head": "de740d743a4f63bfd9f846ea57f9eef821fc54aa93bc21e3239a4f027e900de8",
+    "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+    "exposures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "role_counts": {
+    "ai": 40,
+    "human": 0
+  },
+  "human_adjudications": 0,
+  "native_identities_resolved": 0,
+  "accepted_overlay_count": 0,
+  "protected_files_unchanged": 191,
+  "packet_endpoint_hashes_verified": 80,
+  "code_sha256": {
+    "import_ai_reviews.py": "66fbcfc0a750235fa51d19df89a4148dcdbf2e99b77d538cc48b7f4dfa163c3c",
+    "server.py": "ed6a4847641893662a56a409633a56018df8e5c3cd6f6894ad899a3a7dfdef90",
+    "test_import_ai.py": "c485f6dd2aa39dd4f540fc6a2ebf89aba432f30e14467a5991548b18b93d703a",
+    "browser_smoke.mjs": "a347b4bb95eaf683d835a6b9a2b119763d59a210493feb4f996a3ebe0bd8eadf",
+    "test_core.py": "2e028cbc9cdbbd94aad273ece82651c10fd05aa3008a03dc72bfedbd71496123",
+    "core.py": "ece1d7a63f5ddbb81533b3a16e0da58175f3c107432a56ef3a4f46556efb0d81",
+    "test_ai_assisted.py": "60b11c09fa0c00a94a35632c15e9d8b98a8ddddd6a1da1abed89e9822bc4dd1e",
+    "browser_ai_smoke.mjs": "07e3caf771ad5291ad884da75d59c4f5ff572b72112960f7236a48d9c114089e",
+    "test_server.py": "e0bc5455cd6781388725bb04ef3ba8a372b46a421402869b1046a9c97eba6ea2",
+    "static/index.html": "fee6b01e3642f28df2f9fb2bc41df6fb8d0394b7640d73ab708b81d7baabc088",
+    "static/style.css": "76a3dda630f61b8cf5230ff23c1a11477f1e2010515eb51ee3c321bc0e128633",
+    "static/app.js": "bd551c6c3f7280a478ab5e09cba75c5fc7a512490037add4c93e378c05a8eed9"
+  }
+}

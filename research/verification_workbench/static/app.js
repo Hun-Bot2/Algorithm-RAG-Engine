@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const state = { pairRequest: 0, pairReviewer: null, items: [], progress: null, writeToken: "", selectedId: null, selectedIndex: -1, pair: null, revealedPairs: new Set(), reviewerIdentity: "", tab: "relationship" };
+  const state = { pairRequest: 0, pairReviewer: null, items: [], progress: null, writeToken: "", selectedId: null, selectedIndex: -1, pair: null, revealedPairs: new Set(), aiAssistedPairs: new Set(), reviewerIdentity: "", tab: "relationship" };
   const $ = (id) => document.getElementById(id);
   const api = async (url, options = {}) => {
     const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
@@ -67,7 +67,7 @@
     const p = state.progress;
     if (!p) { $("progress").textContent = `${state.items.length} pairs`; return; }
     if (p.total_pairs != null) {
-      $("progress").textContent = `${p.pending_human_work ?? p.total_pairs} pending human work · ${p.accepted_adjudications ?? 0} accepted adjudications`;
+      $("progress").textContent = `${p.ai_draft_pairs ?? 0} AI drafts · ${p.pending_human_work ?? p.total_pairs} pending human work · ${p.accepted_adjudications ?? 0} accepted adjudications`;
       return;
     }
     const done = p.completed ?? p.reviewed ?? p.count ?? 0;
@@ -108,8 +108,10 @@
   async function loadPair(pairId) {
     const reviewer = $("reviewer").value.trim();
     const request = ++state.pairRequest;
-    const isRevealed = state.revealedPairs.has(`${reviewer}\n${pairId}`);
-    const mode = isRevealed ? "adjudicate" : "review";
+    const key = `${reviewer}\n${pairId}`;
+    const isRevealed = state.revealedPairs.has(key);
+    const isAiAssisted = state.aiAssistedPairs.has(key);
+    const mode = isRevealed ? "adjudicate" : isAiAssisted ? "ai_assisted" : "review";
     const data = await api(`/api/pair?id=${encodeURIComponent(pairId)}&reviewer=${encodeURIComponent(reviewer)}&mode=${mode}`);
     if (request !== state.pairRequest || pairId !== state.selectedId || reviewer !== $("reviewer").value.trim()) return;
     state.pair = data; state.pairReviewer = reviewer;
@@ -155,22 +157,30 @@
     renderSide("target", data.target, data.identity_candidates?.target);
     const methods = $("methods");
     methods.replaceChildren();
-    const ranks = pair.methods || current.methods || current.method_ranks || {};
+    const ranks = data.ai_assisted ? {} : (pair.methods || current.methods || current.method_ranks || {});
     if (Array.isArray(ranks)) {
       ranks.forEach((method) => methods.append(make("span", "method-chip", typeof method === "string" ? method : `${method.name || method.method || "method"}${method.rank != null ? ` · rank ${method.rank}` : ""}`)));
     } else {
       Object.entries(ranks).forEach(([name, rank]) => methods.append(make("span", "method-chip", `${name} · rank ${rank}`)));
     }
-    if (!methods.childElementCount) methods.append(make("span", "muted", data.blind ? "Retrieval ranks hidden during independent review." : "No method output supplied."));
+    if (!methods.childElementCount) methods.append(make("span", "muted", data.ai_assisted ? "Retrieval ranks hidden during AI-assisted review." : data.blind ? "Retrieval ranks hidden during independent review." : "No method output supplied."));
     renderRecords(data.records);
     const revealKey = `${$("reviewer").value.trim()}\n${state.selectedId}`;
     const revealed = state.revealedPairs.has(revealKey);
+    const aiAssisted = state.aiAssistedPairs.has(revealKey);
+    $("view-ai-draft").disabled = revealed || aiAssisted || $("role").value !== "human" || !$("reviewer").value.trim();
+    $("view-ai-draft").textContent = aiAssisted ? "AI draft viewed" : "View AI draft";
     $("reveal-reviews").disabled = revealed || $("role").value !== "human" || !$("reviewer").value.trim();
     $("reveal-reviews").textContent = revealed ? "Reviews revealed" : "Reveal reviews";
     $("reveal-warning").textContent = revealed
       ? "Other reviews are revealed. You cannot submit a new independent review for this pair; use this mode only for adjudication."
-      : "Reveal reviews for adjudication; you cannot submit a new independent review for this pair afterward.";
-    document.querySelectorAll('input[name="independent"]').forEach((input) => { if (revealed) input.checked = false; input.disabled = revealed; });
+      : aiAssisted
+        ? "AI drafts are visible. Record your judgment as AI-assisted; you cannot claim an independent judgment for this pair."
+        : data.reviewer_exposed
+          ? "This reviewer has previously viewed exposed records for this pair. Independent judgment is locked; choose an exposed view to inspect them again."
+          : "Viewing AI drafts or revealing reviews locks independent judgment for this pair.";
+    const independentLocked = revealed || aiAssisted || data.reviewer_exposed;
+    document.querySelectorAll('input[name="independent"]').forEach((input) => { if (independentLocked) input.checked = false; input.disabled = independentLocked; });
     $("previous").disabled = state.selectedIndex <= 0;
     $("next").disabled = state.selectedIndex >= state.items.length - 1;
   }
@@ -183,8 +193,19 @@
       const role = record.role === "ai" ? "AI judgment" : record.role === "human" ? "Human judgment" : "Review record";
       card.append(make("div", "record-top", `${role} · ${record.kind || "record"}`), make("div", "record-reviewer", record.reviewer || "Reviewer unavailable"));
       const payload = record.decision || record;
-      const details = make("pre", "record-payload", JSON.stringify(payload, null, 2));
-      card.append(details);
+      if (record.kind === "relationship") {
+        const similarity = payload.similarity == null ? "unknown" : String(payload.similarity);
+        const difficulty = { query_easier: "Query easier", target_easier: "Target easier", similar: "Similar", unknown: "Unknown" }[payload.difficulty] || payload.difficulty;
+        card.append(make("p", "record-summary", `Similarity: ${similarity} · Difficulty: ${difficulty} · Transfer: ${payload.transfer} · Prerequisite: ${payload.prerequisite}`));
+        card.append(make("p", "record-rationale", payload.rationale || "Rationale unavailable."));
+        const evidence = make("details", "record-evidence");
+        evidence.append(make("summary", "", "Evidence and source references"));
+        const list = make("ul");
+        (payload.evidence || []).forEach(item => list.append(make("li", "", item)));
+        evidence.append(list); card.append(evidence);
+      }
+      const raw = make("details", "record-raw"); raw.append(make("summary", "", "Full review record"));
+      raw.append(make("pre", "record-payload", JSON.stringify(payload, null, 2))); card.append(raw);
       if (record.id || record.record_id) card.append(make("code", "record-id", record.id || record.record_id));
       box.append(card);
     });
@@ -329,6 +350,23 @@
     } catch (error) {
       $("reveal-reviews").textContent = "Reveal attempted";
       showToast(`Reveal outcome may be uncertain; independent review stays locked for this pair. ${error.message}`, true);
+    }
+  });
+  $("view-ai-draft").addEventListener("click", async () => {
+    const reviewer = $("reviewer").value.trim();
+    if (!reviewer || $("role").value !== "human") { showToast("Enter a reviewer name and choose Human reviewer before viewing AI drafts.", true); return; }
+    const key = `${reviewer}\n${state.selectedId}`;
+    if (state.aiAssistedPairs.has(key)) return;
+    state.aiAssistedPairs.add(key);
+    document.querySelectorAll('input[name="independent"]').forEach((input) => { input.checked = false; input.disabled = true; });
+    $("view-ai-draft").disabled = true;
+    $("view-ai-draft").textContent = "Loading AI draft…";
+    try {
+      await loadPair(state.selectedId);
+      showToast("AI draft shown. Independent judgment is locked for this pair.");
+    } catch (error) {
+      $("view-ai-draft").textContent = "AI draft view attempted";
+      showToast(`AI draft view outcome may be uncertain; independent judgment stays locked. ${error.message}`, true);
     }
   });
   $("reviewer").addEventListener("input", () => {

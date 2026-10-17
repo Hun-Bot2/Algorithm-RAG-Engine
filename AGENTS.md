@@ -596,3 +596,9 @@ Keep these distinctions clear in summaries and docs:
   research/verification_workbench -v`; two tests require loopback socket access.
   Browser test writes MUST use the disposable synthetic server, not the real pilot.
   Real statement screenshots and exports stay private. Production import is absent.
+- User-requested AI-first reviews remain role=ai/independent=false; their private
+  40-pair report is under `private-learning/verification-workbench/ai-review-v1/`.
+  View AI draft exposes only AI+own records, keeps ranks hidden, and persists an
+  exposure lock; assisted human judgments are allowed but cannot satisfy the
+  independent-human verification gates. AI-only import validates exact pilot
+  coverage before writing and is resumable/idempotent. Never call these drafts gold.

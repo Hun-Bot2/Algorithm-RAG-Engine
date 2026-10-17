@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "role": "ai",
+  "reviewer": "codex-ai-pilot-v1",
+  "pilot_pairs": 40,
+  "similarity_counts": {
+    "0": 18,
+    "1": 13,
+    "2": 3,
+    "unknown": 6
+  },
+  "difficulty_counts": {
+    "query_easier": 10,
+    "target_easier": 11,
+    "unknown": 18,
+    "similar": 1
+  },
+  "all_dimensions_unknown_pairs": [
+    6,
+    13,
+    16,
+    17,
+    19,
+    22
+  ],
+  "human_labels_created": 0,
+  "native_identities_resolved": 0,
+  "accepted_overlay_count": 0,
+  "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+  "final_reviews_sha256": "1d58b0dd6eacd91f4f23e27409908292c9f04d26393dae4362e697a376db61f5",
+  "report_sha256": "1cfa85b894ce5eedee97f966ce600e70913ea3081e36664531e7ee1d0a11c3ed",
+  "source_packets_sha256": {
+    "packet-1.json": "d8dad0747d80da95e7180337ec2e87816e456ca2fec49e9efc63d98d3abbee2d",
+    "packet-2.json": "fccc568ec7d18814e7e947d61af76fe724d5a093e89333fca38158c10b8d39cb",
+    "packet-3.json": "e3d257da7503e8f81b7c634c3cef9b0ec123362b5bfaa94e51bf7afd297fabba"
+  },
+  "limitations": [
+    "AI drafts are not independent human evidence.",
+    "Four reversed difficulty enums corrected during root review before import (positions 1,2,3,23).",
+    "Partial algorithms and missing image content are explicitly flagged.",
+    "First batch initial snapshot reconstructed after correction; see private receipt."
+  ]
+}

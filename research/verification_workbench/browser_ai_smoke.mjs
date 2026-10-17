@@ -1,0 +1,44 @@
+// AI-assisted browser regression: real pilot read-only, all human writes synthetic.
+import fs from 'node:fs/promises';
+const targets=await (await fetch('http://127.0.0.1:9223/json')).json();
+const ws=new WebSocket(targets.find(t=>t.type==='page').webSocketDebuggerUrl);
+await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject});
+let seq=0;const pending=new Map();const errors=[];
+ws.onmessage=event=>{const m=JSON.parse(event.data);if(m.id){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(m.error):p.resolve(m.result)}else if(m.method==='Runtime.exceptionThrown')errors.push(m.params.exceptionDetails.text)};
+const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}))});
+const evaluate=async expression=>{const r=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(r.exceptionDetails.text);return r.result.value};
+const wait=async expression=>{for(let i=0;i<100;i++){if(await evaluate(expression))return;await new Promise(r=>setTimeout(r,100))}throw Error('DOM condition timed out: '+expression)};
+await call('Runtime.enable');await call('Page.enable');
+
+const out='private-learning/verification-workbench/ai-review-v1/browser-smoke';await fs.mkdir(out,{recursive:true});
+await call('Emulation.setDeviceMetricsOverride',{width:1360,height:1100,deviceScaleFactor:1,mobile:false});
+await call('Page.navigate',{url:'http://127.0.0.1:8765/'});
+await wait("document.querySelectorAll('.queue-item').length===40 && document.getElementById('query-statement').textContent.length>100");
+const actual=await evaluate(`(async()=>{const p=await(await fetch('/api/pilot')).json();const pair=await(await fetch('/api/pair?id='+p.pilot.items[0].pair_id+'&reviewer=codex-ai-pilot-v1')).json();return {count:p.pilot.items.length,ai:pair.records.filter(r=>r.role==='ai').length,humans:pair.records.filter(r=>r.role==='human').length}})()`);
+if(actual.count!==40||actual.ai!==1||actual.humans!==0)throw Error('Real AI draft not available');
+await call('Page.navigate',{url:'http://127.0.0.1:8766/'});
+await wait("document.querySelectorAll('.queue-item').length===2");
+await evaluate("document.getElementById('role').value='human';document.getElementById('role').dispatchEvent(new Event('change'));document.getElementById('reviewer').value='fixture-human-judge';document.getElementById('reviewer').dispatchEvent(new Event('change'))");
+await wait("!document.getElementById('view-ai-draft').disabled");
+await evaluate("document.getElementById('view-ai-draft').click()");
+await wait("document.getElementById('view-ai-draft').textContent==='AI draft viewed' && document.querySelectorAll('#records .record-card').length===1");
+const scoped=await evaluate("document.getElementById('records').textContent.includes('fixture-ai') && !document.getElementById('records').textContent.includes('fixture-other-human') && document.querySelector('#relationship-form [name=independent]').disabled && document.getElementById('methods').textContent.includes('hidden')");
+if(!scoped)throw Error('AI-assisted visibility/independence gate failed');
+await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+if(await evaluate('document.documentElement.scrollWidth>window.innerWidth'))throw Error('AI-assisted mobile overflow');
+await evaluate("document.getElementById('records').scrollIntoView()");
+const mobile=await call('Page.captureScreenshot',{format:'png'});await fs.writeFile(`${out}/assisted-mobile.png`,Buffer.from(mobile.data,'base64'));
+await call('Emulation.setDeviceMetricsOverride',{width:1360,height:1100,deviceScaleFactor:1,mobile:false});
+
+await evaluate(`(()=>{const f=document.getElementById('relationship-form');for(const[k,v]of Object.entries({similarity:'1',prerequisite:'unknown',transfer:'unknown',difficulty:'unknown',rationale:'Synthetic human judgment of AI draft only.',evidence:'Synthetic fixture comparison.'}))f.elements[k].value=v;f.requestSubmit()})()`);
+await wait("document.getElementById('save-status').textContent==='Record saved.'");
+await call('Page.reload');
+await wait("document.querySelectorAll('.queue-item').length===2");
+await evaluate("document.getElementById('role').value='human';document.getElementById('role').dispatchEvent(new Event('change'));document.getElementById('reviewer').value='fixture-human-judge';document.getElementById('reviewer').dispatchEvent(new Event('change'))");
+await wait("document.querySelector('#relationship-form [name=independent]').disabled");
+const progress=await evaluate("(async()=>{const p=await(await fetch('/api/pilot')).json();return p.progress.accepted_adjudications})()");
+if(progress!==0)throw Error('Assisted review promoted to verified');
+const image=await call('Page.captureScreenshot',{format:'png'});await fs.writeFile(`${out}/assisted-view.png`,Buffer.from(image.data,'base64'));
+if(errors.length)throw Error(errors.join(', '));
+await fs.writeFile(`${out}/receipt.json`,JSON.stringify({actual_pilot_read_only:true,actual_first_pair_ai_draft_visible:true,synthetic_ai_draft_visible:true,mobile_no_horizontal_overflow:true,other_human_review_hidden:true,assisted_human_submission_saved:true,independence_lock_survives_reload:true,accepted_adjudications:0,browser_exceptions:errors},null,2));
+console.log('AI-assisted browser smoke passed; real pilot read-only.');ws.close();
