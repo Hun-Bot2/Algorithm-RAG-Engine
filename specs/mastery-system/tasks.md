@@ -127,7 +127,9 @@ Commands:
   `.venv/bin/python -m unittest research.mastery_catalog.test_build research.mastery_catalog.test_refresh
   research.mastery_catalog.test_archive research.mastery_catalog.test_relatedness` (17 tests),
   `python3 -m unittest discover -s tests` (78), research map-v2 verifier `all_checks_passed`.
-- MS-603 ran as a bounded pilot: 120 ABC C-F tasks, 77 with an ai_reviewed concept.
+- MS-603 ran as a bounded pilot: 120 ABC C-F tasks, 77 with an ai_reviewed concept. MS-603b (atcoder-concepts.md) added blind decoys,
+  a 450-problem random calibration sample (136 ai_reviewed items), catalog-v4 and the semantic fallback; the full-catalog run was
+  declined on cost (about 5M tokens for ABC/ARC/AGC). See atcoder-concepts-report.md.
 - MS-901 is tooling only: no shown related candidates or learner verdicts exist yet.
 - MS-903 deferred: dashboard filters need a hosted catalog packaging decision (D1 cannot ATTACH);
   the CLI plus SQL views satisfy R13 locally.

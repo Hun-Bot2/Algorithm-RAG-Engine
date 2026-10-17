@@ -1,0 +1,45 @@
+{
+ "stride": 10,
+ "pools": {
+  "before": {
+   "atcoder_eligible": 9613,
+   "atcoder_with_trusted_concept": 77
+  },
+  "after": {
+   "atcoder_eligible": 9613,
+   "atcoder_with_trusted_concept": 211
+  }
+ },
+ "related_top5_atcoder": {
+  "before_catalog_concept_only": {
+   "sources": 1307,
+   "sources_with_atcoder_candidate": 1221,
+   "share_sources_with_candidate": 0.934,
+   "atcoder_candidates": 4573,
+   "labeled_concept_candidates": 4573,
+   "semantic_only_candidates": 0,
+   "share_semantic_only": 0,
+   "distinct_atcoder_problems_reached": 76
+  },
+  "after_catalog_concept_only": {
+   "sources": 1307,
+   "sources_with_atcoder_candidate": 1298,
+   "share_sources_with_candidate": 0.993,
+   "atcoder_candidates": 5870,
+   "labeled_concept_candidates": 5870,
+   "semantic_only_candidates": 0,
+   "share_semantic_only": 0,
+   "distinct_atcoder_problems_reached": 170
+  },
+  "after_catalog_with_semantic_fallback": {
+   "sources": 1307,
+   "sources_with_atcoder_candidate": 1307,
+   "share_sources_with_candidate": 1,
+   "atcoder_candidates": 6531,
+   "labeled_concept_candidates": 5870,
+   "semantic_only_candidates": 661,
+   "share_semantic_only": 0.101,
+   "distinct_atcoder_problems_reached": 568
+  }
+ }
+}

@@ -686,3 +686,14 @@ Keep these distinctions clear in summaries and docs:
   Two Claude judges share training memory, so their agreement is not independent verification.
 - Catalog versions are immutable: catalog-v2 is superseded by catalog-v3 (ADT URL fix). Do not edit or
   delete private-learning/mastery/catalog-v*; make a new version.
+
+## AtCoder concept classification (2026-10-17)
+
+- Spec specs/mastery-system/atcoder-concepts.md, result atcoder-concepts-report.md. Only a 450-problem random sample was judged (cost: about
+  3,800 tokens per labeled problem, 5M projected for ABC/ARC/AGC); other problems stay unclassified. Judge batches mix blind decoys (invented
+  tasks, swapped titles); judge files and truth.json live under private-learning/mastery/judgments/ and stay out of Git.
+- ai_reviewed needs both judges plus at least one `recognized`; title-inference-only agreement is `proposed` (untrusted). Only the `confirm`
+  command writes approved/rejected. catalog-v4 is the offline replay with the new rows; never edit v1-v3.
+- related-v1 has a semantic-only fallback: unclassified candidates from a title channel, reliable titles on both sides, label
+  "Semantic title neighbor...", -1.5 penalty, never credited to a concept. Before estimating cost for a subagent run, state the agent count and
+  total tokens up front: the user stopped a 10-agent wave that had been described only as "5M tokens".

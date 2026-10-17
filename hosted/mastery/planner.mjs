@@ -210,7 +210,7 @@ function exploreSlot(kind,{date,catalog,abilities,stats,poolFor,mastery,attempts
     const c=result.candidates[0];
     if (!c) return null;
     return {kind:'explore',sub_kind:kind,problem_key:c.problem_key,platform:c.platform,title:c.title,url:c.url,concepts:c.shared_concepts,prediction:c.prediction,
-      outside_target_zone:c.prediction.p_conservative<ZONE.low || c.prediction.p_conservative>ZONE.high,components:{...c.components,source_key:result.source_key,channel},
+      outside_target_zone:c.prediction.p_conservative<ZONE.low || c.prediction.p_conservative>ZONE.high,components:{...c.components,source_key:result.source_key,channel},semantic_only:c.semantic_only,
       evidence_label:c.evidence_label,reason:`Related practice from ${result.source_key} via ${channel} (${c.evidence_label}).`,estimated_minutes:MINUTES.practice,related_policy:RELATED_VERSION};
   }
   if (kind==='new_problem') {

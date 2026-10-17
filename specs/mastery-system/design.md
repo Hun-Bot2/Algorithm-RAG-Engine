@@ -471,6 +471,7 @@ are Node-only), migrations `007_git_evidence.sql` and `008_mastery_ledger.sql`, 
 | Live contests | proposals | annotated calendar from the existing provider cache; no new network calls | the CLI stays offline; fetching needs the gated provider sync |
 | Weekend reviews | not specified | reviews are deferred on virtual/upsolve days and listed in plan notes | weekend budget is reserved for contests |
 | AtCoder concepts | per-problem AI batch | bounded pilot of 120 ABC C-F tasks; both judges are Claude models whose recognition comes from overlapping training memory, so their agreement (73/73 on jointly recognized items) is not independent verification | cost and weak title-only evidence |
+| AtCoder concepts (MS-603b) | all eligible problems | 450-problem random calibration sample with blind decoys, merged with the pilot into catalog-v4 (211 AtCoder problems with a trusted concept); unlabeled problems get a labelled semantic-only fallback in related-v1 | full run projected at 5M-11M tokens for 2,650-3,100 labels; user declined |
 
 Explore rotation is reproducible scheduling. It does not establish that any sub-kind or channel is
 better; channel comparisons in reports are descriptive.

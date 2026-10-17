@@ -1,0 +1,119 @@
+{
+ "catalog": {
+  "counts": {
+   "ai_judgments": 0,
+   "archive_records": 0,
+   "by_platform": {
+    "atcoder": 9793,
+    "codeforces": 11457,
+    "leetcode": 3053
+   },
+   "concept_map_rows": 115,
+   "contests": 8733,
+   "difficulty_kind": {
+    "atc_irt": 4866,
+    "cf_rating": 11152,
+    "lc_level": 3053,
+    "none": 5232
+   },
+   "eligible": 23459,
+   "neighbor_channels": {
+    "title_v2": 729090,
+    "title_v2_cross": 729090
+   },
+   "neighbors": 1458180,
+   "problem_concepts": {
+    "abstained": 880,
+    "ai_reviewed": 33903,
+    "proposed": 4
+   },
+   "problems": 24303,
+   "problems_with_concepts": 13629,
+   "status": {
+    "active": 24303,
+    "removed_upstream": 0
+   }
+  },
+  "output_sha256": "27a4ca622de50bfa6b86eb7d789abcc856bf40dd8fd511001e91edba20cffde4"
+ },
+ "contests": 8733,
+ "delta": {
+  "added": 0,
+  "changed": 0,
+  "removed": 0,
+  "unchanged": 21250
+ },
+ "encoded_titles": 0,
+ "manual_additions": [],
+ "model_revision": "sentence-transformers/all-MiniLM-L6-v2@1110a243fdf4706b3f48f1d95db1a4f5529b4d41+c2-translation",
+ "neighbors": {
+  "any": {
+   "idx_sha256": "e0e605960edfeab384c20463287dfc6bf278e22d7aa377e1b1fb769a7076b2fa",
+   "score_sha256": "f3787383f61f4cee3c9d23ee8cd8b0b9adcfb9d40ce76053429ab7e47fe51c2b"
+  },
+  "cross": {
+   "idx_sha256": "abedc42499ca80170fe6cdec2062bff572e0fc3e4066e63ee7c6b5705c3cc906",
+   "score_sha256": "05c86548c25be504e4e90158f61586ebc38a8c1cc3af3050daad8a80916e9271"
+  }
+ },
+ "previous_version": "catalog-v3",
+ "raw_manifest": {
+  "atcoder_contest_problem": {
+   "bytes": 3216694,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:34+00:00",
+   "sha256": "12633d5f1ff26050f7ee67498b0f8aeadfd18230d7caa17cff4dfa920ec44b83",
+   "status": "ok",
+   "url": "https://kenkoooo.com/atcoder/resources/contest-problem.json"
+  },
+  "atcoder_contests": {
+   "bytes": 1044730,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:31+00:00",
+   "sha256": "316c9bf73caf8be1f0594b32094d34908a1b41244547729cb75e05b8b435e0e9",
+   "status": "ok",
+   "url": "https://kenkoooo.com/atcoder/resources/contests.json"
+  },
+  "atcoder_models": {
+   "bytes": 1162557,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:36+00:00",
+   "sha256": "2bdb4d6cdde49d76a40dceb8e02be5ad59f86717bf83b57374de625ffb890a58",
+   "status": "ok",
+   "url": "https://kenkoooo.com/atcoder/resources/problem-models.json"
+  },
+  "atcoder_problems": {
+   "bytes": 1232159,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:28+00:00",
+   "sha256": "b2bc159cdf6ff39e154fc19f09da97d98f080b56494595bbc3df533fa7a1fafa",
+   "status": "ok",
+   "url": "https://kenkoooo.com/atcoder/resources/problems.json"
+  },
+  "codeforces_contests": {
+   "bytes": 411155,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:26+00:00",
+   "sha256": "e789a0659402cce68bd6dbc97dd4b86f1673bb6279c73133a9158b0b8d3e85e3",
+   "status": "ok",
+   "url": "https://codeforces.com/api/contest.list?gym=false"
+  },
+  "codeforces_problems": {
+   "bytes": 2275356,
+   "http_status": 200,
+   "retrieved_at": "2026-10-17T11:10:23+00:00",
+   "sha256": "75ae600dd9ba7dc2e9661b069535f7973ec1e696edeaab4d55659c7512f32591",
+   "status": "ok",
+   "url": "https://codeforces.com/api/problemset.problems?lang=en"
+  }
+ },
+ "rejects": {
+  "atcoder": {},
+  "atcoder_canonical_url_corrections": 1717,
+  "codeforces": {}
+ },
+ "schema": "mastery-refresh-receipt.v1",
+ "statement_fields_read": false,
+ "translated_titles": 0,
+ "version": "catalog-v4"
+}

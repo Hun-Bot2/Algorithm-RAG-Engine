@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {atcoderInternalRating,atcoderSolveProbability,calibrationReport,codeforcesSolveProbability,fitAbility,fitLeetCode,fitAll,predict,priorFor} from '../mastery/calibration.mjs';
 import {EXPLORE_KINDS,exploreIndex,planDay,relatedChannelFor,weekInfo} from '../mastery/planner.mjs';
-import {relatedCandidates} from '../mastery/related.mjs';
+import {relatedCandidates,SEMANTIC_ONLY_LABEL,trustedConcepts} from '../mastery/related.mjs';
 import {catalogFromData} from '../mastery/catalog.mjs';
 import {normalizePreferences} from '../core/preferences.mjs';
 
@@ -145,4 +145,41 @@ test('related practice requires concept overlap and labels evidence; embedding r
   const isolated=catalogFromData({problems:[lc('src',2,['tries']),cf('codeforces:900A',900,['greedy'])],neighbors:{title_v2:{'leetcode:src':['codeforces:900A']}}});
   assert.equal(relatedCandidates({sourceKey:'leetcode:src',catalog:isolated,abilities:fitAll([],isolated,[]),channel:'title_v2'}).candidates.length,0,'zero-overlap neighbor rejected (R5.2)');
   assert.match(result.note,/not claimed to be algorithmically equivalent/);
+});
+
+const unlabeled = (task,d,extra={}) => ({...atc(task,d),concepts:[],reliability:'reliable',...extra});
+
+test('semantic fallback: unclassified candidates appear only from a title channel, labelled, and never as concept evidence', () => {
+  const src=cf('codeforces:900A',900,['greedy']);
+  const near=unlabeled('abc300_c',1000), far=unlabeled('abc300_d',1000), proposed=unlabeled('abc300_e',1000,{concepts:[{id:'sorting',status:'proposed'}]});
+  const mismatch={...atc('abc300_f',1000),concepts:[{id:'trees',status:'ai_reviewed'}]};
+  const c=catalogFromData({problems:[src,near,far,proposed,mismatch],neighbors:{title_v2_cross:{'codeforces:900A':['atcoder:abc300_c','atcoder:abc300_e','atcoder:abc300_f']}}});
+  const abilities=fitAll([],c,[]);
+  const result=relatedCandidates({sourceKey:'codeforces:900A',catalog:c,abilities,channel:'title_v2_cross',limit:10});
+  const keys=result.candidates.map(x=>x.problem_key);
+  assert.deepEqual(keys.sort(),['atcoder:abc300_c','atcoder:abc300_e'],'unlabeled or proposed-only neighbors qualify; a labeled non-matching one and a non-neighbor do not');
+  for (const cand of result.candidates) {
+    assert.equal(cand.semantic_only,true);
+    assert.equal(cand.evidence_label,SEMANTIC_ONLY_LABEL);
+    assert.deepEqual(cand.shared_concepts,[]);
+    assert.equal(cand.components.semantic_only,-1.5);
+    assert.equal(cand.components.concept_jaccard,0);
+    assert.ok(cand.components.channel_rank>0);
+  }
+  assert.equal(trustedConcepts(c.problems.get('atcoder:abc300_e')).size,0,'proposed is never trusted');
+  const conceptOnly=relatedCandidates({sourceKey:'codeforces:900A',catalog:c,abilities,channel:'concept',limit:10});
+  assert.equal(conceptOnly.candidates.length,0,'the concept channel never yields unclassified problems');
+});
+
+test('semantic fallback requires reliable titles on both sides and ranks below a concept match', () => {
+  const src=cf('codeforces:900A',900,['greedy']);
+  const degraded=unlabeled('abc301_c',1000,{reliability:'degraded'});
+  const good=unlabeled('abc301_d',1000);
+  const matched={...atc('abc301_e',1000)};
+  const c=catalogFromData({problems:[src,degraded,good,matched],neighbors:{title_v2_cross:{'codeforces:900A':['atcoder:abc301_c','atcoder:abc301_d','atcoder:abc301_e']}}});
+  const result=relatedCandidates({sourceKey:'codeforces:900A',catalog:c,abilities:fitAll([],c,[]),channel:'title_v2_cross',limit:10});
+  assert.deepEqual(result.candidates.map(x=>x.problem_key),['atcoder:abc301_e','atcoder:abc301_d']);
+  assert.equal(result.candidates[0].semantic_only,false);
+  const degradedSource=catalogFromData({problems:[{...src,reliability:'degraded'},good],neighbors:{title_v2_cross:{'codeforces:900A':['atcoder:abc301_d']}}});
+  assert.equal(relatedCandidates({sourceKey:'codeforces:900A',catalog:degradedSource,abilities:fitAll([],degradedSource,[]),channel:'title_v2_cross'}).candidates.length,0);
 });

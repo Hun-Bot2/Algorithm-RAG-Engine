@@ -1,0 +1,177 @@
+{
+ "schema": "atcoder-concepts-eval.v1",
+ "batches": [
+  0,
+  1,
+  2
+ ],
+ "sample_items": 450,
+ "eligible_population": 9613,
+ "item_status": {
+  "labeled": 136,
+  "proposed_only": 3,
+  "abstained": 56,
+  "unknown": 255
+ },
+ "coverage_by_family": {
+  "abc": {
+   "labeled": 90,
+   "proposed_only": 0,
+   "abstained": 13,
+   "unknown": 19
+  },
+  "agc": {
+   "labeled": 9,
+   "proposed_only": 0,
+   "abstained": 5,
+   "unknown": 6
+  },
+  "arc": {
+   "labeled": 12,
+   "proposed_only": 1,
+   "abstained": 14,
+   "unknown": 17
+  },
+  "awc": {
+   "labeled": 0,
+   "proposed_only": 0,
+   "abstained": 0,
+   "unknown": 42
+  },
+  "joi": {
+   "labeled": 3,
+   "proposed_only": 0,
+   "abstained": 4,
+   "unknown": 17
+  },
+  "other": {
+   "labeled": 22,
+   "proposed_only": 2,
+   "abstained": 16,
+   "unknown": 144
+  },
+  "past": {
+   "labeled": 0,
+   "proposed_only": 0,
+   "abstained": 4,
+   "unknown": 10
+  }
+ },
+ "coverage_by_difficulty": {
+  "1200+": {
+   "labeled": 44,
+   "proposed_only": 1,
+   "abstained": 22,
+   "unknown": 35
+  },
+  "400-1199": {
+   "labeled": 30,
+   "proposed_only": 0,
+   "abstained": 4,
+   "unknown": 6
+  },
+  "<400": {
+   "labeled": 47,
+   "proposed_only": 0,
+   "abstained": 13,
+   "unknown": 8
+  },
+  "no_difficulty": {
+   "labeled": 15,
+   "proposed_only": 2,
+   "abstained": 17,
+   "unknown": 206
+  }
+ },
+ "coverage_by_title_reliability": {
+  "degraded": {
+   "labeled": 6,
+   "proposed_only": 0,
+   "abstained": 19,
+   "unknown": 51
+  },
+  "reliable": {
+   "labeled": 130,
+   "proposed_only": 3,
+   "abstained": 37,
+   "unknown": 203
+  },
+  "unreliable": {
+   "labeled": 0,
+   "proposed_only": 0,
+   "abstained": 0,
+   "unknown": 1
+  }
+ },
+ "judges": {
+  "draft_known": 150,
+  "review_known": 194,
+  "known_kappa": 0.786,
+  "both_known": 149,
+  "mean_concept_jaccard_when_both_known": 0.818,
+  "basis_draft": {
+   "recognized": 140,
+   "title_inference": 10,
+   "unknown": 300
+  },
+  "basis_review": {
+   "recognized": 187,
+   "title_inference": 7,
+   "unknown": 256
+  }
+ },
+ "controls": {
+  "fabricated": {
+   "items": 12,
+   "draft_known": 0,
+   "review_known": 0,
+   "either_known": 0,
+   "both_known": 0,
+   "ai_reviewed_label": 0,
+   "either_known_wilson95": [
+    0.0,
+    0.243
+   ]
+  },
+  "swapped": {
+   "items": 12,
+   "draft_known": 2,
+   "review_known": 1,
+   "either_known": 3,
+   "both_known": 0,
+   "ai_reviewed_label": 0,
+   "either_known_wilson95": [
+    0.089,
+    0.532
+   ],
+   "recognized_despite_wrong_title": 3
+  }
+ },
+ "retest_vs_pilot": {
+  "items_in_both": 2,
+  "both_labeled": 2,
+  "concept_overlap": 2
+ },
+ "cost": {
+  "items_shown_incl_controls": 474,
+  "draft_tokens": 254798,
+  "review_tokens": 263051,
+  "tokens_per_real_item_both_judges": 1151,
+  "tokens_per_labeled_item": 3808,
+  "projected_tokens_abc_arc_agc_remaining": 4957541,
+  "projected_tokens_full_catalog": 11062405
+ },
+ "projection": {
+  "labeled_if_abc_arc_agc": 2653,
+  "labeled_if_full_catalog": 3114,
+  "population_by_family": {
+   "other": 3518,
+   "abc": 2899,
+   "agc": 448,
+   "arc": 1147,
+   "awc": 920,
+   "joi": 321,
+   "past": 360
+  }
+ }
+}

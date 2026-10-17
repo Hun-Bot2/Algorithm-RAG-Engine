@@ -1,0 +1,2451 @@
+{
+ "schema": "mastery-problem-concepts.v2",
+ "not_gold": true,
+ "via": "atcoder-full-v1",
+ "status_rule": "ai_reviewed: both judges include the concept, neither unknown, at least one recognized; proposed: agreement on title inference only; abstained: one judge only or disagreement",
+ "models": {
+  "draft": "claude-sonnet-subagent",
+  "review": "claude-opus-subagent"
+ },
+ "run_date": "2026-10-17",
+ "prompt_sha256": "bf08d5f3da60777632012cf4f579c92cc185f1c2e932d90d2531abbacd24db4d",
+ "input_sha256": "d5918c214f02d413a05a9697a392851969733c69adb6818ef0ba7ff1a23928c3",
+ "stats": {
+  "items": 450,
+  "item_status": {
+   "labeled": 136,
+   "proposed_only": 3,
+   "abstained": 56,
+   "unknown": 255
+  },
+  "pair_stats": {
+   "both_known": 149,
+   "both_unknown": 255,
+   "one_unknown": 46,
+   "agree_any": 139,
+   "disagree_known": 10
+  },
+  "rows_by_status": {
+   "ai_reviewed": 186,
+   "proposed": 4,
+   "abstained": 137
+  }
+ },
+ "item_status": {
+  "atcoder:aalc001_l": "unknown",
+  "atcoder:aalc001_o": "unknown",
+  "atcoder:aalc001_s": "unknown",
+  "atcoder:abc001_1": "labeled",
+  "atcoder:abc021_a": "abstained",
+  "atcoder:abc025_d": "labeled",
+  "atcoder:abc028_c": "labeled",
+  "atcoder:abc050_a": "labeled",
+  "atcoder:abc054_c": "labeled",
+  "atcoder:abc057_c": "labeled",
+  "atcoder:abc064_a": "labeled",
+  "atcoder:abc064_d": "labeled",
+  "atcoder:abc068_b": "abstained",
+  "atcoder:abc070_d": "labeled",
+  "atcoder:abc075_a": "labeled",
+  "atcoder:abc099_c": "labeled",
+  "atcoder:abc100_b": "labeled",
+  "atcoder:abc106_d": "labeled",
+  "atcoder:abc120_c": "labeled",
+  "atcoder:abc121_d": "labeled",
+  "atcoder:abc128_d": "labeled",
+  "atcoder:abc129_f": "labeled",
+  "atcoder:abc131_d": "labeled",
+  "atcoder:abc140_d": "labeled",
+  "atcoder:abc142_b": "labeled",
+  "atcoder:abc153_d": "labeled",
+  "atcoder:abc156_b": "labeled",
+  "atcoder:abc176_d": "labeled",
+  "atcoder:abc176_f": "labeled",
+  "atcoder:abc179_c": "labeled",
+  "atcoder:abc184_d": "labeled",
+  "atcoder:abc185_d": "labeled",
+  "atcoder:abc187_e": "labeled",
+  "atcoder:abc189_f": "labeled",
+  "atcoder:abc190_d": "labeled",
+  "atcoder:abc192_a": "labeled",
+  "atcoder:abc200_a": "labeled",
+  "atcoder:abc200_c": "labeled",
+  "atcoder:abc203_b": "labeled",
+  "atcoder:abc212_g": "labeled",
+  "atcoder:abc213_d": "labeled",
+  "atcoder:abc215_a": "abstained",
+  "atcoder:abc217_h": "labeled",
+  "atcoder:abc219_h": "labeled",
+  "atcoder:abc224_c": "labeled",
+  "atcoder:abc225_b": "labeled",
+  "atcoder:abc230_e": "labeled",
+  "atcoder:abc233_c": "labeled",
+  "atcoder:abc233_h": "abstained",
+  "atcoder:abc235_c": "labeled",
+  "atcoder:abc250_c": "labeled",
+  "atcoder:abc254_f": "labeled",
+  "atcoder:abc256_c": "labeled",
+  "atcoder:abc256_d": "labeled",
+  "atcoder:abc258_f": "abstained",
+  "atcoder:abc261_g": "abstained",
+  "atcoder:abc264_d": "labeled",
+  "atcoder:abc266_c": "labeled",
+  "atcoder:abc270_f": "labeled",
+  "atcoder:abc271_a": "labeled",
+  "atcoder:abc272_c": "labeled",
+  "atcoder:abc273_b": "labeled",
+  "atcoder:abc274_g": "labeled",
+  "atcoder:abc274_h": "abstained",
+  "atcoder:abc276_c": "labeled",
+  "atcoder:abc279_c": "labeled",
+  "atcoder:abc282_g": "labeled",
+  "atcoder:abc285_g": "labeled",
+  "atcoder:abc295_h": "unknown",
+  "atcoder:abc301_a": "labeled",
+  "atcoder:abc301_e": "labeled",
+  "atcoder:abc306_f": "labeled",
+  "atcoder:abc310_h": "unknown",
+  "atcoder:abc317_a": "labeled",
+  "atcoder:abc319_g": "labeled",
+  "atcoder:abc321_a": "abstained",
+  "atcoder:abc323_a": "labeled",
+  "atcoder:abc323_f": "abstained",
+  "atcoder:abc324_a": "labeled",
+  "atcoder:abc324_d": "labeled",
+  "atcoder:abc328_g": "labeled",
+  "atcoder:abc334_a": "labeled",
+  "atcoder:abc340_c": "labeled",
+  "atcoder:abc342_e": "labeled",
+  "atcoder:abc343_e": "labeled",
+  "atcoder:abc344_f": "labeled",
+  "atcoder:abc345_f": "abstained",
+  "atcoder:abc348_e": "labeled",
+  "atcoder:abc353_e": "labeled",
+  "atcoder:abc354_g": "labeled",
+  "atcoder:abc360_d": "labeled",
+  "atcoder:abc362_b": "labeled",
+  "atcoder:abc365_b": "labeled",
+  "atcoder:abc370_a": "labeled",
+  "atcoder:abc372_e": "labeled",
+  "atcoder:abc375_a": "abstained",
+  "atcoder:abc377_a": "abstained",
+  "atcoder:abc385_a": "labeled",
+  "atcoder:abc385_b": "labeled",
+  "atcoder:abc393_c": "labeled",
+  "atcoder:abc394_a": "labeled",
+  "atcoder:abc404_b": "labeled",
+  "atcoder:abc405_g": "unknown",
+  "atcoder:abc411_g": "labeled",
+  "atcoder:abc413_b": "labeled",
+  "atcoder:abc416_b": "labeled",
+  "atcoder:abc418_f": "unknown",
+  "atcoder:abc418_g": "unknown",
+  "atcoder:abc419_d": "labeled",
+  "atcoder:abc420_c": "labeled",
+  "atcoder:abc421_a": "abstained",
+  "atcoder:abc421_c": "unknown",
+  "atcoder:abc426_a": "unknown",
+  "atcoder:abc437_d": "unknown",
+  "atcoder:abc441_c": "unknown",
+  "atcoder:abc442_g": "unknown",
+  "atcoder:abc453_c": "unknown",
+  "atcoder:abc455_b": "unknown",
+  "atcoder:abc457_f": "unknown",
+  "atcoder:abc458_e": "unknown",
+  "atcoder:abc463_b": "unknown",
+  "atcoder:abc464_f": "unknown",
+  "atcoder:abc468_c": "unknown",
+  "atcoder:abc470_d": "unknown",
+  "atcoder:abc477_b": "unknown",
+  "atcoder:acl1_d": "abstained",
+  "atcoder:agc002_b": "labeled",
+  "atcoder:agc009_d": "labeled",
+  "atcoder:agc011_e": "abstained",
+  "atcoder:agc015_d": "labeled",
+  "atcoder:agc019_e": "abstained",
+  "atcoder:agc026_c": "labeled",
+  "atcoder:agc030_e": "abstained",
+  "atcoder:agc038_c": "labeled",
+  "atcoder:agc039_e": "labeled",
+  "atcoder:agc040_c": "labeled",
+  "atcoder:agc044_a": "labeled",
+  "atcoder:agc045_c": "unknown",
+  "atcoder:agc047_b": "labeled",
+  "atcoder:agc049_c": "unknown",
+  "atcoder:agc053_a": "abstained",
+  "atcoder:agc056_d": "unknown",
+  "atcoder:agc064_b": "abstained",
+  "atcoder:agc069_e": "unknown",
+  "atcoder:agc072_a": "unknown",
+  "atcoder:agc074_d": "unknown",
+  "atcoder:aising2020_c": "labeled",
+  "atcoder:apc001_b": "labeled",
+  "atcoder:apio_code": "unknown",
+  "atcoder:arc008_2": "abstained",
+  "atcoder:arc009_1": "abstained",
+  "atcoder:arc010_2": "abstained",
+  "atcoder:arc019_2": "abstained",
+  "atcoder:arc026_4": "abstained",
+  "atcoder:arc032_1": "abstained",
+  "atcoder:arc041_a": "abstained",
+  "atcoder:arc054_d": "unknown",
+  "atcoder:arc055_a": "unknown",
+  "atcoder:arc057_a": "abstained",
+  "atcoder:arc057_b": "unknown",
+  "atcoder:arc063_a": "abstained",
+  "atcoder:arc069_c": "abstained",
+  "atcoder:arc073_a": "labeled",
+  "atcoder:arc083_d": "abstained",
+  "atcoder:arc088_c": "labeled",
+  "atcoder:arc090_b": "labeled",
+  "atcoder:arc104_c": "labeled",
+  "atcoder:arc106_a": "labeled",
+  "atcoder:arc108_a": "labeled",
+  "atcoder:arc108_b": "labeled",
+  "atcoder:arc109_d": "unknown",
+  "atcoder:arc110_a": "labeled",
+  "atcoder:arc112_c": "labeled",
+  "atcoder:arc113_e": "unknown",
+  "atcoder:arc117_a": "labeled",
+  "atcoder:arc124_d": "labeled",
+  "atcoder:arc134_c": "abstained",
+  "atcoder:arc139_f": "unknown",
+  "atcoder:arc144_f": "proposed_only",
+  "atcoder:arc145_f": "unknown",
+  "atcoder:arc146_d": "unknown",
+  "atcoder:arc156_b": "abstained",
+  "atcoder:arc158_f": "unknown",
+  "atcoder:arc159_e": "unknown",
+  "atcoder:arc173_d": "abstained",
+  "atcoder:arc177_a": "labeled",
+  "atcoder:arc184_e": "unknown",
+  "atcoder:arc197_a": "unknown",
+  "atcoder:arc198_c": "unknown",
+  "atcoder:arc200_e": "unknown",
+  "atcoder:arc227_b": "unknown",
+  "atcoder:arc227_f": "unknown",
+  "atcoder:arc230_e": "unknown",
+  "atcoder:asprocon9_a": "unknown",
+  "atcoder:autumn_fest_07": "unknown",
+  "atcoder:awc0001_b": "unknown",
+  "atcoder:awc0009_e": "unknown",
+  "atcoder:awc0013_a": "unknown",
+  "atcoder:awc0024_e": "unknown",
+  "atcoder:awc0025_e": "unknown",
+  "atcoder:awc0040_d": "unknown",
+  "atcoder:awc0041_c": "unknown",
+  "atcoder:awc0052_a": "unknown",
+  "atcoder:awc0054_e": "unknown",
+  "atcoder:awc0056_d": "unknown",
+  "atcoder:awc0059_c": "unknown",
+  "atcoder:awc0062_a": "unknown",
+  "atcoder:awc0066_a": "unknown",
+  "atcoder:awc0076_d": "unknown",
+  "atcoder:awc0079_c": "unknown",
+  "atcoder:awc0081_d": "unknown",
+  "atcoder:awc0088_d": "unknown",
+  "atcoder:awc0090_d": "unknown",
+  "atcoder:awc0093_e": "unknown",
+  "atcoder:awc0101_c": "unknown",
+  "atcoder:awc0103_b": "unknown",
+  "atcoder:awc0105_b": "unknown",
+  "atcoder:awc0116_c": "unknown",
+  "atcoder:awc0117_b": "unknown",
+  "atcoder:awc0119_d": "unknown",
+  "atcoder:awc0124_b": "unknown",
+  "atcoder:awc0126_e": "unknown",
+  "atcoder:awc0127_e": "unknown",
+  "atcoder:awc0129_a": "unknown",
+  "atcoder:awc0130_c": "unknown",
+  "atcoder:awc0139_c": "unknown",
+  "atcoder:awc0141_b": "unknown",
+  "atcoder:awc0148_a": "unknown",
+  "atcoder:awc0150_o": "unknown",
+  "atcoder:awc0154_b": "unknown",
+  "atcoder:awc0155_a": "unknown",
+  "atcoder:awc0157_e": "unknown",
+  "atcoder:awc0158_c": "unknown",
+  "atcoder:awc0170_e": "unknown",
+  "atcoder:awc0171_e": "unknown",
+  "atcoder:awc0172_a": "unknown",
+  "atcoder:awc0180_d": "unknown",
+  "atcoder:awtf2025_e": "unknown",
+  "atcoder:cf17_final_a": "labeled",
+  "atcoder:cf17_final_b": "labeled",
+  "atcoder:cf17_final_g": "unknown",
+  "atcoder:chokudai_S001_k": "labeled",
+  "atcoder:chokudai_S002_l": "unknown",
+  "atcoder:code_festival_2015_okinawa_c": "unknown",
+  "atcoder:code_festival_2017_quala_b": "labeled",
+  "atcoder:code_festival_2017_quala_f": "unknown",
+  "atcoder:code_festival_2018_final_c": "unknown",
+  "atcoder:code_festival_2018_final_f": "unknown",
+  "atcoder:code_festival_2018_qualb_d": "unknown",
+  "atcoder:code_festival_final_b": "abstained",
+  "atcoder:code_festival_final_d": "unknown",
+  "atcoder:code_thanks_festival_14_quala_a": "abstained",
+  "atcoder:code_thanks_festival_2015_a": "unknown",
+  "atcoder:code_thanks_festival_2017_f": "abstained",
+  "atcoder:codefestival_2015_ex_b": "unknown",
+  "atcoder:codefestival_2015_final_d": "unknown",
+  "atcoder:codefestival_2016_final_e": "abstained",
+  "atcoder:codefestival_2016_qualB_d": "abstained",
+  "atcoder:codefestival_2016_qualC_b": "labeled",
+  "atcoder:codequeen2023_final_a": "unknown",
+  "atcoder:codequeen2024_final_g": "unknown",
+  "atcoder:codequeen2025_final_d": "unknown",
+  "atcoder:colopl2018_final_d": "unknown",
+  "atcoder:colopl2018_final_f": "unknown",
+  "atcoder:cpsco2019_s3_c": "unknown",
+  "atcoder:ddcc_2016_final_e": "unknown",
+  "atcoder:discovery_2016_final_c": "unknown",
+  "atcoder:dp_f": "labeled",
+  "atcoder:dp_k": "labeled",
+  "atcoder:fps_24_b": "unknown",
+  "atcoder:game_o": "unknown",
+  "atcoder:gw2015_g": "unknown",
+  "atcoder:hokudai_hitachi2018_a": "unknown",
+  "atcoder:icpc2013summer_day4_f": "labeled",
+  "atcoder:icpc2013summer_day4_g": "unknown",
+  "atcoder:icpc2014spring_g": "unknown",
+  "atcoder:icpc2015autumn_g": "unknown",
+  "atcoder:icpc2015autumn_j": "unknown",
+  "atcoder:icpc2015spring_i": "unknown",
+  "atcoder:ijpc2015_j": "unknown",
+  "atcoder:indeednow_2015_finala_b": "unknown",
+  "atcoder:indeednow_2015_finalb_e": "unknown",
+  "atcoder:intro_heuristics_c": "labeled",
+  "atcoder:jag2016secretspring_c": "unknown",
+  "atcoder:jag2017autumn_d": "unknown",
+  "atcoder:jag2017summer_day3_d": "unknown",
+  "atcoder:jag2017summer_day3_h": "unknown",
+  "atcoder:jag2018summer_day2_g": "unknown",
+  "atcoder:joi2007ho_d": "abstained",
+  "atcoder:joi2009ho_d": "abstained",
+  "atcoder:joi2009yo_b": "unknown",
+  "atcoder:joi2013ho5": "labeled",
+  "atcoder:joi2015ho_c": "labeled",
+  "atcoder:joi2016ho_a": "abstained",
+  "atcoder:joi2016yo_f": "unknown",
+  "atcoder:joi2017ho_a": "labeled",
+  "atcoder:joi2017yo_a": "abstained",
+  "atcoder:joi2018_yo_e": "unknown",
+  "atcoder:joi2022_yo1a_c": "unknown",
+  "atcoder:joi2022_yo1a_d": "unknown",
+  "atcoder:joi2022_yo1c_b": "unknown",
+  "atcoder:joi2022ho_e": "unknown",
+  "atcoder:joi2023_yo1b_c": "unknown",
+  "atcoder:joi2024_yo2_c": "unknown",
+  "atcoder:joi2025_yo1a_a": "unknown",
+  "atcoder:joi2025_yo1b_a": "unknown",
+  "atcoder:joi2025_yo1b_b": "unknown",
+  "atcoder:joi2025_yo1b_c": "unknown",
+  "atcoder:joi2025_yo1c_b": "unknown",
+  "atcoder:joi2025ho_e": "unknown",
+  "atcoder:joi2026_semifinal_a": "unknown",
+  "atcoder:joi2026_yo2_d": "unknown",
+  "atcoder:joig2021_c": "unknown",
+  "atcoder:joig2021_d": "unknown",
+  "atcoder:joig2022_f": "unknown",
+  "atcoder:joig2024_f": "unknown",
+  "atcoder:joigsp2024_e": "unknown",
+  "atcoder:joigsp2025_c": "unknown",
+  "atcoder:joigsp2025_l": "unknown",
+  "atcoder:joisc2007_factor": "abstained",
+  "atcoder:joisc2007_packin": "unknown",
+  "atcoder:joisc2009_distribution": "unknown",
+  "atcoder:joisc2010_sengoku": "unknown",
+  "atcoder:joisc2010_simroad1": "unknown",
+  "atcoder:joisc2010_simroad3": "unknown",
+  "atcoder:joisc2012_constellation": "unknown",
+  "atcoder:joisc2013_collecting": "unknown",
+  "atcoder:joisc2014_e": "abstained",
+  "atcoder:joisc2015_b": "abstained",
+  "atcoder:joisc2015_e": "unknown",
+  "atcoder:joisc2016_c": "unknown",
+  "atcoder:joisc2017_d": "labeled",
+  "atcoder:joisc2017_j": "labeled",
+  "atcoder:joisc2020_n": "unknown",
+  "atcoder:joisp2023_h": "unknown",
+  "atcoder:joisp2025_b": "unknown",
+  "atcoder:joisp2025_l": "unknown",
+  "atcoder:jsc2019_qual_b": "labeled",
+  "atcoder:jsc2021_c": "labeled",
+  "atcoder:jsc2025_final_d": "unknown",
+  "atcoder:k2pc001_h4": "unknown",
+  "atcoder:kupc2012pr_1": "unknown",
+  "atcoder:kupc2013_d": "unknown",
+  "atcoder:kupc2014_g": "unknown",
+  "atcoder:kupc2019_k": "unknown",
+  "atcoder:kupc2021_h": "unknown",
+  "atcoder:math_and_algorithm_aa": "labeled",
+  "atcoder:math_and_algorithm_bo": "unknown",
+  "atcoder:math_and_algorithm_bp": "proposed_only",
+  "atcoder:math_and_algorithm_e": "abstained",
+  "atcoder:maximum_2013_c": "unknown",
+  "atcoder:maximum_2013_g": "unknown",
+  "atcoder:mujin_pc_2018_b": "unknown",
+  "atcoder:mujin_pc_2018_g": "unknown",
+  "atcoder:nadafes2022_day1_j": "unknown",
+  "atcoder:nadafes2022_day2_k": "unknown",
+  "atcoder:nikkei2019_2_final_e": "unknown",
+  "atcoder:nikkei2019_2_qual_a": "abstained",
+  "atcoder:nikkei2019_qual_e": "labeled",
+  "atcoder:nikkei2019ex_b": "unknown",
+  "atcoder:nikkei2019ex_h": "unknown",
+  "atcoder:njpc2017_b": "unknown",
+  "atcoder:otemae2019_i": "unknown",
+  "atcoder:pakencamp_2018_day2_c": "unknown",
+  "atcoder:pakencamp_2019_day4_c": "unknown",
+  "atcoder:pakencamp_2019_day4_g": "unknown",
+  "atcoder:pakencamp_2020_day1_h": "unknown",
+  "atcoder:pakencamp_2021_day2_i": "unknown",
+  "atcoder:pakencamp_2021_day2_j": "unknown",
+  "atcoder:pakencamp_2022_day1_c": "unknown",
+  "atcoder:pakencamp_2022_day1_l": "unknown",
+  "atcoder:pakencamp_2022_day2_c": "unknown",
+  "atcoder:pakencamp_2022_day3_h": "unknown",
+  "atcoder:pakencamp_2023_day1_b": "unknown",
+  "atcoder:pakencamp_2023_day1_d": "unknown",
+  "atcoder:pakencamp_2024_day1_d": "unknown",
+  "atcoder:pakencamp_2024_day2_b": "unknown",
+  "atcoder:pakencamp_2024_day3_1_h": "unknown",
+  "atcoder:pakencamp_2025_day1_i": "unknown",
+  "atcoder:past17_b": "unknown",
+  "atcoder:past18_d": "unknown",
+  "atcoder:past18_f": "abstained",
+  "atcoder:past18_g": "unknown",
+  "atcoder:past19_l": "abstained",
+  "atcoder:past201912_h": "abstained",
+  "atcoder:past201912_n": "unknown",
+  "atcoder:past202004_m": "unknown",
+  "atcoder:past202303_b": "unknown",
+  "atcoder:past202309_m": "abstained",
+  "atcoder:past20_a": "unknown",
+  "atcoder:past21_h": "unknown",
+  "atcoder:past21_i": "unknown",
+  "atcoder:past24_c": "unknown",
+  "atcoder:practice2_l": "labeled",
+  "atcoder:rco_contest_2019_qual_b": "unknown",
+  "atcoder:relay2018_j": "unknown",
+  "atcoder:s8pc_2_a": "unknown",
+  "atcoder:s8pc_2_g": "unknown",
+  "atcoder:s8pc_3_g": "unknown",
+  "atcoder:scpc2026_div3_f": "unknown",
+  "atcoder:soundhound2018_b": "unknown",
+  "atcoder:soundhound2018_d": "unknown",
+  "atcoder:soundhound2018_e": "unknown",
+  "atcoder:soundhound2018_summer_final_e": "unknown",
+  "atcoder:stpc2025_1_h": "unknown",
+  "atcoder:sumitb2019_f": "abstained",
+  "atcoder:summerfes2018_e": "unknown",
+  "atcoder:tdpc_game": "labeled",
+  "atcoder:tdpc_house": "unknown",
+  "atcoder:tdpc_number": "labeled",
+  "atcoder:tenka1_2012_8": "unknown",
+  "atcoder:tenka1_2012_9": "abstained",
+  "atcoder:tenka1_2015_qualB_c": "unknown",
+  "atcoder:tenka1_2015_qualB_e": "unknown",
+  "atcoder:tenka1_2016_final_e": "unknown",
+  "atcoder:tessoku_book_be": "abstained",
+  "atcoder:tessoku_book_ce": "unknown",
+  "atcoder:tessoku_book_cq": "proposed_only",
+  "atcoder:tessoku_book_df": "unknown",
+  "atcoder:tessoku_book_dk": "unknown",
+  "atcoder:tessoku_book_em": "unknown",
+  "atcoder:tessoku_book_fe": "unknown",
+  "atcoder:tessoku_book_i": "abstained",
+  "atcoder:test001_c": "unknown",
+  "atcoder:tkppc3_g": "unknown",
+  "atcoder:tkppc4_1_b": "unknown",
+  "atcoder:tkppc4_1_l": "unknown",
+  "atcoder:tkppc4_1_m": "unknown",
+  "atcoder:toyota2023spring_final_d": "unknown",
+  "atcoder:tricky_4": "unknown",
+  "atcoder:ttpc2023_p": "unknown",
+  "atcoder:ttpc2024_2_o": "unknown",
+  "atcoder:tupc2022_n": "unknown",
+  "atcoder:tupc2023_m": "unknown",
+  "atcoder:typical90_aj": "labeled",
+  "atcoder:typical90_bb": "abstained",
+  "atcoder:typical90_bv": "unknown",
+  "atcoder:utpc2021_d": "unknown",
+  "atcoder:utpc2022_d": "unknown",
+  "atcoder:utpc2024_o": "unknown",
+  "atcoder:wtf22_day1_d": "unknown",
+  "atcoder:wtf22_day2_a": "unknown",
+  "atcoder:wupc2012_3": "unknown",
+  "atcoder:wupc2019_f": "unknown",
+  "atcoder:xmascon16_d": "unknown",
+  "atcoder:xmascon16_f": "unknown",
+  "atcoder:xmascon17_a": "unknown",
+  "atcoder:xmascon20_g": "unknown",
+  "atcoder:xmascon25_d": "unknown",
+  "atcoder:zone2021_c": "labeled"
+ },
+ "rows": [
+  {
+   "problem_key": "atcoder:abc365_b",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc365_b",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc090_b",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc090_b",
+   "concept_id": "union-find",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc041_a",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2013ho5",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2013ho5",
+   "concept_id": "range-structures",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:chokudai_S001_k",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:chokudai_S001_k",
+   "concept_id": "range-structures",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc334_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc064_b",
+   "concept_id": "constructive",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc064_b",
+   "concept_id": "union-find",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc212_g",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc258_f",
+   "concept_id": "geometry",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc258_f",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc258_f",
+   "concept_id": "search-enumeration",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc258_f",
+   "concept_id": "shortest-paths",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc100_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc100_b",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc394_a",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc134_c",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2017yo_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_festival_2017_quala_b",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc256_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2007ho_d",
+   "concept_id": "graph-ordering",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc225_b",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc225_b",
+   "concept_id": "trees",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc064_a",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc064_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:jsc2019_qual_b",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc270_f",
+   "concept_id": "spanning-trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc270_f",
+   "concept_id": "union-find",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc032_1",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc030_e",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc030_e",
+   "concept_id": "search-enumeration",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc104_c",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc028_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc028_c",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc215_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc215_a",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc073_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc069_c",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc069_c",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:sumitb2019_f",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:past202309_m",
+   "concept_id": "geometry",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:aising2020_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc177_a",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:typical90_bb",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:typical90_bb",
+   "concept_id": "shortest-paths",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:codefestival_2016_final_e",
+   "concept_id": "search-enumeration",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc184_d",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc184_d",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2009ho_d",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc372_e",
+   "concept_id": "union-find",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc063_a",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc063_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc063_a",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc324_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc345_f",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc345_f",
+   "concept_id": "trees",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc192_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc192_a",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc317_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc393_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc393_c",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tenka1_2012_9",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2015_b",
+   "concept_id": "prefix-sums",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2015_b",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2014_e",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2014_e",
+   "concept_id": "spanning-trees",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2014_e",
+   "concept_id": "trees",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc106_a",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:dp_f",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:dp_f",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc057_c",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc057_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc019_2",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc324_d",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc324_d",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc039_e",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc039_e",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc323_a",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc009_1",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_j",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_j",
+   "concept_id": "range-structures",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_thanks_festival_2017_f",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_thanks_festival_2017_f",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc274_h",
+   "concept_id": "binary-search",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc274_h",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc274_h",
+   "concept_id": "string-algorithms",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:nikkei2019_2_qual_a",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:nikkei2019_2_qual_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc233_h",
+   "concept_id": "binary-search",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc233_h",
+   "concept_id": "geometry",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc233_h",
+   "concept_id": "range-structures",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc200_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc106_d",
+   "concept_id": "prefix-sums",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tessoku_book_cq",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "proposed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc070_d",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc070_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc070_d",
+   "concept_id": "shortest-paths",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc419_d",
+   "concept_id": "prefix-sums",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc416_b",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc416_b",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc282_g",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc282_g",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc282_g",
+   "concept_id": "prefix-sums",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc421_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc088_c",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc088_c",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc088_c",
+   "concept_id": "range-structures",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc124_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc124_d",
+   "concept_id": "union-find",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc321_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc321_a",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc001_1",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:dp_k",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:dp_k",
+   "concept_id": "game-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc185_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc185_d",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc185_d",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc131_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc131_d",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:codefestival_2016_qualB_d",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc340_c",
+   "concept_id": "divide-and-conquer",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc340_c",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc054_c",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc054_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc250_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc250_c",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc266_c",
+   "concept_id": "geometry",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2007_factor",
+   "concept_id": "binary-search",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2007_factor",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc344_f",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc344_f",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc413_b",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc413_b",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc219_h",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc219_h",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc108_a",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc108_a",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc121_d",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc179_c",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc179_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:zone2021_c",
+   "concept_id": "binary-search",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:zone2021_c",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_aa",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_aa",
+   "concept_id": "divide-and-conquer",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc348_e",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc348_e",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:past18_f",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:past18_f",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:apc001_b",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tessoku_book_be",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tessoku_book_be",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc057_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc008_2",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc026_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc026_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc144_f",
+   "concept_id": "game-theory",
+   "evidence_status": "proposed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc064_d",
+   "concept_id": "stacks-queues",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc064_d",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc064_d",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc011_e",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc011_e",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:jsc2021_c",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:jsc2021_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:cf17_final_b",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:cf17_final_b",
+   "concept_id": "constructive",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc108_b",
+   "concept_id": "stacks-queues",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc108_b",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_bp",
+   "concept_id": "stacks-queues",
+   "evidence_status": "proposed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_bp",
+   "concept_id": "string-processing",
+   "evidence_status": "proposed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_festival_final_b",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_festival_final_b",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc120_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc120_c",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc120_c",
+   "concept_id": "stacks-queues",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:code_thanks_festival_14_quala_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc362_b",
+   "concept_id": "geometry",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc002_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc002_b",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc075_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc010_2",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc173_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc173_d",
+   "concept_id": "shortest-paths",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc213_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc213_d",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc213_d",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc128_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc128_d",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc128_d",
+   "concept_id": "heaps",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc128_d",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc306_f",
+   "concept_id": "range-structures",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc306_f",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc040_c",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc040_c",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc271_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tdpc_game",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tdpc_game",
+   "concept_id": "game-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc256_d",
+   "concept_id": "prefix-sums",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc256_d",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc217_h",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc217_h",
+   "concept_id": "heaps",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc370_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc279_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc279_c",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc156_b",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc156_b",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc276_c",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc276_c",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2015ho_c",
+   "concept_id": "shortest-paths",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2015ho_c",
+   "concept_id": "sorting",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:codefestival_2016_qualC_b",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:codefestival_2016_qualC_b",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc153_d",
+   "concept_id": "divide-and-conquer",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc153_d",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc153_d",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc019_e",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc019_e",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc203_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc404_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc404_b",
+   "concept_id": "search-enumeration",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc254_f",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc254_f",
+   "concept_id": "range-structures",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc068_b",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc068_b",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:acl1_d",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:acl1_d",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc026_4",
+   "concept_id": "binary-search",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc026_4",
+   "concept_id": "spanning-trees",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc200_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc200_c",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc021_a",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc021_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc235_c",
+   "concept_id": "arrays-hashing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc420_c",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc187_e",
+   "concept_id": "prefix-sums",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc187_e",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc190_d",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2017ho_a",
+   "concept_id": "prefix-sums",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc015_d",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc176_f",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc264_d",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc044_a",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc038_c",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc142_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc301_e",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc301_e",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc301_e",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc301_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc025_d",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc025_d",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc360_d",
+   "concept_id": "binary-search",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc360_d",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc117_a",
+   "concept_id": "constructive",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc230_e",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc112_c",
+   "concept_id": "game-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc112_c",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc112_c",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:nikkei2019_qual_e",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:nikkei2019_qual_e",
+   "concept_id": "union-find",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc047_b",
+   "concept_id": "tries",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:intro_heuristics_c",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:practice2_l",
+   "concept_id": "range-structures",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc273_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc140_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc385_b",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc375_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc375_a",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_d",
+   "concept_id": "binary-search",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_d",
+   "concept_id": "heaps",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joisc2017_d",
+   "concept_id": "range-structures",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc099_c",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:past19_l",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_e",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:math_and_algorithm_e",
+   "concept_id": "number-theory",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tessoku_book_i",
+   "concept_id": "prefix-sums",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc274_g",
+   "concept_id": "flows-matching",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc272_c",
+   "concept_id": "sorting",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc272_c",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc354_g",
+   "concept_id": "flows-matching",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc354_g",
+   "concept_id": "string-algorithms",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc354_g",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:typical90_aj",
+   "concept_id": "geometry",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc233_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc323_f",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc323_f",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc053_a",
+   "concept_id": "constructive",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc053_a",
+   "concept_id": "greedy",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc343_e",
+   "concept_id": "geometry",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc343_e",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc050_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc385_a",
+   "concept_id": "implementation",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc261_g",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc261_g",
+   "concept_id": "shortest-paths",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc328_g",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc328_g",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc009_d",
+   "concept_id": "greedy",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc009_d",
+   "concept_id": "trees",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:agc009_d",
+   "concept_id": "bitmasks",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc110_a",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc189_f",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc189_f",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc353_e",
+   "concept_id": "tries",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc285_g",
+   "concept_id": "flows-matching",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc342_e",
+   "concept_id": "shortest-paths",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc176_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc176_d",
+   "concept_id": "shortest-paths",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc319_g",
+   "concept_id": "graph-traversal",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:past201912_h",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc411_g",
+   "concept_id": "bitmasks",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc411_g",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc156_b",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:icpc2013summer_day4_f",
+   "concept_id": "linear-algebra",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc129_f",
+   "concept_id": "linear-algebra",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc129_f",
+   "concept_id": "number-theory",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:cf17_final_a",
+   "concept_id": "string-processing",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc377_a",
+   "concept_id": "implementation",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc377_a",
+   "concept_id": "string-processing",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc224_c",
+   "concept_id": "geometry",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:abc224_c",
+   "concept_id": "search-enumeration",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc083_d",
+   "concept_id": "combinatorics-probability",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:arc083_d",
+   "concept_id": "graph-traversal",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:tdpc_number",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "ai_reviewed",
+   "via": "atcoder-full-v1"
+  },
+  {
+   "problem_key": "atcoder:joi2016ho_a",
+   "concept_id": "dynamic-programming",
+   "evidence_status": "abstained",
+   "via": "atcoder-full-v1"
+  }
+ ],
+ "scope": "calibration slice: 450 seeded-random eligible AtCoder problems (batches 000-002); all other problems unjudged"
+}
