@@ -1,0 +1,98 @@
+{
+ "baseline": "C0",
+ "eligible": [
+  "C2",
+  "C3",
+  "C4",
+  "C5"
+ ],
+ "evaluation_sha256": "95c62e274e3c7ff6ab3faed9e7fbfe635ca83955f93ec6b000ed1c6e92f9e458",
+ "gain_vs_baseline": 0.4899833055091819,
+ "homophily_and_mixing_used_in_selection": false,
+ "ineligible_reasons": {
+  "C1": [
+   "G2 translation MRR not above 0.25 and 10x the random control"
+  ]
+ },
+ "note": "winner replaces the baseline",
+ "replaced": true,
+ "rule": "specs/unified-similarity-map/language-bias.md#pre-registered-selection-rule-fixed-before-any-new-result",
+ "table": {
+  "C0": {
+   "coherence_coverage": 0.001266713581984518,
+   "coherence_lift": 1.0,
+   "consistency": 0.015692821368948246,
+   "consistency_diff_vs_baseline_lo": null,
+   "consistency_halfwidth": 0.00427170283806344,
+   "english_retention": 1.0,
+   "mrr": 0.03904682148984872
+  },
+  "C1": {
+   "coherence_coverage": 0.01203377902885292,
+   "coherence_lift": 1.125,
+   "consistency": 0.02053422370617696,
+   "consistency_diff_vs_baseline_lo": 0.0013313856427378964,
+   "consistency_halfwidth": 0.005682387312186977,
+   "english_retention": 1.0105745098038463,
+   "mrr": 0.04321820845893387
+  },
+  "C2": {
+   "coherence_coverage": 0.4020408163265306,
+   "coherence_lift": 1.1050529259037347,
+   "consistency": 0.5056761268781301,
+   "consistency_diff_vs_baseline_lo": 0.4582345575959933,
+   "consistency_halfwidth": 0.03382095158597667,
+   "english_retention": 1.0077184591306478,
+   "mrr": 0.6642537147943636
+  },
+  "C3": {
+   "coherence_coverage": 0.0446164672765658,
+   "coherence_lift": 1.238805970149254,
+   "consistency": 0.1070116861435726,
+   "consistency_diff_vs_baseline_lo": 0.07746243739565944,
+   "consistency_halfwidth": 0.014390651085141898,
+   "english_retention": 0.9864542349999186,
+   "mrr": 0.57869642529391
+  },
+  "C4": {
+   "coherence_coverage": 0.2004926108374384,
+   "coherence_lift": 1.0974874371859296,
+   "consistency": 0.3936560934891486,
+   "consistency_diff_vs_baseline_lo": 0.34740400667779636,
+   "consistency_halfwidth": 0.029653589315525863,
+   "english_retention": 0.9997013929246718,
+   "mrr": 0.5567975423990926
+  },
+  "C5": {
+   "coherence_coverage": 0.34602392681210414,
+   "coherence_lift": 1.0881443298969071,
+   "consistency": 0.41001669449081807,
+   "consistency_diff_vs_baseline_lo": 0.36725792988313855,
+   "consistency_halfwidth": 0.023804257095158626,
+   "english_retention": 0.9743655686708629,
+   "mrr": 0.740341898318333
+  },
+  "random": {
+   "coherence_coverage": 0.5669247009148487,
+   "coherence_lift": 1.0088664575092074,
+   "consistency": 0.000333889816360601,
+   "consistency_diff_vs_baseline_lo": -0.019707846410684474,
+   "consistency_halfwidth": 0.00033597662771285526,
+   "english_retention": 0.7727037271619218,
+   "mrr": 0.0011486230717627753
+  },
+  "shuffled": {
+   "coherence_coverage": 0.0011963406052076003,
+   "coherence_lift": 0.6,
+   "consistency": 0.016026711185308847,
+   "consistency_diff_vs_baseline_lo": -0.001001669449081803,
+   "consistency_halfwidth": 0.004513772954924875,
+   "english_retention": 1.0073258562093352,
+   "mrr": 0.04321820845893387
+  }
+ },
+ "tied": [
+  "C2"
+ ],
+ "winner": "C2"
+}

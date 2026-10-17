@@ -169,6 +169,29 @@ class Payload(unittest.TestCase):
                              {"judgments": []}, {}, {})
 
 
+class Extras(unittest.TestCase):
+    def test_extras_are_merged_and_cannot_overwrite_core_fields(self):
+        nodes = fixture()
+        meta = [{"problem_key": x["problem_key"], "reliability": "reliable", "unk_share": 0.0, "vector_source": "a1_reused"}
+                for x in nodes]
+        n = len(nodes)
+        idx = np.array([[(i + 1 + j) % n for j in range(10)] for i in range(n)], dtype=np.int32)
+        score = np.full((n, 10), 0.5, dtype=np.float32)
+        coords = {name: np.zeros((n, 2), dtype=np.float32) for name in fh.PROJECTIONS}
+        pres = {name: np.zeros(n, dtype=np.uint8) for name in fh.PROJECTIONS}
+        args = (nodes, meta, idx, score, idx, score, coords, pres, {}, [], {"judgments": []}, {}, {})
+        payload = fh.build_payload(*args, extras={"language": {"vocab": ["en"]}})
+        self.assertEqual(payload["language"], {"vocab": ["en"]})
+        with self.assertRaises(ValueError):
+            fh.build_payload(*args, extras={"keys": []})
+
+    def test_template_guards_every_optional_field(self):
+        text = TEMPLATE.read_text(encoding="utf-8")
+        for guard in ("P.language ?", "P.embedded ?", "P.representation ||", "const lb = P.language_bias; if (!lb) return ''",
+                      "if (LANG) $('optLanguage').hidden = false", "if (REP && REP.banner)"):
+            self.assertIn(guard, text)
+
+
 class Html(unittest.TestCase):
     def test_render_embeds_json_safely_and_round_trips(self):
         _, payload, *_ = build()

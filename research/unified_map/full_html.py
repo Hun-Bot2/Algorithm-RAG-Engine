@@ -132,7 +132,7 @@ def history_pairs(history: dict, aliases: dict, index: dict) -> tuple[list[list]
 
 
 def build_payload(nodes, meta, any_idx, any_score, cross_idx, cross_score, coords, preservation,
-                  quality, labels, history, aliases, run_info) -> dict:
+                  quality, labels, history, aliases, run_info, extras: dict | None = None) -> dict:
     n = len(nodes)
     index = {node["problem_key"]: i for i, node in enumerate(nodes)}
     if [m["problem_key"] for m in meta] != [node["problem_key"] for node in nodes]:
@@ -193,6 +193,10 @@ def build_payload(nodes, meta, any_idx, any_score, cross_idx, cross_score, coord
                           "top1_any_p90": float(np.percentile(top1, 90)),
                           "rank10_any_median": float(np.median(tenth))},
     }
+    clash = set(extras or {}) & set(payload)
+    if clash:
+        raise ValueError(f"extras would overwrite payload fields: {sorted(clash)}")
+    payload.update(extras or {})
     return payload
 
 

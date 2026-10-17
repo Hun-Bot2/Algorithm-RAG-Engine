@@ -647,6 +647,23 @@ Keep these distinctions clear in summaries and docs:
 - Tests: `.venv/bin/python -m unittest research.unified_map.test_full_embed research.unified_map.test_full_quality
   research.unified_map.test_full_html`. Spurious Accelerate FP warnings appear in float32 matmuls; wrap test calls in np.errstate.
 
+## Language-bias study (2026-10-17)
+
+- Spec specs/unified-similarity-map/language-bias.md; code and report in research/language_bias/. The selected representation (C2) embeds
+  English-translated titles with the same pinned MiniLM; full-v2 holds its vectors, neighbors, maps and page. full-v1 is preserved: do not
+  modify it (research.language_bias.verify proves its hashes). Never judge a language fix by low homophily or platform mixing alone: random vectors
+  score best on both. Use neighbor consistency, translation retrieval, English-quality retention and the random control.
+- Models live under private-learning/models/ with the manifest OUTSIDE the directory; the verifier checks exact membership, so move any CLI
+  `.cache` folder out (huggingface-cli leaves one inside --local-dir). The translator ships only pickle weights: it is quarantined and converted once
+  with torch weights-only loading and the network blocked; never load that .bin any other way. Only user-approved models may be fetched, and a
+  downloader must refuse everything else; get approval before any package install (sentencepiece 0.2.1 is the only addition, research .venv only).
+- Marian (opus-mt) needs sentencepiece; its output ends with a period that real titles lack, so the translator strips it. The model reads Japanese
+  only: Russian and Korean titles stay untranslated and still cluster by language. Machine translation can fail badly on numbered tutorial titles and
+  place names; those nodes are tiered degraded.
+- Helper methods named `run` in a unittest.TestCase shadow TestCase.run and break the suite; name them otherwise. scikit-learn's centroid-style
+  fixes need a minimum group size: a one-node group's centroid is the node itself (zero vector).
+- An interrupted tool call may already have run part of its command (an edit and a delete ran before the interrupt): check the state afterwards.
+
 ## Mastery system (implemented locally, 2026-10-17)
 
 - Spec: specs/mastery-system/ (design.md section 15 lists deviations; runbook.md has commands). Code:

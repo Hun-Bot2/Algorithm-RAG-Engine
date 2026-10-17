@@ -41,3 +41,5 @@ See [FULL-MAP-REPORT.md](FULL-MAP-REPORT.md) and [full_map.ipynb](full_map.ipynb
 ```
 
 Title similarity, tag evidence and judged pairs stay separate channels; see the report for coverage and limits.
+
+Language-bias correction (English-translated titles, `full-v2`): see [../language_bias/REPORT.md](../language_bias/REPORT.md).

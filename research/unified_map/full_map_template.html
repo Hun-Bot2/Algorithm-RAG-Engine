@@ -86,7 +86,7 @@ a{color:var(--accent)}
 <body>
 <header>
   <h1>Full-catalog similarity map <span class="muted small" id="subtitle"></span></h1>
-  <div class="banner" role="note"><b>How to read this.</b> Positions and scores come from a MiniLM embedding of each problem's <b>title only</b>. They show how alike two titles read &mdash; not that two problems share an algorithm, invariant or difficulty. Platform tags and the AI-reviewed taxonomy are shown as <b>separate evidence</b> and were never used to place points or rank neighbors. AtCoder publishes no tags. 2D maps distort distances; see the fidelity numbers.</div>
+  <div class="banner" role="note" id="banner"><b>How to read this.</b> Positions and scores come from a MiniLM embedding of each problem's <b>title only</b>. They show how alike two titles read &mdash; not that two problems share an algorithm, invariant or difficulty. Platform tags and the AI-reviewed taxonomy are shown as <b>separate evidence</b> and were never used to place points or rank neighbors. AtCoder publishes no tags. 2D maps distort distances; see the fidelity numbers.</div>
 </header>
 <main>
   <aside id="controls" aria-label="Map controls">
@@ -101,6 +101,7 @@ a{color:var(--accent)}
       <option value="platform">Platform</option>
       <option value="reliability">Embedding reliability / eligibility</option>
       <option value="fidelity">Local neighborhood fidelity (this map)</option>
+      <option value="language" id="optLanguage" hidden>Language of the original title</option>
     </select>
     <div id="legend" class="small" style="margin-top:6px"></div>
     <h2>Platforms</h2>
@@ -170,6 +171,11 @@ const NB = {any:{idx:unpack(P.neighbors.any_idx), sc:unpack(P.neighbors.any_scor
             cross:{idx:unpack(P.neighbors.cross_idx), sc:unpack(P.neighbors.cross_score)}};
 const PR = {};
 for (const name of PROJS) PR[name] = {xy: unpack(P.projections[name].coords), pres: unpack(P.projections[name].preserved_top10)};
+const LANG = P.language ? {names: P.language.vocab, codes: unpack(P.language.codes)} : null;
+const EMBEDDED = P.embedded ? {text: P.embedded.text, src: unpack(P.embedded.source), srcNames: P.embedded.source_vocab} : null;
+const REP = P.representation || null;
+const LANG_LABEL = {en:'English / Latin', ja_pure:'Japanese only', ja_parallel:'Japanese with English', ja_other:'Japanese, mixed', ru:'Russian', ko:'Korean'};
+const SRC_LABEL = {identity:'used as written', parenthetical:"platform's own English wording", machine:'machine-translated (opus-mt-ja-en)', machine_empty_fallback:'translation empty: original used', untranslated:'not translated: original used'};
 const lowerTitles = P.titles.map(t => t.toLowerCase()), lowerKeys = P.keys.map(k => k.toLowerCase());
 const ceq = P.concepts.mapped.map(list => new Set(list.filter(e => e[1] === 0 && e[2] >= 85).map(e => e[0])));
 const judged = new Map();                       // "q|t" -> [label, deceptive]
@@ -223,6 +229,10 @@ function classInfo(panel){
   if (state.colorBy === 'reliability') return {n:4,
     of: i => !eligible[i] ? 3 : rel[i], color: c => [css('--rel0'),css('--rel1'),css('--rel2'),css('--relx')][c],
     name: c => ['eligible, reliable title embedding','eligible, degraded (non-Latin)','eligible, unreliable (unknown tokens)','excluded from research cohort'][c]};
+  if (state.colorBy === 'language' && LANG) {
+    const pal = ['#009E73','#D55E00','#E69F00','#CC79A7','#0072B2','#999999'];
+    return {n:LANG.names.length, of: i => LANG.codes[i], color: c => pal[c % pal.length], name: c => LANG_LABEL[LANG.names[c]] || LANG.names[c]};
+  }
   const pres = PR[panel.proj].pres;
   return {n:11, of: i => pres[i], color: c => fidelityColor(c), name: c => c + '/10 semantic neighbors kept in 2D top-10'};
 }
@@ -384,8 +394,9 @@ function platChip(i){ return '<span class="chip"><span class="sw" style="backgro
 function flagChips(j){
   const f = [];
   if (!eligible[j]) f.push('<span class="chip warn" title="' + esc(excludedReasons(j).join(', ')) + '">excluded from research cohort</span>');
-  if (rel[j] === 1) f.push('<span class="chip warn" title="non-Latin title in an English-only model">degraded embedding</span>');
-  if (rel[j] === 2) f.push('<span class="chip warn" title="' + unk[j] + '% of tokens unknown">unreliable embedding</span>');
+  const notes = REP && REP.tier_notes ? REP.tier_notes : {};
+  if (rel[j] === 1) f.push('<span class="chip warn" title="' + esc(notes.degraded || 'non-Latin title in an English-only model') + '">degraded embedding</span>');
+  if (rel[j] === 2) f.push('<span class="chip warn" title="' + esc(notes.unreliable || (unk[j] + '% of tokens unknown')) + '">unreliable embedding</span>');
   return f.join('');
 }
 function judgedChip(i, j){
@@ -447,9 +458,11 @@ function renderDetail(){
   box.innerHTML =
     '<h2 style="margin-top:0">Selected problem</h2><div style="font-size:16px;font-weight:600">' + esc(P.titles[i]) + '</div>' +
     '<div>' + platChip(i) + '<span class="chip">' + esc(P.keys[i]) + '</span>' +
+    (LANG ? '<span class="chip">' + esc(LANG_LABEL[LANG.names[LANG.codes[i]]] || LANG.names[LANG.codes[i]]) + '</span>' : '') +
     (P.difficulty[i] != null ? '<span class="chip">native difficulty: ' + esc(P.difficulty[i]) + '</span>' : '') + flagChips(i) + '</div>' +
     (url ? '<div class="small"><a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Open on ' + PLAT_LABEL[PLAT[platform[i]]] + ' &#8599;</a></div>' : '') +
-    '<div class="box"><h3>Embedding provenance</h3><div class="small">Title vector: ' + (vsrc[i] ? 'newly encoded for this map' : 'reused earlier A1 title vector') +
+    '<div class="box"><h3>Embedding provenance</h3>' + (EMBEDDED ? '<div class="small"><b>Text embedded:</b> ' + esc(EMBEDDED.text[i] != null ? EMBEDDED.text[i] : P.titles[i]) +
+      ' <span class="muted">(' + esc(SRC_LABEL[EMBEDDED.srcNames[EMBEDDED.src[i]]] || EMBEDDED.srcNames[EMBEDDED.src[i]]) + ')</span></div>' : '') + '<div class="small">Title vector: ' + (vsrc[i] ? 'newly encoded for this map' : 'reused earlier A1 title vector') +
       ' &middot; reliability: <b>' + TIER[rel[i]] + '</b> (' + unk[i] + '% of title tokens unknown to the English tokenizer)' +
       (reasons.length ? ' &middot; excluded: ' + esc(reasons.join(', ')) : ' &middot; in the research cohort') +
       ' &middot; publisher statement record: ' + (stmt[i] ? 'linked (not used by this map)' : 'not available') + '</div></div>' +
@@ -491,6 +504,12 @@ function renderCoverage(){
     '<div>' + excluded.toLocaleString() + ' excluded from the research cohort (kept on the map).</div><div class="muted">' + per.join('; ') + '</div>';
   $('subtitle').textContent = '— ' + N.toLocaleString() + ' problems · LeetCode, Codeforces, AtCoder';
 }
+function languageBiasBlock(){
+  const lb = P.language_bias; if (!lb) return '';
+  const rows = lb.rows.map(r => '<tr><td>' + esc(r.label) + '</td><td>' + esc(r.before) + '</td><td>' + esc(r.after) + '</td></tr>').join('');
+  return '<div style="margin-top:6px"><b>' + esc(lb.title) + '</b><table><tr><th></th><th>' + esc(lb.before_label) + '</th><th>' + esc(lb.after_label) + '</th></tr>' + rows + '</table>' +
+    '<ul style="padding-left:16px;margin:4px 0">' + lb.caveats.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul></div>';
+}
 function renderQuality(){
   const q = P.quality, hd = q.high_dimensional;
   const rows = PROJS.map(n => { const e = q.projections[n + '-seed17']; return '<tr><td>' + PROJ_LABEL[n] + '</td><td>' + pct(e.preservation_top10_any) + '</td><td>' + pct(e.preservation_top10_cross_platform) +
@@ -503,7 +522,7 @@ function renderQuality(){
     '<tr><td>384-d reference</td><td>100%</td><td>100%</td><td>1</td><td>1</td><td>' + pct(hd.same_platform_fraction_top10) + '</td></tr></table>' +
     '<div class="muted" style="margin-top:4px">Top-10 kept = share of each problem\'s exact 384-d title neighbors that are also its 10 nearest 2D points (all ' + N.toLocaleString() + ' problems). Trust and continuity use ' + q.trust_query_sample.size.toLocaleString() + ' sampled queries.</div>' +
     '<div style="margin-top:6px"><b>Seed stability</b>' + stab + '</div>' +
-    '<div style="margin-top:6px"><b>Tag agreement, descriptive</b><div>Title neighbors (any platform): ' + lift(hd.tag_agreement_top10, hd.tag_agreement_top10_platform_matched_random) + '</div>' +
+    languageBiasBlock() + '<div style="margin-top:6px"><b>Tag agreement, descriptive</b><div>Title neighbors (any platform): ' + lift(hd.tag_agreement_top10, hd.tag_agreement_top10_platform_matched_random) + '</div>' +
     '<div>Title neighbors (other platforms): ' + lift(hd.tag_agreement_cross_platform_top10, hd.tag_agreement_cross_platform_top10_platform_matched_random) + '</div>' +
     '<div class="muted">Share of tagged neighbor slots with a shared taxonomy concept, against random tagged nodes on the same platforms. Tags did not shape the vectors; this is not proof of the same technique.</div></div>';
 }
@@ -548,6 +567,8 @@ function initControls(){
   renderCoverage(); renderQuality();
 }
 
+if (LANG) $('optLanguage').hidden = false;
+if (REP && REP.banner) $('banner').innerHTML = '<b>How to read this.</b> ' + esc(REP.banner);
 initControls();
 layoutPanels();
 window.__map = {state, select, refreshPanels, panels, P};

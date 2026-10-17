@@ -1,0 +1,233 @@
+{
+ "checks": [
+  {
+   "changed": [],
+   "name": "every full-v1 artifact is byte-identical to its recorded hash",
+   "passed": true
+  },
+  {
+   "name": "full-v2 inputs present",
+   "passed": true
+  },
+  {
+   "mismatched": [],
+   "name": "v2 neighbor and projection arrays match their receipts and the v2 vectors",
+   "passed": true
+  },
+  {
+   "name": "representation record binds the evaluation and selection receipts",
+   "passed": true
+  },
+  {
+   "name": "one v2 vector per catalog node, keys unique and sorted",
+   "passed": true
+  },
+  {
+   "name": "v2 vectors finite and unit-norm",
+   "passed": true
+  },
+  {
+   "name": "v2 vectors equal the evaluated C2 vectors bit-for-bit",
+   "passed": true
+  },
+  {
+   "name": "embedded text and vector meta cover the catalog in key order",
+   "passed": true
+  },
+  {
+   "name": "translation provenance obeys its rules for every node (identity/parenthetical/machine/untranslated)",
+   "passed": true,
+   "violations": 0
+  },
+  {
+   "name": "no machine-translated or untranslated title is labelled reliable",
+   "passed": true,
+   "tiers": {
+    "degraded": 1564,
+    "reliable": 22685,
+    "unreliable": 48
+   }
+  },
+  {
+   "max_abs_deviation": 2.521555870771408e-07,
+   "name": "re-encoding 400 embedded texts with MiniLM reproduces the stored v2 vectors",
+   "passed": true
+  },
+  {
+   "name": "any: indices valid, no self, no exact duplicates, scores non-increasing, platform rule",
+   "passed": true,
+   "rows": 24297
+  },
+  {
+   "max_abs_deviation": 9.485939550524236e-07,
+   "name": "any: stored scores equal recomputed float64 cosine",
+   "passed": true
+  },
+  {
+   "name": "cross: indices valid, no self, no exact duplicates, scores non-increasing, platform rule",
+   "passed": true,
+   "rows": 24297
+  },
+  {
+   "max_abs_deviation": 9.485939550524236e-07,
+   "name": "cross: stored scores equal recomputed float64 cosine",
+   "passed": true
+  },
+  {
+   "mismatches": 0,
+   "name": "any: top-30 equals float64 brute force on 400 random queries (tie-aware)",
+   "passed": true,
+   "queries": 400
+  },
+  {
+   "mismatches": 0,
+   "name": "cross: top-30 equals float64 brute force on 400 random queries (tie-aware)",
+   "passed": true,
+   "queries": 400
+  },
+  {
+   "name": "every projection covers all 24,297 nodes with finite coordinates",
+   "passed": true,
+   "projections": [
+    "pca-seed17",
+    "tsne-random-seed18",
+    "tsne-random-seed19",
+    "tsne-seed17",
+    "umap-seed17",
+    "umap-seed18",
+    "umap-seed19"
+   ]
+  },
+  {
+   "distinct_positions": {
+    "pca-seed17": 22410,
+    "tsne-random-seed18": 23938,
+    "tsne-random-seed19": 23928,
+    "tsne-seed17": 23841,
+    "umap-seed17": 24283,
+    "umap-seed18": 24282,
+    "umap-seed19": 24281
+   },
+   "name": "projections are not degenerate (many distinct 2D positions)",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "pca seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "umap seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "tsne seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "name": "pca: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 0,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "umap: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 2,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "tsne: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 0,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "selection receipt equals the pre-registered rule re-applied to the evaluation",
+   "passed": true
+  },
+  {
+   "name": "C0: saved pure-Japanese homophily equals a recomputation from the stored neighbors",
+   "passed": true,
+   "recomputed": 0.9876847290640394,
+   "saved": 0.9876847290640394
+  },
+  {
+   "name": "C2: saved pure-Japanese homophily equals a recomputation from the stored neighbors",
+   "passed": true,
+   "recomputed": 0.2522167487684729,
+   "saved": 0.2522167487684729
+  },
+  {
+   "name": "v1_minilm_raw_title/umap: saved 2D island index equals an independent brute-force recomputation",
+   "passed": true,
+   "recomputed": 0.9788881069669247,
+   "saved": 0.9774806474313863
+  },
+  {
+   "name": "v1_minilm_raw_title/tsne: saved 2D island index equals an independent brute-force recomputation",
+   "passed": true,
+   "recomputed": 0.9767769176636172,
+   "saved": 0.9767769176636172
+  },
+  {
+   "name": "v2_minilm_translated_title/umap: saved 2D island index equals an independent brute-force recomputation",
+   "passed": true,
+   "recomputed": 0.00422237860661506,
+   "saved": 0.00422237860661506
+  },
+  {
+   "name": "v2_minilm_translated_title/tsne: saved 2D island index equals an independent brute-force recomputation",
+   "passed": true,
+   "recomputed": 0.021815622800844477,
+   "saved": 0.021815622800844477
+  },
+  {
+   "name": "html payload lists every catalog node once, in key order",
+   "passed": true
+  },
+  {
+   "name": "html neighbor indices equal the saved exact neighbors",
+   "passed": true
+  },
+  {
+   "name": "html neighbor scores equal the quantized saved scores (1e-4 resolution)",
+   "passed": true
+  },
+  {
+   "name": "html coordinates equal the normalized saved projections",
+   "passed": true
+  },
+  {
+   "found": [],
+   "name": "html contains no statement-text fields",
+   "passed": true
+  },
+  {
+   "name": "html loads no remote code",
+   "passed": true
+  },
+  {
+   "bytes": 11535184,
+   "name": "html is a single self-contained file under 16 MiB",
+   "passed": true
+  },
+  {
+   "found": [],
+   "name": "no statement fields in any text artifact written by this pipeline",
+   "passed": true
+  },
+  {
+   "name": "existing map-v2 verifier and 501-file preservation snapshot still pass",
+   "passed": true
+  }
+ ],
+ "html_sha256": "f52d28d8a0aa23d6617223eeee737c96ae036639443593eb0fbd68fc347dc299",
+ "passed": true,
+ "schema": "language-bias-validation.v1"
+}

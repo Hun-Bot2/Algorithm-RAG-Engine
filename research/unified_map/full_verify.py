@@ -137,11 +137,11 @@ def check_neighbors(run: Path, nodes, vectors, report: Report, sample=400) -> No
                    queries=sample, mismatches=wrong)
 
 
-def check_projections(run: Path, nodes, vectors, report: Report, reproduce: bool) -> None:
+def check_projections(run: Path, nodes, vectors, report: Report, reproduce: bool, minimum: int = 8) -> None:
     n = len(nodes)
     files = {p.stem: np.load(p) for p in sorted((run / "projections").glob("*-seed*.npy"))}
     ok = all(a.shape == (n, 2) and np.isfinite(a).all() for a in files.values())
-    report.add("every projection covers all 24,297 nodes with finite coordinates", ok and len(files) >= 8,
+    report.add("every projection covers all 24,297 nodes with finite coordinates", ok and len(files) >= minimum,
                projections=sorted(files))
     uniq = {name: len(np.unique(np.round(a, 4), axis=0)) for name, a in files.items()}
     report.add("projections are not degenerate (many distinct 2D positions)", all(u > 0.5 * n for u in uniq.values()),
@@ -202,12 +202,12 @@ def check_html(run: Path, html_path: Path, nodes, report: Report) -> None:
     report.add("html is a single self-contained file under 16 MiB", size < 16 * 2**20, bytes=size)
 
 
-def check_quarantine(run: Path, report: Report) -> None:
+def check_quarantine(run: Path, report: Report, quality_path: Path | None = None) -> None:
     hits = []
     for path in list(run.glob("*.jsonl")) + list(run.glob("*.json")):
         text = path.read_text(encoding="utf-8")
         hits += [f"{path.name}:{t}" for t in FORBIDDEN_TEXT if t in text]
-    quality = (RECEIPTS / "quality.v1.json").read_text(encoding="utf-8")
+    quality = (quality_path or RECEIPTS / "quality.v1.json").read_text(encoding="utf-8")
     hits += [f"quality:{t}" for t in FORBIDDEN_TEXT if t in quality]
     report.add("no statement fields in any text artifact written by this pipeline", not hits, found=hits)
 
