@@ -45,3 +45,13 @@ python3 -m unittest discover -s research/verification_workbench -v
 `--append` imports only AI/proposed/nonindependent records through the existing
 idempotent workbench API. It preserves prior records and never promotes native
 IDs. Human assessment and independent adjudication remain separate gates.
+
+## User-approved mapping metadata
+
+Following explicit user approval, 36 mappings are applied in
+`private-learning/verification-workbench/identity-mappings/user-approved-v1.json`.
+`p03510` remains unresolved. Both `abc084_c` statement-quality flags are retained.
+`apply_approval.mapping_for` resolves these mappings only for matching source
+content hashes; callers must explicitly load the overlay. Original descriptions,
+catalogs, research runs and AI review records are unchanged. This approval is not
+independent adjudication. See `approval-receipt.v1.json` for validation hashes.

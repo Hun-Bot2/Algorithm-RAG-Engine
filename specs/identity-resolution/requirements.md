@@ -20,3 +20,11 @@
 - Outputs SHALL contain a per-problem review report and reproducible provenance.
   Records absent from the frozen native catalog require an explicit evidence-only
   pending candidate, not a guessed or silently inserted catalog entry.
+
+## Explicit user approval amendment (2026-10-17)
+
+The user's approval SHALL apply the 36 proposals through a separate mapping
+metadata overlay with `user_approved` provenance. It SHALL NOT impersonate
+independent adjudication or mutate original AI drafts, descriptions or datasets.
+`p03510` SHALL remain unresolved; `abc084_c` quality flags SHALL be retained.
+Overlay lookups MUST reject mismatched source-content hashes.

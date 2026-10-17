@@ -7,3 +7,5 @@
 - [x] Import AI proposals only; create private user report and aggregate receipt.
 - [x] Verify protected hashes, run tests, document evidence limits and commit.
 - [ ] Human identity assessment and later independent adjudication remain external.
+- [x] Apply explicit user approval as hash-bound metadata only; validate 36 mappings,
+  one unresolved p03510, retained abc084_c flags and unchanged frozen sources.
