@@ -1,6 +1,8 @@
 # ADR 001: deterministic hosted core, optional offline AI
 
 Status: accepted for implementation, 2026-10-16.
+Status note 2026-10-17: the hosting and canonical-store choices are superseded
+by ADR 003 (local SQLite canonical, hosting optional). The no-AI core stands.
 
 Decision: use Worker/static assets + D1 + Access for the eventual private service.
 Keep local SQLite for development/recovery and Python for offline profiling,

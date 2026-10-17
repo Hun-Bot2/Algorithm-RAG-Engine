@@ -646,3 +646,22 @@ Keep these distinctions clear in summaries and docs:
   that contains only the HTML; never stop servers you did not start.
 - Tests: `.venv/bin/python -m unittest research.unified_map.test_full_embed research.unified_map.test_full_quality
   research.unified_map.test_full_html`. Spurious Accelerate FP warnings appear in float32 matmuls; wrap test calls in np.errstate.
+
+## Mastery system design (2026-10-17)
+
+- specs/mastery-system/ (critique, requirements, design, tasks) extends
+  specs/adaptive-learning/; nothing is implemented yet. critique.md section 1 lists which
+  features exist (E), need modification (M) or are new (N). D-A, D-C, D-D remain open.
+- ADR 003 is accepted: local SQLite is canonical, the JS core (hosted/core via
+  hosted/local.mjs on node:sqlite) is the only learner-state engine, and hosting is
+  optional. Single writer; switch deployments only through backup/restore.
+- hosted/core/events.mjs requires exact payload field sets and events has CHECK
+  constraints on kind/source. Add evidence as append-only side tables following
+  004_contest_history.sql, read only through one ledger merge. Snapshots must record
+  per-table sequence high-water marks for reproduction.
+- Human review is never a gate: AI draft + blind AI review gives ai_reviewed, disagreement
+  abstains. AI never resolves same_problem identity or reads quarantined LeetCode text.
+- Difficulty is calibrated per platform (CF logistic, AtCoder Problems IRT, LeetCode
+  Beta per level); never convert across platforms. Store predicted P in snapshots.
+- Exploration uses a fixed calendar rotation, not randomization. Neighbor tables stay
+  exact per catalog version; only fetch/diff/embedding work is incremental.
