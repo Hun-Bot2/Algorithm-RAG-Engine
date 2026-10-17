@@ -1,4 +1,21 @@
 # Algorithm RAG Engine
+
+## 현재 상태 (2026-10-18)
+
+백준이 서비스를 종료해서 아래 "초기 파이프라인"은 입력(백준 풀이 노트)을 잃었고, 그 GitHub Actions 워크플로우 2개
+(`daily_algorithm_pipeline.yml`, `publish_docker.yml`)는 삭제했습니다(git 이력에서 복구 가능). 현재 방향은 다음과 같습니다.
+
+- **로컬 우선 학습 시스템** (`hosted/`, `specs/mastery-system/`): LeetCode, Codeforces, AtCoder 풀이 기록을 읽고 개인 맞춤 연습을 계획합니다.
+  유료 API와 서버 없이 로컬에서만 동작합니다. 사용법은 [runbook](specs/mastery-system/runbook.md)을 보세요.
+- **풀이 기록 저장소**: 별도 private repo `algorithm-solution`. 이 저장소의 커밋을 `node hosted/cli.mjs repo ingest`가 읽습니다.
+  push만으로 추천이 만들어지지는 않고, 추천은 로컬에서 `plan`으로 만듭니다.
+- **연구** (`research/`): 세 플랫폼 24,297문제의 제목 기반 유사도 지도, 언어 편향 보정, AtCoder 개념 분류. 결과는 `research/*/REPORT.md`와 `specs/`에 있습니다.
+- 초기 파이프라인 코드(`src/main/`, `Dockerfile`, `docker-compose.yml`)는 기록으로 남아 있지만 자동 실행은 없습니다.
+
+아래 내용은 2026-01 시점의 초기 파이프라인 기록입니다.
+
+---
+
 백준 풀이 기록을 분석해 유사한 LeetCode 문제를 자동 추천하고, 매일 07:00 KST에 Slack으로 알림을 보냅니다.
 
 ![actions](images/Algo-RAGv2.png)
@@ -8,8 +25,7 @@
 	- Baekjoon MDX → OpenAI 임베딩(text-embedding-3-small) → Numpy(LeetCode 인덱스) 유사도 검색 → GPT-4o-mini로 추천 이유 생성 → `artifacts/recommendation_map.json` 저장
 - Light Job (`src/main/slack_bot_daily_review.py`):
 	- JSON 로드 → Slack Webhook으로 메시지 전송
-- GitHub Actions (`.github/workflows/daily_algorithm_pipeline.yml`):
-	- 매일 07:00 KST 스케줄 실행 + 수동 실행 지원(workflow_dispatch)
+- GitHub Actions: 워크플로우 삭제됨(2026-10-18). 이전에는 수동 실행(workflow_dispatch)만 지원했습니다.
 - S3 사용(워크플로우에서만):
 	- Job1: `aws s3 sync ./artifacts s3://hunbot-algo-rag-data/ --delete`
 	- Job2: `aws s3 cp s3://hunbot-algo-rag-data/recommendation_map.json .`
@@ -65,7 +81,7 @@ GitHub Actions 실행 시점에만 S3에서 인덱스를 다운로드하고 Dock
 - `src/main/generate_index_map.py` — Baekjoon MDX → OpenAI 임베딩 → NumPy 검색 → GPT-4o-mini 이유 → JSON 저장
 - `src/main/slack_bot_daily_review.py` — JSON 로드 → Slack Webhook 알림
 - `Dockerfile` — heavy/light 멀티스테이지 빌드 (heavy:  NumPy+LangChain, light: Slack 최소 의존성)
-- `.github/workflows/daily_algorithm_pipeline.yml` — Job1(heavy) → S3 업로드 → Job2(light) → Slack
+- `.github/workflows/daily_algorithm_pipeline.yml` — 삭제됨(2026-10-18, git 이력 참고)
 - `indexes/faiss_leetcode/ → indexes/numpy_leetcode/` — 사전 구축된 LeetCode → NumPy 인덱스 (필수)
 - `artifacts/recommendation_map.json` — 생성된 추천 맵 (S3 업로드 대상)
 

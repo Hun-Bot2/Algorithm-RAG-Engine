@@ -233,13 +233,12 @@ If validation cannot be performed, explicitly explain why.
 
 ## Production Code vs Experiments
 
-Treat these as the current production entry points:
+Treat these as the legacy batch entry points (no automation remains; see "Current direction" below):
 
 - `src/main/generate_index_map.py` - heavy recommendation generation job.
 - `src/main/slack_bot_daily_review.py` - light Slack delivery job.
 - `Dockerfile` - multi-stage heavy/light image.
 - `docker-compose.yml` - local/container orchestration.
-- `.github/workflows/daily_algorithm_pipeline.yml` - pipeline orchestration.
 
 Treat these as legacy or experimental unless the task explicitly targets them:
 
@@ -256,9 +255,8 @@ currently runs through `src/main/generate_index_map.py`.
 
 - The main production search path uses NumPy, not FAISS.
 - FAISS files and scripts remain for migration history and experiments.
-- The workflow schedule is documented historically, but the checked-in
-  `.github/workflows/daily_algorithm_pipeline.yml` currently uses manual
-  `workflow_dispatch`; verify before saying it runs daily.
+- No GitHub Actions workflow remains in this repository (the manual pipeline and Docker publish workflows
+  were removed 2026-10-18; recover them from git history if needed). Nothing here runs daily.
 - `generate_index_map.py` relies on OpenAI API access and a NumPy index.
 - `artifacts/recommendation_map.json` is generated output and may contain sample
   recommendations; do not use it as proof of quality without evaluation.
@@ -697,3 +695,14 @@ Keep these distinctions clear in summaries and docs:
 - related-v1 has a semantic-only fallback: unclassified candidates from a title channel, reliable titles on both sides, label
   "Semantic title neighbor...", -1.5 penalty, never credited to a concept. Before estimating cost for a subagent run, state the agent count and
   total tokens up front: the user stopped a 10-agent wave that had been described only as "5M tokens".
+
+## Current direction (2026-10-18)
+
+- Baekjoon has shut down: the legacy batch pipeline (`src/main/generate_index_map.py`, Docker, S3, OpenAI, Slack) has no input and no
+  automation. Its code stays as history; do not revive it or add paid-API or cloud dependencies for it.
+- The product direction is the local-first mastery system (`hosted/`, `specs/mastery-system/`, ADR 003): LeetCode, Codeforces and AtCoder
+  only, no paid APIs, no hosting. Minimize cost and storage; ask before adding anything that costs money or large disk.
+- Solutions live in the separate private repo `algorithm-solution` (layout `leetcode/`, `codeforces/`, `atcoder/`; commit trailers
+  `Problem:`, `Outcome:`, `Hints:`). Its own Actions only check naming and trailers. Pushing never produces recommendations: run
+  `node hosted/cli.mjs repo ingest` and `plan` locally.
+- This repository is not a portfolio or a commercial service. Do not add features for external users.
