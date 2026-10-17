@@ -1,0 +1,25 @@
+{
+  "schema": "mastery-archive.v1",
+  "archive_version": "archive-example-1",
+  "note": "Template with fictional organizations. Keep your real archive in a private repository; store links and your own notes, not third-party statement text.",
+  "records": [
+    {"record_id": "example-grad-2024-s1-q3", "version": 1, "supersedes": null, "category": "grad_entrance",
+     "origin": {"organization": "Example Graduate School", "exam": "CS entrance exam", "year": 2024, "session": "1", "label": "Q3"},
+     "source": {"kind": "official_publication", "citation": "Example Graduate School past-paper page", "url": "https://example.org/past-papers", "accessed": "2026-10-17"},
+     "acquisition": "link_only", "rights_status": "link_only", "private_copy_sha256": null, "confidence": "medium", "recorded_by": "learner",
+     "statement_text": null, "notes": null,
+     "links": [{"problem_key": "codeforces:4A", "relation": "practice_for", "evidence": [], "status": "approved"}]},
+    {"record_id": "example-grad-2024-s1-q3", "version": 2, "supersedes": "example-grad-2024-s1-q3@1", "category": "grad_entrance",
+     "origin": {"organization": "Example Graduate School", "exam": "CS entrance exam", "year": 2024, "session": "1", "label": "Q3"},
+     "source": {"kind": "official_publication", "citation": "Example Graduate School past-paper page (corrected session)", "url": "https://example.org/past-papers", "accessed": "2026-10-17"},
+     "acquisition": "link_only", "rights_status": "personal_notes", "private_copy_sha256": null, "confidence": "high", "recorded_by": "learner",
+     "statement_text": null, "notes": "My own summary: parity argument on integer splits.",
+     "links": [{"problem_key": "codeforces:4A", "relation": "practice_for", "evidence": [], "status": "approved"}]},
+    {"record_id": "example-company-2025-onsite-1", "version": 1, "supersedes": null, "category": "company_interview",
+     "origin": {"organization": "Example Corp", "exam": "onsite interview", "year": 2025, "session": null, "label": "round 1"},
+     "source": {"kind": "personal_recollection", "citation": "own recollection after the interview", "url": null, "accessed": null},
+     "acquisition": "recollection", "rights_status": "own_work", "private_copy_sha256": null, "confidence": "medium", "recorded_by": "learner",
+     "statement_text": "My reconstruction: return indices of two numbers adding to a target.", "notes": null,
+     "links": [{"problem_key": "leetcode:two-sum", "relation": "concept_only", "evidence": [], "status": "approved"}]}
+  ]
+}

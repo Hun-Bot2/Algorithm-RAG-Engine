@@ -1,0 +1,55 @@
+{
+  "built_at": "2026-10-17T10:53:14+00:00",
+  "concept_map": "assets/mastery/concept-map.v1.json",
+  "counts": {
+    "ai_judgments": 0,
+    "archive_records": 0,
+    "by_platform": {
+      "atcoder": 9787,
+      "codeforces": 11457,
+      "leetcode": 3053
+    },
+    "concept_map_rows": 115,
+    "contests": 0,
+    "difficulty_kind": {
+      "atc_irt": 4866,
+      "cf_rating": 11152,
+      "lc_level": 3053,
+      "none": 5226
+    },
+    "eligible": 23454,
+    "neighbor_channels": {
+      "title_v2": 728910,
+      "title_v2_cross": 728910
+    },
+    "neighbors": 1457820,
+    "problem_concepts": {
+      "abstained": 691,
+      "ai_reviewed": 33605
+    },
+    "problems": 24297,
+    "problems_with_concepts": 13418,
+    "status": {
+      "active": 24297,
+      "removed_upstream": 0
+    }
+  },
+  "input_sha256": {
+    "aliases": "58979a9cf1d34d5f6d9bd6ca05433691890c3acac2f7883f8128394148273b63",
+    "atcoder_models": "2bdb4d6cdde49d76a40dceb8e02be5ad59f86717bf83b57374de625ffb890a58",
+    "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+    "concepts": "cfcf8171546a89bedd3d9a4865a208f70011193082de50b8a6ba18dd7adb42e6",
+    "keys": "19f9245cf50f22f5d411f8506f55ea4eb4fb777085193ac8dea1cb456ae1c767",
+    "neighbors_any_idx": "b8c68ee20923e11521fca8ba036d73cd8b04b11f896e4c404a994ac1c01c2ca5",
+    "neighbors_any_score": "c11e9936f4e5fffbb8386d32f0264572ab93bf5455f05d32f9f81efbaeab45e6",
+    "neighbors_cross_idx": "a069e618dd86ca33c679153c382785fb4ca15b7cc05af61f29ae050b390ca16a",
+    "neighbors_cross_score": "8d5569d8d85a8aef8470fe2ed7cc8dd6c553c4da2314b8416e4677c9859a2245",
+    "vector_meta": "a79fd20bf9aa837b579b0e4a6bc28d7f7654453cf75d1c5b9a3dbf3ba0487cc6"
+  },
+  "output": "catalog-v1.sqlite3",
+  "output_sha256": "ea30eea9da93a90fbb7eee04ede25302d70a886375428e5fcebb5c39c1f220cf",
+  "parent_version": null,
+  "schema": "mastery-catalog-receipt.v1",
+  "statement_fields_read": false,
+  "version": "catalog-v1"
+}

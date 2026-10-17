@@ -1,0 +1,9 @@
+Map each native problem tag to the concept ids (from assets/mastery/concepts.v1.json) that a
+problem carrying that tag most likely PRACTICES. Rules: use only vocabulary ids; zero, one or at
+most three concepts per tag; map very broad container tags that say almost nothing about
+technique (for example LeetCode "Array", "String", "Math", "Matrix", Codeforces "math",
+"data structures") to [] unless one concept is clearly implied; membership is a practice grouping,
+not a claim that problems share an algorithm; give a short concrete non-empty rationale for every
+tag. Work alone; do not read other judges' outputs or browse the web. Output a JSON array of
+{"platform","native_tag","concepts","rationale"} covering the 69 LeetCode and 37 Codeforces tags
+observed in eligible rows of private-learning/full-catalog/catalog-v1 (2026-10-17 count).

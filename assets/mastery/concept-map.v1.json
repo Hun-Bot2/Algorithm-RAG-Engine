@@ -1,0 +1,4178 @@
+{
+ "schema": "mastery-concept-map.v1",
+ "status_rule": "pair in both independent judgments -> ai_reviewed; in one -> abstained",
+ "not_gold": true,
+ "run_date": "2026-10-17",
+ "models": {
+  "draft": "claude-sonnet-subagent",
+  "review": "claude-opus-subagent"
+ },
+ "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+ "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+ "stats": {
+  "pairs_agreed": 101,
+  "pairs_abstained": 14,
+  "tags_identical": 94,
+  "tags_both_empty": 5
+ },
+ "entries": [
+  {
+   "platform": "codeforces",
+   "native_tag": "2-sat",
+   "concepts": [
+    {
+     "concept_id": "graph-ordering",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:2-sat"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "binary search",
+   "concepts": [
+    {
+     "concept_id": "binary-search",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:binary search"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "bitmasks",
+   "concepts": [
+    {
+     "concept_id": "bitmasks",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:bitmasks"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "brute force",
+   "concepts": [
+    {
+     "concept_id": "search-enumeration",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:brute force"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "chinese remainder theorem",
+   "concepts": [
+    {
+     "concept_id": "number-theory",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:chinese remainder theorem"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "combinatorics",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:combinatorics"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "communication",
+   "concepts": [
+    {
+     "concept_id": "interactive",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:communication"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "constructive algorithms",
+   "concepts": [
+    {
+     "concept_id": "constructive",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:constructive algorithms"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "data structures",
+   "concepts": [],
+   "judgment_ref": "crosswalk-v1:codeforces:data structures"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "dfs and similar",
+   "concepts": [
+    {
+     "concept_id": "graph-traversal",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:dfs and similar"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "divide and conquer",
+   "concepts": [
+    {
+     "concept_id": "divide-and-conquer",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:divide and conquer"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "dp",
+   "concepts": [
+    {
+     "concept_id": "dynamic-programming",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:dp"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "dsu",
+   "concepts": [
+    {
+     "concept_id": "union-find",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:dsu"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "expression parsing",
+   "concepts": [
+    {
+     "concept_id": "string-processing",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "stacks-queues",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:expression parsing"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "fft",
+   "concepts": [
+    {
+     "concept_id": "polynomials-fft",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:fft"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "flows",
+   "concepts": [
+    {
+     "concept_id": "flows-matching",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:flows"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "games",
+   "concepts": [
+    {
+     "concept_id": "game-theory",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:games"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "geometry",
+   "concepts": [
+    {
+     "concept_id": "geometry",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:geometry"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "graph matchings",
+   "concepts": [
+    {
+     "concept_id": "flows-matching",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:graph matchings"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "graphs",
+   "concepts": [
+    {
+     "concept_id": "graph-traversal",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:graphs"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "greedy",
+   "concepts": [
+    {
+     "concept_id": "greedy",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:greedy"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "hashing",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:hashing"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "implementation",
+   "concepts": [
+    {
+     "concept_id": "implementation",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:implementation"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "interactive",
+   "concepts": [
+    {
+     "concept_id": "interactive",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:interactive"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "math",
+   "concepts": [],
+   "judgment_ref": "crosswalk-v1:codeforces:math"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "matrices",
+   "concepts": [
+    {
+     "concept_id": "linear-algebra",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:matrices"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "meet-in-the-middle",
+   "concepts": [
+    {
+     "concept_id": "search-enumeration",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:meet-in-the-middle"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "number theory",
+   "concepts": [
+    {
+     "concept_id": "number-theory",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:number theory"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "probabilities",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:probabilities"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "schedules",
+   "concepts": [
+    {
+     "concept_id": "greedy",
+     "evidence_status": "abstained"
+    },
+    {
+     "concept_id": "sorting",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:schedules"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "shortest paths",
+   "concepts": [
+    {
+     "concept_id": "shortest-paths",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:shortest paths"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "sortings",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:sortings"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "string suffix structures",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:string suffix structures"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "strings",
+   "concepts": [
+    {
+     "concept_id": "string-processing",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:strings"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "ternary search",
+   "concepts": [
+    {
+     "concept_id": "ternary-search",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:ternary search"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "trees",
+   "concepts": [
+    {
+     "concept_id": "trees",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:trees"
+  },
+  {
+   "platform": "codeforces",
+   "native_tag": "two pointers",
+   "concepts": [
+    {
+     "concept_id": "two-pointers",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:codeforces:two pointers"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Array",
+   "concepts": [],
+   "judgment_ref": "crosswalk-v1:leetcode:Array"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Backtracking",
+   "concepts": [
+    {
+     "concept_id": "search-enumeration",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Backtracking"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Biconnected Component",
+   "concepts": [
+    {
+     "concept_id": "graph-ordering",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Biconnected Component"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Binary Indexed Tree",
+   "concepts": [
+    {
+     "concept_id": "range-structures",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Binary Indexed Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Binary Search",
+   "concepts": [
+    {
+     "concept_id": "binary-search",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Binary Search"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Binary Search Tree",
+   "concepts": [
+    {
+     "concept_id": "ordered-structures",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "trees",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Binary Search Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Binary Tree",
+   "concepts": [
+    {
+     "concept_id": "trees",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Binary Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Bit Manipulation",
+   "concepts": [
+    {
+     "concept_id": "bitmasks",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Bit Manipulation"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Bitmask",
+   "concepts": [
+    {
+     "concept_id": "bitmasks",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Bitmask"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Brainteaser",
+   "concepts": [
+    {
+     "concept_id": "constructive",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Brainteaser"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Breadth-First Search",
+   "concepts": [
+    {
+     "concept_id": "graph-traversal",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Breadth-First Search"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Bucket Sort",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Bucket Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Combinatorics",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Combinatorics"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Counting",
+   "concepts": [
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Counting"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Counting Sort",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Counting Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Data Stream",
+   "concepts": [
+    {
+     "concept_id": "data-structure-design",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Data Stream"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Depth-First Search",
+   "concepts": [
+    {
+     "concept_id": "graph-traversal",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "trees",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Depth-First Search"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Design",
+   "concepts": [
+    {
+     "concept_id": "data-structure-design",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Design"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Divide and Conquer",
+   "concepts": [
+    {
+     "concept_id": "divide-and-conquer",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Divide and Conquer"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Doubly-Linked List",
+   "concepts": [
+    {
+     "concept_id": "linked-lists",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "data-structure-design",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Doubly-Linked List"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Dynamic Programming",
+   "concepts": [
+    {
+     "concept_id": "dynamic-programming",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Dynamic Programming"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Enumeration",
+   "concepts": [
+    {
+     "concept_id": "search-enumeration",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Enumeration"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Eulerian Circuit",
+   "concepts": [
+    {
+     "concept_id": "graph-ordering",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Eulerian Circuit"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Game Theory",
+   "concepts": [
+    {
+     "concept_id": "game-theory",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Game Theory"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Geometry",
+   "concepts": [
+    {
+     "concept_id": "geometry",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Geometry"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Graph",
+   "concepts": [
+    {
+     "concept_id": "graph-traversal",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Graph"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Greedy",
+   "concepts": [
+    {
+     "concept_id": "greedy",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Greedy"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Hash Function",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Hash Function"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Hash Table",
+   "concepts": [
+    {
+     "concept_id": "arrays-hashing",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Hash Table"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Heap (Priority Queue)",
+   "concepts": [
+    {
+     "concept_id": "heaps",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Heap (Priority Queue)"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Interactive",
+   "concepts": [
+    {
+     "concept_id": "interactive",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Interactive"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Iterator",
+   "concepts": [
+    {
+     "concept_id": "data-structure-design",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Iterator"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Line Sweep",
+   "concepts": [
+    {
+     "concept_id": "geometry",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Line Sweep"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Linked List",
+   "concepts": [
+    {
+     "concept_id": "linked-lists",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Linked List"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Math",
+   "concepts": [],
+   "judgment_ref": "crosswalk-v1:leetcode:Math"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Matrix",
+   "concepts": [],
+   "judgment_ref": "crosswalk-v1:leetcode:Matrix"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Memoization",
+   "concepts": [
+    {
+     "concept_id": "dynamic-programming",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Memoization"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Merge Sort",
+   "concepts": [
+    {
+     "concept_id": "divide-and-conquer",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Merge Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Minimum Spanning Tree",
+   "concepts": [
+    {
+     "concept_id": "spanning-trees",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Minimum Spanning Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Monotonic Queue",
+   "concepts": [
+    {
+     "concept_id": "stacks-queues",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "sliding-window",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Monotonic Queue"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Monotonic Stack",
+   "concepts": [
+    {
+     "concept_id": "stacks-queues",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Monotonic Stack"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Number Theory",
+   "concepts": [
+    {
+     "concept_id": "number-theory",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Number Theory"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Ordered Set",
+   "concepts": [
+    {
+     "concept_id": "ordered-structures",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Ordered Set"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Prefix Sum",
+   "concepts": [
+    {
+     "concept_id": "prefix-sums",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Prefix Sum"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Probability and Statistics",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Probability and Statistics"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Queue",
+   "concepts": [
+    {
+     "concept_id": "stacks-queues",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Queue"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Quickselect",
+   "concepts": [
+    {
+     "concept_id": "divide-and-conquer",
+     "evidence_status": "ai_reviewed"
+    },
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Quickselect"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Radix Sort",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Radix Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Randomized",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "abstained"
+    },
+    {
+     "concept_id": "data-structure-design",
+     "evidence_status": "abstained"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Randomized"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Recursion",
+   "concepts": [
+    {
+     "concept_id": "divide-and-conquer",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Recursion"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Rejection Sampling",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Rejection Sampling"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Reservoir Sampling",
+   "concepts": [
+    {
+     "concept_id": "combinatorics-probability",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Reservoir Sampling"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Rolling Hash",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Rolling Hash"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Segment Tree",
+   "concepts": [
+    {
+     "concept_id": "range-structures",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Segment Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Shortest Path",
+   "concepts": [
+    {
+     "concept_id": "shortest-paths",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Shortest Path"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Simulation",
+   "concepts": [
+    {
+     "concept_id": "implementation",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Simulation"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Sliding Window",
+   "concepts": [
+    {
+     "concept_id": "sliding-window",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Sliding Window"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Sort",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Sorting",
+   "concepts": [
+    {
+     "concept_id": "sorting",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Sorting"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Stack",
+   "concepts": [
+    {
+     "concept_id": "stacks-queues",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Stack"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "String",
+   "concepts": [
+    {
+     "concept_id": "string-processing",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:String"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "String Matching",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:String Matching"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Strongly Connected Component",
+   "concepts": [
+    {
+     "concept_id": "graph-ordering",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Strongly Connected Component"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Suffix Array",
+   "concepts": [
+    {
+     "concept_id": "string-algorithms",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Suffix Array"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Topological Sort",
+   "concepts": [
+    {
+     "concept_id": "graph-ordering",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Topological Sort"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Tree",
+   "concepts": [
+    {
+     "concept_id": "trees",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Tree"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Trie",
+   "concepts": [
+    {
+     "concept_id": "tries",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Trie"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Two Pointers",
+   "concepts": [
+    {
+     "concept_id": "two-pointers",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Two Pointers"
+  },
+  {
+   "platform": "leetcode",
+   "native_tag": "Union Find",
+   "concepts": [
+    {
+     "concept_id": "union-find",
+     "evidence_status": "ai_reviewed"
+    }
+   ],
+   "judgment_ref": "crosswalk-v1:leetcode:Union Find"
+  }
+ ],
+ "judgments": [
+  {
+   "judgment_id": "crosswalk-v1:codeforces:2-sat:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:2-sat",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "2-SAT is listed in graph-ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:2-sat:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:2-sat",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "2-SAT is named in the graph-ordering concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:binary search:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:binary search",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "binary-search"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:binary search:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:binary search",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "binary-search"
+   ],
+   "rationale": "The tag directly names binary search, frequently on the answer."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:bitmasks:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:bitmasks",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:bitmasks:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:bitmasks",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "The tag directly names bitmask techniques."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:brute force:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:brute force",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Brute force is explicit in search-enumeration."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:brute force:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:brute force",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Brute force is named in the search-enumeration concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:chinese remainder theorem:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:chinese remainder theorem",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "CRT is listed in number-theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:chinese remainder theorem:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:chinese remainder theorem",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "CRT is named in the number-theory concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:combinatorics:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:combinatorics",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:combinatorics:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:combinatorics",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Combinatorics is part of the counting and combinatorics concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:communication:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:communication",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "interactive"
+   ],
+   "rationale": "Communication problems are an interactive/protocol style; closest concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:communication:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:communication",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Communication (run-twice encode/decode) problems describe a format, not a technique, and no vocabulary concept fits."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:constructive algorithms:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:constructive algorithms",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "constructive"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:constructive algorithms:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:constructive algorithms",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "constructive"
+   ],
+   "rationale": "The tag directly names constructive algorithms."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:data structures:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:data structures",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Broad container tag covering many unrelated structures (segment trees, sets, DSU), so no single concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:data structures:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:data structures",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Codeforces data structures covers everything from stacks to segment trees and treaps, so no single concept is clearly implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dfs and similar:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dfs and similar",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "DFS and BFS traversal."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dfs and similar:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dfs and similar",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "DFS/BFS-style search is the core of graph traversal."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:divide and conquer:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:divide and conquer",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:divide and conquer:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:divide and conquer",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "The tag directly names divide and conquer."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dp:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dp",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dp:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dp",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "The tag directly names dynamic programming."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dsu:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dsu",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "union-find"
+   ],
+   "rationale": "DSU is disjoint set union."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:dsu:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:dsu",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "union-find"
+   ],
+   "rationale": "DSU is disjoint set union."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:expression parsing:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:expression parsing",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing"
+   ],
+   "rationale": "Parsing expressions is string parsing."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:expression parsing:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:expression parsing",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing",
+    "stacks-queues"
+   ],
+   "rationale": "Expression parsing practices string parsing, typically with stacks for operators."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:fft:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:fft",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "polynomials-fft"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:fft:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:fft",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "polynomials-fft"
+   ],
+   "rationale": "The tag directly names FFT."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:flows:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:flows",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "flows-matching"
+   ],
+   "rationale": "Network flow concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:flows:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:flows",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "flows-matching"
+   ],
+   "rationale": "The tag directly names network flow."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:games:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:games",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "game-theory"
+   ],
+   "rationale": "Game problems practice combinatorial game theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:games:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:games",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "game-theory"
+   ],
+   "rationale": "Games problems practice combinatorial game theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:geometry:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:geometry",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:geometry:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:geometry",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry"
+   ],
+   "rationale": "The tag directly names computational geometry."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:graph matchings:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:graph matchings",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "flows-matching"
+   ],
+   "rationale": "Bipartite matching is in flows-matching."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:graph matchings:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:graph matchings",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "flows-matching"
+   ],
+   "rationale": "Bipartite matching is named in the flows-matching concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:graphs:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:graphs",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "Graph modeling and connectivity is the baseline graph practice."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:graphs:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:graphs",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "Graph problems primarily practice graph modeling and connectivity."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:greedy:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:greedy",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "greedy"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:greedy:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:greedy",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "greedy"
+   ],
+   "rationale": "The tag directly names greedy choice reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:hashing:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:hashing",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms",
+    "arrays-hashing"
+   ],
+   "rationale": "Hashing problems are usually string hashing, sometimes hash-based lookup."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:hashing:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:hashing",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Codeforces hashing problems are predominantly polynomial string hashing."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:implementation:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:implementation",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "implementation"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:implementation:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:implementation",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "implementation"
+   ],
+   "rationale": "The tag directly names implementation."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:interactive:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:interactive",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "interactive"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:interactive:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:interactive",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "interactive"
+   ],
+   "rationale": "The tag directly names interactive problems."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:math:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:math",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Broad container tag spanning number theory, combinatorics and formulas with no single concept implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:math:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:math",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Codeforces math is an extremely broad container tag spanning many techniques, so no single concept is implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:matrices:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:matrices",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linear-algebra"
+   ],
+   "rationale": "Matrix problems (exponentiation, elimination) map to linear algebra."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:matrices:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:matrices",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linear-algebra"
+   ],
+   "rationale": "Codeforces matrices problems practice matrix exponentiation and linear algebra."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:meet-in-the-middle:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:meet-in-the-middle",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Meet-in-the-middle is listed in search-enumeration."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:meet-in-the-middle:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:meet-in-the-middle",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Meet-in-the-middle is named in the search-enumeration concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:number theory:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:number theory",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:number theory:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:number theory",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "The tag directly names number theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:probabilities:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:probabilities",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Probability and expectation."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:probabilities:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:probabilities",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Probability and expectation are part of the combinatorics-probability concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:schedules:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:schedules",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "greedy",
+    "sorting"
+   ],
+   "rationale": "Scheduling problems typically use sorting by deadline or time with greedy choice."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:schedules:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:schedules",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Schedules is a rare problem-domain tag rather than a technique, so no concept is clearly implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:shortest paths:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:shortest paths",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "shortest-paths"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:shortest paths:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:shortest paths",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "shortest-paths"
+   ],
+   "rationale": "The tag directly names shortest paths."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:sortings:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:sortings",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:sortings:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:sortings",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "The tag directly names sorting."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:string suffix structures:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:string suffix structures",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Suffix structures are in string-algorithms."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:string suffix structures:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:string suffix structures",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Suffix structures are named in the string-algorithms concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:strings:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:strings",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing"
+   ],
+   "rationale": "General string problems practice manipulation and parsing."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:strings:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:strings",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing"
+   ],
+   "rationale": "Codeforces strings problems mostly practice string manipulation, with dedicated tags for hashing and suffix structures."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:ternary search:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:ternary search",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ternary-search"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:ternary search:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:ternary search",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ternary-search"
+   ],
+   "rationale": "The tag directly names ternary search."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:trees:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:trees",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:trees:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:trees",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "The tag directly names trees."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:two pointers:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:two pointers",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "two-pointers"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:codeforces:two pointers:review",
+   "object_kind": "tag_concept",
+   "object_ref": "codeforces:two pointers",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "two-pointers"
+   ],
+   "rationale": "The tag directly names two pointers."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Array:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Array",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Container tag naming only the data layout, implying no single technique."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Array:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Array",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Array is a near-universal container tag attached to problems of every technique, so it implies no specific practice concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Backtracking:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Backtracking",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Backtracking is explicitly listed in the search-enumeration concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Backtracking:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Backtracking",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Backtracking is named in the search-enumeration concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Biconnected Component:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Biconnected Component",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Bridges and biconnectivity are in graph-ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Biconnected Component:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Biconnected Component",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Bridges and biconnectivity are named in the graph-ordering concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Indexed Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Indexed Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "range-structures"
+   ],
+   "rationale": "Fenwick trees are in range-structures."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Indexed Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Indexed Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "range-structures"
+   ],
+   "rationale": "Binary indexed trees are Fenwick trees, a range-query structure."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Search:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Search",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "binary-search"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Search:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Search",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "binary-search"
+   ],
+   "rationale": "The tag directly names binary search, including search on the answer."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Search Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Search Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ordered-structures",
+    "trees"
+   ],
+   "rationale": "BSTs are ordered structures and also trees."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Search Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Search Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ordered-structures",
+    "trees"
+   ],
+   "rationale": "BST problems practice ordered structure properties on a binary tree."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "Binary tree traversal and recursion fall under the trees concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Binary Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Binary Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "Binary tree problems practice tree traversal and structure."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bit Manipulation:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bit Manipulation",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "Bit tricks are practiced under the bit manipulation concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bit Manipulation:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bit Manipulation",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "Bit manipulation is part of the bitmasks concept label."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bitmask:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bitmask",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bitmask:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bitmask",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "bitmasks"
+   ],
+   "rationale": "Bitmask techniques (often bitmask DP or subset states) practice the bitmasks concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Brainteaser:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Brainteaser",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "constructive"
+   ],
+   "rationale": "Brainteasers rely on insight and constructing or reasoning out an answer; loose fit."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Brainteaser:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Brainteaser",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Brainteasers rely on a one-off insight rather than a reusable technique, so no concept is clearly implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Breadth-First Search:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Breadth-First Search",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "BFS is a core traversal of graph modeling and connectivity."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Breadth-First Search:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Breadth-First Search",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "BFS is a core graph traversal technique, often on grids or implicit graphs."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bucket Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bucket Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Bucket sort is a non-comparison sorting method."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Bucket Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Bucket Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting",
+    "arrays-hashing"
+   ],
+   "rationale": "Bucket sort groups values into buckets by key, combining ordering with bucketed counting."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Combinatorics:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Combinatorics",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Counting and combinatorics concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Combinatorics:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Combinatorics",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Combinatorics is part of the counting and combinatorics concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Counting:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Counting",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "arrays-hashing"
+   ],
+   "rationale": "Counting problems typically use frequency tables."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Counting:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Counting",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "arrays-hashing"
+   ],
+   "rationale": "LeetCode Counting mostly means frequency counting with arrays or hash maps rather than combinatorial counting."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Counting Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Counting Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Counting sort is a non-comparison sorting method."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Counting Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Counting Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting",
+    "arrays-hashing"
+   ],
+   "rationale": "Counting sort uses frequency arrays to order values."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Data Stream:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Data Stream",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Data stream problems require designing structures that handle incremental input."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Data Stream:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Data Stream",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Data Stream problems ask for a class that processes incremental inputs, i.e. data structure/API design."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Depth-First Search:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Depth-First Search",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "DFS is a core traversal of graph and tree modeling."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Depth-First Search:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Depth-First Search",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal",
+    "trees"
+   ],
+   "rationale": "LeetCode DFS problems are mostly graph/grid traversal or tree traversal, covering both concepts."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Design:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Design",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Design problems ask for data structures and APIs such as LRU cache."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Design:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Design",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Design problems ask for implementing a class/API with specified operations."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Divide and Conquer:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Divide and Conquer",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Divide and Conquer:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Divide and Conquer",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "The tag directly names divide and conquer."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Doubly-Linked List:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Doubly-Linked List",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linked-lists"
+   ],
+   "rationale": "Variant of linked lists, often used in LRU-style designs."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Doubly-Linked List:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Doubly-Linked List",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linked-lists",
+    "data-structure-design"
+   ],
+   "rationale": "Doubly-linked lists appear mostly in design problems such as LRU/LFU caches."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Dynamic Programming:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Dynamic Programming",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Dynamic Programming:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Dynamic Programming",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "The tag directly names the dynamic-programming practice concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Enumeration:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Enumeration",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Enumerating candidates is brute-force enumeration."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Enumeration:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Enumeration",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "search-enumeration"
+   ],
+   "rationale": "Enumeration of candidates is part of the brute force and enumeration concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Eulerian Circuit:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Eulerian Circuit",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Euler paths are in graph-ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Eulerian Circuit:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Eulerian Circuit",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Euler paths are named in the graph-ordering concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Game Theory:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Game Theory",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "game-theory"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Game Theory:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Game Theory",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "game-theory"
+   ],
+   "rationale": "The tag directly names combinatorial game theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Geometry:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Geometry",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Geometry:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Geometry",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry"
+   ],
+   "rationale": "The tag directly names computational geometry."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Graph:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Graph",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "Graph modeling and connectivity are the common baseline practice."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Graph:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Graph",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-traversal"
+   ],
+   "rationale": "Graph-tagged problems primarily practice graph modeling, traversal and connectivity."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Greedy:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Greedy",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "greedy"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Greedy:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Greedy",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "greedy"
+   ],
+   "rationale": "The tag directly names greedy choice reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Hash Function:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Hash Function",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Hash-function problems mostly concern string hashing; weak but the closest concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Hash Function:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Hash Function",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms",
+    "arrays-hashing"
+   ],
+   "rationale": "Hash Function problems are mostly string/rolling hashing and sometimes custom hash table design."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Hash Table:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Hash Table",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "arrays-hashing"
+   ],
+   "rationale": "Hash tables are the lookup and frequency tool of the arrays-hashing concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Hash Table:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Hash Table",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "arrays-hashing"
+   ],
+   "rationale": "Hash tables are the core lookup and frequency tool named by the arrays-hashing concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Heap (Priority Queue):draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Heap (Priority Queue)",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "heaps"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Heap (Priority Queue):review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Heap (Priority Queue)",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "heaps"
+   ],
+   "rationale": "The tag directly names heaps and priority queues."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Interactive:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Interactive",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "interactive"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Interactive:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Interactive",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "interactive"
+   ],
+   "rationale": "The tag directly names interactive problems."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Iterator:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Iterator",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Iterator problems design an API over a data structure."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Iterator:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Iterator",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "Iterator problems ask for implementing an iterator API."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Line Sweep:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Line Sweep",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry",
+    "sorting"
+   ],
+   "rationale": "Sweep lines are in the geometry concept and rely on sorted events."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Line Sweep:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Line Sweep",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "geometry",
+    "sorting"
+   ],
+   "rationale": "Sweep lines are named in the geometry concept and rely on processing sorted events."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Linked List:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Linked List",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linked-lists"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Linked List:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Linked List",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "linked-lists"
+   ],
+   "rationale": "The tag directly names linked lists."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Math:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Math",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Broad container tag spanning arithmetic, number theory and combinatorics with no single concept implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Math:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Math",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Math is a broad container covering arithmetic, number theory, combinatorics and geometry, so no single concept is clearly implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Matrix:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Matrix",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "Container tag for 2D grids; the technique (BFS, DP, simulation) varies."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Matrix:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Matrix",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [],
+   "rationale": "LeetCode Matrix usually means a 2D grid container rather than linear algebra, so no concept is clearly implied."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Memoization:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Memoization",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "Memoization is listed under dynamic programming."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Memoization:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Memoization",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "dynamic-programming"
+   ],
+   "rationale": "Memoization is named in the dynamic-programming concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Merge Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Merge Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting",
+    "divide-and-conquer"
+   ],
+   "rationale": "Merge sort is a sorting algorithm built on divide and conquer."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Merge Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Merge Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer",
+    "sorting"
+   ],
+   "rationale": "Merge sort problems (e.g. inversion counting) practice divide and conquer over sorted halves."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Minimum Spanning Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Minimum Spanning Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "spanning-trees"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Minimum Spanning Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Minimum Spanning Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "spanning-trees"
+   ],
+   "rationale": "The tag directly names minimum spanning trees."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Monotonic Queue:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Monotonic Queue",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Monotonic queue is listed under stacks-queues."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Monotonic Queue:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Monotonic Queue",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues",
+    "sliding-window"
+   ],
+   "rationale": "Monotonic deques are part of stacks-queues and are typically used for sliding window extrema."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Monotonic Stack:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Monotonic Stack",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Monotonic stack is listed under stacks-queues."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Monotonic Stack:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Monotonic Stack",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Monotonic stack is explicitly part of the stacks-queues concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Number Theory:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Number Theory",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Number Theory:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Number Theory",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "number-theory"
+   ],
+   "rationale": "The tag directly names number theory."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Ordered Set:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Ordered Set",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ordered-structures"
+   ],
+   "rationale": "Ordered sets and maps are the ordered-structures concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Ordered Set:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Ordered Set",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "ordered-structures"
+   ],
+   "rationale": "Ordered sets are named in the ordered-structures concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Prefix Sum:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Prefix Sum",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "prefix-sums"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Prefix Sum:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Prefix Sum",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "prefix-sums"
+   ],
+   "rationale": "The tag directly names prefix sums."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Probability and Statistics:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Probability and Statistics",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Probability and expectation concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Probability and Statistics:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Probability and Statistics",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Probability problems practice probability and expectation."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Queue:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Queue",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Queue:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Queue",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Queues are part of the stacks-queues concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Quickselect:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Quickselect",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting",
+    "divide-and-conquer"
+   ],
+   "rationale": "Quickselect is partition-based order selection, a divide and conquer on order statistics."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Quickselect:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Quickselect",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting",
+    "divide-and-conquer"
+   ],
+   "rationale": "Quickselect is partition-based order statistics, a divide and conquer selection over ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Radix Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Radix Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Radix sort is a non-comparison sorting method."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Radix Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Radix Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Radix sort practices digit-wise ordering of values."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Randomized:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Randomized",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Randomized problems involve probability and sampling reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Randomized:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Randomized",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "data-structure-design"
+   ],
+   "rationale": "LeetCode Randomized problems are mostly design tasks like random pick or randomized set implementations."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Recursion:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Recursion",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "Recursion-based splitting is part of the divide-and-conquer concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Recursion:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Recursion",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "divide-and-conquer"
+   ],
+   "rationale": "Recursion problems mostly practice recursive decomposition into subproblems, the closest concept being recursion-based splitting."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Rejection Sampling:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Rejection Sampling",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Rejection sampling is a probability technique."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Rejection Sampling:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Rejection Sampling",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Rejection sampling practices constructing uniform distributions and expected-trial reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Reservoir Sampling:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Reservoir Sampling",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Reservoir sampling relies on probability arguments for uniformity."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Reservoir Sampling:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Reservoir Sampling",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "combinatorics-probability"
+   ],
+   "rationale": "Reservoir sampling practices reasoning about uniform selection probabilities."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Rolling Hash:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Rolling Hash",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Rolling hash is string hashing."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Rolling Hash:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Rolling Hash",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Rolling hash is string hashing, part of the string-algorithms concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Segment Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Segment Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "range-structures"
+   ],
+   "rationale": "Segment trees are the range-structures concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Segment Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Segment Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "range-structures"
+   ],
+   "rationale": "Segment trees are a range-query structure."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Shortest Path:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Shortest Path",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "shortest-paths"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Shortest Path:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Shortest Path",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "shortest-paths"
+   ],
+   "rationale": "The tag directly names shortest paths."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Simulation:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Simulation",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "implementation"
+   ],
+   "rationale": "Simulation problems are direct implementation of described processes."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Simulation:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Simulation",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "implementation"
+   ],
+   "rationale": "Simulation problems practice careful step-by-step implementation."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sliding Window:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sliding Window",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sliding-window"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sliding Window:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sliding Window",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sliding-window"
+   ],
+   "rationale": "The tag directly names the sliding window concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Direct name match to sorting."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Sort is a legacy spelling of the Sorting tag and practices order-based reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sorting:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sorting",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Sorting:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Sorting",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "sorting"
+   ],
+   "rationale": "Sorting problems practice ordering data and order-based reasoning."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Stack:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Stack",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Stack:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Stack",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "stacks-queues"
+   ],
+   "rationale": "Stacks are part of the stacks-queues concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:String:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:String",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing"
+   ],
+   "rationale": "String-tagged problems practice manipulation and parsing of character data."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:String:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:String",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-processing"
+   ],
+   "rationale": "Problems tagged String almost always involve character-level manipulation or parsing, which is the string-processing practice concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:String Matching:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:String Matching",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Pattern matching uses KMP/Z and hashing."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:String Matching:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:String Matching",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "String matching problems practice KMP/Z or hashing based pattern search."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Strongly Connected Component:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Strongly Connected Component",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "SCC is in graph-ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Strongly Connected Component:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Strongly Connected Component",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "SCC is named in the graph-ordering concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Suffix Array:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Suffix Array",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Suffix structures are in string-algorithms."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Suffix Array:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Suffix Array",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "string-algorithms"
+   ],
+   "rationale": "Suffix arrays are suffix structures, part of the string-algorithms concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Topological Sort:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Topological Sort",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Topological order is in graph-ordering."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Topological Sort:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Topological Sort",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "graph-ordering"
+   ],
+   "rationale": "Topological order is named in the graph-ordering concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Tree:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Tree",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "Tree-tagged problems practice rooted tree structure and traversal."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Tree:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Tree",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "trees"
+   ],
+   "rationale": "Tree problems practice rooted tree structure and traversal."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Trie:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Trie",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "tries"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Trie:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Trie",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "tries"
+   ],
+   "rationale": "The tag directly names tries."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Two Pointers:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Two Pointers",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "two-pointers"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Two Pointers:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Two Pointers",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "two-pointers"
+   ],
+   "rationale": "The tag directly names the two-pointers concept."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Union Find:draft",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Union Find",
+   "model": "claude-sonnet-subagent",
+   "role": "draft",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "union-find"
+   ],
+   "rationale": "Direct name match."
+  },
+  {
+   "judgment_id": "crosswalk-v1:leetcode:Union Find:review",
+   "object_kind": "tag_concept",
+   "object_ref": "leetcode:Union Find",
+   "model": "claude-opus-subagent",
+   "role": "review",
+   "run_date": "2026-10-17",
+   "prompt_sha256": "61b69e56559aeea3e02d892c5ba58dbb40ac7ed89c289ebe9462f250ac894ed7",
+   "input_sha256": "6ab07ba814a89c992491467e2902d8ae041e5d791872c5921c50bf6dd7e341ed",
+   "verdict": [
+    "union-find"
+   ],
+   "rationale": "Union Find is disjoint set union."
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "byte_identical": true,
+ "checked_at": "2026-10-17",
+ "delta": {
+  "added": 0,
+  "changed": 0,
+  "removed": 0,
+  "unchanged": 21244
+ },
+ "encoded_titles": 0,
+ "finding": "Identical title texts encoded in different batches differ by ~1e-7; the cache therefore reuses each unchanged node vector by (problem_key, text) before falling back to text-only reuse.",
+ "full_v2_neighbors_sha256": {
+  "any": {
+   "idx_sha256": "b8c68ee20923e11521fca8ba036d73cd8b04b11f896e4c404a994ac1c01c2ca5",
+   "score_sha256": "c11e9936f4e5fffbb8386d32f0264572ab93bf5455f05d32f9f81efbaeab45e6"
+  },
+  "cross": {
+   "idx_sha256": "a069e618dd86ca33c679153c382785fb4ca15b7cc05af61f29ae050b390ca16a",
+   "score_sha256": "8d5569d8d85a8aef8470fe2ed7cc8dd6c553c4da2314b8416e4677c9859a2245"
+  }
+ },
+ "input": "2026-10-16 reviewed-identities raw snapshot (codeforces.raw, atcoder.raw) + 2026-10-16 problem-models, replayed through refresh-v1 from catalog-v1",
+ "neighbors_sha256": {
+  "any": {
+   "idx_sha256": "b8c68ee20923e11521fca8ba036d73cd8b04b11f896e4c404a994ac1c01c2ca5",
+   "score_sha256": "c11e9936f4e5fffbb8386d32f0264572ab93bf5455f05d32f9f81efbaeab45e6"
+  },
+  "cross": {
+   "idx_sha256": "a069e618dd86ca33c679153c382785fb4ca15b7cc05af61f29ae050b390ca16a",
+   "score_sha256": "8d5569d8d85a8aef8470fe2ed7cc8dd6c553c4da2314b8416e4677c9859a2245"
+  }
+ },
+ "output_location": "scratch (not kept); seconds ~21",
+ "requirement": "R11.4 neighbors in N+1 equal exact full recomputation; R11.3 only new/changed titles encoded",
+ "schema": "mastery-refresh-acceptance.v1",
+ "translated_titles": 0
+}

@@ -1,6 +1,6 @@
 # Mastery system design v1
 
-Status: revised 2026-10-17, before implementation. Implements `requirements.md`.
+Status: implemented locally 2026-10-17 (see section 15 for deviations). Implements `requirements.md`.
 `critique.md` holds the feature inventory and the critical review.
 
 ## 1. Architecture
@@ -449,3 +449,30 @@ Dashboard filters come later and reuse the query builder.
   - AI judgment record validator (rejects empty rationale or missing hashes)
 - Regression: existing hosted, `tests/` and research verify suites stay green;
   pinned research files unchanged.
+
+## 15. Implementation notes and deviations (2026-10-17)
+
+Code: `hosted/mastery/*.mjs` (pure policy modules; `git-ingest`, `catalog`, `views` and `hosted/cli.mjs`
+are Node-only), migrations `007_git_evidence.sql` and `008_mastery_ledger.sql`, and
+`research/mastery_catalog/` (catalog builder, refresh, archive, AI judgments, relatedness tooling).
+
+| Topic | Design | Implemented | Reason |
+|---|---|---|---|
+| Planner placement | inside `buildMission` (MS-403) | separate `planDay` policy; curriculum missions unchanged | keeps the 53 existing mission tests and the hosted curriculum path byte-stable |
+| AtCoder model | Laplace update over per-problem discrimination | all 4,889 models share discrimination 0.0044794, so it is a one-parameter logistic; CF and AtCoder both use a Gaussian (Laplace) update with drift of 25 points per week | provenance in `research/mastery_catalog/atcoder-model-provenance.v1.json`; formulas match a Python reference within 1e-12 |
+| AtCoder sentinel | not planned | difficulty < -2000 (only `agc010_a` = -10000) is unknown | sentinel value |
+| CF problem rating | contest-condition logistic | same, with the CF scale treated as Elo-like (assumption, not verified against Codeforces documentation) | API documentation was not fetchable (HTTP 403) |
+| Concept offsets | after 8 outcomes | not implemented; concept need uses Beta posteriors | single-learner data volume |
+| Neighbor channels | title_v2 and statement_cc, top-50 | title_v2 and title_v2_cross, top-30 | the CodeContests statement run is cross-platform only and its AtCoder rows lack native IDs, so no statement edge joins two catalog nodes; full-v2 stores 30 |
+| Related channel rank | 2 x 1/(60+rank) | 2 x 60/(60+rank) | the unscaled RRF term was negligible (< 0.04) |
+| AtCoder URLs | from problems.json | canonical contest from contest-problem.json (task prefix, else earliest non-ADT) | AtCoder Problems points shared ABC tasks at the latest ADT reuse, so URLs drifted daily; catalog-v2 (live refresh) is superseded by catalog-v3 (same raw data, 1,717 corrected rows) |
+| Embedding cache | by text hash + model | by (problem_key, text) first, then text | identical texts encoded in different batches differ by ~1e-7; with this rule a replay reproduces the full-v2 neighbor files byte-for-byte |
+| LeetCode access | unknown means ineligible | stored rows are `free_at_collection` (collector skipped isPaidOnly in Jan 2026) | audit conclusion; status may have changed since |
+| Live contests | proposals | annotated calendar from the existing provider cache; no new network calls | the CLI stays offline; fetching needs the gated provider sync |
+| Weekend reviews | not specified | reviews are deferred on virtual/upsolve days and listed in plan notes | weekend budget is reserved for contests |
+| AtCoder concepts | per-problem AI batch | bounded pilot of 120 ABC C-F tasks; both judges are Claude models whose recognition comes from overlapping training memory, so their agreement (73/73 on jointly recognized items) is not independent verification | cost and weak title-only evidence |
+
+Explore rotation is reproducible scheduling. It does not establish that any sub-kind or channel is
+better; channel comparisons in reports are descriptive.
+
+Runbook: `specs/mastery-system/runbook.md`.

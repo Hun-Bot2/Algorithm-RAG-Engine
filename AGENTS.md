@@ -647,21 +647,25 @@ Keep these distinctions clear in summaries and docs:
 - Tests: `.venv/bin/python -m unittest research.unified_map.test_full_embed research.unified_map.test_full_quality
   research.unified_map.test_full_html`. Spurious Accelerate FP warnings appear in float32 matmuls; wrap test calls in np.errstate.
 
-## Mastery system design (2026-10-17)
+## Mastery system (implemented locally, 2026-10-17)
 
-- specs/mastery-system/ (critique, requirements, design, tasks) extends
-  specs/adaptive-learning/; nothing is implemented yet. critique.md section 1 lists which
-  features exist (E), need modification (M) or are new (N). D-A, D-C, D-D remain open.
-- ADR 003 is accepted: local SQLite is canonical, the JS core (hosted/core via
-  hosted/local.mjs on node:sqlite) is the only learner-state engine, and hosting is
-  optional. Single writer; switch deployments only through backup/restore.
-- hosted/core/events.mjs requires exact payload field sets and events has CHECK
-  constraints on kind/source. Add evidence as append-only side tables following
-  004_contest_history.sql, read only through one ledger merge. Snapshots must record
-  per-table sequence high-water marks for reproduction.
-- Human review is never a gate: AI draft + blind AI review gives ai_reviewed, disagreement
-  abstains. AI never resolves same_problem identity or reads quarantined LeetCode text.
-- Difficulty is calibrated per platform (CF logistic, AtCoder Problems IRT, LeetCode
-  Beta per level); never convert across platforms. Store predicted P in snapshots.
-- Exploration uses a fixed calendar rotation, not randomization. Neighbor tables stay
-  exact per catalog version; only fetch/diff/embedding work is incremental.
+- Spec: specs/mastery-system/ (design.md section 15 lists deviations; runbook.md has commands). Code:
+  hosted/mastery/*.mjs, hosted/cli.mjs, migrations 007-008, research/mastery_catalog/. ADR 003 accepted:
+  local SQLite is canonical, the JS core is the only learner-state engine, hosting is optional.
+- Tests: `node --test hosted/test/*.test.mjs`; `.venv/bin/python -m unittest research.mastery_catalog.test_build
+  research.mastery_catalog.test_refresh research.mastery_catalog.test_archive research.mastery_catalog.test_relatedness`.
+  The CLI test builds a fixture catalog with system python3 (`-I`) and needs git.
+- hosted/core/events.mjs requires exact payload fields and events has CHECK constraints: add evidence as
+  append-only side tables (hosted/mastery/side-ledger.mjs contract), read only through ledger.mjs. Snapshots
+  store per-table sequence high-water marks. Node-only modules (git-ingest, catalog, views, cli) must never be
+  imported by core/ or worker.mjs; `wrangler deploy --dry-run` confirms the bundle.
+- AtCoder Problems: problem-models `difficulty` is raw (unclipped); all models share one discrimination;
+  agc010_a = -10000 is a sentinel. problems.json points shared ABC tasks at the latest ADT reuse, so derive
+  canonical contests from contest-problem.json. MiniLM batch padding makes identical texts differ by ~1e-7:
+  reuse vectors by (problem_key, text) to keep neighbors byte-identical across refreshes.
+- Never mark reported_completion or Git commits without explicit Outcome/Hints trailers as independent.
+  Difficulty stays per platform; selection uses mean minus one SD while history is sparse.
+- AI judgments: two different model roles, blind; agreement -> ai_reviewed, else abstained; never gold.
+  Two Claude judges share training memory, so their agreement is not independent verification.
+- Catalog versions are immutable: catalog-v2 is superseded by catalog-v3 (ADT URL fix). Do not edit or
+  delete private-learning/mastery/catalog-v*; make a new version.

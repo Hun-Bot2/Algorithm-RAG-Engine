@@ -53,3 +53,12 @@ timers. Confirmed overlapping intervals contribute only their elapsed-time union
 This is recorded evidence, not a verified attention measurement.
 
 Validation: `python3 -m unittest discover -s tests -v`.
+
+## Canonical local runtime (ADR 003, 2026-10-17)
+
+The canonical learner store is the JS core on `node:sqlite` (`hosted/local.mjs`,
+`node hosted/cli.mjs`), using `hosted/migrations/`. `src/learning/store.py` and
+`scripts/learning/history.py` are frozen for recovery and legacy exports; they
+cannot open the hosted schema and receive no new features. Mastery-system
+evidence (Git observations, feedback, ratings, catalog switches) lives only in the
+JS schema (`specs/mastery-system/design.md` section 2).

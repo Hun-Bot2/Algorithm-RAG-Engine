@@ -10,6 +10,30 @@ const plusDays = (date,days) => new Date(Date.parse(date.slice(0,10)+'T00:00:00Z
 const approved = item => item?.review?.status === 'approved';
 const eligible = item => approved(item) && item.access_state === 'free';
 
+// Per-problem evidence and review state machine, shared by curriculum missions and the
+// mastery planner. Attempts: {id, occurred_at, outcome, hints, activity_type?, transfer_from?}
+// in replay order. reported_completion is evidence only and never changes state.
+export function replayProblemAttempts(problemKey, attempts, {isTransfer=()=>false}={}) {
+  let state = 'unknown', reviewStage = 0, dueDate = null, latestOutcome = null; const evidence = [];
+  for (const a of attempts) {
+    const date = seoulDate(new Date(a.occurred_at));
+    latestOutcome = a.outcome;
+    if (a.outcome === 'reported_completion') { evidence.push(a.id); continue; }
+    if (a.outcome === 'independent' && a.hints === false) {
+      const transfer = a.activity_type === 'transfer' && isTransfer(a);
+      if (transfer) state = 'transfer-evidenced';
+      else if (state !== 'transfer-evidenced') state = 'demonstrated';
+      reviewStage = a.activity_type === 'review' ? Math.min(reviewStage+1,REVIEW_DAYS.length-1) : 0;
+      dueDate = plusDays(date,REVIEW_DAYS[reviewStage]);
+    } else {
+      if (state === 'unknown' || a.activity_type === 'review') state = 'learning';
+      if (a.activity_type === 'review') { reviewStage = 0; dueDate = plusDays(date,1); }
+    }
+    evidence.push(a.id);
+  }
+  return {state,review_stage:reviewStage,due_date:dueDate,latest_outcome:latestOutcome,evidence};
+}
+
 export function deriveProgress(curriculum, events, cutoff) {
   const active = activeEvents(events,cutoff).filter(e=>e.kind==='attempt');
   const byKey = new Map();
@@ -22,25 +46,8 @@ export function deriveProgress(curriculum, events, cutoff) {
   const priorDemonstration = (key,at) => (byKey.get(key) ?? []).some(e=>e.occurred_at < at && e.payload.outcome==='independent' && e.payload.hints===false);
   const problems = {}, concepts = {};
   for (const p of curriculum.problems ?? []) {
-    const attempts = byKey.get(p.problem_key) ?? [];
-    let state = 'unknown', reviewStage = 0, dueDate = null, latestOutcome = null, evidence = [];
-    for (const e of attempts) {
-      const a = e.payload, date = seoulDate(new Date(e.occurred_at));
-      latestOutcome = a.outcome;
-      if (a.outcome === 'reported_completion') { evidence.push(e.event_id); continue; }
-      if (a.outcome === 'independent' && a.hints === false) {
-        const transfer = a.activity_type === 'transfer' && transferEdges.has(a.transfer_from+'\0'+p.problem_key) && priorDemonstration(a.transfer_from,e.occurred_at);
-        if (transfer) state = 'transfer-evidenced';
-        else if (state !== 'transfer-evidenced') state = 'demonstrated';
-        reviewStage = a.activity_type === 'review' ? Math.min(reviewStage+1,REVIEW_DAYS.length-1) : 0;
-        dueDate = plusDays(date,REVIEW_DAYS[reviewStage]);
-      } else {
-        if (state === 'unknown' || a.activity_type === 'review') state = 'learning';
-        if (a.activity_type === 'review') { reviewStage = 0; dueDate = plusDays(date,1); }
-      }
-      evidence.push(e.event_id);
-    }
-    problems[p.problem_key] = {state,review_stage:reviewStage,due_date:dueDate,latest_outcome:latestOutcome,evidence};
+    const attempts = (byKey.get(p.problem_key) ?? []).map(e=>({id:e.event_id,occurred_at:e.occurred_at,...e.payload}));
+    const {state,evidence} = problems[p.problem_key] = replayProblemAttempts(p.problem_key,attempts,{isTransfer:a=>transferEdges.has(a.transfer_from+'\0'+p.problem_key) && priorDemonstration(a.transfer_from,a.occurred_at)});
     for (const concept of p.concepts ?? []) {
       const entry = concepts[concept] ?? {state:'unknown',evidence:[]};
       const rank = {'unknown':0,'learning':1,'demonstrated':2,'transfer-evidenced':3};
