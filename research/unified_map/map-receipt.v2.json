@@ -1,0 +1,259 @@
+{
+  "a1_all_lexical_reference": {
+    "methods": {
+      "tfidf_char": {
+        "actual_top50_sha256": "d04dadf6d4dd223a5dd21978e60e990154179fec53c7a72f7494f815d3ea5e26",
+        "top50_path": "private-learning/full-catalog/baselines-v1/A1-all/tfidf_char/top50.jsonl",
+        "top50_sha256": "d04dadf6d4dd223a5dd21978e60e990154179fec53c7a72f7494f815d3ea5e26"
+      }
+    },
+    "receipt_path": "research/full_catalog/receipts/baselines-A1-all-cross.v1.json",
+    "receipt_sha256": "b949c1d583306b7415edcb39b39852b3adf49c4c039d7d4d177d58a7a137d1ac",
+    "rows": 23454,
+    "use": "frozen lexical diagnostic for encoder-flagged rows; no MiniLM vectors or new retrieval generated"
+  },
+  "a1_embedding_receipt_sha256": "2f9e6573d731f6985879afd2e635e335b81fdca73c6a34383f3f9b23f9a66927",
+  "a1_keys_sha256": "9f25d5c0430b7ada95c78e0f3d966e61e6ba2c11fe838778d386e8707f24bdff",
+  "a1_variant_input_sha256": "02ad40c9a2b6c92cf7620a681fb880505c771cc29dda94839e408487e8a0f9c4",
+  "a1_vectors_sha256": "f5669fbed78ab8aae760088e19f85ee35702977fe9dd0428c0ea8afd04ff85f1",
+  "abc084_c_quality_flags": [
+    "official_en_ja_constraint_disagreement",
+    "sample_exceeds_english_bound"
+  ],
+  "algorithm_similarity": {
+    "hybrid": "equal-weight reciprocal rank fusion, k=60, on semantic top50 union positive-Jaccard taxonomy top50; zero-overlap ties contribute no taxonomy rank",
+    "minimum_mapping_confidence": 0.85,
+    "missing_or_unmapped_tag_behavior": "unknown_or_empty remains explicit; no imputation",
+    "statement_retrieval": "not run; source availability only",
+    "tag_metric": "Jaccard over equivalent normalized concepts only",
+    "tag_only_diagnostic": "exact top50 includes deterministic zero-Jaccard ties when fewer than 50 positive-overlap targets exist; score=0 means no evidence",
+    "vector_spaces_averaged": false
+  },
+  "approval_receipt_sha256": "6e99ca8db7717a5367b7051ccad671af4577b798d18d65ae7e77e07d473aab95",
+  "approved_mapping_count": 36,
+  "approved_mapping_sha256": "6e2a2b7dc08da2bb0cd764b27b6b01f0af5e4c01f74fcee9692d71ac5f60145d",
+  "catalog_sha256": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "counts": {
+    "a1_embedding_rows": 21297,
+    "catalog_nodes": 24297,
+    "coverage_cells": [
+      {
+        "a1_embedding_available": false,
+        "eligibility": "eligible",
+        "platform": "atcoder",
+        "rows": 2141,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "unavailable"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "atcoder",
+        "rows": 7431,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "unavailable"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "atcoder",
+        "rows": 36,
+        "statement_status": "publisher_statement_available",
+        "tag_status": "unavailable"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "excluded",
+        "platform": "atcoder",
+        "rows": 179,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "unavailable"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 1,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "empty"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 12,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 3,
+        "statement_status": "publisher_statement_available",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 66,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "empty"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 113,
+        "statement_status": "publisher_statement_available",
+        "tag_status": "empty"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 4038,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "codeforces",
+        "rows": 6664,
+        "statement_status": "publisher_statement_available",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "excluded",
+        "platform": "codeforces",
+        "rows": 263,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "excluded",
+        "platform": "codeforces",
+        "rows": 297,
+        "statement_status": "publisher_statement_available",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "leetcode",
+        "rows": 61,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "empty"
+      },
+      {
+        "a1_embedding_available": true,
+        "eligibility": "eligible",
+        "platform": "leetcode",
+        "rows": 2888,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "present"
+      },
+      {
+        "a1_embedding_available": false,
+        "eligibility": "excluded",
+        "platform": "leetcode",
+        "rows": 104,
+        "statement_status": "not_available_in_admitted_corpus",
+        "tag_status": "present"
+      }
+    ],
+    "eligible": 23454,
+    "matched_tagged_a1_rows": 13590,
+    "tag_only_rows": 13605
+  },
+  "duration_seconds": 30.358,
+  "evaluation_corpus_required": "A runnable labeled corpus with problem_key/platform/native_difficulty/source_tags; current statement evaluation corpus does not cover all native catalog nodes.",
+  "methods": {
+    "hybrid_cross": {
+      "fusion": {
+        "candidate_pool": "union of semantic top50 and positive-Jaccard taxonomy top50; fusion is bounded, not exhaustive",
+        "k": 60,
+        "method": "reciprocal_rank_fusion",
+        "weights": {
+          "semantic": 1,
+          "taxonomy": 1
+        },
+        "zero_jaccard_candidates_receive_no_taxonomy_rank_or_weight": true
+      },
+      "outputs": {
+        "top10.jsonl": "23c01ca7b9acfb24b2dd4b980bc4776842f09ed759cc69d9c9a0db6b46e3ea43",
+        "top20.jsonl": "dc197577a1331d6770b89f140f8be7447a4d561f74dd3be860c71fc10a051dde",
+        "top50.jsonl": "dddb1ab9af1c59f24c563ef8846c356953659dacac890c776991fb0d9488a13c"
+      },
+      "queries": 13590,
+      "score_components_sha256": "7caca4e6f3286a937849f261a81e7adb6e67dd74cad488b2ba7af58ec3968cb7",
+      "short_lists": 0
+    },
+    "matched_semantic_cross": {
+      "outputs": {
+        "top10.jsonl": "34af6a885147d35cdeb8a944f2e454dc4f1a2efaea6cad44e25d658f28fe1eb9",
+        "top20.jsonl": "de66fc355a93ce365f3c9ba96a3768fb705dc7f1f15e5a808e6b3ebde858aeae",
+        "top50.jsonl": "b3278808fecf57de00273e8bb63558a662412175e1e8fb89719cd983adf0a734"
+      },
+      "queries": 13590,
+      "short_lists": 0
+    },
+    "matched_tag_cross": {
+      "outputs": {
+        "top10.jsonl": "627d2fb1eb06fece0054bbdb676f99ccf719c6a2d6d401f88841e05f9df73505",
+        "top20.jsonl": "8c254fca60bf1d367ae49687be25b85c6e250887c05f2821959d8c552f8f1ead",
+        "top50.jsonl": "364813cf85d58687bb594078fd1219049c781fc238e35d4b199edac101b3e17a"
+      },
+      "queries": 13590,
+      "short_lists": 0
+    },
+    "semantic_a1_cross": {
+      "outputs": {
+        "top10.jsonl": "63280fc825708e4f6c13c1f3aca864fc8d91a0cba8e1fdaf635efe4f957b448e",
+        "top20.jsonl": "9ed79691812d61486e4d0a313a7dfbb234eaa10ea94cc3603a90bc3f384305ff",
+        "top50.jsonl": "fe1f690b51c7c064bad2b61ac53b1aa52cced80b759535da1b9087a153b9d13b"
+      },
+      "queries": 21297,
+      "short_lists": 0
+    },
+    "tag_only_full_tagged_cross": {
+      "outputs": {
+        "top10.jsonl": "ed728ad92ca923dc72360dee180e9ce0e389285dfbebb97263d11d879ef585d6",
+        "top20.jsonl": "4179453b5bf86e150545b98dc6a30b55a63fed790b23a9a1f0e40772ad01e4cb",
+        "top50.jsonl": "367b892cdeb46a1f45c6c8d2b021fbc3e6815bef59c3f8d1d0caf86ac301e0ee"
+      },
+      "queries": 13605,
+      "short_lists": 0
+    }
+  },
+  "nodes_sha256": "d60196488269a35c398d44e470d4b95e006e6c4c9c4dcd9de54ffabfa38344a2",
+  "output_sha256": {
+    "diagnostics/tag_only/top10.jsonl": "ed728ad92ca923dc72360dee180e9ce0e389285dfbebb97263d11d879ef585d6",
+    "diagnostics/tag_only/top20.jsonl": "4179453b5bf86e150545b98dc6a30b55a63fed790b23a9a1f0e40772ad01e4cb",
+    "diagnostics/tag_only/top50.jsonl": "367b892cdeb46a1f45c6c8d2b021fbc3e6815bef59c3f8d1d0caf86ac301e0ee",
+    "hybrid/score-components.jsonl": "7caca4e6f3286a937849f261a81e7adb6e67dd74cad488b2ba7af58ec3968cb7",
+    "hybrid/top10.jsonl": "23c01ca7b9acfb24b2dd4b980bc4776842f09ed759cc69d9c9a0db6b46e3ea43",
+    "hybrid/top20.jsonl": "dc197577a1331d6770b89f140f8be7447a4d561f74dd3be860c71fc10a051dde",
+    "hybrid/top50.jsonl": "dddb1ab9af1c59f24c563ef8846c356953659dacac890c776991fb0d9488a13c",
+    "implementation.py": "52ed2dc456784214890f4a5416c5075bfe65da1313370d77e7f6474658dc5661",
+    "matched_semantic/top10.jsonl": "34af6a885147d35cdeb8a944f2e454dc4f1a2efaea6cad44e25d658f28fe1eb9",
+    "matched_semantic/top20.jsonl": "de66fc355a93ce365f3c9ba96a3768fb705dc7f1f15e5a808e6b3ebde858aeae",
+    "matched_semantic/top50.jsonl": "b3278808fecf57de00273e8bb63558a662412175e1e8fb89719cd983adf0a734",
+    "nodes.jsonl": "d60196488269a35c398d44e470d4b95e006e6c4c9c4dcd9de54ffabfa38344a2",
+    "semantic/top10.jsonl": "63280fc825708e4f6c13c1f3aca864fc8d91a0cba8e1fdaf635efe4f957b448e",
+    "semantic/top20.jsonl": "9ed79691812d61486e4d0a313a7dfbb234eaa10ea94cc3603a90bc3f384305ff",
+    "semantic/top50.jsonl": "fe1f690b51c7c064bad2b61ac53b1aa52cced80b759535da1b9087a153b9d13b",
+    "tag/top10.jsonl": "627d2fb1eb06fece0054bbdb676f99ccf719c6a2d6d401f88841e05f9df73505",
+    "tag/top20.jsonl": "8c254fca60bf1d367ae49687be25b85c6e250887c05f2821959d8c552f8f1ead",
+    "tag/top50.jsonl": "364813cf85d58687bb594078fd1219049c781fc238e35d4b199edac101b3e17a"
+  },
+  "schema": "unified-map-receipt.v1",
+  "statement_corpus_rows": 9424,
+  "statement_corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+  "taxonomy_sha256": "5a58fdb450ac3d66f11b7965f29db9a65dca0638cab2492f83f6e72955ff2006",
+  "unresolved_p03510_preserved": true
+}

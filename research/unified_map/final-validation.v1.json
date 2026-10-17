@@ -1,0 +1,14 @@
+{
+  "supplementary_input_output_hashes": {
+    "research/full_catalog/labels.v1.jsonl": "f2ae204931195763ba745a2e0378b03518eaf3ca2bc19c958f191f4fe0c6e503",
+    "private-learning/unified-map/map-v2/nodes.jsonl": "d60196488269a35c398d44e470d4b95e006e6c4c9c4dcd9de54ffabfa38344a2",
+    "private-learning/full-catalog/embeddings-v1/A1/keys.json": "9f25d5c0430b7ada95c78e0f3d966e61e6ba2c11fe838778d386e8707f24bdff",
+    "private-learning/unified-map/reduction-v2/receipt.json": "b08307312ea7e0312d33185d19dc6e320ee6643009e86c8a7a71e34019bf9855",
+    "private-learning/unified-map/reduction-v2/quality-diagnostics.json": "b33663cfba597cc4ac96b3e6909ea1531dac9737ddfe65bfba5e1024425e6e03"
+  },
+  "tests_passed": 12,
+  "preserved_input_files": 501,
+  "notebook_executed_cells": 3,
+  "notebook_errors": 0,
+  "no_production_changes": true
+}

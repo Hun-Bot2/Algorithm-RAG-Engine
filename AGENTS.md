@@ -614,3 +614,15 @@ Keep these distinctions clear in summaries and docs:
 - Identity agreement does not establish full statement fidelity. Keep language
   discrepancies and inaccessible sources explicit; never infer an unavailable
   statement from a title or editorial alone.
+
+## Unified similarity research (2026-10-17)
+
+- `research/unified_map/` links all native catalog nodes and a separate admitted
+  statement source index. Semantic title neighbors, statement neighbors and
+  algorithm-tag proxies are separate channels; missing tags remain unknown.
+- Use package-qualified imports for new research helpers. Inserting another
+  research directory at sys.path[0] can make unittest discover the wrong test module.
+- Hybrid RRF MUST NOT grant algorithm evidence to zero-Jaccard rank ties. Inspect
+  component support; tag consistency of a tag ranker is circular, not validation.
+- Native map-v2 and reduction-v2 are the reviewed runs; v1 remains preliminary.
+  2D UMAP/t-SNE use a disclosed stratified sample, not all-catalog relevance proof.

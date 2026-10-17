@@ -1,0 +1,1464 @@
+{
+  "all_semantic": {
+    "schema": "statement-method-evaluation.v1",
+    "label_source": "historical_ai_reviewed_semantic_labels_not_gold",
+    "label_records": 3647,
+    "label_nulls": 761,
+    "common_query_count": 21297,
+    "query_set_rule": "intersection_across_methods",
+    "method_query_counts": {
+      "semantic": 21297
+    },
+    "positive_rule": "label_2_or_3",
+    "metrics": {
+      "10": {
+        "semantic": {
+          "query_count": 21297,
+          "retrieved_slots": 212970,
+          "judged_slots": 597,
+          "unjudged_slots": 212373,
+          "ai_deceptive_flagged_judged_slots": 356,
+          "hard_negative_flagged_rate_among_judged": 0.5963149078726968,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0028032117199605576,
+          "observed_precision_judged": 0.018425460636515914,
+          "precision_bounds": [
+            5.165046720195333e-05,
+            0.9972484387472415
+          ],
+          "ndcg_common_judged_query_count": 52,
+          "common_judged_slot_count": 597,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.013392857142857142,
+              "query_count": 124,
+              "bootstrap_95_interval": [
+                0.003456221198156682,
+                0.027649769585253454
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 5.165046720195333e-05,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                9.390994036718787e-06,
+                0.00010799643142226604
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9972484387472415,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                0.9966192421467812,
+                0.997727379443114
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.6933967594010919,
+              "query_count": 52,
+              "bootstrap_95_interval": [
+                0.6304394955721064,
+                0.7504603645011788
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 19501,
+            "max_indegree": 280,
+            "top_target_indegrees": [
+              [
+                "atcoder:arc167_f",
+                280
+              ],
+              [
+                "atcoder:pakencamp_2023_day3_i",
+                277
+              ],
+              [
+                "atcoder:abc457_b",
+                257
+              ],
+              [
+                "atcoder:abc457_a",
+                248
+              ],
+              [
+                "atcoder:agc005_a",
+                205
+              ],
+              [
+                "atcoder:abc199_e",
+                203
+              ],
+              [
+                "atcoder:bogosortcontest_div1_b",
+                199
+              ],
+              [
+                "atcoder:dp_t",
+                196
+              ],
+              [
+                "atcoder:ndpc2026_c",
+                193
+              ],
+              [
+                "atcoder:past202004_e",
+                193
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.6360520261069633
+          },
+          "tag_consistency": {
+            "eligible_pairs": 30676,
+            "mean_primary_concept_jaccard": 0.0857376352331692
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      },
+      "20": {
+        "semantic": {
+          "query_count": 21297,
+          "retrieved_slots": 425940,
+          "judged_slots": 753,
+          "unjudged_slots": 425187,
+          "ai_deceptive_flagged_judged_slots": 457,
+          "hard_negative_flagged_rate_among_judged": 0.6069057104913679,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0017678546274123117,
+          "observed_precision_judged": 0.01859229747675963,
+          "precision_bounds": [
+            3.286847912851575e-05,
+            0.9982650138517162
+          ],
+          "ndcg_common_judged_query_count": 58,
+          "common_judged_slot_count": 753,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.014831746031746033,
+              "query_count": 125,
+              "bootstrap_95_interval": [
+                0.0035555555555555553,
+                0.028076190476190477
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 3.286847912851576e-05,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                9.390994036718787e-06,
+                6.338920974785182e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9982650138517162,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                0.9978940695872659,
+                0.9985772644034372
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.6669332211155693,
+              "query_count": 58,
+              "bootstrap_95_interval": [
+                0.6061854943842622,
+                0.7298887820604896
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 20744,
+            "max_indegree": 363,
+            "top_target_indegrees": [
+              [
+                "atcoder:pakencamp_2023_day3_i",
+                363
+              ],
+              [
+                "atcoder:arc167_f",
+                353
+              ],
+              [
+                "atcoder:abc457_b",
+                345
+              ],
+              [
+                "atcoder:abc457_a",
+                312
+              ],
+              [
+                "atcoder:abc314_f",
+                300
+              ],
+              [
+                "atcoder:agc005_a",
+                292
+              ],
+              [
+                "atcoder:ndpc2026_c",
+                286
+              ],
+              [
+                "leetcode:permutations",
+                249
+              ],
+              [
+                "atcoder:abc149_a",
+                245
+              ],
+              [
+                "atcoder:tessoku_book_bv",
+                242
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.8105836502793822
+          },
+          "tag_consistency": {
+            "eligible_pairs": 64589,
+            "mean_primary_concept_jaccard": 0.08411755743538246
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      },
+      "50": {
+        "semantic": {
+          "query_count": 21297,
+          "retrieved_slots": 1064850,
+          "judged_slots": 957,
+          "unjudged_slots": 1063893,
+          "ai_deceptive_flagged_judged_slots": 563,
+          "hard_negative_flagged_rate_among_judged": 0.5882967607105538,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0008987181293139879,
+          "observed_precision_judged": 0.02089864158829676,
+          "precision_bounds": [
+            1.8781988073437575e-05,
+            0.9991200638587594
+          ],
+          "ndcg_common_judged_query_count": 63,
+          "common_judged_slot_count": 957,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.018554879864403673,
+              "query_count": 126,
+              "bootstrap_95_interval": [
+                0.0063775510204081625,
+                0.030196523053665908
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 1.8781988073437575e-05,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                8.451894633046909e-06,
+                3.474667793585951e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9991200638587594,
+              "query_count": 21297,
+              "bootstrap_95_interval": [
+                0.9989397567732544,
+                0.9992768934591726
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.6419454893953036,
+              "query_count": 63,
+              "bootstrap_95_interval": [
+                0.5918033932728294,
+                0.6985389936283062
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 21240,
+            "max_indegree": 616,
+            "top_target_indegrees": [
+              [
+                "atcoder:abc314_f",
+                616
+              ],
+              [
+                "atcoder:ndpc2026_o",
+                557
+              ],
+              [
+                "atcoder:code_festival_china_e",
+                555
+              ],
+              [
+                "atcoder:pakencamp_2023_day3_i",
+                488
+              ],
+              [
+                "atcoder:abc457_b",
+                486
+              ],
+              [
+                "atcoder:arc167_f",
+                480
+              ],
+              [
+                "atcoder:tessoku_book_bv",
+                480
+              ],
+              [
+                "atcoder:abc398_e",
+                460
+              ],
+              [
+                "atcoder:agc010_f",
+                457
+              ],
+              [
+                "atcoder:agc005_a",
+                438
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.9504155514861248
+          },
+          "tag_consistency": {
+            "eligible_pairs": 171935,
+            "mean_primary_concept_jaccard": 0.08185896907555144
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      }
+    },
+    "ndcg_rule": "same_explicit_judged_target_intersection_per_query_and_K; unjudged_removed_before_discounting; all_zero_gain_undefined",
+    "precision_rule": "observed denominator judged slots only; bounds assign every unjudged slot negative or positive",
+    "review_queue_sampling": {
+      "seed": 17,
+      "max_queries_per_platform": 30,
+      "method": "smallest_seeded_SHA256_query_hash_per_platform",
+      "platform_counts": {
+        "atcoder": {
+          "eligible_queries": 7467,
+          "sampled_queries": 30
+        },
+        "codeforces": {
+          "eligible_queries": 10881,
+          "sampled_queries": 30
+        },
+        "leetcode": {
+          "eligible_queries": 2949,
+          "sampled_queries": 30
+        }
+      },
+      "sampling_applies_only_to_review_queues": true
+    },
+    "limitations": [
+      "Unjudged and abstained pairs are never negatives.",
+      "Historical AI-reviewed labels are semantic judgments, not human gold or difficulty-ordering labels.",
+      "Query bootstrap does not assert independent duplicate families.",
+      "Cross-platform difficulty differences are unavailable; within-source distances are descriptive."
+    ]
+  },
+  "matched_tags": {
+    "schema": "statement-method-evaluation.v1",
+    "label_source": "historical_ai_reviewed_semantic_labels_not_gold",
+    "label_records": 3647,
+    "label_nulls": 761,
+    "common_query_count": 13590,
+    "query_set_rule": "intersection_across_methods",
+    "method_query_counts": {
+      "matched_semantic": 13590,
+      "tag": 13590,
+      "hybrid": 13590
+    },
+    "positive_rule": "label_2_or_3",
+    "metrics": {
+      "10": {
+        "matched_semantic": {
+          "query_count": 13590,
+          "retrieved_slots": 135900,
+          "judged_slots": 396,
+          "unjudged_slots": 135504,
+          "ai_deceptive_flagged_judged_slots": 193,
+          "hard_negative_flagged_rate_among_judged": 0.48737373737373735,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.002913907284768212,
+          "observed_precision_judged": 0.027777777777777776,
+          "precision_bounds": [
+            8.094186902133922e-05,
+            0.9971670345842532
+          ],
+          "ndcg_common_judged_query_count": 2,
+          "common_judged_slot_count": 5,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.02195479641131815,
+              "query_count": 92,
+              "bootstrap_95_interval": [
+                0.006685645272601795,
+                0.04127846790890269
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 8.094186902133922e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                1.4716703458425313e-05,
+                0.00014716703458425313
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9971670345842532,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9963502575423105,
+                0.9977409860191316
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 1.0,
+              "query_count": 2,
+              "bootstrap_95_interval": [
+                1.0,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 8216,
+            "max_indegree": 614,
+            "top_target_indegrees": [
+              [
+                "leetcode:game-of-life",
+                614
+              ],
+              [
+                "leetcode:candy",
+                553
+              ],
+              [
+                "leetcode:elimination-game",
+                477
+              ],
+              [
+                "leetcode:snakes-and-ladders",
+                465
+              ],
+              [
+                "leetcode:grid-game",
+                457
+              ],
+              [
+                "leetcode:sum-game",
+                410
+              ],
+              [
+                "leetcode:mice-and-cheese",
+                402
+              ],
+              [
+                "leetcode:n-queens",
+                400
+              ],
+              [
+                "leetcode:stone-game",
+                393
+              ],
+              [
+                "leetcode:zuma-game",
+                376
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 135900,
+            "mean_primary_concept_jaccard": 0.07352768635270907
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "tag": {
+          "query_count": 13590,
+          "retrieved_slots": 135900,
+          "judged_slots": 381,
+          "unjudged_slots": 135519,
+          "ai_deceptive_flagged_judged_slots": 2,
+          "hard_negative_flagged_rate_among_judged": 0.005249343832020997,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0028035320088300223,
+          "observed_precision_judged": 0.05249343832020997,
+          "precision_bounds": [
+            0.00014716703458425313,
+            0.9973436350257542
+          ],
+          "ndcg_common_judged_query_count": 2,
+          "common_judged_slot_count": 5,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.06166666666666666,
+              "query_count": 90,
+              "bootstrap_95_interval": [
+                0.028703703703703707,
+                0.10037037037037037
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 0.00014716703458425313,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                5.886681383370125e-05,
+                0.0002428256070640177
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9973436350257542,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9967034584253128,
+                0.9978660779985283
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.8983537904952533,
+              "query_count": 2,
+              "bootstrap_95_interval": [
+                0.7967075809905066,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 2206,
+            "max_indegree": 1680,
+            "top_target_indegrees": [
+              [
+                "leetcode:broken-calculator",
+                1680
+              ],
+              [
+                "leetcode:2-keys-keyboard",
+                1570
+              ],
+              [
+                "leetcode:determine-the-minimum-sum-of-a-k-avoiding-array",
+                1554
+              ],
+              [
+                "leetcode:distribute-money-to-maximum-children",
+                1519
+              ],
+              [
+                "leetcode:find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+                1430
+              ],
+              [
+                "leetcode:01-matrix",
+                1239
+              ],
+              [
+                "leetcode:1-bit-and-2-bit-characters",
+                1239
+              ],
+              [
+                "leetcode:132-pattern",
+                1239
+              ],
+              [
+                "leetcode:24-game",
+                1226
+              ],
+              [
+                "leetcode:3sum",
+                1222
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 135900,
+            "mean_primary_concept_jaccard": 0.4457106918917073
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "hybrid": {
+          "query_count": 13590,
+          "retrieved_slots": 135900,
+          "judged_slots": 592,
+          "unjudged_slots": 135308,
+          "ai_deceptive_flagged_judged_slots": 149,
+          "hard_negative_flagged_rate_among_judged": 0.2516891891891892,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0043561442236938926,
+          "observed_precision_judged": 0.04222972972972973,
+          "precision_bounds": [
+            0.0001839587932303164,
+            0.9958278145695364
+          ],
+          "ndcg_common_judged_query_count": 2,
+          "common_judged_slot_count": 5,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.045541788143828955,
+              "query_count": 98,
+              "bootstrap_95_interval": [
+                0.023777129899578878,
+                0.07582604470359573
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 0.0001839587932303164,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                8.830022075055188e-05,
+                0.0003164091243561442
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9958278145695364,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9949080206033848,
+                0.9966298749080207
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.8983537904952533,
+              "query_count": 2,
+              "bootstrap_95_interval": [
+                0.7967075809905066,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 7506,
+            "max_indegree": 1439,
+            "top_target_indegrees": [
+              [
+                "leetcode:broken-calculator",
+                1439
+              ],
+              [
+                "leetcode:candy",
+                998
+              ],
+              [
+                "leetcode:break-a-palindrome",
+                989
+              ],
+              [
+                "leetcode:a-number-after-a-double-reversal",
+                922
+              ],
+              [
+                "leetcode:abbreviating-the-product-of-a-range",
+                865
+              ],
+              [
+                "leetcode:account-balance-after-rounded-purchase",
+                855
+              ],
+              [
+                "leetcode:can-place-flowers",
+                819
+              ],
+              [
+                "leetcode:add-minimum-number-of-rungs",
+                814
+              ],
+              [
+                "leetcode:add-two-integers",
+                811
+              ],
+              [
+                "leetcode:alice-and-bob-playing-flower-game",
+                757
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 135900,
+            "mean_primary_concept_jaccard": 0.2813934770976713
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      },
+      "20": {
+        "matched_semantic": {
+          "query_count": 13590,
+          "retrieved_slots": 271800,
+          "judged_slots": 527,
+          "unjudged_slots": 271273,
+          "ai_deceptive_flagged_judged_slots": 249,
+          "hard_negative_flagged_rate_among_judged": 0.47248576850094876,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.001938925680647535,
+          "observed_precision_judged": 0.022770398481973434,
+          "precision_bounds": [
+            4.415011037527594e-05,
+            0.9981052244297277
+          ],
+          "ndcg_common_judged_query_count": 7,
+          "common_judged_slot_count": 13,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.021279761904761902,
+              "query_count": 96,
+              "bootstrap_95_interval": [
+                0.009114583333333334,
+                0.036557539682539685
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 4.415011037527594e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                1.1037527593818986e-05,
+                8.094186902133922e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9981052244297277,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.997579102281089,
+                0.9984584253127299
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 1.0,
+              "query_count": 7,
+              "bootstrap_95_interval": [
+                1.0,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 9853,
+            "max_indegree": 1085,
+            "top_target_indegrees": [
+              [
+                "leetcode:game-of-life",
+                1085
+              ],
+              [
+                "leetcode:candy",
+                934
+              ],
+              [
+                "leetcode:grid-game",
+                883
+              ],
+              [
+                "leetcode:snakes-and-ladders",
+                849
+              ],
+              [
+                "leetcode:elimination-game",
+                848
+              ],
+              [
+                "leetcode:stone-game",
+                806
+              ],
+              [
+                "leetcode:sum-game",
+                756
+              ],
+              [
+                "leetcode:n-queens",
+                751
+              ],
+              [
+                "leetcode:brick-wall",
+                720
+              ],
+              [
+                "leetcode:zuma-game",
+                713
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 271800,
+            "mean_primary_concept_jaccard": 0.07177882095775064
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "tag": {
+          "query_count": 13590,
+          "retrieved_slots": 271800,
+          "judged_slots": 430,
+          "unjudged_slots": 271370,
+          "ai_deceptive_flagged_judged_slots": 7,
+          "hard_negative_flagged_rate_among_judged": 0.01627906976744186,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0015820456217807211,
+          "observed_precision_judged": 0.05116279069767442,
+          "precision_bounds": [
+            8.094186902133922e-05,
+            0.9984988962472406
+          ],
+          "ndcg_common_judged_query_count": 7,
+          "common_judged_slot_count": 13,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.05040109233657621,
+              "query_count": 93,
+              "bootstrap_95_interval": [
+                0.02244410308926438,
+                0.08325652841781873
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 8.094186902133922e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                3.679175864606328e-05,
+                0.0001434878587196468
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9984988962472406,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9981346578366446,
+                0.9987785136129507
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.9709582258557867,
+              "query_count": 7,
+              "bootstrap_95_interval": [
+                0.91287467756736,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 3369,
+            "max_indegree": 2318,
+            "top_target_indegrees": [
+              [
+                "leetcode:a-number-after-a-double-reversal",
+                2318
+              ],
+              [
+                "leetcode:abbreviating-the-product-of-a-range",
+                2318
+              ],
+              [
+                "leetcode:account-balance-after-rounded-purchase",
+                2317
+              ],
+              [
+                "leetcode:add-minimum-number-of-rungs",
+                2114
+              ],
+              [
+                "leetcode:2-keys-keyboard",
+                2094
+              ],
+              [
+                "leetcode:broken-calculator",
+                1833
+              ],
+              [
+                "leetcode:determine-the-minimum-sum-of-a-k-avoiding-array",
+                1812
+              ],
+              [
+                "leetcode:distribute-money-to-maximum-children",
+                1790
+              ],
+              [
+                "leetcode:find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+                1722
+              ],
+              [
+                "leetcode:find-the-minimum-possible-sum-of-a-beautiful-array",
+                1693
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 271800,
+            "mean_primary_concept_jaccard": 0.42242234207824714
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "hybrid": {
+          "query_count": 13590,
+          "retrieved_slots": 271800,
+          "judged_slots": 765,
+          "unjudged_slots": 271035,
+          "ai_deceptive_flagged_judged_slots": 209,
+          "hard_negative_flagged_rate_among_judged": 0.27320261437908494,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.002814569536423841,
+          "observed_precision_judged": 0.040522875816993466,
+          "precision_bounds": [
+            0.00011405445180279617,
+            0.997299484915379
+          ],
+          "ndcg_common_judged_query_count": 7,
+          "common_judged_slot_count": 13,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.04513686426951733,
+              "query_count": 98,
+              "bootstrap_95_interval": [
+                0.027607709750566894,
+                0.07386216391318431
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 0.00011405445180279617,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                5.518763796909492e-05,
+                0.00018027961736571008
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9972994849153789,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9965967623252392,
+                0.9977998528329655
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.9709582258557867,
+              "query_count": 7,
+              "bootstrap_95_interval": [
+                0.91287467756736,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 9364,
+            "max_indegree": 1717,
+            "top_target_indegrees": [
+              [
+                "leetcode:broken-calculator",
+                1717
+              ],
+              [
+                "leetcode:determine-the-minimum-sum-of-a-k-avoiding-array",
+                1548
+              ],
+              [
+                "leetcode:distribute-money-to-maximum-children",
+                1535
+              ],
+              [
+                "leetcode:candy",
+                1410
+              ],
+              [
+                "leetcode:find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+                1303
+              ],
+              [
+                "leetcode:break-a-palindrome",
+                1134
+              ],
+              [
+                "leetcode:alice-and-bob-playing-flower-game",
+                1117
+              ],
+              [
+                "leetcode:a-number-after-a-double-reversal",
+                1005
+              ],
+              [
+                "leetcode:add-two-integers",
+                961
+              ],
+              [
+                "leetcode:can-place-flowers",
+                950
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 271800,
+            "mean_primary_concept_jaccard": 0.26372466893795293
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      },
+      "50": {
+        "matched_semantic": {
+          "query_count": 13590,
+          "retrieved_slots": 679500,
+          "judged_slots": 707,
+          "unjudged_slots": 678793,
+          "ai_deceptive_flagged_judged_slots": 307,
+          "hard_negative_flagged_rate_among_judged": 0.43422913719943423,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0010404709345106695,
+          "observed_precision_judged": 0.02263083451202263,
+          "precision_bounds": [
+            2.35467255334805e-05,
+            0.9989830757910229
+          ],
+          "ndcg_common_judged_query_count": 13,
+          "common_judged_slot_count": 52,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.02160894660894661,
+              "query_count": 99,
+              "bootstrap_95_interval": [
+                0.008044733044733044,
+                0.03665223665223665
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 2.35467255334805e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                7.358351729212656e-06,
+                4.26784400294334e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9989830757910229,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9987299484915378,
+                0.9991832229580574
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.9947096480203618,
+              "query_count": 13,
+              "bootstrap_95_interval": [
+                0.9841289440610855,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 11931,
+            "max_indegree": 2112,
+            "top_target_indegrees": [
+              [
+                "leetcode:game-of-life",
+                2112
+              ],
+              [
+                "leetcode:grid-game",
+                1805
+              ],
+              [
+                "leetcode:candy",
+                1765
+              ],
+              [
+                "leetcode:snakes-and-ladders",
+                1701
+              ],
+              [
+                "leetcode:elimination-game",
+                1686
+              ],
+              [
+                "leetcode:beautiful-arrangement-ii",
+                1676
+              ],
+              [
+                "leetcode:brick-wall",
+                1671
+              ],
+              [
+                "leetcode:stone-game",
+                1664
+              ],
+              [
+                "leetcode:n-queens",
+                1651
+              ],
+              [
+                "leetcode:sum-game",
+                1563
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 679500,
+            "mean_primary_concept_jaccard": 0.06945067659955986
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "tag": {
+          "query_count": 13590,
+          "retrieved_slots": 679500,
+          "judged_slots": 535,
+          "unjudged_slots": 678965,
+          "ai_deceptive_flagged_judged_slots": 19,
+          "hard_negative_flagged_rate_among_judged": 0.03551401869158879,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0007873436350257542,
+          "observed_precision_judged": 0.044859813084112146,
+          "precision_bounds": [
+            3.532008830022075e-05,
+            0.9992479764532745
+          ],
+          "ndcg_common_judged_query_count": 13,
+          "common_judged_slot_count": 52,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.04598913817663818,
+              "query_count": 96,
+              "bootstrap_95_interval": [
+                0.02200186965811966,
+                0.0793914707977208
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 3.5320088300220746e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                1.7660044150110373e-05,
+                6.0338484179543786e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9992479764532746,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9990772626931567,
+                0.9993877851361296
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.9810926968285661,
+              "query_count": 13,
+              "bootstrap_95_interval": [
+                0.9432780904856984,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 5380,
+            "max_indegree": 3535,
+            "top_target_indegrees": [
+              [
+                "leetcode:2-keys-keyboard",
+                3535
+              ],
+              [
+                "leetcode:a-number-after-a-double-reversal",
+                3287
+              ],
+              [
+                "leetcode:abbreviating-the-product-of-a-range",
+                3103
+              ],
+              [
+                "leetcode:account-balance-after-rounded-purchase",
+                2979
+              ],
+              [
+                "leetcode:add-two-integers",
+                2859
+              ],
+              [
+                "leetcode:alice-and-bob-playing-flower-game",
+                2811
+              ],
+              [
+                "leetcode:alternating-digit-sum",
+                2791
+              ],
+              [
+                "leetcode:angle-between-hands-of-a-clock",
+                2748
+              ],
+              [
+                "leetcode:add-minimum-number-of-rungs",
+                2398
+              ],
+              [
+                "leetcode:broken-calculator",
+                2098
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 679500,
+            "mean_primary_concept_jaccard": 0.3754783616497485
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        },
+        "hybrid": {
+          "query_count": 13590,
+          "retrieved_slots": 679500,
+          "judged_slots": 976,
+          "unjudged_slots": 678524,
+          "ai_deceptive_flagged_judged_slots": 278,
+          "hard_negative_flagged_rate_among_judged": 0.2848360655737705,
+          "hard_negative_rate_basis": "historical AI deceptive flag among judged retrieved slots; not independent human error rate",
+          "judged_coverage": 0.0014363502575423105,
+          "observed_precision_judged": 0.03381147540983607,
+          "precision_bounds": [
+            4.856512141280353e-05,
+            0.9986122148638705
+          ],
+          "ndcg_common_judged_query_count": 13,
+          "common_judged_slot_count": 52,
+          "query_bootstrap": {
+            "observed_precision_judged": {
+              "mean": 0.03458365840273148,
+              "query_count": 99,
+              "bootstrap_95_interval": [
+                0.019730764383170802,
+                0.0540929452471342
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_lower_bound": {
+              "mean": 4.856512141280354e-05,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                2.35467255334805e-05,
+                7.211184694628404e-05
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "precision_upper_bound": {
+              "mean": 0.9986122148638704,
+              "query_count": 13590,
+              "bootstrap_95_interval": [
+                0.9983002207505518,
+                0.9988741721854305
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            },
+            "ndcg_common_judged": {
+              "mean": 0.9832228095526617,
+              "query_count": 13,
+              "bootstrap_95_interval": [
+                0.9496684286579853,
+                1.0
+              ],
+              "resamples": 200,
+              "resampling_unit": "query_with_replacement; family_independence_not_claimed"
+            }
+          },
+          "hubness": {
+            "distinct_targets": 11590,
+            "max_indegree": 2031,
+            "top_target_indegrees": [
+              [
+                "leetcode:candy",
+                2031
+              ],
+              [
+                "leetcode:broken-calculator",
+                1958
+              ],
+              [
+                "leetcode:distribute-money-to-maximum-children",
+                1898
+              ],
+              [
+                "leetcode:determine-the-minimum-sum-of-a-k-avoiding-array",
+                1850
+              ],
+              [
+                "leetcode:find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+                1841
+              ],
+              [
+                "leetcode:find-the-minimum-possible-sum-of-a-beautiful-array",
+                1825
+              ],
+              [
+                "leetcode:k-items-with-the-maximum-sum",
+                1797
+              ],
+              [
+                "leetcode:max-difference-you-can-get-from-changing-an-integer",
+                1676
+              ],
+              [
+                "leetcode:maximize-sum-of-squares-of-digits",
+                1633
+              ],
+              [
+                "leetcode:maximum-69-number",
+                1599
+              ]
+            ]
+          },
+          "diversity": {
+            "mean_distinct_target_platforms_per_query": 1.0
+          },
+          "tag_consistency": {
+            "eligible_pairs": 679500,
+            "mean_primary_concept_jaccard": 0.2408553824972634
+          },
+          "native_difficulty_distance": {},
+          "cross_platform_difficulty_distance": "unavailable; native scales are not equated"
+        }
+      }
+    },
+    "ndcg_rule": "same_explicit_judged_target_intersection_per_query_and_K; unjudged_removed_before_discounting; all_zero_gain_undefined",
+    "precision_rule": "observed denominator judged slots only; bounds assign every unjudged slot negative or positive",
+    "review_queue_sampling": {
+      "seed": 17,
+      "max_queries_per_platform": 30,
+      "method": "smallest_seeded_SHA256_query_hash_per_platform",
+      "platform_counts": {
+        "codeforces": {
+          "eligible_queries": 10702,
+          "sampled_queries": 30
+        },
+        "leetcode": {
+          "eligible_queries": 2888,
+          "sampled_queries": 30
+        }
+      },
+      "sampling_applies_only_to_review_queues": true
+    },
+    "limitations": [
+      "Unjudged and abstained pairs are never negatives.",
+      "Historical AI-reviewed labels are semantic judgments, not human gold or difficulty-ordering labels.",
+      "Query bootstrap does not assert independent duplicate families.",
+      "Cross-platform difficulty differences are unavailable; within-source distances are descriptive."
+    ]
+  }
+}

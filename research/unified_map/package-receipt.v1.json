@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "native_catalog_nodes": 24297,
+  "statement_source_nodes": 9424,
+  "statement_rows_linked_to_native_catalog": 7113,
+  "unresolved_statement_native_identities": 1291,
+  "identified_statements_outside_native_catalog": 1020,
+  "source_corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+  "approval_sha256": "6e2a2b7dc08da2bb0cd764b27b6b01f0af5e4c01f74fcee9692d71ac5f60145d",
+  "references": {
+    "native_map": {
+      "path": "private-learning/unified-map/map-v2/manifest.json",
+      "sha256": "3a7b266e1f6194bd9f8ef84d42a4df6f9b6a7a6e1e1f92031b875740e2a60953"
+    },
+    "native_evaluation": {
+      "path": "private-learning/unified-map/map-v2/evaluation-receipt.json",
+      "sha256": "cf2d6861c4b00d81ae644be0edaa105483cf152ef4a85a692fae8621eca7684e"
+    },
+    "reduction": {
+      "path": "private-learning/unified-map/reduction-v2/receipt.json",
+      "sha256": "b08307312ea7e0312d33185d19dc6e320ee6643009e86c8a7a71e34019bf9855"
+    },
+    "statement_evaluation": {
+      "path": "private-learning/unified-map/statement-evaluation-v1/receipt.json",
+      "sha256": "65deb9024ce5900e3c2ebe29eda6cb94b3380967b6534b172d606fc43d55e47f"
+    }
+  },
+  "statement_source_index_sha256": "60e88a4f6ce01ba0ae62767c021bab5e6ac5d6068fa2c9b4e4c6aacf37cb4c0f",
+  "boundary": "Native and publisher identities remain separate; unlinked rows are not deleted or guessed."
+}
