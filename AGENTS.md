@@ -626,3 +626,23 @@ Keep these distinctions clear in summaries and docs:
   component support; tag consistency of a tag ranker is circular, not validation.
 - Native map-v2 and reduction-v2 are the reviewed runs; v1 remains preliminary.
   2D UMAP/t-SNE use a disclosed stratified sample, not all-catalog relevance proof.
+
+## Full-catalog interactive map (2026-10-17)
+
+- Spec: specs/unified-similarity-map/interactive-map.md. Code: research/unified_map/full_{embed,project,quality,html,verify}.py
+  and full_map_template.html. Outputs are private (private-learning/unified-map/full-v1/), including interactive.html,
+  which embeds titles/tags/URLs. Never commit it; only receipts under research/unified_map/full-receipts/ and
+  point-only figures are committed.
+- research/full_catalog/retrieve.py is hash-pinned by research/unified_map/PRESERVATION.v1.json. Do not edit it or other pinned
+  files. Run `.venv/bin/python -m research.unified_map.verify private-learning/unified-map/map-v2` before finishing; put new
+  retrieval modes in new modules (the any-platform mode lives in full_quality.py).
+- scikit-learn t-SNE with init="pca" ignores random_state: seed repeats give a bit-identical layout. Measure stability with
+  --tsne-init random. UMAP/t-SNE run with one thread for reproducibility (t-SNE ~3 min, UMAP ~30 s for 24,297 nodes).
+- Tokenizer unknown-share alone overstates embedding reliability: Cyrillic titles tokenize into known word pieces. A non-Latin
+  title is capped at "degraded". Latin-script romanized Japanese titles cannot be detected and stay "reliable".
+- Compare neighbor tag agreement with a platform-matched random baseline, not random pairs: cross-platform concept sets differ,
+  so an all-pairs baseline is unfair.
+- Port 8765 is the verification workbench (private statements). Preview static HTML on another loopback port from a directory
+  that contains only the HTML; never stop servers you did not start.
+- Tests: `.venv/bin/python -m unittest research.unified_map.test_full_embed research.unified_map.test_full_quality
+  research.unified_map.test_full_html`. Spurious Accelerate FP warnings appear in float32 matmuls; wrap test calls in np.errstate.

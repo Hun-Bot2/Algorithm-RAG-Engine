@@ -6,3 +6,4 @@
 - [x] Execute PCA/SVD compression and sampled UMAP/t-SNE comparisons.
 - [x] Review outputs, produce report/notebook/figures and validate preservation.
 - [x] Commit intended changes only; retain unsupported areas explicitly.
+- [x] Full-catalog interactive map (all 24,297 nodes): see interactive-map.md and research/unified_map/FULL-MAP-REPORT.md.

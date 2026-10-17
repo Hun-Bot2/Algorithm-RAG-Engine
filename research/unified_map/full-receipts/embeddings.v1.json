@@ -1,0 +1,151 @@
+{
+ "coverage_before": [
+  {
+   "eligibility": "eligible",
+   "had_a1_vector": true,
+   "non_latin_title": false,
+   "platform": "atcoder",
+   "rows": 7467
+  },
+  {
+   "eligibility": "eligible",
+   "had_a1_vector": false,
+   "non_latin_title": true,
+   "platform": "atcoder",
+   "rows": 2141
+  },
+  {
+   "eligibility": "excluded",
+   "had_a1_vector": false,
+   "non_latin_title": false,
+   "platform": "atcoder",
+   "rows": 102
+  },
+  {
+   "eligibility": "excluded",
+   "had_a1_vector": false,
+   "non_latin_title": true,
+   "platform": "atcoder",
+   "rows": 77
+  },
+  {
+   "eligibility": "eligible",
+   "had_a1_vector": true,
+   "non_latin_title": false,
+   "platform": "codeforces",
+   "rows": 10881
+  },
+  {
+   "eligibility": "eligible",
+   "had_a1_vector": false,
+   "non_latin_title": true,
+   "platform": "codeforces",
+   "rows": 16
+  },
+  {
+   "eligibility": "excluded",
+   "had_a1_vector": false,
+   "non_latin_title": false,
+   "platform": "codeforces",
+   "rows": 534
+  },
+  {
+   "eligibility": "excluded",
+   "had_a1_vector": false,
+   "non_latin_title": true,
+   "platform": "codeforces",
+   "rows": 26
+  },
+  {
+   "eligibility": "eligible",
+   "had_a1_vector": true,
+   "non_latin_title": false,
+   "platform": "leetcode",
+   "rows": 2949
+  },
+  {
+   "eligibility": "excluded",
+   "had_a1_vector": false,
+   "non_latin_title": false,
+   "platform": "leetcode",
+   "rows": 104
+  }
+ ],
+ "environment": {
+  "machine": "arm64",
+  "numpy": "2.1.3",
+  "python": "3.13.2",
+  "sentence-transformers": "5.2.0",
+  "torch": "2.9.1",
+  "transformers": "4.57.3"
+ },
+ "inputs": {
+  "a1_keys": "9f25d5c0430b7ada95c78e0f3d966e61e6ba2c11fe838778d386e8707f24bdff",
+  "a1_receipt": "2f9e6573d731f6985879afd2e635e335b81fdca73c6a34383f3f9b23f9a66927",
+  "a1_vectors": "f5669fbed78ab8aae760088e19f85ee35702977fe9dd0428c0ea8afd04ff85f1",
+  "model_manifest": "b4475d8f573844b730b695cdd8e65ce4a558b9f24da47184f1a2d14057430c1a",
+  "nodes": "d60196488269a35c398d44e470d4b95e006e6c4c9c4dcd9de54ffabfa38344a2"
+ },
+ "model": {
+  "dimensions": 384,
+  "max_tokens": 256,
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+ },
+ "nodes": 24297,
+ "offline_boundary": "HF/Transformers offline flags and Python socket connect guards; not an OS-level egress test",
+ "outputs": {
+  "keys.json": "19f9245cf50f22f5d411f8506f55ea4eb4fb777085193ac8dea1cb456ae1c767",
+  "vector_meta.jsonl": "9cc0fceb186b641945cfcab69f796d32ad28e26c351da0f9b29b81d8d0f8dabb",
+  "vectors.npy": "daa6d8bee416f0d74059abf5bced3b4305307f32da949984d7f914b7f082c887"
+ },
+ "performance": {
+  "encode_seconds_new_rows": 3.2,
+  "peak_rss_bytes": 1026670592
+ },
+ "promotion": false,
+ "reliability": {
+  "by_platform": {
+   "atcoder/degraded": 1642,
+   "atcoder/reliable": 7562,
+   "atcoder/unreliable": 583,
+   "codeforces/degraded": 42,
+   "codeforces/reliable": 11415,
+   "leetcode/reliable": 3053
+  },
+  "counts": {
+   "degraded": 1684,
+   "reliable": 22030,
+   "unreliable": 583
+  },
+  "mean_unk_share_of_non_latin_titles": 0.3119,
+  "thresholds": {
+   "degraded_unk_share": 0.1,
+   "non_latin_title_cap": "degraded",
+   "unreliable_unk_share": 0.5
+  }
+ },
+ "reuse_check": {
+  "interpretation": "re-encoding sampled A1 titles in a different batch composition",
+  "max_abs_component_deviation": 1.825392246246338e-07,
+  "min_cosine_to_stored": 0.9999997615814209,
+  "sample_size": 500,
+  "seed": 17
+ },
+ "schema": "full-embedding-receipt.v1",
+ "settings": {
+  "batch_size": 64,
+  "device": "cpu",
+  "order": "problem_key ascending",
+  "text": "title.strip()",
+  "threads": 1
+ },
+ "statement_fields_read": false,
+ "training": false,
+ "vectors": {
+  "dimension": 384,
+  "new_title_encode": 3000,
+  "reused_a1": 21297
+ },
+ "warnings": []
+}

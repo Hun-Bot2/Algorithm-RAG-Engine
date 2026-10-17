@@ -1,0 +1,195 @@
+{
+ "checks": [
+  {
+   "mismatched": [],
+   "name": "embedding outputs match receipt hashes",
+   "passed": true
+  },
+  {
+   "changed": [],
+   "name": "frozen input artifacts unchanged since embedding run",
+   "passed": true
+  },
+  {
+   "mismatched": [],
+   "name": "neighbor arrays match receipt hashes",
+   "passed": true
+  },
+  {
+   "mismatched": [],
+   "name": "projection arrays match receipts and the final vectors",
+   "passed": true
+  },
+  {
+   "dim": 384,
+   "name": "one vector per catalog node, keys unique and sorted",
+   "passed": true,
+   "rows": 24297
+  },
+  {
+   "max_norm_error": 1.7881393432617188e-07,
+   "name": "vectors finite and unit-norm",
+   "passed": true
+  },
+  {
+   "name": "all 21,297 A1 vectors reused bit-for-bit",
+   "passed": true,
+   "reused": 21297
+  },
+  {
+   "counts": {
+    "a1_reused": 21297,
+    "new_title_encode": 3000
+   },
+   "name": "vector_meta sources partition the catalog (21,297 reused + 3,000 new)",
+   "passed": true
+  },
+  {
+   "name": "no non-Latin title is labelled reliable",
+   "passed": true,
+   "tiers": {
+    "degraded": 1684,
+    "reliable": 22030,
+    "unreliable": 583
+   }
+  },
+  {
+   "name": "any: indices valid, no self, no exact duplicates, scores non-increasing, platform rule",
+   "passed": true,
+   "rows": 24297
+  },
+  {
+   "max_abs_deviation": 9.410250429997546e-07,
+   "name": "any: stored scores equal recomputed float64 cosine",
+   "passed": true
+  },
+  {
+   "name": "cross: indices valid, no self, no exact duplicates, scores non-increasing, platform rule",
+   "passed": true,
+   "rows": 24297
+  },
+  {
+   "max_abs_deviation": 9.410250429997546e-07,
+   "name": "cross: stored scores equal recomputed float64 cosine",
+   "passed": true
+  },
+  {
+   "mismatches": 0,
+   "name": "any: top-30 equals float64 brute force on 400 random queries (tie-aware)",
+   "passed": true,
+   "queries": 400
+  },
+  {
+   "mismatches": 0,
+   "name": "cross: top-30 equals float64 brute force on 400 random queries (tie-aware)",
+   "passed": true,
+   "queries": 400
+  },
+  {
+   "name": "every projection covers all 24,297 nodes with finite coordinates",
+   "passed": true,
+   "projections": [
+    "pca-seed17",
+    "tsne-random-seed18",
+    "tsne-random-seed19",
+    "tsne-seed17",
+    "tsne-seed18",
+    "umap-seed17",
+    "umap-seed18",
+    "umap-seed19"
+   ]
+  },
+  {
+   "distinct_positions": {
+    "pca-seed17": 22457,
+    "tsne-random-seed18": 23908,
+    "tsne-random-seed19": 23916,
+    "tsne-seed17": 23863,
+    "tsne-seed18": 23863,
+    "umap-seed17": 24263,
+    "umap-seed18": 24273,
+    "umap-seed19": 24267
+   },
+   "name": "projections are not degenerate (many distinct 2D positions)",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "pca seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "umap seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "bitwise_identical": true,
+   "max_abs_diff": 0.0,
+   "name": "tsne seed 17 re-run reproduces saved coordinates",
+   "passed": true
+  },
+  {
+   "name": "pca: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 3,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "umap: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 3,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "tsne: saved per-node fidelity matches an independent recomputation on 300 nodes (+/-1 tie slack)",
+   "off_by_more_than_one": 0,
+   "passed": true,
+   "queries": 300
+  },
+  {
+   "name": "html payload lists every catalog node once, in key order",
+   "passed": true
+  },
+  {
+   "name": "html neighbor indices equal the saved exact neighbors",
+   "passed": true
+  },
+  {
+   "name": "html neighbor scores equal the quantized saved scores (1e-4 resolution)",
+   "passed": true
+  },
+  {
+   "name": "html coordinates equal the normalized saved projections",
+   "passed": true
+  },
+  {
+   "found": [],
+   "name": "html contains no statement-text fields",
+   "passed": true
+  },
+  {
+   "name": "html loads no remote code",
+   "passed": true
+  },
+  {
+   "bytes": 11409365,
+   "name": "html is a single self-contained file under 16 MiB",
+   "passed": true
+  },
+  {
+   "found": [],
+   "name": "no statement fields in any text artifact written by this pipeline",
+   "passed": true
+  },
+  {
+   "name": "existing map-v2 verifier and 501-file preservation snapshot still pass",
+   "passed": true
+  }
+ ],
+ "html_sha256": "3d0559b2e758ee414f7b54c8f6645b2e5148845ec6b8124275abd97a9bacb5a4",
+ "passed": true,
+ "schema": "full-validation-receipt.v1"
+}

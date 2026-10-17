@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full-Catalog Similarity Map</title>
+<style>
+:root{
+  --bg:#f6f7f9;--panel:#ffffff;--ink:#16191d;--muted:#5b6470;--line:#d8dce2;--accent:#1d4ed8;
+  --canvas:#fbfcfd;--dim:#9aa3af;--warn-bg:#fff7e0;--warn-line:#e0b84d;--chip:#eef1f5;
+  --atcoder:#009E73;--codeforces:#0072B2;--leetcode:#E69F00;
+  --rel0:#4b78b0;--rel1:#E69F00;--rel2:#D55E00;--relx:#8a8f98;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101318;--panel:#171b22;--ink:#e8ebef;--muted:#9aa3af;--line:#2b323c;--accent:#7aa2ff;
+  --canvas:#0c0f13;--dim:#4b5563;--warn-bg:#2a2412;--warn-line:#8a6d1c;--chip:#232a34;
+  --atcoder:#2ec4a0;--codeforces:#56a8e8;--leetcode:#f2b134;--rel0:#7fa6d8;--rel1:#f2b134;--rel2:#f07d3c;--relx:#6b7280;}}
+:root[data-theme="dark"]{
+  --bg:#101318;--panel:#171b22;--ink:#e8ebef;--muted:#9aa3af;--line:#2b323c;--accent:#7aa2ff;
+  --canvas:#0c0f13;--dim:#4b5563;--warn-bg:#2a2412;--warn-line:#8a6d1c;--chip:#232a34;
+  --atcoder:#2ec4a0;--codeforces:#56a8e8;--leetcode:#f2b134;--rel0:#7fa6d8;--rel1:#f2b134;--rel2:#f07d3c;--relx:#6b7280;}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+header{padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+header h1{font-size:16px;margin:0 0 4px}
+.banner{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;padding:6px 10px;font-size:13px}
+.banner b{font-weight:600}
+main{flex:1;min-height:0;display:grid;grid-template-columns:268px minmax(0,1fr) 380px;gap:0}
+aside,section{min-height:0;overflow:auto}
+#controls{background:var(--panel);border-right:1px solid var(--line);padding:12px 14px}
+#detail{background:var(--panel);border-left:1px solid var(--line);padding:12px 14px}
+#stage{display:flex;flex-direction:column;min-width:0}
+#panels{flex:1;min-height:0;display:grid;gap:6px;padding:8px}
+#panels.single{grid-template-columns:1fr}
+#panels.compare{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panel{position:relative;display:flex;flex-direction:column;min-height:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--canvas)}
+.panel .ph{padding:4px 8px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--panel)}
+.panel .ph b{color:var(--ink)}
+.panel .wrap{position:relative;flex:1;min-height:120px}
+.panel canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+.panel .pf{padding:3px 8px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);background:var(--panel);min-height:22px}
+#status{padding:4px 12px 8px;font-size:12px;color:var(--muted)}
+h2{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+h2:first-child{margin-top:0}
+label{display:flex;align-items:center;gap:6px;margin:3px 0}
+select,input[type=search],button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:4px 6px}
+select,input[type=search]{width:100%}
+button{cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sw{display:inline-block;width:11px;height:11px;border-radius:3px;flex:none}
+.chip{display:inline-block;padding:0 6px;border-radius:9px;background:var(--chip);font-size:12px;margin:1px 2px 1px 0;white-space:nowrap}
+.chip.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.box{border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:8px 0}
+.box h3{margin:0 0 4px;font-size:13px}
+.box.sem{border-left:4px solid var(--accent)}
+.box.tag{border-left:4px solid var(--leetcode)}
+.box.judge{border-left:4px solid var(--atcoder)}
+ol.nl{list-style:none;margin:6px 0 0;padding:0}
+.nrow{display:block;width:100%;text-align:left;margin:2px 0;padding:4px 6px;border-radius:5px}
+.nrow .t{font-weight:500}
+.nrow .s{float:right;font-variant-numeric:tabular-nums;font-weight:600}
+.tabs{display:flex;gap:4px;margin:4px 0}
+.tabs button[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+details{margin:6px 0}
+summary{cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:12px}
+td,th{padding:2px 4px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+#tip{position:fixed;pointer-events:none;z-index:5;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;display:none;max-width:320px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+a{color:var(--accent)}
+@media (max-width:1100px){
+  main{grid-template-columns:1fr;grid-auto-rows:auto;overflow:auto}
+  body{height:auto}
+  #stage{min-height:70vh}
+  #panels.compare{grid-template-columns:1fr}
+  #controls,#detail{border:0;border-top:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Full-catalog similarity map <span class="muted small" id="subtitle"></span></h1>
+  <div class="banner" role="note"><b>How to read this.</b> Positions and scores come from a MiniLM embedding of each problem's <b>title only</b>. They show how alike two titles read &mdash; not that two problems share an algorithm, invariant or difficulty. Platform tags and the AI-reviewed taxonomy are shown as <b>separate evidence</b> and were never used to place points or rank neighbors. AtCoder publishes no tags. 2D maps distort distances; see the fidelity numbers.</div>
+</header>
+<main>
+  <aside id="controls" aria-label="Map controls">
+    <h2>View</h2>
+    <div class="seg" id="viewSeg" role="group" aria-label="View mode">
+      <button data-view="single" aria-pressed="true">Single</button>
+      <button data-view="compare" aria-pressed="false">Compare 3</button>
+    </div>
+    <div class="seg" id="projSeg" role="group" aria-label="Projection" style="margin-top:6px"></div>
+    <h2>Color by</h2>
+    <select id="colorBy" aria-label="Color by">
+      <option value="platform">Platform</option>
+      <option value="reliability">Embedding reliability / eligibility</option>
+      <option value="fidelity">Local neighborhood fidelity (this map)</option>
+    </select>
+    <div id="legend" class="small" style="margin-top:6px"></div>
+    <h2>Platforms</h2>
+    <div id="platformBoxes"></div>
+    <h2>Coverage filters</h2>
+    <label><input type="checkbox" id="showExcluded" checked> Show excluded problems</label>
+    <label><input type="checkbox" id="showDegraded" checked> Show degraded / unreliable-embedding titles</label>
+    <h2>Tag evidence filters</h2>
+    <label class="small" for="nativeTag">Native tag (platform label)</label>
+    <select id="nativeTag"></select>
+    <label class="small" for="concept" style="margin-top:6px">Mapped concept (AI-reviewed taxonomy)</label>
+    <select id="concept"></select>
+    <div class="seg" id="filterModeSeg" style="margin-top:6px" role="group" aria-label="Non-matching points">
+      <button data-fm="dim" aria-pressed="true">Dim others</button>
+      <button data-fm="hide" aria-pressed="false">Hide others</button>
+    </div>
+    <h2>Search</h2>
+    <input type="search" id="search" placeholder="Title or key  (press /)" aria-label="Search problems" autocomplete="off">
+    <div id="searchResults" class="small"></div>
+    <h2>Neighbors drawn</h2>
+    <label class="small">Top <input type="range" id="kRange" min="1" max="30" value="10" style="flex:1"> <span id="kVal">10</span></label>
+    <label class="small"><input type="checkbox" id="hideFlagged"> Hide excluded / degraded-embedding neighbors</label>
+    <h2>Coverage</h2>
+    <div id="coverage" class="small"></div>
+    <details id="qualityBox"><summary>Projection fidelity</summary><div id="quality" class="small"></div></details>
+    <details><summary>Limits</summary>
+      <ul class="small" style="padding-left:18px;margin:4px 0">
+        <li>Title similarity is a weak proxy: generic or narrative titles match by wording, not technique.</li>
+        <li>Non-Latin titles (mostly Japanese AtCoder) are embedded by an English-only model: marked degraded/unreliable.</li>
+        <li>Neighbors are exact in the 384-d space; map distances are not. Compare the three projections before reading structure into any one.</li>
+        <li>Judged pairs cover only a small, selected set of pairs; absence of a judgment is unknown, not negative.</li>
+      </ul>
+    </details>
+  </aside>
+  <section id="stage" aria-label="Map">
+    <div id="panels" class="single"></div>
+    <div id="status" aria-live="polite"></div>
+  </section>
+  <aside id="detail" aria-label="Selected problem"><div class="muted">Click a point or search to inspect a problem. Scroll to zoom, drag to pan, double-click to reset a panel.</div></aside>
+</main>
+<div id="tip" role="tooltip"></div>
+<script id="payload" type="application/json">__PAYLOAD_JSON__</script>
+<script>
+'use strict';
+const P = JSON.parse(document.getElementById('payload').textContent);
+const N = P.n;
+const PLAT = P.platforms;                       // atcoder, codeforces, leetcode
+const PLAT_LABEL = {atcoder:'AtCoder', codeforces:'Codeforces', leetcode:'LeetCode'};
+const TIER = ['reliable','degraded','unreliable'];
+const LABEL_NAME = ['unrelated','partially related','relevant','strongly relevant'];
+const HIST_TYPE = ['similarity','prerequisite','transfer'];
+const PROJS = ['pca','umap','tsne'];
+const PROJ_LABEL = {pca:'PCA', umap:'UMAP', tsne:'t-SNE'};
+
+function unpack(d){
+  const bin = atob(d.b64), u8 = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+  const T = {u8:Uint8Array,i16:Int16Array,u16:Uint16Array,u32:Uint32Array,i32:Int32Array,f32:Float32Array}[d.dtype];
+  return new T(u8.buffer);
+}
+const platform = unpack(P.platform), eligible = unpack(P.eligible), rel = unpack(P.reliability);
+const unk = unpack(P.unk_percent), vsrc = unpack(P.vector_source), stmt = unpack(P.statement_available);
+const tgroup = unpack(P.title_group), dgroup = unpack(P.duplicate_group);
+const tagOff = unpack(P.tags.offsets), tagIds = unpack(P.tags.ids);
+const K = P.neighbors.k, SCALE = P.neighbors.score_scale;
+const NB = {any:{idx:unpack(P.neighbors.any_idx), sc:unpack(P.neighbors.any_score)},
+            cross:{idx:unpack(P.neighbors.cross_idx), sc:unpack(P.neighbors.cross_score)}};
+const PR = {};
+for (const name of PROJS) PR[name] = {xy: unpack(P.projections[name].coords), pres: unpack(P.projections[name].preserved_top10)};
+const lowerTitles = P.titles.map(t => t.toLowerCase()), lowerKeys = P.keys.map(k => k.toLowerCase());
+const ceq = P.concepts.mapped.map(list => new Set(list.filter(e => e[1] === 0 && e[2] >= 85).map(e => e[0])));
+const judged = new Map();                       // "q|t" -> [label, deceptive]
+const judgedByNode = Array.from({length:N}, () => []);
+for (const [q, t, label, dec] of P.judged_pairs) { judged.set(q + '|' + t, [label, dec]); judgedByNode[q].push(['out', t, label, dec]); judgedByNode[t].push(['in', q, label, dec]); }
+const histByNode = Array.from({length:N}, () => []);
+for (const h of P.history) { histByNode[h[0]].push(h); if (h[1] !== h[0]) histByNode[h[1]].push(h); }
+const titleGroups = new Map();
+for (let i = 0; i < N; i++) if (tgroup[i] >= 0) { if (!titleGroups.has(tgroup[i])) titleGroups.set(tgroup[i], []); titleGroups.get(tgroup[i]).push(i); }
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = id => document.getElementById(id);
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const pct = x => (100 * x).toFixed(1) + '%';
+
+function urlOf(i){
+  const ex = P.url_exceptions[i]; if (ex) return ex;
+  const key = P.keys[i], slug = key.slice(key.indexOf(':') + 1), p = PLAT[platform[i]];
+  if (p === 'leetcode') return 'https://leetcode.com/problems/' + encodeURIComponent(slug) + '/';
+  if (p === 'codeforces') { const m = /^codeforces:(\d+)(.+)$/.exec(key); return m ? 'https://codeforces.com/problemset/problem/' + m[1] + '/' + encodeURIComponent(m[2]) : null; }
+  const c = P.contest[i]; return c ? 'https://atcoder.jp/contests/' + encodeURIComponent(c) + '/tasks/' + encodeURIComponent(slug) : null;
+}
+function nativeTags(i){ const out = []; for (let a = tagOff[i]; a < tagOff[i + 1]; a++) out.push(P.tags.vocab[tagIds[a]]); return out; }
+function excludedReasons(i){ const r = P.excluded_reasons.by_node[i]; return r ? r.map(x => P.excluded_reasons.vocab[x]) : []; }
+
+// ---------- state ----------
+const state = {view:'single', proj:'umap', colorBy:'platform', plat:[true,true,true], showExcluded:true, showDegraded:true,
+               nativeTag:-1, concept:-1, filterMode:'dim', sel:-1, tab:'any', k:10, hideFlagged:false};
+let vis = new Uint8Array(N), match = new Uint8Array(N);
+const panels = [];
+
+function computeVisibility(){
+  for (let i = 0; i < N; i++) {
+    vis[i] = (state.plat[platform[i]] && (eligible[i] || state.showExcluded) && (rel[i] === 0 || state.showDegraded)) ? 1 : 0;
+    let m = 1;
+    if (state.nativeTag >= 0) { m = 0; for (let a = tagOff[i]; a < tagOff[i + 1]; a++) if (tagIds[a] === state.nativeTag) { m = 1; break; } }
+    if (m && state.concept >= 0) { m = 0; for (const e of P.concepts.mapped[i]) if (e[0] === state.concept) { m = 1; break; } }
+    match[i] = m;
+  }
+}
+const anyTagFilter = () => state.nativeTag >= 0 || state.concept >= 0;
+
+function fidelityColor(c){   // 0..10 -> viridis-like ramp
+  const stops = [[68,1,84],[59,82,139],[33,145,140],[94,201,98],[253,231,37]];
+  const t = Math.min(Math.max(c / 10, 0), 1) * 4, a = Math.floor(Math.min(t, 3.999)), f = t - a;
+  const mix = stops[a].map((v, j) => Math.round(v + (stops[a + 1][j] - v) * f));
+  return 'rgb(' + mix.join(',') + ')';
+}
+function classInfo(panel){
+  if (state.colorBy === 'platform') return {n:3, of: i => platform[i], color: c => css('--' + PLAT[c]), name: c => PLAT_LABEL[PLAT[c]]};
+  if (state.colorBy === 'reliability') return {n:4,
+    of: i => !eligible[i] ? 3 : rel[i], color: c => [css('--rel0'),css('--rel1'),css('--rel2'),css('--relx')][c],
+    name: c => ['eligible, reliable title embedding','eligible, degraded (non-Latin)','eligible, unreliable (unknown tokens)','excluded from research cohort'][c]};
+  const pres = PR[panel.proj].pres;
+  return {n:11, of: i => pres[i], color: c => fidelityColor(c), name: c => c + '/10 semantic neighbors kept in 2D top-10'};
+}
+
+// ---------- panels ----------
+class Panel {
+  constructor(proj){
+    this.proj = proj; this.view = {cx:.5, cy:.5, zoom:1};
+    this.el = document.createElement('div'); this.el.className = 'panel';
+    this.el.innerHTML = '<div class="ph"></div><div class="wrap"><canvas role="img"></canvas></div><div class="pf"></div>';
+    this.canvas = this.el.querySelector('canvas'); this.ctx = this.canvas.getContext('2d');
+    this.head = this.el.querySelector('.ph'); this.foot = this.el.querySelector('.pf');
+    this.canvas.setAttribute('aria-label', PROJ_LABEL[proj] + ' map of all catalog problems');
+    this.buildGrid(); this.bind(); this.W = 0; this.H = 0; this.lists = [];
+    new ResizeObserver(() => this.resize()).observe(this.canvas.parentElement);
+    this.renderHead();
+  }
+  buildGrid(){
+    const xy = PR[this.proj].xy, G = 160; this.G = G; this.cells = new Map();
+    for (let i = 0; i < N; i++) {
+      const key = Math.min(G - 1, Math.floor(xy[2*i] * G)) * G + Math.min(G - 1, Math.floor(xy[2*i+1] * G));
+      let a = this.cells.get(key); if (!a) this.cells.set(key, a = []); a.push(i);
+    }
+  }
+  renderHead(){
+    const q = P.quality.projections[this.proj + '-seed17'];
+    this.head.innerHTML = '<b>' + PROJ_LABEL[this.proj] + '</b> &middot; top-10 preservation ' + pct(q.preservation_top10_any) +
+      ' &middot; trust ' + q.trustworthiness.toFixed(3) + ' &middot; continuity ' + q.continuity.toFixed(3);
+  }
+  resize(){
+    const r = this.canvas.parentElement.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    this.W = Math.max(1, Math.round(r.width)); this.H = Math.max(1, Math.round(r.height));
+    this.canvas.width = this.W * d; this.canvas.height = this.H * d; this.ctx.setTransform(d, 0, 0, d, 0, 0); this.draw();
+  }
+  S(){ return Math.min(this.W, this.H) * .92 * this.view.zoom; }
+  toScreen(u, v){ const S = this.S(); return [this.W / 2 + (u - this.view.cx) * S, this.H / 2 - (v - this.view.cy) * S]; }
+  toNorm(x, y){ const S = this.S(); return [(x - this.W / 2) / S + this.view.cx, -(y - this.H / 2) / S + this.view.cy]; }
+  rebuildLists(){
+    const info = classInfo(this); this.info = info; this.lists = Array.from({length:info.n}, () => []); this.dim = [];
+    for (let i = 0; i < N; i++) {
+      if (!vis[i]) continue;
+      if (match[i]) this.lists[info.of(i)].push(i); else if (state.filterMode === 'dim') this.dim.push(i);
+    }
+  }
+  draw(){
+    const ctx = this.ctx, W = this.W, H = this.H, xy = PR[this.proj].xy, S = this.S(), v = this.view;
+    ctx.fillStyle = css('--canvas'); ctx.fillRect(0, 0, W, H);
+    const size = Math.min(6, Math.max(1.6, 1.4 * Math.sqrt(v.zoom)));
+    const px = i => W / 2 + (xy[2*i] - v.cx) * S, py = i => H / 2 - (xy[2*i+1] - v.cy) * S;
+    ctx.globalAlpha = .14; ctx.fillStyle = css('--dim');
+    for (const i of this.dim) { const x = px(i), y = py(i); if (x > -4 && x < W + 4 && y > -4 && y < H + 4) ctx.fillRect(x - size/2, y - size/2, size, size); }
+    ctx.globalAlpha = state.sel >= 0 ? .62 : .85;
+    this.lists.forEach((list, c) => {
+      ctx.fillStyle = this.info.color(c);
+      for (const i of list) { const x = px(i), y = py(i); if (x > -4 && x < W + 4 && y > -4 && y < H + 4) ctx.fillRect(x - size/2, y - size/2, size, size); }
+    });
+    ctx.globalAlpha = 1;
+    if (state.sel >= 0) this.drawSelection(px, py, size);
+    this.renderFoot();
+  }
+  drawSelection(px, py, size){
+    const ctx = this.ctx, s = state.sel, sx = px(s), sy = py(s), list = currentNeighbors();
+    ctx.lineWidth = 1; ctx.strokeStyle = css('--ink'); ctx.globalAlpha = .35;
+    for (const nb of list) { ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(px(nb.j), py(nb.j)); ctx.stroke(); }
+    ctx.globalAlpha = 1; ctx.lineWidth = 2;
+    for (const nb of list) {
+      const x = px(nb.j), y = py(nb.j);
+      ctx.strokeStyle = css('--' + PLAT[platform[nb.j]]); ctx.fillStyle = css('--canvas');
+      ctx.beginPath(); ctx.arc(x, y, size + 2.5, 0, 6.2832); ctx.fill(); ctx.stroke();
+      if (nb.rank <= 9) { ctx.fillStyle = css('--ink'); ctx.font = '10px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(nb.rank, x, y + .5); }
+    }
+    ctx.strokeStyle = css('--ink'); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(sx, sy, size + 6, 0, 6.2832); ctx.stroke();
+    ctx.fillStyle = css('--' + PLAT[platform[s]]); ctx.beginPath(); ctx.arc(sx, sy, size + 2, 0, 6.2832); ctx.fill();
+  }
+  renderFoot(){
+    if (state.sel < 0) { this.foot.textContent = 'Select a problem to see how this map keeps its semantic neighbors.'; return; }
+    const kept = PR[this.proj].pres[state.sel];
+    this.foot.innerHTML = 'Selected: <b>' + kept + '/10</b> of its exact top-10 title neighbors are also within its 10 nearest points in this map.';
+  }
+  hit(x, y){
+    const [u, v] = this.toNorm(x, y), G = this.G, r = 9 / this.S() * G, xy = PR[this.proj].xy;
+    const cx = Math.floor(u * G), cy = Math.floor(v * G), span = Math.ceil(r);
+    let best = -1, bestD = 81;
+    for (let a = cx - span; a <= cx + span; a++) for (let b = cy - span; b <= cy + span; b++) {
+      if (a < 0 || b < 0 || a >= G || b >= G) continue;
+      const list = this.cells.get(a * G + b); if (!list) continue;
+      for (const i of list) {
+        if (!vis[i] || !match[i]) continue;
+        const [sx, sy] = this.toScreen(xy[2*i], xy[2*i+1]), d = (sx - x) ** 2 + (sy - y) ** 2;
+        if (d < bestD) { bestD = d; best = i; }
+      }
+    }
+    return best;
+  }
+  focusOn(i){
+    const xy = PR[this.proj].xy; this.view.cx = xy[2*i]; this.view.cy = xy[2*i+1]; this.view.zoom = Math.max(this.view.zoom, 6); this.draw();
+  }
+  bind(){
+    const c = this.canvas; let drag = null, moved = false;
+    c.addEventListener('mousedown', e => { drag = {x:e.clientX, y:e.clientY, cx:this.view.cx, cy:this.view.cy}; moved = false; });
+    window.addEventListener('mouseup', () => { drag = null; });
+    window.addEventListener('mousemove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
+      const S = this.S(); this.view.cx = drag.cx - dx / S; this.view.cy = drag.cy + dy / S; this.draw();
+    });
+    c.addEventListener('mousemove', e => {
+      if (drag) return;
+      const r = c.getBoundingClientRect(), i = this.hit(e.clientX - r.left, e.clientY - r.top);
+      const tip = $('tip');
+      if (i < 0) { tip.style.display = 'none'; return; }
+      tip.innerHTML = '<b>' + esc(P.titles[i]) + '</b><br><span class="muted">' + esc(P.keys[i]) + '</span>';
+      tip.style.display = 'block'; tip.style.left = Math.min(window.innerWidth - 330, e.clientX + 12) + 'px'; tip.style.top = (e.clientY + 12) + 'px';
+    });
+    c.addEventListener('mouseleave', () => { $('tip').style.display = 'none'; });
+    c.addEventListener('click', e => {
+      if (moved) return;
+      const r = c.getBoundingClientRect(), i = this.hit(e.clientX - r.left, e.clientY - r.top);
+      if (i >= 0) select(i);
+    });
+    c.addEventListener('dblclick', () => { this.view = {cx:.5, cy:.5, zoom:1}; this.draw(); });
+    c.addEventListener('wheel', e => {
+      e.preventDefault();
+      const r = c.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, [u, v] = this.toNorm(x, y);
+      this.view.zoom = Math.min(400, Math.max(.5, this.view.zoom * Math.exp(-e.deltaY * .0015)));
+      const S = this.S(); this.view.cx = u - (x - this.W / 2) / S; this.view.cy = v + (y - this.H / 2) / S; this.draw();
+    }, {passive:false});
+  }
+}
+
+function layoutPanels(){
+  const host = $('panels'); host.innerHTML = ''; panels.length = 0;
+  host.className = state.view;
+  const names = state.view === 'single' ? [state.proj] : PROJS;
+  for (const n of names) { const p = new Panel(n); panels.push(p); host.appendChild(p.el); }
+  refreshPanels(); requestAnimationFrame(() => panels.forEach(p => p.resize()));
+}
+function refreshPanels(){ computeVisibility(); panels.forEach(p => { p.rebuildLists(); p.draw(); }); renderLegend(); renderStatus(); }
+function redraw(){ panels.forEach(p => p.draw()); }
+
+// ---------- neighbors / evidence ----------
+function neighborsFor(i, tab, k, hideFlagged){
+  const out = [], idx = NB[tab].idx, sc = NB[tab].sc;
+  for (let r = 0; r < K && out.length < k; r++) {
+    const j = idx[i * K + r]; if (hideFlagged && (!eligible[j] || rel[j] !== 0)) continue;
+    out.push({j, s: sc[i * K + r] / SCALE, rank: r + 1});
+  }
+  return out;
+}
+const currentNeighbors = () => state.sel < 0 ? [] : neighborsFor(state.sel, state.tab, state.k, state.hideFlagged);
+
+function sharedConcepts(i, j){
+  const a = ceq[i], b = ceq[j];
+  if (!a.size || !b.size) return null;
+  const shared = [...a].filter(x => b.has(x));
+  return {shared: shared.map(x => P.concepts.vocab[x]), jaccard: shared.length / (a.size + b.size - shared.length)};
+}
+function platChip(i){ return '<span class="chip"><span class="sw" style="background:var(--' + PLAT[platform[i]] + ')"></span> ' + PLAT_LABEL[PLAT[platform[i]]] + '</span>'; }
+function flagChips(j){
+  const f = [];
+  if (!eligible[j]) f.push('<span class="chip warn" title="' + esc(excludedReasons(j).join(', ')) + '">excluded from research cohort</span>');
+  if (rel[j] === 1) f.push('<span class="chip warn" title="non-Latin title in an English-only model">degraded embedding</span>');
+  if (rel[j] === 2) f.push('<span class="chip warn" title="' + unk[j] + '% of tokens unknown">unreliable embedding</span>');
+  return f.join('');
+}
+function judgedChip(i, j){
+  let hit = judged.get(i + '|' + j), reverse = false;
+  if (!hit) { hit = judged.get(j + '|' + i); reverse = !!hit; }
+  if (!hit) return '';
+  const lab = hit[0] === 255 ? 'judge abstained (unknown)' : 'judged: ' + LABEL_NAME[hit[0]];
+  return '<span class="chip">' + esc(lab) + (hit[1] === 1 ? ', deceptive title match' : '') + (reverse ? ' (reverse pair)' : '') + '</span>';
+}
+function neighborRows(i){
+  const list = neighborsFor(i, state.tab, state.k, state.hideFlagged);
+  if (!list.length) return '<div class="muted small">No neighbors to show with the current filters.</div>';
+  return '<ol class="nl">' + list.map(nb => {
+    const j = nb.j, sc = sharedConcepts(i, j), same = tgroup[j] >= 0 && tgroup[j] === tgroup[i];
+    const tag = sc === null ? '<span class="chip" title="a tag channel needs tags on both problems">tag overlap unavailable</span>'
+      : sc.shared.length ? '<span class="chip" title="equivalent taxonomy concepts, confidence 0.85 or higher">shared concepts: ' + esc(sc.shared.join(', ')) + '</span>'
+      : '<span class="chip">no shared concept</span>';
+    return '<li><button class="nrow" data-j="' + j + '"><span class="s" title="cosine similarity of title vectors">' + nb.s.toFixed(3) + '</span>' +
+      '<span class="muted">#' + nb.rank + '</span> <span class="t">' + esc(P.titles[j]) + '</span><br>' + platChip(j) + tag +
+      (same ? '<span class="chip warn">identical normalized title</span>' : '') + (dgroup[i] >= 0 && dgroup[j] === dgroup[i] ? '<span class="chip warn">duplicate-candidate group</span>' : '') +
+      judgedChip(i, j) + flagChips(j) + '</button></li>';
+  }).join('') + '</ol>';
+}
+function judgedSection(i){
+  const rows = [];
+  for (const [dir, other, label, dec] of judgedByNode[i].slice(0, 40)) {
+    const text = label === 255 ? 'judge abstained (unknown)' : LABEL_NAME[label];
+    rows.push('<li><button class="nrow" data-j="' + other + '"><span class="muted">' + (dir === 'out' ? 'as query &rarr;' : 'as target &larr;') + '</span> ' + esc(P.titles[other]) +
+      '<br><span class="chip">' + esc(text) + '</span>' + (dec === 1 ? '<span class="chip">deceptive title match</span>' : '') + '</button></li>');
+  }
+  const hist = histByNode[i].map(h => {
+    const other = h[0] === i ? h[1] : h[0], dir = h[0] === i ? 'from this' : 'to this';
+    return '<li><button class="nrow" data-j="' + other + '"><span class="muted">' + HIST_TYPE[h[2]] + ', ' + dir + ' &middot; relevance ' + h[3] + '</span> ' + esc(P.titles[other]) +
+      '<br><span class="small muted">' + esc(h[4]) + (h[5] ? ' (legacy key resolved by reviewed alias)' : '') + '</span></button></li>';
+  });
+  let html = '';
+  html += rows.length ? '<div class="small muted">Title/tag-pool pair judgments (AI-reviewed draft, review and adjudication; not human gold):</div><ol class="nl">' + rows.join('') + '</ol>'
+                      : '<div class="small muted">No pooled pair judgment involves this problem. That is unknown, not negative.</div>';
+  if (hist.length) html += '<div class="small muted" style="margin-top:6px">Earlier curated relationship judgments (AI-reviewed):</div><ol class="nl">' + hist.join('') + '</ol>';
+  return html;
+}
+function tagSection(i){
+  const tags = nativeTags(i), mapped = P.concepts.mapped[i];
+  let html = '';
+  if (PLAT[platform[i]] === 'atcoder') html += '<div class="muted small">AtCoder publishes no algorithm tags: tag evidence is <b>unavailable</b>, not empty.</div>';
+  else if (!tags.length) html += '<div class="muted small">The platform lists no tags for this problem.</div>';
+  else html += '<div>' + tags.map(t => '<span class="chip">' + esc(t) + '</span>').join('') + '</div>';
+  if (mapped.length) html += '<div class="small muted" style="margin-top:4px">Mapped concepts (relation, confidence):</div><div>' +
+    mapped.map(e => '<span class="chip">' + esc(P.concepts.vocab[e[0]]) + ' &middot; ' + P.concepts.relations[e[1]] + ' ' + (e[2] / 100).toFixed(2) + '</span>').join('') + '</div>';
+  html += '<div class="small muted" style="margin-top:4px">Platform editorial labels and an AI-reviewed mapping. They did not influence positions or semantic neighbors.</div>';
+  return html;
+}
+function renderDetail(){
+  const box = $('detail'), i = state.sel;
+  if (i < 0) { box.innerHTML = '<div class="muted">Click a point or search to inspect a problem. Scroll to zoom, drag to pan, double-click to reset a panel.</div>'; return; }
+  const url = urlOf(i), reasons = excludedReasons(i), ctx = P.score_context;
+  const same = tgroup[i] >= 0 ? titleGroups.get(tgroup[i]).filter(x => x !== i) : [];
+  const dups = dgroup[i] >= 0 ? P.duplicate_members[dgroup[i]].filter(x => x !== i) : [];
+  box.innerHTML =
+    '<h2 style="margin-top:0">Selected problem</h2><div style="font-size:16px;font-weight:600">' + esc(P.titles[i]) + '</div>' +
+    '<div>' + platChip(i) + '<span class="chip">' + esc(P.keys[i]) + '</span>' +
+    (P.difficulty[i] != null ? '<span class="chip">native difficulty: ' + esc(P.difficulty[i]) + '</span>' : '') + flagChips(i) + '</div>' +
+    (url ? '<div class="small"><a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Open on ' + PLAT_LABEL[PLAT[platform[i]]] + ' &#8599;</a></div>' : '') +
+    '<div class="box"><h3>Embedding provenance</h3><div class="small">Title vector: ' + (vsrc[i] ? 'newly encoded for this map' : 'reused earlier A1 title vector') +
+      ' &middot; reliability: <b>' + TIER[rel[i]] + '</b> (' + unk[i] + '% of title tokens unknown to the English tokenizer)' +
+      (reasons.length ? ' &middot; excluded: ' + esc(reasons.join(', ')) : ' &middot; in the research cohort') +
+      ' &middot; publisher statement record: ' + (stmt[i] ? 'linked (not used by this map)' : 'not available') + '</div></div>' +
+    '<div class="box tag"><h3>Tag evidence <span class="muted small">(separate from similarity)</span></h3>' + tagSection(i) + '</div>' +
+    '<div class="box sem"><h3>Semantic title similarity</h3>' +
+      '<div class="small muted">Score = cosine similarity of 384-d title vectors (1 = same direction). Across the catalog the top-1 any-platform score has median ' + ctx.top1_any_median.toFixed(2) +
+      ' (10th&ndash;90th percentile ' + ctx.top1_any_p10.toFixed(2) + '&ndash;' + ctx.top1_any_p90.toFixed(2) + '); the 10th neighbor has median ' + ctx.rank10_any_median.toFixed(2) + '. It does not measure algorithm equivalence.</div>' +
+      '<div class="tabs" role="tablist"><button role="tab" data-tab="any" aria-selected="' + (state.tab === 'any') + '">Any platform</button>' +
+      '<button role="tab" data-tab="cross" aria-selected="' + (state.tab === 'cross') + '">Other platforms</button></div>' + neighborRows(i) + '</div>' +
+    '<div class="box judge"><h3>Judged evidence</h3>' + judgedSection(i) + '</div>' +
+    ((same.length || dups.length) ? '<div class="box"><h3>Identity notes</h3>' +
+      (same.length ? '<div class="small">Other problems with an identical normalized title: ' + same.slice(0, 8).map(j => '<button class="nrow" data-j="' + j + '">' + esc(P.titles[j]) + ' <span class="muted">' + esc(P.keys[j]) + '</span></button>').join('') + (same.length > 8 ? ' +' + (same.length - 8) + ' more' : '') + '</div>' : '') +
+      (dups.length ? '<div class="small muted">Member of a same-title duplicate-candidate group (' + (dups.length + 1) + ' problems). A shared title is not evidence of an identical problem.</div>' : '') + '</div>' : '');
+  box.scrollTop = 0;
+}
+
+function select(i, focus){
+  state.sel = i;
+  renderDetail(); redraw();
+  if (focus) panels.forEach(p => p.focusOn(i));
+}
+
+// ---------- controls ----------
+function renderLegend(){
+  const info = panels.length ? panels[0].info : null; if (!info) return;
+  $('legend').innerHTML = Array.from({length:info.n}, (_, c) => '<div><span class="sw" style="background:' + info.color(c) + '"></span> ' + esc(info.name(c)) + '</div>').join('');
+}
+function renderStatus(){
+  let shown = 0, matched = 0; for (let i = 0; i < N; i++) { if (vis[i]) { shown++; if (match[i]) matched++; } }
+  $('status').textContent = 'Showing ' + shown.toLocaleString() + ' of ' + N.toLocaleString() + ' problems' + (anyTagFilter() ? ' · ' + matched.toLocaleString() + ' match the tag filter' : '') +
+    (state.view === 'single' ? ' · ' + PROJ_LABEL[state.proj] : ' · PCA, UMAP and t-SNE side by side (selection is linked; each panel zooms separately)');
+}
+function renderCoverage(){
+  const counts = {reliable:0, degraded:0, unreliable:0}; let excluded = 0, fresh = 0;
+  for (let i = 0; i < N; i++) { counts[TIER[rel[i]]]++; excluded += !eligible[i]; fresh += vsrc[i]; }
+  const per = PLAT.map((p, c) => { let n = 0, t = 0; for (let i = 0; i < N; i++) if (platform[i] === c) { n++; t += tagOff[i + 1] > tagOff[i]; } return PLAT_LABEL[p] + ' ' + n.toLocaleString() + ' (' + t.toLocaleString() + ' with tags)'; });
+  $('coverage').innerHTML = '<div>' + N.toLocaleString() + ' problems, each with a title vector: ' + (N - fresh).toLocaleString() + ' reused, ' + fresh.toLocaleString() + ' newly encoded.</div>' +
+    '<div>Reliability: ' + counts.reliable.toLocaleString() + ' reliable, ' + counts.degraded.toLocaleString() + ' degraded, ' + counts.unreliable.toLocaleString() + ' unreliable.</div>' +
+    '<div>' + excluded.toLocaleString() + ' excluded from the research cohort (kept on the map).</div><div class="muted">' + per.join('; ') + '</div>';
+  $('subtitle').textContent = '— ' + N.toLocaleString() + ' problems · LeetCode, Codeforces, AtCoder';
+}
+function renderQuality(){
+  const q = P.quality, hd = q.high_dimensional;
+  const rows = PROJS.map(n => { const e = q.projections[n + '-seed17']; return '<tr><td>' + PROJ_LABEL[n] + '</td><td>' + pct(e.preservation_top10_any) + '</td><td>' + pct(e.preservation_top10_cross_platform) +
+    '</td><td>' + e.trustworthiness.toFixed(3) + '</td><td>' + e.continuity.toFixed(3) + '</td><td>' + pct(e.same_platform_fraction_top10) + '</td></tr>'; }).join('');
+  const STAB = {pca:'PCA', umap:'UMAP', tsne:'t-SNE (PCA init)', 'tsne-random':'t-SNE (random init)'};
+  const stab = Object.entries(q.stability).map(([m, list]) => '<div>' + (STAB[m] || m) + ': ' + list.map(s => 'seeds ' + s.seeds.join('/') + ' ' +
+    (s.identical_layout ? 'identical layout (the seed has no effect with this init)' : 'Procrustes disparity ' + s.procrustes_disparity.toFixed(2) + ', 2D top-10 overlap ' + pct(s.top10_2d_neighbor_overlap))).join('; ') + '</div>').join('');
+  const lift = (obs, base) => obs.share_with_concept == null || base.share_with_concept == null ? 'n/a' : pct(obs.share_with_concept) + ' vs ' + pct(base.share_with_concept) + ' chance';
+  $('quality').innerHTML = '<table><tr><th></th><th>Top-10 kept</th><th>Cross-platform</th><th>Trust</th><th>Cont.</th><th>Same-platform</th></tr>' + rows +
+    '<tr><td>384-d reference</td><td>100%</td><td>100%</td><td>1</td><td>1</td><td>' + pct(hd.same_platform_fraction_top10) + '</td></tr></table>' +
+    '<div class="muted" style="margin-top:4px">Top-10 kept = share of each problem\'s exact 384-d title neighbors that are also its 10 nearest 2D points (all ' + N.toLocaleString() + ' problems). Trust and continuity use ' + q.trust_query_sample.size.toLocaleString() + ' sampled queries.</div>' +
+    '<div style="margin-top:6px"><b>Seed stability</b>' + stab + '</div>' +
+    '<div style="margin-top:6px"><b>Tag agreement, descriptive</b><div>Title neighbors (any platform): ' + lift(hd.tag_agreement_top10, hd.tag_agreement_top10_platform_matched_random) + '</div>' +
+    '<div>Title neighbors (other platforms): ' + lift(hd.tag_agreement_cross_platform_top10, hd.tag_agreement_cross_platform_top10_platform_matched_random) + '</div>' +
+    '<div class="muted">Share of tagged neighbor slots with a shared taxonomy concept, against random tagged nodes on the same platforms. Tags did not shape the vectors; this is not proof of the same technique.</div></div>';
+}
+function setPressed(group, attr, value){ group.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset[attr] === value))); }
+function initControls(){
+  $('viewSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; state.view = b.dataset.view; setPressed($('viewSeg'), 'view', state.view); $('projSeg').style.display = state.view === 'single' ? '' : 'none'; layoutPanels(); });
+  const seg = $('projSeg'); seg.innerHTML = PROJS.map(n => '<button data-proj="' + n + '" aria-pressed="' + (n === state.proj) + '">' + PROJ_LABEL[n] + '</button>').join('');
+  seg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; state.proj = b.dataset.proj; setPressed(seg, 'proj', state.proj); layoutPanels(); });
+  $('colorBy').addEventListener('change', e => { state.colorBy = e.target.value; refreshPanels(); });
+  $('platformBoxes').innerHTML = PLAT.map((p, c) => '<label><input type="checkbox" data-p="' + c + '" checked><span class="sw" style="background:var(--' + p + ')"></span> ' + PLAT_LABEL[p] + '</label>').join('');
+  $('platformBoxes').addEventListener('change', e => { state.plat[+e.target.dataset.p] = e.target.checked; refreshPanels(); });
+  $('showExcluded').addEventListener('change', e => { state.showExcluded = e.target.checked; refreshPanels(); });
+  $('showDegraded').addEventListener('change', e => { state.showDegraded = e.target.checked; refreshPanels(); });
+  const tagCounts = new Map(); for (let a = 0; a < tagIds.length; a++) tagCounts.set(tagIds[a], (tagCounts.get(tagIds[a]) || 0) + 1);
+  const tagOpts = [...tagCounts].sort((a, b) => b[1] - a[1]);
+  $('nativeTag').innerHTML = '<option value="-1">Any (no filter)</option>' + tagOpts.map(([id, n]) => '<option value="' + id + '">' + esc(P.tags.vocab[id]) + ' (' + n.toLocaleString() + ')</option>').join('');
+  $('nativeTag').addEventListener('change', e => { state.nativeTag = +e.target.value; refreshPanels(); });
+  const cCounts = new Map(); for (const list of P.concepts.mapped) for (const e of list) cCounts.set(e[0], (cCounts.get(e[0]) || 0) + 1);
+  $('concept').innerHTML = '<option value="-1">Any (no filter)</option>' + [...cCounts].sort((a, b) => b[1] - a[1]).map(([id, n]) => '<option value="' + id + '">' + esc(P.concepts.vocab[id]) + ' (' + n.toLocaleString() + ')</option>').join('');
+  $('concept').addEventListener('change', e => { state.concept = +e.target.value; refreshPanels(); });
+  $('filterModeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; state.filterMode = b.dataset.fm; setPressed($('filterModeSeg'), 'fm', state.filterMode); refreshPanels(); });
+  $('kRange').addEventListener('input', e => { state.k = +e.target.value; $('kVal').textContent = state.k; if (state.sel >= 0) { renderDetail(); redraw(); } });
+  $('hideFlagged').addEventListener('change', e => { state.hideFlagged = e.target.checked; if (state.sel >= 0) { renderDetail(); redraw(); } });
+  $('detail').addEventListener('click', e => {
+    const row = e.target.closest('.nrow'); if (row) { select(+row.dataset.j, true); return; }
+    const tab = e.target.closest('[data-tab]'); if (tab) { state.tab = tab.dataset.tab; renderDetail(); redraw(); }
+  });
+  const search = $('search'), results = $('searchResults');
+  function runSearch(){
+    const term = search.value.trim().toLowerCase(); if (term.length < 2) { results.innerHTML = ''; return []; }
+    const found = []; for (let i = 0; i < N && found.length < 12; i++) if (lowerTitles[i].includes(term) || lowerKeys[i].includes(term)) found.push(i);
+    results.innerHTML = found.map(i => '<button class="nrow" data-s="' + i + '">' + esc(P.titles[i]) + ' <span class="muted">' + esc(P.keys[i]) + '</span></button>').join('') || '<div class="muted">No match.</div>';
+    return found;
+  }
+  search.addEventListener('input', runSearch);
+  search.addEventListener('keydown', e => { if (e.key === 'Enter') { const f = runSearch(); if (f.length) select(f[0], true); } });
+  results.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (b) select(+b.dataset.s, true); });
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
+    if (e.key === 'Escape') { state.sel = -1; renderDetail(); redraw(); }
+  });
+  renderCoverage(); renderQuality();
+}
+
+initControls();
+layoutPanels();
+window.__map = {state, select, refreshPanels, panels, P};
+</script>
+</body>
+</html>

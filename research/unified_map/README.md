@@ -29,3 +29,15 @@ kernel and loopback socket permission. Private statement text is never exported.
 No model inference/download or API key is needed. Existing title, statement and
 legacy OpenAI vector namespaces remain separate. Retain original384 until new
 independent algorithm-level judgments support another choice.
+
+## Full-catalog interactive map (all 24,297 nodes)
+
+See [FULL-MAP-REPORT.md](FULL-MAP-REPORT.md) and [full_map.ipynb](full_map.ipynb). The interactive page is private
+(`private-learning/unified-map/full-v1/interactive.html`); rebuild it with fresh output paths:
+
+```sh
+.venv/bin/python -m research.unified_map.full_embed --output private-learning/unified-map/full-NEW --receipt research/unified_map/full-receipts/embeddings.NEW.json
+# then full_project (pca, umap, tsne, tsne --tsne-init random), full_quality neighbors/metrics, full_html, full_verify
+```
+
+Title similarity, tag evidence and judged pairs stay separate channels; see the report for coverage and limits.
