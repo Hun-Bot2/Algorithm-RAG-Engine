@@ -1,3 +1,5 @@
+> **2026-10-18:** the pipeline described below was removed after Baekjoon shut down; restore files from git tag `legacy-pipeline-final`. This document is historical.
+
 # Algorithm RAG Engine - STAR+Alpha Portfolio
 
 ## One-Line Summary

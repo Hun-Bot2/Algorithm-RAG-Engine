@@ -167,25 +167,12 @@ After changing code:
 
 ## Project Snapshot
 
-Algorithm RAG Engine recommends English LeetCode follow-up problems from Korean
-Baekjoon study notes. The current production path is a batch pipeline:
-
-1. Detect changed Baekjoon Markdown/MDX study files.
-2. Parse problem metadata.
-3. Embed the source problem with OpenAI `text-embedding-3-small`.
-4. Search the local NumPy LeetCode index.
-5. Generate a Korean recommendation reason with GPT-4o-mini.
-6. Write `artifacts/recommendation_map.json`.
-7. Send the result to Slack through a lightweight Slack job.
-
-Read the docs before making architectural changes:
-
-- `README.md` - project overview and current pipeline narrative.
-- `STAR.md` - portfolio summary, accurate caveats, file inventory.
-- `improve.md` - production improvement roadmap.
-- `docs/leetcode_update.md` - LeetCode data update strategy.
-- `docs/embedding_visualization.md` - embedding visualization notes.
-- `Evaluation_100/docs/*.md` - evaluation and benchmark context.
+Algorithm RAG Engine began (2026-01) as a batch pipeline that recommended English LeetCode follow-ups from Korean Baekjoon
+study notes (OpenAI embeddings, NumPy index, GPT-4o-mini reasons, Slack). Baekjoon shut down and the pipeline, its Docker
+files, workflows and evaluation scripts were removed on 2026-10-18; the last state is the git tag `legacy-pipeline-final`
+(`git checkout legacy-pipeline-final -- <path>` restores any file). The repository is now the local-first mastery system plus
+research (see "Current direction" at the end). Historical docs (`README.md` lower half, `STAR.md`, `specs/production-recommender/`)
+describe the removed pipeline.
 
 ## Strict Architectural Constraints
 
@@ -233,73 +220,38 @@ If validation cannot be performed, explicitly explain why.
 
 ## Production Code vs Experiments
 
-Treat these as the legacy batch entry points (no automation remains; see "Current direction" below):
-
-- `src/main/generate_index_map.py` - heavy recommendation generation job.
-- `src/main/slack_bot_daily_review.py` - light Slack delivery job.
-- `Dockerfile` - multi-stage heavy/light image.
-- `docker-compose.yml` - local/container orchestration.
-
-Treat these as legacy or experimental unless the task explicitly targets them:
-
-- `src/rag/faiss_recommendation_engine.py` - older FAISS-based recommender.
-- `scripts/preprocessing/build_faiss_index.py`
-- `scripts/preprocessing/build_production_faiss_index.py`
-- `Evaluation_100/**` - evaluation research, benchmark scripts, notebooks, images.
-
-Do not claim that `Evaluation_100` is the exact deployed production code path.
-It is useful for ideas such as hybrid scoring and GPT reranking, but production
-currently runs through `src/main/generate_index_map.py`.
+There is no production service. Current code, in priority order: `hosted/` (mastery CLI and policy modules, the only learner-state
+engine), `curriculum/`, `src/learning` (stdlib foundation, embedding backend), `scripts/learning/`, and `research/`.
+Removed 2026-10-18 and recoverable from the tag: `src/main`, `src/rag`, `src/evaluation`, `src/utils`, `scripts/collection`
+(LeetCode collection), `scripts/preprocessing`, `scripts/evaluation`, Dockerfile, docker-compose.yml, requirements-heavy/light,
+`artifacts/`, `images/`, `Evaluation_100/` (except `Evaluation_100/data/*.json`, which the asset manifests pin by hash).
+The one-off audit scripts `research/full_catalog/audit_catalog.py` and `research/statements/audit_availability.py` read removed
+files; their receipts are committed, and re-running them needs those files restored from the tag.
 
 ## Current Important Caveats
 
-- The main production search path uses NumPy, not FAISS.
-- FAISS files and scripts remain for migration history and experiments.
-- No GitHub Actions workflow remains in this repository (the manual pipeline and Docker publish workflows
-  were removed 2026-10-18; recover them from git history if needed). Nothing here runs daily.
-- `generate_index_map.py` relies on OpenAI API access and a NumPy index.
-- `artifacts/recommendation_map.json` is generated output and may contain sample
-  recommendations; do not use it as proof of quality without evaluation.
-- LangSmith and Slack feedback helper modules exist, but feedback is not yet in
-  the main production ranking loop.
+- No GitHub Actions workflow, schedule, Docker image or hosted service exists in this repository.
+- FAISS and OpenAI-based code is gone from the tree; do not reintroduce FAISS, PyTorch in production dependencies, paid APIs or cloud storage.
+- Local data under `data/`, `indexes/` and `algorithm_indexes_v1.tar.gz` is untracked and pinned by `assets/*.manifest*.json`; the stored
+  LeetCode statements stay quarantined (see "Statement sources and terms").
 
 ## Data and Artifacts
 
 Important paths:
 
-- `data/raw/leetcode_raw_data.jsonl` - raw LeetCode records.
-- `data/processed/leetcode_processed.jsonl` - processed LeetCode records.
-- `data/raw/leetcode_slugs.txt` - slug manifest for duplicate detection.
-- `indexes/numpy_leetcode/vectors.npy` - current production vector index.
-- `indexes/numpy_leetcode/metadata.json` - current production metadata.
-- `artifacts/recommendation_map.json` - generated recommendation map.
-- `Evaluation_100/data/ground_truth_v2.json` - 100-pair evaluation ground truth.
+- `private-learning/` (git-ignored): catalogs, models, maps, judgments, learner database. Never commit it.
+- `assets/` and `curriculum/`: reviewed, hash-pinned inputs. A manifest mismatch needs review and a new version, not regeneration.
+- `data/raw/leetcode_raw_data.jsonl`, `data/processed/leetcode_processed.jsonl`, `data/raw/leetcode_slugs.txt`,
+  `indexes/numpy_leetcode/*` (untracked, pinned by the asset manifest; statements quarantined).
+- `Evaluation_100/data/ground_truth_v2.json` and `potential_gt.json` (tracked, pinned by the asset manifest).
 
-Large data, indexes, generated images, and artifacts may be intentionally stored
-outside Git or synced through S3 in workflows. Do not delete or regenerate them
-unless the user asks.
+Do not delete or regenerate pinned files unless the user asks.
 
 ## Recommended Development Direction
 
-The current documented roadmap prioritizes recommendation quality before product
-UI:
-
-1. Refactor the recommender into reusable production modules under `src/rag/`.
-2. Parse Baekjoon MDX into structured algorithm profiles.
-3. Add hybrid scoring with explicit score components.
-4. Add GPT reranking as a decision layer.
-5. Make evaluation call the same recommender code path used by production.
-6. Add API, database, notification routing, feedback loop, and observability.
-
-When making changes, keep new code aligned with that direction instead of adding
-more one-off scripts.
-
-The final platform direction is:
-
-> A production-style personalized algorithm training platform with validated
-> AI-generated problems, secure sandboxed judging, concept-level
-> personalization, spaced repetition learning, explainable recommendations, and
-> feedback-driven adaptation.
+The roadmap is the local-first mastery system (`specs/mastery-system/`, ADR 003): explainable plans from the learner's own solution
+history, AI-reviewed concepts kept separate from user-confirmed ones, no paid services. Research results are exploratory and never
+promoted to recommendations without evaluation. The older platform vision (judge, AI problem generation, hosted app) is not being built.
 
 ## Coding Guidelines
 
@@ -332,62 +284,24 @@ The final platform direction is:
 
 ## Useful Commands
 
-Install production-heavy dependencies:
-
 ```bash
-pip install -r requirements-heavy.txt
+node hosted/cli.mjs catalog use --version catalog-v4
+node hosted/cli.mjs repo add --id solutions --path ~/algorithm-solution
+node hosted/cli.mjs repo ingest
+node hosted/cli.mjs plan
+node --test hosted/test/*.test.mjs
+python3 -m unittest discover -s tests -v
+python3 scripts/learning/assets.py verify
+.venv/bin/python -m unittest discover -s research/full_catalog -v
+.venv/bin/python -m research.unified_map.verify private-learning/unified-map/map-v2
 ```
 
-Install light Slack dependencies:
-
-```bash
-pip install -r requirements-light.txt
-```
-
-Run the heavy generator locally, assuming required environment variables and
-index paths are configured:
-
-```bash
-python3 src/main/generate_index_map.py
-```
-
-Run the Slack delivery job locally:
-
-```bash
-python3 src/main/slack_bot_daily_review.py
-```
-
-Check for new LeetCode problems without GraphQL:
-
-```bash
-python3 scripts/collection/leetcode_check_new_fast.py
-```
-
-Collect LeetCode details when new problems exist:
-
-```bash
-python3 scripts/collection/leetcode_data_collection.py
-```
-
-Run retrieval evaluation:
-
-```bash
-python3 scripts/evaluation/evaluate_retrieval.py
-```
+More commands: `specs/mastery-system/runbook.md`.
 
 ## Testing and Verification
 
-There is no single documented test command for the whole repository. Choose
-verification based on the change:
-
-- Parser/scoring changes: add or run focused unit-style checks if available.
-- Generator changes: verify JSON output shape and no missing required fields.
-- Slack changes: validate Block Kit payload shape without sending live messages
-  unless the user approves real delivery.
-- Workflow/Docker changes: inspect commands and paths carefully; local execution
-  may require API keys, S3 data, or Docker credentials.
-- Evaluation changes: report Recall@K/MRR changes against the documented
-  100-pair ground truth when possible.
+Choose verification by change: Node tests for `hosted/`, `unittest` for `src/learning`, `scripts/learning` and `research/`, the asset
+verifier for pinned inputs, and the unified-map verifier for the preservation snapshot. Say what ran and what did not.
 
 ## Documentation Requirements
 
@@ -416,11 +330,9 @@ Tasks should be:
 
 Keep these distinctions clear in summaries and docs:
 
-- "Current production" means the NumPy-based heavy/light Slack pipeline.
-- "Evaluation_100" means experimental benchmark work.
-- "FAISS" means legacy or alternate indexing unless a task explicitly revives it.
-- "Daily schedule" should be described as disabled/manual unless the workflow is
-  changed and verified.
+- There is no production pipeline or schedule; the batch pipeline is removed (tag `legacy-pipeline-final`).
+- Similarity maps use title embeddings and say nothing about algorithm equivalence.
+- AI-reviewed means AI judgment; user-confirmed (`approved`) comes only from the user.
 
 ## Adaptive learning foundation (2026-10-16)
 

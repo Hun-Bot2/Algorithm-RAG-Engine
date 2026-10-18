@@ -10,15 +10,13 @@
 - **풀이 기록 저장소**: 별도 private repo `algorithm-solution`. 이 저장소의 커밋을 `node hosted/cli.mjs repo ingest`가 읽습니다.
   push만으로 추천이 만들어지지는 않고, 추천은 로컬에서 `plan`으로 만듭니다.
 - **연구** (`research/`): 세 플랫폼 24,297문제의 제목 기반 유사도 지도, 언어 편향 보정, AtCoder 개념 분류. 결과는 `research/*/REPORT.md`와 `specs/`에 있습니다.
-- 초기 파이프라인 코드(`src/main/`, `Dockerfile`, `docker-compose.yml`)는 기록으로 남아 있지만 자동 실행은 없습니다.
+- 초기 파이프라인 코드(`src/main/`, `Dockerfile`, `docker-compose.yml` 등)는 2026-10-18에 삭제했고 git 태그 `legacy-pipeline-final`에서 복구할 수 있습니다.
 
 아래 내용은 2026-01 시점의 초기 파이프라인 기록입니다.
 
 ---
 
 백준 풀이 기록을 분석해 유사한 LeetCode 문제를 자동 추천하고, 매일 07:00 KST에 Slack으로 알림을 보냅니다.
-
-![actions](images/Algo-RAGv2.png)
 
 ## 아키텍처 개요
 - Heavy Job (`src/main/generate_index_map.py`):
@@ -64,8 +62,6 @@ GitHub Actions 실행 시점에만 S3에서 인덱스를 다운로드하고 Dock
 * 선별된 문제에 대해 임베딩 및 유사도 검색을 수행하고, 추천 결과(JSON)를 **S3**에 업로드(Sync)합니다.
 * **Light Job 컨테이너**가 S3에서 JSON을 받아 Slack API를 통해 지정한 형식의 시각화된 메시지를 전송합니다.
 
-![Slack-Bot](images/slack-bot-message.png)
-
 ### 최적화 성과
 
 * **실행 시간 단축**: 사전 빌드 이미지 도입과 의존성 최적화를 통해 전체 파이프라인 실행 시간을 초기 약 12분에서 **2분 미만**으로 80% 이상 단축했습니다.
@@ -77,7 +73,7 @@ GitHub Actions 실행 시점에만 S3에서 인덱스를 다운로드하고 Dock
 - Python 코드 내부의 병렬 처리 (Parallelism) 기법을 도입하여 대량의 알고리즘 문제를 동시에 처리하는 기능도 검토하고 있습니다. -> 공부한 뒤 적용할 계획입니다.
 - 다른 사용자들이 사용할 수도 있어서(?) 최대한 범용적으로 바꿔보려고 합니다.
 
-## 주요 파일
+## 주요 파일 (초기 파이프라인, 삭제됨: 태그 `legacy-pipeline-final`)
 - `src/main/generate_index_map.py` — Baekjoon MDX → OpenAI 임베딩 → NumPy 검색 → GPT-4o-mini 이유 → JSON 저장
 - `src/main/slack_bot_daily_review.py` — JSON 로드 → Slack Webhook 알림
 - `Dockerfile` — heavy/light 멀티스테이지 빌드 (heavy:  NumPy+LangChain, light: Slack 최소 의존성)
