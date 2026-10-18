@@ -3,6 +3,8 @@ import {createServer} from 'node:http';
 import {readFile, mkdir, chmod} from 'node:fs/promises';
 import {resolve, dirname, extname} from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {createGitSync} from './mastery/git-sync.mjs';
+import {highWaterMarks} from './mastery/ledger.mjs';
 import {createJournalService} from './mastery/journal.mjs';
 import {createApp} from './core/app.mjs';
 import {createDatabase} from './test/helpers/d1.mjs';
@@ -11,7 +13,7 @@ const ROOT=resolve(new URL('..',import.meta.url).pathname);
 const PUBLIC = new URL('./public/',import.meta.url);
 const TYPES = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
 export async function startLocal({port=8787,database=resolve(ROOT,'private-learning/hosted.sqlite3'),learnerId='local-owner',
-  curriculum,annotations={},catalogRoot=resolve(ROOT,'private-learning/mastery'),catalogProvider=null}={}) {
+  curriculum,annotations={},catalogRoot=resolve(ROOT,'private-learning/mastery'),catalogProvider=null,gitSyncIntervalMs=5000,autoGitSync=true}={}) {
   const databasePath = database === ':memory:' ? database : resolve(database);
   if (databasePath !== ':memory:') await mkdir(dirname(databasePath),{recursive:true,mode:0o700});
   const db = createDatabase(databasePath);
@@ -23,6 +25,7 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
     try { return new Response(await readFile(new URL(filename,PUBLIC)),{headers:{'content-type':TYPES[extname(filename)]}}); }
     catch { return new Response('Not found',{status:404}); }
   }};
+  const gitSync=createGitSync({db,learnerId,intervalMs:gitSyncIntervalMs});
   const journal=createJournalService({db,catalogRoot,catalogProvider});
   const app = createApp({db,journal,curriculum,annotations,assets,authenticate:async()=>({learner_id:learnerId})});
   const server = createServer(async (incoming,outgoing) => {
@@ -31,6 +34,12 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
       if (!/^127\.0\.0\.1:\d+$/.test(host ?? '')) { outgoing.writeHead(403);outgoing.end();return; }
       const base = `http://${host}`, url = new URL(incoming.url,base);
       if (url.origin !== base) { outgoing.writeHead(403);outgoing.end();return; }
+      if(incoming.method==='GET' && url.pathname==='/api/local/sync'){
+        const marks=await highWaterMarks(db,learnerId);
+        const row=await db.prepare('SELECT revision FROM learners WHERE learner_id=?').bind(learnerId).first();
+        outgoing.writeHead(200,{'content-type':'application/json','cache-control':'no-store'});
+        outgoing.end(JSON.stringify({revision:JSON.stringify([row?.revision ?? 0,marks]),enabled:autoGitSync,status:gitSync.status()}));return;
+      }
       const headers = new Headers();
       for (const [key,value] of Object.entries(incoming.headers)) if (value !== undefined) headers.set(key,Array.isArray(value)?value.join(','):value);
       if (!['GET','HEAD'].includes(incoming.method) && headers.get('origin') !== base) {
@@ -43,8 +52,9 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
     } catch { outgoing.writeHead(500);outgoing.end('Local service error'); }
   });
   await new Promise((resolve,reject)=>server.once('error',reject).listen(port,'127.0.0.1',resolve));
-  return {url:`http://127.0.0.1:${server.address().port}`,db,server,
-    async close(){ await new Promise(resolve=>server.close(resolve));db.close(); }};
+  if(autoGitSync)gitSync.start();
+  return {url:`http://127.0.0.1:${server.address().port}`,db,server,gitSync,
+    async close(){ await gitSync.close();await new Promise(resolve=>server.close(resolve));db.close(); }};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -1221,3 +1221,31 @@ for (const tab of document.querySelectorAll("[data-view]")) {
 }
 
 refresh();
+
+// Local-only evidence polling; no refresh while the learner is entering an outcome.
+let localRevision=null, localPollBusy=false, localSyncWarning=null;
+async function pollLocalEvidence(){
+  if(localPollBusy || document.hidden || currentView!=="journal" || app.getAttribute("aria-busy")==="true" || document.querySelector(".journal-attempt-details[open]") || document.activeElement?.matches("input,select,textarea"))return;
+  localPollBusy=true;
+  try{
+    const result=await request("/local/sync");
+    const blocked=result.status?.lastResults?.find(item=>['history_rewritten','error'].includes(item.status));
+    const warning=blocked ? '풀이 저장소 자동 읽기를 멈췄어요. 경로나 Git 이력 변경 여부를 확인해 주세요.' : null;
+    if(warning!==localSyncWarning){localSyncWarning=warning;if(warning)showNotice(warning,true);}
+    if(result.revision===localRevision)return;
+    const filters=[...document.querySelectorAll('.journal-filters input,.journal-filters select')].map(el=>[el.id,el.value]);
+    const filterOpen=document.querySelector('.journal-filter-details')?.open;
+    if(await refresh()){
+      localRevision=result.revision;
+      for(const [id,value] of filters){const el=document.getElementById(id);if(el)el.value=value;}
+      const detail=document.querySelector('.journal-filter-details');if(detail)detail.open=Boolean(filterOpen);
+      document.querySelector('.journal-filters form')?.dispatchEvent(new Event('change'));
+      if(warning)showNotice(warning,true);
+    }
+  }catch{/* Hosted Worker and offline mode have no local sync endpoint. Keep current view. */}
+  finally{localPollBusy=false;}
+}
+if(globalThis.location?.hostname==='127.0.0.1'){
+  setInterval(pollLocalEvidence,5000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollLocalEvidence();});
+}

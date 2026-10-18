@@ -56,3 +56,14 @@ duplicate archived copies. V1 backups have no mastery archive and remain valid.
 No migration is needed. Archived recommendation rows are restored atomically
 with the rest of the backup. Weekly report archive behavior is unchanged by this
 decision.
+
+## Automatic local Git reflection
+
+While the local server is running, poll registered solution repositories using the
+existing serialized Git ingester. Only committed history is evidence; never
+commit files automatically or infer O/X from saving. No network or repository hook
+installation. Reuse existing watermarks and history-rewrite stop. Expose a local
+revision/status endpoint, and refresh a visible idle journal only when evidence
+changes; do not disrupt an open attempt form. Stop polling before closing SQLite.
+Validate with synthetic repositories and in-memory learners. No real repo/store
+registration or ingestion during implementation.

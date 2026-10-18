@@ -126,3 +126,24 @@ or classifications stay visible; no automatic graduation or invented matches.
 Old clients that reject extra version1 payload fields need upgrading before reading
 new optional `self_minutes`. The new reader accepts old records/backups. Confirmed
 same-day timer time is labeled as not attributable to a specific attempt.
+
+## Automatic solution reflection
+
+While `node hosted/local.mjs` is running, registered solution repositories are
+polled every five seconds through the existing Git ingester. The visible idle
+Journal checks the local evidence revision every five seconds and refreshes only
+when it changes (normally within about 5–10 seconds). An open outcome form is not
+replaced; date filters survive refresh. The server must remain running.
+
+First-time registration is unchanged:
+
+```sh
+node hosted/cli.mjs repo add --id solutions --path ../algorithm-solution --branch main
+```
+
+After that, write solutions and make local commits in your editor. No push or
+repeated `repo ingest` command is required. Saving an uncommitted file does not
+record an attempt or infer an outcome. O/X/hint metadata uses the existing commit
+convention; missing metadata stays unverified. Rewritten history stops ingestion
+and surfaces a warning, requiring explicit investigation/re-anchoring rather than
+silently replaying history. No Git hooks or background OS service are installed.

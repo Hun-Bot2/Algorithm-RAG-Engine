@@ -82,3 +82,19 @@ embeddings and historical research quality conclusions were not altered.
 
 See [runbook](runbook.md) for actual startup/CLI/Git usage and path compatibility.
 Machine-readable preservation/validation receipt: [validation.v1.json](validation.v1.json).
+
+## Automatic Git reflection follow-up
+
+The local server now polls registered repositories every five seconds using the
+existing ingester and exposes a read-only local revision/status endpoint. Idle,
+visible journal views refresh on evidence changes without replacing an open result
+form; filters are restored. No Git hooks, automatic commits or external fetches.
+
+`node --test hosted/test/*.test.mjs`: **135/135 passed** after integration. A real
+loopback test creates a temporary Git repository, commits a failed solution and
+observes automatic ingestion/revision change without invoking ingest; a repeated
+tick leaves exactly one observation. Additional cases cover rewriting-history halt,
+per-repository error containment, close waiting and missing outcome/hint provenance.
+The prior mobile browser receipt predates automatic polling; it is not presented
+as proof of this new timer-driven refresh. Actual repositories/learner DBs were
+not registered, changed or ingested during implementation.
