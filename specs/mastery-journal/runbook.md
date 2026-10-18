@@ -179,3 +179,13 @@ then refreshes. Push is optional. A push from another computer must first reach
 this local checkout; this service does not fetch, pull, or install remote hooks.
 Previously processed commits are not silently rescanned. No real learner import
 or repository registration was performed while implementing this feature.
+
+### Solutions repository convention cleanup
+
+Active sibling README, Markdown guide, common solution template, optional commit
+message template and push checker share schema 2. Previous scaffolding is preserved
+under templates/legacy/ and is not an active format. The duplicate empty
+leetcode/solution.md was moved there to avoid a fake problem identity. The
+standalone checker ships a snapshot of the exact parser with only its problem-key
+import replaced; parser changes must synchronize both copies. No real attempts,
+registration, background service startup or push was performed.

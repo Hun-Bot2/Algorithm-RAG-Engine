@@ -122,3 +122,12 @@ Focused Markdown and Git regression tests: 16/16 passed. Schema 2 tests verify
 O/X-only validation, rejection of hints, default practice, explicit review and
 actual committed success/failure ingestion. Existing schema 1 cases still pass.
 The sibling Markdown template and guide now use YY-MM-DD attempt tokens.
+
+### Shared solutions-repository cleanup
+
+Engine regression: 145/145 passed (including local HTTP integration). Standalone
+solutions-repository checker: 5/5 passed, including schema 2 success/failure/review,
+invalid assisted/hints and path mismatch. Parser snapshot equality was verified
+after replacing only the engine keyPattern import. Working-tree originals were
+backed up to /tmp/algorithm-solution-before-format-cleanup.tar.gz, and obsolete
+scaffolding is retained under templates/legacy/. No push or real learner import.
