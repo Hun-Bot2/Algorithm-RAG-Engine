@@ -29,7 +29,9 @@
 
 The registered Git ingester SHALL accept explicit, versioned flat front matter from
 committed Markdown/MDX. No duplicate TXT/commit outcome entry is required. The body
-SHALL NOT be used to infer independent success/hints. `O` requires explicit no hints;
+SHALL NOT be used to infer success. Schema 2 SHALL accept only O/X, omit hints,
+and default omitted activity to practice. O declares independent success; X covers
+failed or non-independent solving. Schema 1 retains its explicit hint contract;
 unknown outcome remains unverified. Problem keys must agree with recognized paths.
 An attempt token scopes a real attempt per problem/repository: note-only changes
 MUST NOT add attempts, while a new token permits review/new attempts. Changing a

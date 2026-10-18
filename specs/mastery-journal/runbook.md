@@ -152,21 +152,21 @@ silently replaying history. No Git hooks or background OS service are installed.
 
 Copy `../algorithm-solution/templates/solution.md` into a recognized problem path,
 for example `leetcode/two-sum.md` or `leetcode/two-sum/README.md`. Replace the
-attempt, outcome and hints placeholders. No TXT file or Outcome commit trailer is
+attempt and outcome placeholders. No TXT file or Outcome commit trailer is
 required. The detailed Korean guide is `templates/MARKDOWN-GUIDE.md` in that repo.
 
 ```md
 ---
-learning_schema: 1
-attempt: 2026-10-18-01
+learning_schema: 2
+attempt: 26-10-18-01
 outcome: O
-hints: none
-activity: practice
 ---
 # Solution
 ```
 
-Use X for failure and assisted for a non-independent solution. Optional minutes
+Use O for independent success and X for failure or non-independent solving.
+No hints field is needed. Omitted activity means practice; add `activity: review`
+for a review attempt. Old schema 1 records retain their original contract. Optional minutes
 must be measured; omit unknown time. Use a new attempt token only for a real new
 attempt. Prose-only edits retain one observation. Changed outcome metadata under
 an existing token is flagged, never used to overwrite history. Existing explicit

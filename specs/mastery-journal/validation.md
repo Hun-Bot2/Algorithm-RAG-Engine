@@ -115,3 +115,10 @@ this is a current receipt, not a before/after integrity assertion.
 No real solutions were imported; no schema, remote hooks, fetch/pull or deployment
 was added. The existing sibling convention checker may still warn about absent
 Outcome commit trailers; the new ingester accepts valid Markdown metadata.
+
+### Simplified entry follow-up
+
+Focused Markdown and Git regression tests: 16/16 passed. Schema 2 tests verify
+O/X-only validation, rejection of hints, default practice, explicit review and
+actual committed success/failure ingestion. Existing schema 1 cases still pass.
+The sibling Markdown template and guide now use YY-MM-DD attempt tokens.

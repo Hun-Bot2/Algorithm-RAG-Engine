@@ -131,3 +131,28 @@ test('same-commit attempts for one problem retain per-file provenance; duplicate
   assert.ok(Object.values(report.flags).flat().includes('conflicting_markdown_metadata:leetcode:two-sum'));
   assert.equal((await attempts(db)).length,2);
 });
+
+
+test('simplified schema uses short-year attempt IDs, O/X and implicit practice',()=>{
+  const parse=extra=>parseMarkdownAttempt(`---\nlearning_schema: 2\nattempt: 26-10-18-01\n${extra}\n---\nSolution`,{inferredProblem:'leetcode:two-sum'});
+  const success=parse('outcome: O');
+  assert.equal(success.metadata.attempt,'26-10-18-01');
+  assert.equal(success.metadata.outcome,'independent');
+  assert.equal(success.metadata.hints,false);
+  assert.equal(success.metadata.activity_type,'practice');
+  assert.equal(parse('outcome: X').metadata.outcome,'failed');
+  assert.equal(parse('outcome: O\nactivity: review').metadata.activity_type,'review');
+  assert.equal(parse('outcome: assisted').error,'invalid_learning_outcome');
+  assert.equal(parse('outcome: O\nhints: none').error,'unknown_learning_field:hints');
+});
+
+test('schema 2 committed success and failed review enter the existing ledger',async context=>{
+  const r=repo(),db=await setup(context,r);
+  const body=(token,outcome,extra='')=>`---\nlearning_schema: 2\nattempt: ${token}\noutcome: ${outcome}\n${extra}---\n# 풀이`;
+  r.commit({'leetcode/two-sum.md':body('26-10-18-01','O')});
+  r.commit({'leetcode/two-sum.md':body('26-10-19-01','X','activity: review\n')});
+  assert.equal((await ingest(db)).observed,2);
+  assert.deepEqual((await attempts(db)).map(x=>[x.outcome,x.hints,x.activity_type]),[
+    ['independent',false,'practice'],['failed',null,'review'],
+  ]);
+});

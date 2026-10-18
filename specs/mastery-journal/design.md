@@ -81,3 +81,10 @@ closed and are reported. Stable attempt IDs and normalized metadata hashes preve
 note edits from adding success evidence; source path/commit/hash remain provenance.
 Unmarked Markdown retains the legacy unverified first-touch path. No schema changes,
 LLM calls, automatic commits, pulls or push hooks are introduced.
+
+### Simplified Markdown schema 2
+
+New templates use short-year attempt tokens (26-10-18-01), O/X only and no hint
+field. O explicitly declares independent success (internal hints=false); X records
+failure with unknown hints. Omitted activity defaults to practice; review is
+explicit. Schema 1 remains readable without rewriting historical observations.

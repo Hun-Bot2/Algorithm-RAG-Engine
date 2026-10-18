@@ -11,3 +11,6 @@
   test duplicate edits, new attempts, conflicts, per-file outcomes and legacy paths.
 - [x] Create a single-file Markdown solution template in the user's solutions repo;
   document local versus remote push behavior and validate with the real parser.
+
+- [x] Simplify Markdown entry with schema 2: short-year template, O/X only, no
+  hints field, default practice and explicit review; preserve schema 1 replay.

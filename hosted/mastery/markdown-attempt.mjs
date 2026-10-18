@@ -41,21 +41,24 @@ export function parseMarkdownAttempt(source,{inferredProblem=null}={}) {
     catch { return invalid(`invalid_learning_field:${key}`); }
   }
   if (!marked) return {marked:false,metadata:null,error:null};
-  if (raw.learning_schema!=='1') return invalid('unsupported_learning_schema');
+  const simple=raw.learning_schema==='2';
+  if (!simple && raw.learning_schema!=='1') return invalid('unsupported_learning_schema');
+  if (simple && raw.hints!==undefined) return invalid('unknown_learning_field:hints');
   const problem=raw.problem || inferredProblem;
   if (!problem || !keyPattern.test(problem) || /(?:TODO|TBD|PLACEHOLDER|YOUR[-_]|(?:^|:)problem(?:[-_](?:id|key|slug))?$|(?:^|:)example$)/i.test(problem)) return invalid('invalid_learning_problem');
   if (!raw.attempt || raw.attempt.length>100 || !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(raw.attempt)) return invalid('invalid_learning_attempt');
   const outcomeMap={O:'independent',X:'failed',independent:'independent',assisted:'assisted',failed:'failed',accepted:'reported_completion'};
-  const outcome=Object.hasOwn(outcomeMap,raw.outcome) ? outcomeMap[raw.outcome] : null;
+  const outcome=(!simple || ['O','X'].includes(raw.outcome)) && Object.hasOwn(outcomeMap,raw.outcome) ? outcomeMap[raw.outcome] : null;
   if (!outcome) return invalid('invalid_learning_outcome');
-  let hints=null;
+  // Schema 2 O is the learner's explicit independent-success declaration.
+  let hints=simple && raw.outcome==='O' ? false : null;
   if (raw.hints!==undefined) {
     if (raw.hints==='none') hints=false;
     else if (raw.hints==='used') hints=true;
     else return invalid('invalid_learning_hints');
   }
   if (outcome==='independent' && hints!==false) return invalid('independent_requires_no_hints');
-  const activity=raw.activity ?? null;
+  const activity=raw.activity ?? (simple ? 'practice' : null);
   if (activity!==null && !['practice','review','transfer'].includes(activity)) return invalid('invalid_learning_activity');
   const transfer=raw.transfer_from ?? null;
   if ((activity==='transfer') !== (transfer!==null) || (transfer!==null && (!keyPattern.test(transfer) || transfer===problem))) return invalid('invalid_learning_transfer');
