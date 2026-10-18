@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-18",
+  "node_tests": 130,
+  "node_tests_passed": 130,
+  "protected_research_files_verified": 191,
+  "catalog_hashes_verified": {
+    "catalog-v3": "304348e4514523fcaf670e969a74eb687d073fb6e7d2f81dea4807eb6cedf1de",
+    "catalog-v4": "27a4ca622de50bfa6b86eb7d789abcc856bf40dd8fd511001e91edba20cffde4"
+  },
+  "real_learner_database_sha256": "a6b96ed8665b6a31cd337510d49fcb308eb0a8d47e19c838c7867e86c3534dfe",
+  "real_database_migrations": 3,
+  "real_database_learners": 0,
+  "real_database_events": 0,
+  "test_evidence": "Synthetic in-memory/temp learner DBs; catalog-v4 read-only integration; real database inspected read-only",
+  "browser_receipt": "private-learning/mastery-journal-browser-final-v1/receipt.json",
+  "limitations": [
+    "Mechanical correctness tests are not evidence of educational effectiveness.",
+    "No real learner retention/transfer outcomes exist in the inspected default store.",
+    "No push, deployment or notification activation."
+  ]
+}

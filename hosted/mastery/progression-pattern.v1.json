@@ -1,0 +1,12 @@
+{
+  "version": "algorithm-mastery-progression-v1",
+  "pattern": [
+    {"id":"leetcode_easy","platform":"leetcode","difficulty":"easy","distinct_required":3,"variation_signatures_required":3},
+    {"id":"leetcode_medium","platform":"leetcode","difficulty":"medium","distinct_required":2,"variation_signatures_required":2},
+    {"id":"cross_platform_transfer","platforms":["codeforces","atcoder"],"distinct_required":1,"native_difficulty_max":{"codeforces":1000,"atcoder":800},"exclude_experimental_atcoder":true},
+    {"id":"retention_review","activity_type":"review","distinct_required":1,"minimum_days_after_transfer":7}
+  ],
+  "evidence": {"success_outcome":"independent","required_hints":false,"failure_outcomes":["failed","assisted"]},
+  "prerequisites": {},
+  "atcoder_fallback": "semantic_unverified_only"
+}

@@ -1,12 +1,15 @@
 const PENDING_KEY = "adaptive-learning.pending-events.v1";
+const PENDING_JOURNAL_KEY = "adaptive-learning.pending-journal-attempts.v1";
 const PENDING_PARTICIPATION_KEY = "adaptive-learning.pending-participation.v1";
 const API = "/api";
 const $ = (selector, root = document) => root.querySelector(selector);
 const app = $("#app");
 const notice = $("#notice");
 let state = null;
-let currentView = "today";
+let journalState = null;
+let currentView = "journal";
 let pendingWrites = [];
+let pendingJournalWrites = [];
 let pendingParticipation = null;
 let providerSummary = "";
 
@@ -77,6 +80,13 @@ function loadPending(learnerId) {
   } catch { return []; }
 }
 
+function loadPendingJournal(learnerId) {
+  try {
+    const items = JSON.parse(localStorage.getItem(`${PENDING_JOURNAL_KEY}:${encodeURIComponent(learnerId)}`) || "[]");
+    return Array.isArray(items) ? items.filter((item) => item?.learner_id === learnerId && typeof item.event_id === "string") : [];
+  } catch { return []; }
+}
+
 function loadPendingParticipation(learnerId) {
   try {
     const item = JSON.parse(localStorage.getItem(`${PENDING_PARTICIPATION_KEY}:${encodeURIComponent(learnerId)}`) || "null");
@@ -87,6 +97,11 @@ function loadPendingParticipation(learnerId) {
 function savePending() {
   try { localStorage.setItem(`${PENDING_KEY}:${encodeURIComponent(state.learner_id)}`, JSON.stringify(pendingWrites)); }
   catch { showNotice("이 브라우저에 재시도 기록을 저장하지 못했어요. 연결이 복구될 때까지 이 화면을 닫지 말아 주세요.", true); }
+}
+
+function savePendingJournal() {
+  try { localStorage.setItem(`${PENDING_JOURNAL_KEY}:${encodeURIComponent(state.learner_id)}`, JSON.stringify(pendingJournalWrites)); }
+  catch { showNotice("풀이 기록의 재시도 정보를 저장하지 못했어요. 연결이 복구될 때까지 이 화면을 닫지 말아 주세요.", true); }
 }
 
 function savePendingParticipation() {
@@ -119,15 +134,18 @@ async function refresh() {
     const nextState = await request("/state");
     if (state?.learner_id !== nextState.learner_id) {
       pendingWrites = loadPending(nextState.learner_id).filter(item => item.learner_id === nextState.learner_id);
+      pendingJournalWrites = loadPendingJournal(nextState.learner_id);
       pendingParticipation = loadPendingParticipation(nextState.learner_id);
     }
     state = nextState;
+    try { journalState = await request("/journal"); }
+    catch (error) { journalState = { available: false, reason: error.message }; }
     $("#learner-label").textContent = state.learner_id ? "내 학습 기록" : "학습 기록";
     clearNotice();
     render();
     return true;
   } catch (error) {
-    if (error.status === 401 || error.status === 403) { state = null; pendingWrites = []; pendingParticipation = null; }
+    if (error.status === 401 || error.status === 403) { state = null; pendingWrites = []; pendingJournalWrites = []; pendingParticipation = null; }
     app.replaceChildren();
     app.append(node("h1", "page-heading", "학습 정보를 불러오지 못했어요"), node("p", "intro", error.message));
     app.append(button("다시 불러오기", refresh));
@@ -218,10 +236,357 @@ function render() {
     tab.setAttribute("aria-current", tab.dataset.view === currentView ? "page" : "false");
   }
   app.replaceChildren();
-  if (currentView === "progress") renderProgress();
+  if (currentView === "journal") renderJournal();
+  else if (currentView === "progress") renderProgress();
   else if (currentView === "contests") renderContests();
   else renderToday();
   renderPending();
+}
+
+export function filterJournalDays(days, filters = {}) {
+  const from = filters.from || "";
+  const to = filters.to || "";
+  const platform = (filters.platform || "").toLowerCase();
+  const pattern = (filters.pattern || "").toLowerCase();
+  const difficulty = (filters.difficulty || "").toLowerCase();
+  const status = (filters.status || "").toLowerCase();
+  const priority = (filters.priority || "").toLowerCase();
+  return (Array.isArray(days) ? days : []).filter((day) => {
+    if (from && day.date < from) return false;
+    if (to && day.date > to) return false;
+    const entries = Array.isArray(day.entries) ? day.entries : [];
+    return entries.some((entry) => {
+      const values = [entry.platform, entry.pattern, entry.difficulty, entry.status, entry.priority, entry.review_priority]
+        .map((value) => String(value ?? "").toLowerCase());
+      return (!platform || values[0] === platform)
+        && (!pattern || values[1].includes(pattern))
+        && (!difficulty || values[2].includes(difficulty))
+        && (!status || values[3].includes(status))
+        && (!priority || values[4] === priority || values[5] === priority);
+    });
+  }).map((day) => ({ ...day, entries: (Array.isArray(day.entries) ? day.entries : []).filter((entry) => {
+    const values = [entry.platform, entry.pattern, entry.difficulty, entry.status, entry.priority, entry.review_priority]
+      .map((value) => String(value ?? "").toLowerCase());
+    return (!platform || values[0] === platform)
+      && (!pattern || values[1].includes(pattern))
+      && (!difficulty || values[2].includes(difficulty))
+      && (!status || values[3].includes(status))
+      && (!priority || values[4] === priority || values[5] === priority);
+  }) }));
+}
+
+function journalFilters() {
+  const card = node("section", "card journal-filters");
+  const details = document.createElement("details");
+  details.className = "journal-filter-details";
+  const summary = document.createElement("summary");
+  summary.append(node("strong", "", "기록 필터"), node("span", "meta", "날짜 · 플랫폼 · 패턴 · 난이도 · 상태 · 복습 우선순위"));
+  details.append(summary);
+  const form = document.createElement("form");
+  form.className = "form-grid";
+  const values = journalState?.days?.flatMap((day) => day.entries || []) || [];
+  const choices = (key) => [...new Set(values.map((item) => item[key]).filter((value) => value !== null && value !== undefined && value !== "").map(String))].sort();
+  const from = input("journal-from", "date");
+  const to = input("journal-to", "date");
+  const platform = select("journal-platform", [["", "모든 플랫폼"], ...choices("platform").map((value) => [value, value])]);
+  const pattern = select("journal-pattern", [["", "모든 패턴"], ...choices("pattern").map((value) => [value, value])]);
+  const difficulty = select("journal-difficulty", [["", "모든 난이도"], ...choices("difficulty").map((value) => [value, value])]);
+  const status = select("journal-status", [["", "모든 상태"], ...choices("status").map((value) => [value, value])]);
+  const priority = select("journal-priority", [["", "모든 우선순위"], ["priority", "우선 복습"], ["normal", "일반 복습"]]);
+  form.append(field("시작 날짜", from), field("종료 날짜", to), field("플랫폼", platform), field("패턴", pattern), field("난이도", difficulty), field("상태", status), field("복습 우선순위", priority));
+  const results = node("div", "journal-results");
+  const renderFiltered = () => {
+    const days = filterJournalDays(journalState?.days, { from: from.value, to: to.value, platform: platform.value, pattern: pattern.value, difficulty: difficulty.value, status: status.value, priority: priority.value });
+    results.replaceChildren();
+    if (!days.length) results.append(node("p", "empty", "조건에 맞는 학습 기록이 없어요."));
+    else for (const day of days) results.append(renderJournalDay(day));
+  };
+  form.addEventListener("change", renderFiltered);
+  form.addEventListener("input", renderFiltered);
+  details.append(form);
+  card.append(details, results);
+  renderFiltered();
+  return card;
+}
+
+function renderJournal() {
+  const date = journalState?.date || "";
+  app.append(...section("학습 일지", "오늘의 계획과 풀이 기록이 날짜별로 쌓여요."));
+  if (!journalState?.available) {
+    const empty = node("section", "card");
+    empty.append(node("h2", "", "일지를 불러올 수 없어요"), node("p", "empty", journalState?.reason || "학습 일지 정보를 사용할 수 없어요."));
+    app.append(empty, todayShortcut());
+    return;
+  }
+  app.append(todayPlanCard(), focusCard(), journalFilters(), reviewsCard(), patternHistoryCard(), weeklyCard(), upcomingCard());
+  const limitations = Array.isArray(journalState.limitations) ? journalState.limitations.filter(Boolean) : [];
+  if (limitations.length) {
+    const note = node("section", "card journal-limitations");
+    note.append(node("h2", "", "기록 범위 안내"));
+    const list = node("ul", "event-list");
+    for (const limitation of limitations) list.append(node("li", "event-row", typeof limitation === "string" ? limitation : limitation.message || limitation.reason || "확인할 수 없는 기록 범위가 있어요."));
+    note.append(list);
+    app.append(note);
+  }
+  app.append(todayShortcut());
+  if (date) app.setAttribute("data-journal-date", date);
+}
+
+function todayShortcut() {
+  const card = node("section", "card");
+  card.append(node("h2", "", "학습 기록 도구"), node("p", "meta", "목표 설정, 타이머, 백업과 복원은 오늘 화면에서 계속 사용할 수 있어요."));
+  card.append(button("오늘 화면 열기", () => { currentView = "today"; render(); }, "button secondary"));
+  return card;
+}
+
+function todayPlanCard() {
+  const plan = journalState?.plan;
+  const card = node("section", "card journal-plan");
+  card.append(node("div", "card-head"));
+  const head = card.firstChild;
+  const title = node("h2", "", "오늘의 학습 계획");
+  head.append(title, node("span", "tag", plan?.date || journalState?.date || "오늘"));
+  if (!plan || !Array.isArray(plan.slots) || !plan.slots.length) {
+    card.append(node("p", "empty", "오늘 제안된 활동이 없어요. 기록된 학습 일지는 아래에서 계속 확인할 수 있어요."));
+    return card;
+  }
+  const list = node("ol", "journal-plan-list");
+  for (const slot of plan.slots) {
+    const item = node("li", "journal-plan-item");
+    item.dataset.problemKey = slot.problem_key || "";
+    item.dataset.slotKind = slot.kind || "";
+    const heading = node("div", "split");
+    const name = slot.title || slot.problem_key || "학습 활동";
+    const link = safeProblemUrl({ canonical_url: slot.url });
+    if (link) {
+      const anchor = node("a", "", name); anchor.href = link; anchor.target = "_blank"; anchor.rel = "noopener noreferrer";
+      heading.append(anchor);
+    } else heading.append(node("strong", "", name));
+    heading.append(node("span", "tag", `${slot.platform || "플랫폼 미상"}${slot.difficulty ? ` · ${slot.difficulty}` : ""}`));
+    if (slot.semantic_only) heading.append(node("span", "tag warning semantic-only", "의미 유사 후보 · 알고리즘 동등성 미검증"));
+    item.append(heading);
+    if (slot.concepts?.length) item.append(node("p", "meta", `개념 · ${slot.concepts.join(", ")}`));
+    if (slot.reason) {
+      const rationale = document.createElement("details");
+      rationale.className = "journal-plan-reason";
+      const summary = node("summary", "meta", "추천 이유 보기");
+      rationale.append(summary, node("p", "reason", slot.reason));
+      item.append(rationale);
+    } else item.append(node("p", "reason", "제안 이유가 제공되지 않았어요."));
+    if (slot.estimated_minutes !== null && slot.estimated_minutes !== undefined) item.append(node("p", "meta", `예상 ${slot.estimated_minutes}분${slot.review_priority ? ` · ${slot.review_priority === "priority" ? "우선 복습" : "일반 복습"}` : ""}`));
+    if (slot.problem_key) item.append(journalAttemptForm(slot));
+    list.append(item);
+  }
+  card.append(list);
+  return card;
+}
+
+function journalAttemptForm(slot) {
+  const details = document.createElement("details");
+  details.className = "journal-attempt-details";
+  details.dataset.problemKey = slot.problem_key;
+  details.dataset.slotKind = slot.kind || "";
+  const summary = node("summary", "button secondary", "풀이 결과 기록");
+  details.append(summary);
+  const form = document.createElement("form");
+  form.className = "form-grid";
+  const outcome = select(`journal-outcome-${slot.problem_key}`, [["independent", "O · 힌트 없이 해결"], ["assisted", "도움을 받아 해결"], ["failed", "X · 아직 해결하지 못함"]]);
+  const hints = select(`journal-hints-${slot.problem_key}`, [["false", "힌트 없이 풀이"], ["true", "힌트나 도움 사용"], ["", "도움 여부 미기록"]], "false");
+  const minutes = input(`journal-minutes-${slot.problem_key}`, "number"); minutes.min = "0"; minutes.step = "1"; minutes.placeholder = "선택";
+  form.append(field("결과", outcome), field("직접 사용한 시간 (분)", minutes));
+  form.append(field("힌트와 도움", hints));
+  const actions = node("div", "actions full"); const submit = node("button", "button", "풀이 기록 저장"); submit.type = "submit"; actions.append(submit); form.append(actions);
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const selectedOutcome = outcome.value;
+    if (selectedOutcome === "independent" && hints.value !== "false") return showNotice("힌트 없이 해결한 경우에만 O로 기록할 수 있어요.", true);
+    const selfMinutes = minutes.value === "" ? null : Number(minutes.value);
+    if (selfMinutes !== null && (!Number.isInteger(selfMinutes) || selfMinutes < 0 || selfMinutes > 1440)) return showNotice("직접 사용한 시간은 0분에서 1440분 사이로 입력해 주세요.", true);
+    const activityType = slot.transfer_from ? "transfer" : slot.kind === "review" ? "review" : "practice";
+    const payload = { event_id: crypto.randomUUID(), learner_id: state?.learner_id, problem_key: slot.problem_key, outcome: selectedOutcome, hints: hints.value === "" ? null : hints.value === "true", activity_type: activityType, self_minutes: selfMinutes };
+    if (slot.transfer_from) payload.transfer_from = slot.transfer_from;
+    if (!payload.learner_id) return showNotice("학습자 정보를 확인할 수 없어 저장하지 못했어요.", true);
+    pendingJournalWrites.push(payload);
+    savePendingJournal();
+    await retryJournalAttempt(payload.event_id);
+  });
+  details.append(form);
+  return details;
+}
+
+function focusCard() {
+  const focus = journalState?.focus;
+  const card = node("section", "card");
+  card.append(node("h2", "", "이번 주 학습 초점"));
+  if (!focus) card.append(node("p", "empty", "아직 확인할 초점이 없어요."));
+  else {
+    card.append(node("div", "split"));
+    card.lastChild.append(node("strong", "", focus.pattern || "학습 패턴 미확인"), node("span", "tag", progressionStatusLabel(focus.status)));
+    card.append(node("p", "meta", progressionStageLabel(focus.stage)));
+    if (focus.reason) {
+      const rationale = document.createElement("details");
+      rationale.className = "journal-plan-reason";
+      rationale.append(node("summary", "meta", "초점 선정 이유 보기"), node("p", "reason", focus.reason));
+      card.append(rationale);
+    }
+  }
+  return card;
+}
+
+function reviewsCard() {
+  const reviews = journalState?.reviews || {};
+  const card = node("section", "card"); card.append(node("h2", "", "복습 목록"));
+  for (const [key, label] of [["priority", "우선 복습"], ["normal", "일반 복습"]]) {
+    const sectionNode = node("section", "review-group"); sectionNode.append(node("h3", "", label));
+    const items = Array.isArray(reviews[key]) ? reviews[key] : [];
+    if (!items.length) sectionNode.append(node("p", "empty", "예정된 문제가 없어요."));
+    else {
+      const list = node("ul", "problem-list");
+      for (const review of items) {
+        const row = node("li", "problem-row");
+        row.append(node("strong", "", review.title || review.problem_key || "문제 정보 없음"));
+        row.append(node("p", "meta", [review.platform, journalDifficulty(review.platform, review.difficulty), review.due_date, review.reason].filter(Boolean).join(" · ")));
+        list.append(row);
+      }
+      sectionNode.append(list);
+    }
+    card.append(sectionNode);
+  }
+  return card;
+}
+
+function patternHistoryCard() {
+  const card = node("section", "card journal-pattern-history");
+  const details = document.createElement("details");
+  details.className = "pattern-history-details";
+  const summary = document.createElement("summary");
+  const patterns = Array.isArray(journalState?.patterns) ? journalState.patterns : [];
+  summary.append(node("strong", "", "개념 상태와 변경 기록"), node("span", "meta", `${patterns.length}개 개념`));
+  details.append(summary);
+  const content = node("div", "pattern-history-content");
+  if (!patterns.length) content.append(node("p", "empty", "아직 개념 상태 기록이 없어요."));
+  else {
+    const list = node("ul", "event-list");
+    for (const pattern of patterns) {
+      const row = node("li", "event-row");
+      row.append(node("div", "split")); row.firstChild.append(node("strong", "", pattern.pattern || "개념 미상"), node("span", "tag", progressionStatusLabel(pattern.status)));
+      row.append(node("p", "meta", [progressionStageLabel(pattern.stage), pattern.changed_at, pattern.reason].filter(Boolean).join(" · ")));
+      list.append(row);
+    }
+    content.append(list);
+  }
+  const changes = (journalState?.days || []).flatMap((day) => (day.entries || []).filter((entry) => entry.type === "mastery_change").map((entry) => ({ ...entry, date: day.date })));
+  if (changes.length) {
+    content.append(node("h3", "", "변경 내역"));
+    const list = node("ul", "event-list");
+    for (const entry of changes) list.append(node("li", "event-row", `${entry.date} · ${entry.pattern || entry.title || "개념 상태"} · ${progressionStatusLabel(entry.status)}${entry.reason ? ` · ${entry.reason}` : ""}`));
+    content.append(list);
+  }
+  details.append(content);
+  card.append(details);
+  return card;
+}
+
+function weeklyCard() {
+  const weekly = journalState?.weekly;
+  const card = node("section", "card"); card.append(node("h2", "", "이번 주"));
+  if (!weekly || !Object.keys(weekly).length) card.append(node("p", "empty", "주간 학습 기록이 아직 없어요."));
+  else {
+    const activity = weekly.activity || {};
+    const review = weekly.review || {};
+    const process = weekly.process || {};
+    const onTime = review.on_time;
+    const summary = [
+      activity.total !== undefined ? `이번 주 풀이 ${activity.total}회` : null,
+      process.done_slots !== undefined && process.planned_slots !== undefined ? `계획 ${process.done_slots}/${process.planned_slots}개 완료` : null,
+      process.confirmed_timer_minutes !== undefined ? `확인 시간 ${process.confirmed_timer_minutes}분` : null,
+      process.self_reported_minutes !== undefined ? `직접 입력 시간 ${process.self_reported_minutes}분` : null,
+      review.lapse_rate !== undefined && review.lapse_rate !== null ? `복습 실패율 ${Math.round(review.lapse_rate * 100)}% (${review.n ?? 0}회)` : null,
+      onTime ? `정시 복습 ${onTime.successes ?? 0}/${onTime.n ?? 0} (${onTime.status || "기록 요약"})` : null,
+    ].filter(Boolean);
+    if (summary.length) card.append(node("p", "meta", summary.join(" · ")));
+    const list = node("ul", "event-list");
+    for (const group of ["by_platform", "by_outcome", "by_source", "by_difficulty"]) {
+      for (const [key, value] of Object.entries(activity[group] || {}).sort(([a], [b]) => a.localeCompare(b))) list.append(node("li", "event-row", `${group.replace("by_", "")} · ${key} · ${value}`));
+    }
+    if (list.children.length) card.append(list);
+    if (process.time_note) card.append(node("p", "meta", process.time_note));
+    if (weekly.disclaimer) card.append(node("p", "meta", weekly.disclaimer));
+    if (!summary.length && !list.children.length) card.append(node("p", "empty", "주간 기록을 확인할 수 없어요."));
+  }
+  return card;
+}
+
+function upcomingCard() {
+  const card = node("section", "card"); card.append(node("h2", "", "다가오는 학습"));
+  const upcoming = Array.isArray(journalState?.upcoming) ? journalState.upcoming : [];
+  if (!upcoming.length) card.append(node("p", "empty", "가까운 날짜에 예정된 추천이 없어요."));
+  else {
+    const list = node("ul", "problem-list");
+    for (const slot of upcoming) {
+      const row = node("li", "problem-row");
+      row.append(node("div", "split")); row.firstChild.append(node("strong", "", slot.title || slot.problem_key || "학습 활동"), node("span", "tag", slot.date || slot.platform || "예정"));
+      row.append(node("p", "meta", [slot.platform, slot.difficulty, slot.reason].filter(Boolean).join(" · ")));
+      if (slot.semantic_only) row.append(node("p", "meta semantic-only", "의미 유사 후보 · 알고리즘 동등성 미검증"));
+      list.append(row);
+    }
+    card.append(list);
+  }
+  return card;
+}
+
+function renderJournalDay(day) {
+  const card = node("section", "journal-day");
+  const heading = node("div", "split"); heading.append(node("h3", "", formatJournalDate(day.date)), node("span", "tag", `${day.entries.length}개 기록`));
+  card.append(heading);
+  const list = node("ul", "event-list");
+  for (const entry of day.entries) {
+    const row = node("li", `event-row journal-entry ${entry.type || ""}`);
+    const label = entry.status === "superseded" ? "수정" : entry.display_outcome === "O" || entry.display_outcome === "X" ? entry.display_outcome : entry.type === "recommendation" ? "계획" : entry.type === "mastery_change" ? "개념" : "기록";
+    row.append(node("span", `journal-mark ${label === "O" ? "success" : label === "X" ? "failure" : entry.status === "superseded" ? "corrected" : ""}`, label));
+    const content = node("div", "journal-entry-content");
+    content.append(node("strong", "", entry.title || entry.problem_key || entry.pattern || "학습 기록"));
+    const detail = [entry.platform, entry.difficulty, entry.pattern, entry.status ? progressionStatusLabel(entry.status) : null, entry.priority === "priority" || entry.review_priority === "priority" ? "우선 복습" : entry.priority === "normal" || entry.review_priority === "normal" ? "일반 복습" : null].filter(Boolean).join(" · ");
+    if (detail) content.append(node("p", "meta", detail));
+    if (entry.status === "superseded") content.append(node("p", "meta corrected-note", `수정된 기록 · 현재 학습 근거에서 제외${entry.superseded_by ? ` · 새 기록 ${entry.superseded_by}` : ""}`));
+    if (entry.type === "attempt") {
+      const timeBasis = ({ not_recorded: "시간 미기록", self_reported: "직접 입력한 시간", confirmed_intervals_same_day_not_attributed_to_attempt: "같은 날 확인된 타이머 (이 풀이에 직접 연결되지 않음)" })[entry.time_basis] || null;
+      const attemptDetails = [entry.outcome ? outcomeLabel(entry.outcome) : null, ({practice:'연습',review:'알고 있는 문제 복습 · 새 문제 전이 증거 아님',transfer:'타 플랫폼 전이 검증'})[entry.activity_type] || null, entry.hints === true ? "힌트 사용" : entry.hints === false ? "힌트 없음" : "도움 여부 미기록",
+        entry.self_minutes !== null && entry.self_minutes !== undefined ? `직접 기록 ${entry.self_minutes}분` : null,
+        Number.isFinite(Number(entry.confirmed_seconds)) && Number(entry.confirmed_seconds) > 0 ? `확인 시간 ${formatConfirmedMinutes(entry.confirmed_seconds)}` : null,
+        timeBasis].filter(Boolean).join(" · ");
+      if (attemptDetails) content.append(node("p", "meta", attemptDetails));
+    }
+    if (entry.reason) content.append(node("p", "reason", entry.reason));
+    if (entry.semantic_only) content.append(node("p", "meta semantic-only", "의미 유사 후보 · 알고리즘 동등성 미검증"));
+    if (entry.occurred_at) content.append(node("time", "meta", formatJournalTime(entry.occurred_at)));
+    row.append(content); list.append(row);
+  }
+  card.append(list);
+  return card;
+}
+
+function formatJournalDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return String(value || "날짜 미상");
+  return new Intl.DateTimeFormat("ko-KR", { dateStyle: "full", timeZone: "UTC" }).format(new Date(`${value}T12:00:00Z`));
+}
+
+function formatJournalTime(value) {
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat("ko-KR", { dateStyle: "short", timeStyle: "short", timeZone: "Asia/Seoul" }).format(date) : "시각 미상";
+}
+
+function journalDifficulty(platform, value) {
+  if (platform === "leetcode") return ({ 1: "Easy", 2: "Medium", 3: "Hard" })[value] || value;
+  return value;
+}
+
+function progressionStageLabel(value) {
+  return ({ leetcode_easy: "Easy 기초", leetcode_medium: "Medium 적용", cross_platform_transfer: "다른 플랫폼 전이", retention_review: "간격 복습" })[value] || value || "단계 미확인";
+}
+
+function progressionStatusLabel(value) {
+  return ({ in_progress: "진행 중", blocked_prerequisite: "선행 조건 대기", retention_evidenced: "복습 근거 확인", remediation: "보완 필요", current: "현재 단계", complete: "완료", locked: "대기", superseded: "수정된 기록" })[value] || value || "상태 미확인";
 }
 
 function renderToday() {
@@ -422,13 +787,14 @@ async function retryPending(eventId) {
 }
 
 function renderPending() {
-  if (!pendingWrites.length && !pendingParticipation) return;
+  if (!pendingWrites.length && !pendingJournalWrites.length && !pendingParticipation) return;
   const region = node("section", "pending");
   region.setAttribute("aria-label", "전송 대기 중인 기록");
-  const count = pendingWrites.length + Number(Boolean(pendingParticipation));
+  const count = pendingWrites.length + pendingJournalWrites.length + Number(Boolean(pendingParticipation));
   region.append(node("p", "", `전송하지 못한 기록 ${count}개가 있어요. 다시 시도하면 같은 기록 ID를 사용해요.`));
   const list = node("ul", "");
   for (const event of pendingWrites) list.append(node("li", "", `${event.kind} · ${event.payload.problem_key || event.payload.interval_id || "시간 기록"}`));
+  for (const event of pendingJournalWrites) list.append(node("li", "", `풀이 일지 · ${event.problem_key}`));
   if (pendingParticipation) list.append(node("li", "", `대회 참여 · ${pendingParticipation.contest_id}`));
   region.append(list, button("대기 중인 기록 다시 보내기", retryAll, "button secondary"));
   app.append(region);
@@ -439,7 +805,27 @@ async function retryAll() {
     await retryPending(event.event_id);
     if (pendingWrites.some((item) => item.event_id === event.event_id)) break;
   }
+  for (const event of [...pendingJournalWrites]) {
+    await retryJournalAttempt(event.event_id);
+    if (pendingJournalWrites.some((item) => item.event_id === event.event_id)) break;
+  }
   if (pendingParticipation) await retryParticipation(pendingParticipation.entry_id);
+}
+
+async function retryJournalAttempt(eventId) {
+  const attempt = pendingJournalWrites.find((item) => item.event_id === eventId);
+  if (!attempt) return;
+  try {
+    const { learner_id, ...body } = attempt;
+    await request("/journal/attempt", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    pendingJournalWrites = pendingJournalWrites.filter((item) => item.event_id !== eventId);
+    savePendingJournal();
+    const refreshed = await refresh();
+    showNotice(refreshed ? "풀이 기록을 저장했어요." : "기록은 저장했지만 최신 화면을 불러오지 못했어요. 연결을 확인해 주세요.", !refreshed);
+  } catch (error) {
+    showNotice(`풀이 기록을 저장하지 못했어요. 같은 기록 ID로 다시 시도할 수 있어요. (${error.message})`, true);
+    render();
+  }
 }
 
 async function retryParticipation(entryId) {

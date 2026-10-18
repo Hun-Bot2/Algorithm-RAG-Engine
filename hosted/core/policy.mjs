@@ -3,7 +3,7 @@ import {normalizePreferences} from './preferences.mjs';
 import {activeEvents, timestamp} from './events.mjs';
 import {getMission, learnerSnapshot, saveMission} from './store.mjs';
 
-export const POLICY_VERSION = 'deterministic-v2';
+export const POLICY_VERSION = 'deterministic-v3';
 export const REVIEW_DAYS = [1,3,7,14,30,60];
 export const seoulDate = date => new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
 const plusDays = (date,days) => new Date(Date.parse(date.slice(0,10)+'T00:00:00Z')+days*86400000).toISOString().slice(0,10);
@@ -14,24 +14,30 @@ const eligible = item => approved(item) && item.access_state === 'free';
 // mastery planner. Attempts: {id, occurred_at, outcome, hints, activity_type?, transfer_from?}
 // in replay order. reported_completion is evidence only and never changes state.
 export function replayProblemAttempts(problemKey, attempts, {isTransfer=()=>false}={}) {
-  let state = 'unknown', reviewStage = 0, dueDate = null, latestOutcome = null; const evidence = [];
+  let state = 'unknown', reviewStage = 0, dueDate = null, latestOutcome = null;
+  let failureCount=0, consecutiveFailures=0, priority=false, lastFailure=null; const evidence = [];
   for (const a of attempts) {
     const date = seoulDate(new Date(a.occurred_at));
     latestOutcome = a.outcome;
-    if (a.outcome === 'reported_completion') { evidence.push(a.id); continue; }
+    if (a.outcome === 'reported_completion') {
+      // Reported completion is unverified evidence, but still enters universal review.
+      if (!dueDate) dueDate=plusDays(date,1);
+      evidence.push(a.id); continue;
+    }
     if (a.outcome === 'independent' && a.hints === false) {
+      priority=false; consecutiveFailures=0;
       const transfer = a.activity_type === 'transfer' && isTransfer(a);
       if (transfer) state = 'transfer-evidenced';
       else if (state !== 'transfer-evidenced') state = 'demonstrated';
       reviewStage = a.activity_type === 'review' ? Math.min(reviewStage+1,REVIEW_DAYS.length-1) : 0;
       dueDate = plusDays(date,REVIEW_DAYS[reviewStage]);
     } else {
-      if (state === 'unknown' || a.activity_type === 'review') state = 'learning';
-      if (a.activity_type === 'review') { reviewStage = 0; dueDate = plusDays(date,1); }
+      state='learning'; priority=true; failureCount++; consecutiveFailures++; lastFailure=a.occurred_at;
+      reviewStage=0; dueDate=plusDays(date,1);
     }
     evidence.push(a.id);
   }
-  return {state,review_stage:reviewStage,due_date:dueDate,latest_outcome:latestOutcome,evidence};
+  return {state,review_stage:reviewStage,due_date:dueDate,latest_outcome:latestOutcome,evidence,review_priority:priority?'priority':'normal',failure_count:failureCount,consecutive_failures:consecutiveFailures,last_failure:lastFailure};
 }
 
 export function deriveProgress(curriculum, events, cutoff) {

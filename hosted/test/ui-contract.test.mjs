@@ -79,6 +79,20 @@ test("progress helpers exclude corrected attempts and distinguish Slack from pho
   assert.equal(ui.deliveryLabel("unknown"), "Slack 결과 확인 필요");
 });
 
+test("journal filters preserve date groups and match requested facets", () => {
+  const days = [
+    { date: "2026-10-17", entries: [
+      { type: "attempt", platform: "atcoder", pattern: "graphs", difficulty: "Medium", status: "learning", priority: "priority" },
+      { type: "attempt", platform: "leetcode", pattern: "arrays", difficulty: "Easy", status: "demonstrated", priority: "normal" },
+    ] },
+    { date: "2026-10-16", entries: [{ type: "attempt", platform: "atcoder", pattern: "graphs", difficulty: "Easy", status: "learning", priority: "normal" }] },
+  ];
+  assert.deepEqual(ui.filterJournalDays(days, { from: "2026-10-17", platform: "atcoder", pattern: "graph", difficulty: "Medium", status: "learning", priority: "priority" }), [
+    { date: "2026-10-17", entries: [days[0].entries[0]] },
+  ]);
+  assert.deepEqual(ui.filterJournalDays(days, { to: "2026-10-16", platform: "leetcode" }), []);
+});
+
 test("static shell exposes the three primary views and accessible live status", async () => {
   const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
   for (const label of ["오늘", "학습 기록", "대회"]) assert.match(html, new RegExp(`>${label}</button>`));
@@ -91,6 +105,18 @@ test("UI source uses provider sync, full backup, and contest participation route
   for (const route of ["/providers/sync", "/participation", "/backup/export", "/backup/import"]) assert.ok(source.includes(route), `missing ${route}`);
   assert.match(source, /delivery_reconciliation_required/);
   assert.match(source, /수정된 기록/);
+});
+
+test("journal remains the default view and uses its dedicated read and attempt routes", async () => {
+  const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
+  const source = await readFile(new URL("../public/app.mjs", import.meta.url), "utf8");
+  assert.match(html, /data-view="journal"/);
+  assert.match(source, /currentView = "journal"/);
+  assert.match(source, /request\("\/journal"\)/);
+  assert.match(source, /request\("\/journal\/attempt"/);
+  assert.match(source, /adaptive-learning\.pending-journal-attempts\.v1/);
+  assert.match(source, /같은 기록 ID로 다시 시도할 수 있어요/);
+  assert.match(source, /textContent = String\(text\)/);
 });
 
 

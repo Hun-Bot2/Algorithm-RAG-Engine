@@ -1,4 +1,4 @@
-# Algorithm RAG Engine
+# Algorithm RAG Engine — Adaptive Algorithm Mastery System
 
 ## 현재 상태 (2026-10-18)
 
@@ -6,11 +6,27 @@
 (`daily_algorithm_pipeline.yml`, `publish_docker.yml`)는 삭제했습니다(git 이력에서 복구 가능). 현재 방향은 다음과 같습니다.
 
 - **로컬 우선 학습 시스템** (`hosted/`, `specs/mastery-system/`): LeetCode, Codeforces, AtCoder 풀이 기록을 읽고 개인 맞춤 연습을 계획합니다.
-  유료 API와 서버 없이 로컬에서만 동작합니다. 사용법은 [runbook](specs/mastery-system/runbook.md)을 보세요.
+  유료 API와 서버 없이 로컬에서만 동작합니다. 날짜별 학습 일지, O/X 기록, 우선 복습과 Easy → Medium → 전이 → 지연 복습을 지원합니다.
+  사용법은 [학습 일지 시작 안내](specs/mastery-journal/runbook.md)를 보세요.
 - **풀이 기록 저장소**: 별도 private repo `algorithm-solution`. 이 저장소의 커밋을 `node hosted/cli.mjs repo ingest`가 읽습니다.
-  push만으로 추천이 만들어지지는 않고, 추천은 로컬에서 `plan`으로 만듭니다.
+  push 없이 로컬 Git을 읽으며, 현재 커리큘럼 추천은 `node hosted/cli.mjs journal` 또는 로컬 학습 일지에서 확인합니다. 기존 `plan`의 일별 동결 계약도 보존합니다.
 - **연구** (`research/`): 세 플랫폼 24,297문제의 제목 기반 유사도 지도, 언어 편향 보정, AtCoder 개념 분류. 결과는 `research/*/REPORT.md`와 `specs/`에 있습니다.
 - 초기 파이프라인 코드(`src/main/`, `Dockerfile`, `docker-compose.yml` 등)는 2026-10-18에 삭제했고 git 태그 `legacy-pipeline-final`에서 복구할 수 있습니다.
+
+
+### 학습 일지 실행
+
+```sh
+# 아직 카탈로그를 선택하지 않았다면 최초 1회 (기존 선택은 유지 가능)
+node hosted/cli.mjs catalog use --version catalog-v4
+node hosted/local.mjs
+# http://127.0.0.1:8787
+```
+
+기존 SQLite를 사용하며 실행 위치와 관계없이 CLI와 같은 기본 DB 경로를 씁니다.
+실패·도움 풀이도 다음 날 우선 복습에 들어갑니다. 성공한 복습과 새로운 전이 문제의
+독립 해결은 구분합니다. 테스트는 합성 학습 이력으로 수행했으며 실제 교육 효과를
+입증한 것은 아닙니다. [설계·검증 기록](specs/mastery-journal/validation.md).
 
 아래 내용은 2026-01 시점의 초기 파이프라인 기록입니다.
 

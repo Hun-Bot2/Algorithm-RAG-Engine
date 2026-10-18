@@ -9,6 +9,7 @@ import {createDatabase} from './test/helpers/d1.mjs';
 import {appendEvents,getPreferences,putPreferences} from './core/store.mjs';
 import {seoulDate} from './core/policy.mjs';
 import {timestamp} from './core/events.mjs';
+import {createJournalService} from './mastery/journal.mjs';
 import {appendLedger} from './mastery/side-ledger.mjs';
 import {readLedger,getSnapshot,saveSnapshot,saveWeeklyReport,getWeeklyReport} from './mastery/ledger.mjs';
 import {attachCatalog,loadCatalog} from './mastery/catalog.mjs';
@@ -27,11 +28,12 @@ const USAGE=`usage: node hosted/cli.mjs <command> [options]
   catalog use --version catalog-vN            verify and switch the active catalog (logged)
   repo add --id ID --path DIR [--branch main]  register a solutions/notes Git repository
   repo ingest [--id ID] [--anchor SHA]        ingest new commits (all repositories by default)
-  attempt --problem KEY --outcome independent|assisted|failed|reported_completion [--hints none|used] [--activity practice|review|transfer] [--from KEY] [--at ISO]
+  attempt --problem KEY --outcome independent|assisted|failed|reported_completion [--hints none|used] [--minutes N] [--activity practice|review|transfer] [--from KEY] [--at ISO]
   feedback --plan DATE --candidate KEY --verdict related|partly|unrelated|skip [--source KEY] [--channel C]
   rating set --platform codeforces|atcoder --rating N [--participations N]
   rating sync-cf --handle H                   NETWORK: one Codeforces API call (opt-in)
   prefs [--mastery JSON] [--weekday-minutes N] show or update preferences
+  journal                                    current curriculum journal as JSON (immutable evidence revisions)
   plan [--date YYYY-MM-DD]                    build (or show the frozen) plan for a day
   related --problem KEY [--channel concept|title_v2|title_v2_cross]
   weekly [--week YYYY-MM-DD] [--out DIR]      build the weekly report; Markdown never overwrites
@@ -42,7 +44,7 @@ common: --db PATH (default private-learning/hosted.sqlite3) --learner ID (defaul
 
 const ROOT=resolve(new URL('..',import.meta.url).pathname);
 const options={db:{type:'string'},learner:{type:'string'},'catalog-root':{type:'string'},version:{type:'string'},id:{type:'string'},path:{type:'string'},branch:{type:'string'},
-  anchor:{type:'string'},problem:{type:'string'},outcome:{type:'string'},hints:{type:'string'},activity:{type:'string'},from:{type:'string'},at:{type:'string'},
+  anchor:{type:'string'},problem:{type:'string'},outcome:{type:'string'},minutes:{type:'string'},hints:{type:'string'},activity:{type:'string'},from:{type:'string'},at:{type:'string'},
   plan:{type:'string'},candidate:{type:'string'},verdict:{type:'string'},source:{type:'string'},channel:{type:'string'},platform:{type:'string'},rating:{type:'string'},
   participations:{type:'string'},handle:{type:'string'},mastery:{type:'string'},'weekday-minutes':{type:'string'},date:{type:'string'},week:{type:'string'},out:{type:'string'},
   concept:{type:'string'},'concept-status':{type:'string'},tag:{type:'string'},difficulty:{type:'string'},predicted:{type:'string'},status:{type:'string'},near:{type:'string'},
@@ -92,7 +94,8 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
     if (command==='attempt') {
       if (o.hints!==undefined && !['none','used'].includes(o.hints)) throw new Error('--hints must be none or used');
       // Independent requires an explicit --hints none (the core validator enforces it).
-      const payload={problem_key:o.problem,outcome:o.outcome,hints:o.hints===undefined ? null : o.hints==='none' ? false : true};
+      const payload={problem_key:o.problem,outcome:({O:'independent',X:'failed'}[o.outcome] ?? o.outcome),hints:o.hints===undefined ? null : o.hints==='none' ? false : true};
+      if(o.minutes!==undefined)payload.self_minutes=Number(o.minutes);
       if (o.activity) payload.activity_type=o.activity;
       if (o.activity==='transfer') payload.transfer_from=o.from;
       const at=o.at ? timestamp(o.at) : nowIso;
@@ -116,6 +119,7 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
       if (o['weekday-minutes']) patch.weekday_minutes=Number(o['weekday-minutes']);
       out(Object.keys(patch).length ? await putPreferences(db,learnerId,patch) : await getPreferences(db,learnerId)); return 0;
     }
+    if(command==='journal'){out(await createJournalService({db,catalogRoot}).view(learnerId,now));return 0;}
     if (command==='plan') {
       const date=o.date ?? seoulDate(now);
       const frozen=await getSnapshot(db,learnerId,'plan',date);

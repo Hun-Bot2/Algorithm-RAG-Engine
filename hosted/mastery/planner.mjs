@@ -1,14 +1,15 @@
 // planner-v1 (design.md section 5, R4). Pure and deterministic: the same ledger, catalog,
 // preferences and date always yield the same plan. The explore rotation is a fixed calendar
 // schedule for reproducibility; it is NOT evidence that any sub-kind or channel works better.
+import {reviewQueue} from './reviews.mjs';
 import {REVIEW_DAYS,replayProblemAttempts,seoulDate} from '../core/policy.mjs';
 import {normalizeMastery} from '../core/preferences.mjs';
 export {DEFAULT_MASTERY,normalizeMastery} from '../core/preferences.mjs';
 import {MIN_EVIDENCE,fitAll,predict,CALIBRATION_VERSION} from './calibration.mjs';
 import {CHANNELS,RELATED_VERSION,canonicalKey,recommendable,relatedCandidates,trustedConcepts} from './related.mjs';
 
-export const PLANNER_VERSION = 'planner-v1';
-export const POLICY_BUNDLE = 'mastery-policy-v1';
+export const PLANNER_VERSION = 'planner-v2';
+export const POLICY_BUNDLE = 'mastery-policy-v2';
 export const EXPLORE_KINDS = ['uncertain_concept','stretch_probe','related_channel','new_problem'];
 const MINUTES = {review:15,practice:30};
 const ZONE = {low:0.60,high:0.80,center:0.70};
@@ -64,7 +65,7 @@ export function remediationConcepts(attempts,catalog,date) {
   const latest=new Map();
   for (const a of attempts) latest.set(canonicalKey(catalog,a.problem_key),a);
   const out=new Set();
-  for (const [key,a] of latest) if (a.activity_type==='review' && a.outcome!=='independent' && a.outcome!=='reported_completion' && dateOf(a.occurred_at)>=addDays(date,-7))
+  for (const [key,a] of latest) if (['failed','assisted'].includes(a.outcome) && dateOf(a.occurred_at)<=date)
     for (const c of trustedConcepts(catalog.problems.get(key))) out.add(c);
   return out;
 }
@@ -114,14 +115,14 @@ export function planDay({date,now,ledger,catalog,preferences,priorPlans=[],curri
   const take=slot=>{ slots.push(slot); used+=slot.estimated_minutes; used_keys.add(slot.problem_key); seen.add(slot.problem_key); };
 
   // 1. Reviews (existing intervals). Practice days cap reviews at half the budget.
-  const due=[...states].filter(([,s])=>s.due_date && s.due_date<=date).sort((a,b)=>a[1].due_date.localeCompare(b[1].due_date) || a[0].localeCompare(b[0]));
+  const due=reviewQueue(states,catalog,date).filter(r=>r.due).map(r=>[r.problem_key,{...states.get(r.problem_key),...r}]);
   const reviewCap=dayType==='review' ? budget : Math.floor(budget/2);
   for (const [key,s] of due) {
-    if (used+MINUTES.review>reviewCap) { notes.push(`review deferred: ${key}`); continue; }
+    if (used+MINUTES.review>(s.review_priority==='priority'?budget:reviewCap)) { notes.push(`review deferred: ${key}`); continue; }
     const p=catalog.problems.get(key);
     slots.push({kind:'review',sub_kind:null,problem_key:key,platform:p?.platform ?? key.split(':')[0],title:p?.title ?? key,url:p?.url ?? null,concepts:[...trustedConcepts(p)].sort(),
-      prediction:predict(p,abilities),components:{review_stage:s.review_stage,overdue_days:Math.round((Date.parse(date)-Date.parse(s.due_date))/DAY)},
-      reason:`Review due ${s.due_date} (stage ${s.review_stage}, interval ${REVIEW_DAYS[s.review_stage]} days).`,estimated_minutes:MINUTES.review});
+      review_priority:s.review_priority,prediction:predict(p,abilities),components:{failure_count:s.failure_count,urgency:s.urgency,review_stage:s.review_stage,overdue_days:Math.round((Date.parse(date)-Date.parse(s.due_date))/DAY)},
+      reason:`${s.review_priority==='priority'?'Priority review after non-independent evidence. ':''}Review due ${s.due_date} (stage ${s.review_stage}, interval ${REVIEW_DAYS[s.review_stage]} days).`,estimated_minutes:MINUTES.review});
     used+=MINUTES.review; used_keys.add(key);
   }
   if (['virtual','upsolve'].includes(dayType)) {
@@ -133,6 +134,15 @@ export function planDay({date,now,ledger,catalog,preferences,priorPlans=[],curri
   const targetConcepts=new Set(mastery.target_concepts);
   const priority=c=>(1-c.mean)+(targetConcepts.has(c.concept)?0.5:0);
   const conceptOrder=[...stats.values()].filter(c=>!targetConcepts.size || targetConcepts.has(c.concept)).sort((a,b)=>priority(b)-priority(a) || a.concept.localeCompare(b.concept));
+
+  // Targeted repair precedes ordinary practice and is not constrained by exploration quotas.
+  let earlyRemediation=false;
+  if(remediation.size && used+MINUTES.practice<=budget){
+    for(const concept of [...remediation].sort()){
+      const choice=pick(poolFor(mastery.practice_platform,p=>trustedConcepts(p).has(concept)),abilities,{target:0.80,low:0.70,high:0.95,prefer:curriculumKeys});
+      if(choice){take(slotFrom('remediation',null,choice,{concept},`Targeted remediation in ${concept} after unresolved non-independent evidence.`));earlyRemediation=true;break;}
+    }
+  }
 
   // 2. Exploit (cold start: placement pattern) on the practice platform, then contest platforms.
   const exploitPlatforms=[mastery.practice_platform,mastery.contest_platforms[weekday%mastery.contest_platforms.length]];
@@ -167,7 +177,8 @@ export function planDay({date,now,ledger,catalog,preferences,priorPlans=[],curri
   if (dayType==='practice') {
     const index=exploreIndex(date);
     rotation={index,scheduled:EXPLORE_KINDS[index],used:null,fallbacks:[],channel:null,allowed:exploreAllowed};
-    if (!exploreAllowed) notes.push('explore slot skipped: weekly explore cap reached');
+    if (earlyRemediation) rotation.used='remediation';
+    else if (!exploreAllowed) notes.push('explore slot skipped: weekly explore cap reached');
     else if (used+MINUTES.practice>budget) { rotation.allowed=false; notes.push('explore slot skipped: no budget left after reviews and exploit'); }
     else if (remediation.size) {
       const concept=[...remediation].sort()[0];

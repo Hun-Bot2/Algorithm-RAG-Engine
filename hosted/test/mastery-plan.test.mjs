@@ -75,7 +75,7 @@ test('cold start uses the placement pattern with conservative predictions; plans
   assert.ok(plan.slots.every(s=>!['leetcode:premium','leetcode:excluded'].includes(s.problem_key)),'unknown access and excluded rows never recommended');
   assert.equal(plan.abilities.codeforces.prior,'default');
   assert.match(plan.rotation_note,/not causal/);
-  assert.equal(plan.policy_bundle,'mastery-policy-v1');
+  assert.equal(plan.policy_bundle,'mastery-policy-v2');
 });
 
 test('explore rotation is a fixed calendar schedule independent of outcomes', () => {

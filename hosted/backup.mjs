@@ -17,6 +17,32 @@ function validateRepository(value,learnerId) {
 
 const exact=(value,fields)=>value && typeof value==='object' && !Array.isArray(value) && Object.keys(value).sort().join('|')===[...fields].sort().join('|');
 
+function archivedSnapshotRow(row) {
+  const payload=row.payload;
+  if (payload?.archive_type==='recommendation_snapshot') {
+    if (!exact(payload,['archive_type','original_kind','original_payload']) || typeof payload.original_kind!=='string' || !payload.original_kind || !payload.original_payload || typeof payload.original_payload!=='object' || Array.isArray(payload.original_payload)) throw new Error('invalid archived recommendation snapshot');
+    return {kind:payload.original_kind,local_date:row.local_date,payload:payload.original_payload};
+  }
+  return row;
+}
+
+function validateRecommendationArchive(rows) {
+  if (!Array.isArray(rows)) throw new Error('invalid backup recommendation archive');
+  const seen=new Set();
+  return rows.map(input=>{
+    if (!exact(input,['kind','local_date','payload']) || typeof input.kind!=='string' || !input.kind.trim() || input.kind.length>200 || !/^\d{4}-\d{2}-\d{2}$/.test(input.local_date) || !input.payload || typeof input.payload!=='object' || Array.isArray(input.payload) || input.payload.archive_type==='recommendation_snapshot') throw new Error('invalid backup recommendation archive');
+    const row={kind:input.kind,local_date:input.local_date,payload:structuredClone(input.payload)},key=`${row.kind}\0${row.local_date}`;
+    if(seen.has(key))throw new Error('duplicate backup recommendation snapshot');
+    seen.add(key);return row;
+  });
+}
+
+async function archiveSnapshot(row) {
+  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(canonicalJson(row)));
+  const hash=Array.from(new Uint8Array(bytes),value=>value.toString(16).padStart(2,'0')).join('').slice(0,32);
+  return {kind:`archive-${hash}`,local_date:row.local_date,payload:{archive_type:'recommendation_snapshot',original_kind:row.kind,original_payload:row.payload}};
+}
+
 function validateManualContest(value) {
   if (!exact(value,['id','title','platform','url','start_at','duration_minutes','suitable','source','fetched_at'])) throw new Error('invalid backup manual contest');
   identifier(value.id);
@@ -39,18 +65,20 @@ function preflightBackup(document,learnerId) {
   if (new Set(manual.map(c=>c.id)).size!==manual.length) throw new Error('duplicate backup contest');
   const participation=preflightParticipation([],document.participation,learnerId);
   const ledgers={}, repositories=[];
+  let recommendationSnapshots=[];
   if (document.version===2) {
     if (!document.mastery_ledgers || typeof document.mastery_ledgers!=='object' || Array.isArray(document.mastery_ledgers) || Object.keys(document.mastery_ledgers).some(t=>!LEDGERS[t])) throw new Error('invalid backup mastery ledgers');
     for (const [table,entries] of Object.entries(document.mastery_ledgers)) {
       if (!Array.isArray(entries)) throw new Error('invalid backup mastery ledgers');
       ledgers[table]=preflightEntries(table,[],entries,learnerId);
     }
-    if (!Array.isArray(document.git_repositories) || !document.mastery_archive || typeof document.mastery_archive!=='object') throw new Error('invalid backup lists');
+    if (!Array.isArray(document.git_repositories) || !document.mastery_archive || typeof document.mastery_archive!=='object' || Array.isArray(document.mastery_archive) || !Array.isArray(document.mastery_archive.weekly_reports)) throw new Error('invalid backup lists');
+    recommendationSnapshots=validateRecommendationArchive(document.mastery_archive.recommendation_snapshots);
     repositories.push(...document.git_repositories.map(r=>validateRepository(r,learnerId)));
     if (new Set(repositories.map(r=>r.repo_id)).size!==repositories.length) throw new Error('duplicate backup git repository');
   }
-  // Archives are inspectable evidence only; never execute or reinsert their contents.
-  return {events,preferences,manual,participation,ledgers,repositories};
+  // Mission/delivery archives remain inspect-only; recommendation snapshots are restored separately as inert history.
+  return {events,preferences,manual,participation,ledgers,repositories,recommendationSnapshots};
 }
 
 export async function exportLearningBackup(db,learnerId) {
@@ -68,7 +96,10 @@ export async function exportLearningBackup(db,learnerId) {
   const mastery_ledgers={};
   for (const table of Object.keys(LEDGERS)) mastery_ledgers[table]=(await db.prepare(`SELECT canonical FROM ${table} WHERE learner_id=? ORDER BY sequence`).bind(learnerId).all()).results.map(row=>JSON.parse(row.canonical));
   const git_repositories=(await db.prepare('SELECT learner_id,repo_id,branch,path_hint,convention_version,registered_at FROM git_repositories WHERE learner_id=? ORDER BY repo_id').bind(learnerId).all()).results;
-  const mastery_archive={recommendation_snapshots:(await db.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=? ORDER BY kind,local_date').bind(learnerId).all()).results.map(r=>({...r,payload:JSON.parse(r.payload)})),
+  const archivedRows=(await db.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=? ORDER BY kind,local_date').bind(learnerId).all()).results.map(r=>archivedSnapshotRow({...r,payload:JSON.parse(r.payload)}));
+  const uniqueSnapshots=new Map();
+  for(const row of archivedRows){const key=`${row.kind}\0${row.local_date}`,previous=uniqueSnapshots.get(key);if(previous&&canonicalJson(previous.payload)!==canonicalJson(row.payload))throw new Error('conflicting archived recommendation snapshots');uniqueSnapshots.set(key,row);}
+  const mastery_archive={recommendation_snapshots:[...uniqueSnapshots.values()].sort((a,b)=>a.kind.localeCompare(b.kind)||a.local_date.localeCompare(b.local_date)),
     weekly_reports:(await db.prepare('SELECT week_start,payload FROM weekly_reports WHERE learner_id=? ORDER BY week_start').bind(learnerId).all()).results.map(r=>({...r,payload:JSON.parse(r.payload)}))};
   return {format:'adaptive-learning-backup',version:2,learner_id:learnerId,mastery_ledgers,git_repositories,mastery_archive,
     event_document:{format:'adaptive-learning-events',version:1,learner_id:learnerId,events:eventResult.results.map(row=>JSON.parse(row.canonical))},
@@ -78,7 +109,7 @@ export async function exportLearningBackup(db,learnerId) {
 
 export async function importLearningBackup(db,learnerId,document) {
   identifier(learnerId);
-  const {events,preferences,manual,participation,ledgers,repositories}=preflightBackup(document,learnerId);
+  const {events,preferences,manual,participation,ledgers,repositories,recommendationSnapshots}=preflightBackup(document,learnerId);
   const existing=await db.prepare('SELECT revision FROM learners WHERE learner_id=?').bind(learnerId).first();
   if (existing?.revision!==undefined && existing.revision!==0) throw new Error('restore target is not empty');
   const statements=[
@@ -104,6 +135,10 @@ export async function importLearningBackup(db,learnerId,document) {
   for (const p of participation) statements.push(participationInsert(db,p));
   for (const r of repositories) statements.push(db.prepare('INSERT INTO git_repositories(learner_id,repo_id,branch,path_hint,convention_version,registered_at) VALUES (?,?,?,?,?,?)').bind(r.learner_id,r.repo_id,r.branch,r.path_hint,r.convention_version,r.registered_at));
   for (const [table,entries] of Object.entries(ledgers)) for (const e of entries) statements.push(insertStatement(db,table,e));
+  for (const row of recommendationSnapshots) {
+    const archived=await archiveSnapshot(row);
+    statements.push(db.prepare('INSERT INTO recommendation_snapshots(learner_id,kind,local_date,payload) VALUES (?,?,?,?)').bind(learnerId,archived.kind,archived.local_date,canonicalJson(archived.payload)));
+  }
   try {await db.batch(statements);} catch (error) {throw new Error('atomic backup restore failed',{cause:error});}
   const report={events:events.length,manual_contests:manual.length,participation:participation.length,delivery_reconciliation_required:true};
   const mastery=Object.fromEntries(Object.entries(ledgers).filter(([,e])=>e.length).map(([t,e])=>[t,e.length]));

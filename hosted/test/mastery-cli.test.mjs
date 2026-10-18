@@ -72,3 +72,20 @@ test('CLI end to end: catalog switch, Git ingest, plan freeze, attempts, find, w
   assert.equal(await cli('status','--now','2026-10-26T01:00:00Z'),0);
   assert.equal(last().active_catalog,'catalog-t1');
 });
+
+test('CLI journal shares canonical SQLite with O/X attempts and preserves zero self-reported minutes', async context => {
+  const dir=mkdtempSync(join(tmpdir(),'mastery-journal-cli-'));context.after(()=>rmSync(dir,{recursive:true,force:true}));
+  fixtureCatalog(dir);const lines=[];
+  const cli=(...args)=>run([...args,'--db',join(dir,'learner.sqlite3'),'--catalog-root',join(dir,'cat'),'--now','2026-10-19T12:00:00Z','--json'],{print:x=>lines.push(x)});
+  assert.equal(await cli('catalog','use','--version','catalog-t1'),0);
+  assert.equal(await cli('journal'),0);const before=JSON.parse(lines.at(-1));assert.equal(before.available,true);
+  assert.equal(await cli('attempt','--problem','leetcode:p0','--outcome','X','--minutes','0'),0);
+  assert.equal(await cli('journal'),0);const failed=JSON.parse(lines.at(-1));
+  assert.notEqual(failed.plan.snapshot_id,before.plan.snapshot_id);
+  assert.ok(failed.reviews.priority.some(r=>r.problem_key==='leetcode:p0'));
+  assert.equal(failed.days.flatMap(d=>d.entries).find(e=>e.type==='attempt').self_minutes,0);
+  assert.equal(await cli('attempt','--problem','leetcode:p3','--outcome','O','--hints','none'),0);
+  assert.equal(await cli('journal'),0);const success=JSON.parse(lines.at(-1));
+  assert.ok(success.reviews.normal.some(r=>r.problem_key==='leetcode:p3'));
+  assert.ok(success.reviews.priority.some(r=>r.problem_key==='leetcode:p0'));
+});

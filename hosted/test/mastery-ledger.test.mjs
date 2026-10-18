@@ -100,7 +100,12 @@ test('backup v2 round-trips side ledgers and Git registrations; v1 documents sti
   const restored=await exportLearningBackup(target,'owner');
   assert.deepEqual(restored.mastery_ledgers,backup.mastery_ledgers);
   assert.deepEqual(restored.git_repositories,backup.git_repositories);
-  assert.deepEqual(restored.mastery_archive,{recommendation_snapshots:[],weekly_reports:[]},'snapshot archive is inspect-only');
+  assert.deepEqual(restored.mastery_archive.recommendation_snapshots,backup.mastery_archive.recommendation_snapshots,'restored snapshots remain visible through export in the original backup format');
+  const archived=target.sqlite.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=?').all('owner');
+  assert.equal(archived.length,1);
+  assert.match(archived[0].kind,/^archive-/);
+  assert.deepEqual(JSON.parse(archived[0].payload),{archive_type:'recommendation_snapshot',original_kind:'plan',original_payload:{a:1}});
+  assert.deepEqual(restored.mastery_archive.weekly_reports,[], 'weekly report archive behavior remains unchanged');
   const {mastery_ledgers,git_repositories,mastery_archive,...v1}=await exportLearningBackup(createDatabase(),'owner');
   assert.deepEqual(await importLearningBackup(legacy,'owner',{...v1,version:1}),{events:0,manual_contests:0,participation:0,delivery_reconciliation_required:true});
   await assert.rejects(importLearningBackup(legacy,'owner',{...v1,version:1,mastery_ledgers:{}}),/envelope/);

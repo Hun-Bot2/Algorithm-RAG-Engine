@@ -48,6 +48,10 @@ export function normalizeEvent(input) {
       fields.push('activity_type');
       if (p.activity_type === 'transfer') { problemKey(p.transfer_from); if(p.transfer_from===p.problem_key)throw new Error('invalid transfer source'); fields.push('transfer_from'); }
     }
+    if ('self_minutes' in p) {
+      if (e.source!=='manual' || (p.self_minutes!==null && (!Number.isInteger(p.self_minutes) || p.self_minutes<0 || p.self_minutes>1440))) throw new Error('invalid self-reported minutes');
+      fields.push('self_minutes');
+    }
     if (!exact(p, fields)) throw new Error('unexpected or missing payload fields');
   } else {
     if (e.source !== 'manual') throw new Error('timer actions require manual evidence');

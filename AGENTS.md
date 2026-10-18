@@ -618,3 +618,24 @@ Keep these distinctions clear in summaries and docs:
   `Problem:`, `Outcome:`, `Hints:`). Its own Actions only check naming and trailers. Pushing never produces recommendations: run
   `node hosted/cli.mjs repo ingest` and `plan` locally.
 - This repository is not a portfolio or a commercial service. Do not add features for external users.
+
+## Local mastery journal (2026-10-18)
+
+- Local runtime/CLI share repository-root defaults for learner SQLite and catalog
+  paths. Never initialize or migrate the real learner DB while testing; use
+  :memory: or a temporary path and synthetic learner IDs.
+- `mastery/journal.mjs` composes the existing planner and versioned progression;
+  journal handlers are injected only by the local runtime, not into Worker code.
+  Core review replay schedules every attempted problem; hints/failures reset to
+  next-day priority, imported completion is never independent mastery.
+- Journal snapshots fingerprint relevant evidence/config/code. Timer-only events
+  must not rotate the current recommendation. Corrections remain visible as
+  superseded history; do not emit initial unknown-state changes for every concept.
+- Backup-v2 recommendation archives are inert `archive-...` snapshot rows with
+  wrapper metadata. Unwrap them for historical display only; never activate them
+  as current plans. Export flattens wrappers, preventing recursive nesting.
+- Novel transfer cannot reuse an attempted canonical key; known-problem review is
+  retention evidence, not a new transfer. Hard evidence stays separate from Easy
+  and Medium gates. Metadata variation is a proxy, not proven algorithm equivalence.
+- Browser writes require an isolated `browser-smoke` learner and disposable store.
+  Set SMOKE_OUTPUT_DIR to a fresh private path; preserve earlier evidence receipts.

@@ -35,7 +35,7 @@ function manualContest(input,now) {
   if (url.protocol !== 'https:' || url.username || url.password) throw new Error('HTTPS contest URL required');
   return {...input,start_at:timestamp(input.start_at),source:'manual',fetched_at:timestamp(now.toISOString())};
 }
-export function createApp({env={},db=env.DB,curriculum,annotations={},authenticate=request=>authenticateAccess(request,env),assets=env.ASSETS,contests=({learnerId,now})=>cachedProviders(db,learnerId,now),delivery=({learnerId})=>listDeliveries(db,learnerId),now=()=>new Date()}={}) {
+export function createApp({env={},db=env.DB,curriculum,annotations={},authenticate=request=>authenticateAccess(request,env),assets=env.ASSETS,contests=({learnerId,now})=>cachedProviders(db,learnerId,now),delivery=({learnerId})=>listDeliveries(db,learnerId),now=()=>new Date(),journal=null}={}) {
   if (!db || !curriculum) throw new Error('hosted core bindings missing');
   return {async fetch(request) {
     let identity;
@@ -46,6 +46,11 @@ export function createApp({env={},db=env.DB,curriculum,annotations={},authentica
     try {
       if (path.startsWith('/api/') && !['GET','HEAD'].includes(method)) {
         if (request.headers.get('origin') !== url.origin || request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') return json({error:'same-origin JSON request required'},403);
+      }
+      if(path==='/api/journal' && method==='GET')return json(journal?await journal.view(learnerId,now()):{available:false,reason:'Journal is available in the local catalog-backed runtime.'});
+      if(path==='/api/journal/attempt' && method==='POST'){
+        if(!journal)return json({error:'journal unavailable'},409);
+        return json(await journal.attempt(learnerId,await readJson(request),now()),201);
       }
       if (path === '/api/state' && method === 'GET') {
         const snap = await learnerSnapshot(db,learnerId);

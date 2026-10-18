@@ -1,0 +1,22 @@
+{
+  "version": "interview-curriculum-v1",
+  "provenance": "Authored curriculum ordering and prerequisites; not empirically validated educational effectiveness",
+  "concept_order": ["arrays-hashing", "string-processing", "sorting", "two-pointers", "sliding-window", "prefix-sums", "binary-search", "linked-lists", "stacks-queues", "trees", "graph-traversal", "heaps", "search-enumeration", "greedy", "dynamic-programming", "union-find", "shortest-paths", "tries", "range-structures"],
+  "prerequisites": {
+    "two-pointers": ["arrays-hashing"],
+    "sliding-window": ["two-pointers"],
+    "prefix-sums": ["arrays-hashing"],
+    "binary-search": ["sorting"],
+    "linked-lists": ["arrays-hashing"],
+    "stacks-queues": ["arrays-hashing"],
+    "trees": ["stacks-queues"],
+    "graph-traversal": ["stacks-queues"],
+    "heaps": ["sorting"],
+    "search-enumeration": ["arrays-hashing"],
+    "dynamic-programming": ["search-enumeration"],
+    "union-find": ["graph-traversal"],
+    "shortest-paths": ["graph-traversal", "heaps"],
+    "tries": ["string-processing", "trees"],
+    "range-structures": ["prefix-sums", "trees"]
+  }
+}
