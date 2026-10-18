@@ -1,0 +1,38 @@
+# Mastery journal and universal review audit
+
+Audit date: 2026-10-18. Read-only source and learner-store audit; no learner row contents were opened. The only repository change from this audit is this document.
+
+## Current architecture
+
+`hosted/core/store.mjs` and `hosted/core/policy.mjs` are the learner event store and curriculum policy. The local CLI and dashboard use the same SQLite database. The dashboard's `/api/state` reads learner events, curriculum progress, timers, and contest participation; planner policy in `hosted/mastery/` consumes the event/side-ledger projection. `specs/mastery-system/requirements.md` explicitly requires one local SQLite canonical store and one JS learner-state engine (S1), so a journal should be a read projection over existing evidence rather than a second store.
+
+Events are append-only and correction-aware. The core event validator accepts attempt and timer events; attempts preserve outcome, help, activity type and event/recording times. Corrections supersede prior events. Curriculum progress replays active attempts and uses confirmed independent outcomes to update mastery/review state. Core review intervals are 1, 3, 7, 14, 30 and 60 days. A successful explicit review advances the interval; an assisted or failed review resets it to one day. Reported completion does not change mastery (`hosted/core/events.mjs`, `hosted/core/policy.mjs`).
+
+The mastery planner has a parallel review scheduler over the same event evidence: due reviews are selected first on practice/review days, bounded by budget, while virtual/upsolve days defer them (`hosted/mastery/planner.mjs`). Both paths distinguish a review through `activity_type: "review"`; neither has a universal control that marks every curriculum item as a review. The dashboard permits manually recording a review and shows due items, so the missing capability is a universal review workflow/entry point, not the ability to record review evidence.
+
+## Catalog and local database receipts
+
+CLI defaults are `--db private-learning/hosted.sqlite3`, `--learner local-owner`, and `--catalog-root private-learning/mastery` (`hosted/cli.mjs`). Catalog files resolve as `<catalog-root>/<version>/<version>.sqlite3`. `catalog use --version ...` verifies the file against sibling `receipt.json`, attaches the catalog with SQLite read-only/immutable flags, and appends a catalog-switch ledger entry containing the SHA-256. Plan/related/find paths require a logged active catalog and check that the file still matches the logged hash. The first switch creates the initial selection. CLI help and dispatch expose no backup or restore command.
+
+Latest artifact present is `catalog-v4` at `private-learning/mastery/catalog-v4/catalog-v4.sqlite3`, with receipt SHA-256 `27a4ca622de50bfa6b86eb7d789abcc856bf40dd8fd511001e91edba20cffde4`; it is parented by catalog-v3. Its receipt reports 24,303 problems, 33,903 AI-reviewed problem-concept rows, 880 abstentions and 4 proposed rows. Catalog-v3 is also present and immutable. The runbook still names catalog-v3 as first-use guidance, then describes the v3-to-v4 refresh (`specs/mastery-system/runbook.md`). The inspected learner DB has no active catalog switch, so no learner-selected catalog version can be reported. To use the latest available catalog, the concrete CLI command is `node hosted/cli.mjs catalog use --version catalog-v4`.
+
+Read-only SQLite inspection of `private-learning/hosted.sqlite3` found tables from migrations 001–003 only (8 user tables including `schema_migrations`), with 0 rows in `learners`, `events`, `mission_snapshots`, `manual_contests`, `delivery_outbox`, `provider_cache`, and `mutation_guard`; `schema_migrations` has 3 rows. Thus this checkout's default learner DB is an empty pre-mastery snapshot, not evidence of active learner history. Current CLI startup calls `createDatabase`, which applies missing migrations as a write; the audit did not use that path. A later CLI invocation will migrate the DB through 008, but it will still have no active catalog until `catalog use` is run.
+
+Full backup and restore exist through `hosted/backup.mjs`, `/api/backup/export` and `/api/backup/import`, with dashboard download/upload controls. Backup format v2 captures events, preferences, manual contests, contest participation, mastery side ledgers/Git registrations, and mission/report/delivery archives. Restore is atomic and only accepts an empty learner; it sets delivery reconciliation required, does not restore archived missions/deliveries as active state, and v1 backups remain accepted. The CLI itself has no backup/restore path. The lower-level `/api/export`/`import` pair covers only core events.
+
+## Current journal surface and gaps
+
+The progress view already renders a “recent records” list from the active core events, sorts by `occurred_at` descending, and limits it to 20. It labels event kind, outcome, source, correction status and occurrence timestamp. `/api/state` returns the core event list and separately returns contest participation. The journal therefore omits contest participation and every mastery side ledger (Git observations, feedback, ratings and catalog switches); it has no paging or full chronological-history view. It does not show `recorded_at` alongside `occurred_at`, which matters for late-entered evidence and corrections. Event corrections are identified as superseded, but the list does not explain the replacement event. The current progress view sorts problem summaries alphabetically and due reviews by due date; neither is a chronological journal.
+
+Review recording is available in the manual attempt form and CLI. Review scheduling is due-date driven, not universal across the curriculum. The existing curriculum policy only considers reviewed/free eligible problems and schedules reviews for problems with replay-derived due dates. It has no bulk “review all” selector or chronological review session. The mastery planner likewise prioritizes items with existing due dates, not every learned/eligible curriculum item.
+
+## Minimal implementation direction
+
+1. Keep canonical evidence in the existing append-only ledgers and add a journal read model/route that merges active core events with contest participation and selected mastery ledgers. Apply each ledger's existing supersession rules before merge; sort by `occurred_at`, then stable table rank and ID, while displaying `recorded_at` separately. Include source, outcome/activity, correction linkage and unavailable fields explicitly.
+2. Add a paged chronological journal view that can deep-link to the existing problem/curriculum record. Do not infer timestamps or merge delivery notifications into learner evidence.
+3. Treat universal review as an explicit curriculum selection workflow that records ordinary `attempt` events with `activity_type: "review"`. Preserve current outcome/help requirements and interval replay. Specify whether “universal” means all eligible curriculum problems or learner-selected curriculum scope before implementing selection rules; do not change the scheduler's due-review policy implicitly.
+4. Add focused requirements/design/tasks under this spec before policy or schema changes. A journal can likely be implemented without a migration if it is a query/projection over existing ledgers. A schema change is unnecessary for a universal review action if the existing event contract remains sufficient.
+
+## Validation receipt
+
+Ran `node --test hosted/test/*.test.mjs`: 88 tests, 87 passed, 1 failed. The only failure is `hosted/test/local.test.mjs`, which cannot bind `127.0.0.1` in this sandbox (`listen EPERM`); the other 87 passed. No test fixtures or learner DB rows were modified by the audit.

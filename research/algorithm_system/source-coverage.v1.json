@@ -1,0 +1,136 @@
+{
+  "schema": "algorithm-system-source-coverage.v1",
+  "as_of": "2026-10-16",
+  "scope": "aggregate provenance and identity coverage; no raw statement text included",
+  "catalog": {
+    "catalog_receipt": "research/full_catalog/receipts/catalog.v1.json",
+    "catalog_receipt_sha256": "f49767aca503712d5232fec911584d3443807de798712ccab3200d7613064755",
+    "catalog_version": "catalog-v1",
+    "records": 24297,
+    "per_platform_records": {
+      "atcoder": 9787,
+      "codeforces": 11457,
+      "leetcode": 3053
+    },
+    "interpretation": "snapshot counts across source catalogs; not an eligible unique statement total"
+  },
+  "code_contests": {
+    "dataset": "Google DeepMind CodeContests",
+    "attribution": "Google DeepMind CodeContests; original source materials retain separate third-party rights/terms conditions",
+    "source_url": "https://github.com/google-deepmind/code_contests",
+    "license_url": "https://github.com/google-deepmind/code_contests/blob/main/README.md#license",
+    "license_grant": "CC BY 4.0 for non-code materials, with attribution; publisher states third-party materials may have separate terms and makes no representation about rights to those materials",
+    "snapshot": {
+      "dataset_id": "deepmind/code_contests",
+      "revision": "802411c3010cb00d1b05bad57ca77365a3c699d6",
+      "dataset_infos_sha256": "6289cbfb168f2bde925e27bdada4cdaed65d7a4b9c060c75946504584f3cbdc0",
+      "metadata_sha256": "ae6e380e42e43b8960e30934037474a671ff43e3892375045a22aabf953ccbb4"
+    },
+    "raw_rows": 9424,
+    "source_rows": {
+      "CODEFORCES": 8101,
+      "ATCODER": 1323
+    },
+    "explicit_identity": {
+      "codeforces": 8097,
+      "codeforces_unresolved": 4,
+      "atcoder": 0,
+      "atcoder_unresolved": 1323
+    },
+    "catalog_join": {
+      "codeforces": 7077,
+      "atcoder": 0,
+      "not_matched_or_unresolved": 2347
+    },
+    "method": {
+      "shards": 41,
+      "selected_range_bytes": 16209154,
+      "selected_range_count": 260,
+      "whole_shards_downloaded": false,
+      "columns_read": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "offline_replay_verified": true,
+      "replay_records": 9424,
+      "replay_network_calls": 0,
+      "normalized_output_sha256": "369f072ebef82d7c7fc12b881ae8a9f5bef4753b4b141c566d69cc153d8295b6"
+    },
+    "public_tests_column_selected": true,
+    "solution_private_or_generated_test_columns_read": false,
+    "direct_platform_statement_fetches": 0,
+    "direct_platform_statement_fetch_status": "none; this is a third-party dataset snapshot, not a scrape from platform problem pages",
+    "premium_status": "not present in selected source records; row-level Premium cannot be determined"
+  },
+  "statement_run_duplicate_audit": {
+    "private_run_path": "private-learning/algorithm-system/statement-run-v1",
+    "private_corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+    "duplicate_review_sha256": "2ef50fe43b4dd19c9137a8650b1ef086071f78ba39e3cd5d74f31aab2ba74f51",
+    "input_count": 9424,
+    "exact_content_duplicate_groups": 1007,
+    "rows_in_exact_content_duplicate_groups": 2050,
+    "normalized_cross_platform_title_review_groups": 0,
+    "records_deleted": false,
+    "note": "audit output remains a candidate review signal; exact content groups do not prove original-platform equivalence"
+  },
+  "project_codenet": {
+    "public_aggregate_receipt": "research/algorithm_system/codenet-source.v1.json",
+    "private_receipt_path": "private-learning/codenet/import-description-v1/receipt.json",
+    "records": 3999,
+    "platform_and_native_identity": "unknown for all records",
+    "metadata_rows": 0,
+    "current_catalog_joins": 0,
+    "dataset_license": "CDLA-Permissive-2.0 (dataset grant evidence; separate original-description copyright and terms remain unresolved)",
+    "tools_repository_license": "Apache-2.0; not used as the dataset license basis",
+    "pinned_commit": "55c323b527ab3d6510d55edff188bc0a0d7bc5e5",
+    "archive_sha256": "8b631ae168ba84dce69c7d8e1b6c632256e0155858c2664c6493a5f001b45fdd",
+    "raw_description_text_public": false,
+    "full_submission_archive_acquired": false
+  },
+  "leetcode": {
+    "historical_local_statement_records": 3053,
+    "use_status": "quarantined; excluded from new statement research and eligible-source totals",
+    "premium_filter_field": "isPaidOnly was read by historical collector but not persisted per row",
+    "row_level_premium_status": "unknown",
+    "new_statement_scrape_or_refresh": false,
+    "public_metadata_catalog_records": 3053
+  },
+  "api_pacing_and_boundary": {
+    "metadata_sources": {
+      "codeforces": {
+        "endpoint": "https://codeforces.com/api/problemset.problems?lang=en",
+        "retrieval_time": "2026-10-16T08:21:51.588037+00:00",
+        "http_status": 200,
+        "source_bytes_sha256": "eed189077b6b83898501a7067c82733545d6a50a7156a47e43f4a84f812ee86e"
+      },
+      "atcoder_problems_community": {
+        "endpoint": "https://kenkoooo.com/atcoder/resources/problems.json",
+        "retrieval_time": "2026-10-16T08:21:52.428923+00:00",
+        "http_status": 200,
+        "source_bytes_sha256": "d8b51a2f77eb759f62f5a880bd70362e867452df6d156b74de2ab2c29f75c877",
+        "not_official_atcoder_source": true
+      }
+    },
+    "collector_minimum_request_start_interval_seconds": 2.1,
+    "interval_interpretation": "repository client-side pacing for documented metadata endpoints, not a claim about a vendor-published quota",
+    "statement_page_fetches": 0,
+    "api_metadata_is_statement_content": false
+  },
+  "eligible_total": null,
+  "eligible_total_note": "Not computed: CodeContests, CodeNet, historical LeetCode, and platform catalog rows overlap and/or have unresolved identity/rights; do not sum their counts as unique eligible problems.",
+  "limitations": [
+    "No direct Codeforces or AtCoder statement pages were fetched.",
+    "AtCoder CodeContests records have no explicit task URL and remain unmatched; titles are not used to guess native identity.",
+    "Premium is unknown at row level because legacy isPaidOnly values were not persisted.",
+    "CodeNet records remain identity-unknown despite a dataset-level license receipt; upstream original-description rights/terms caveat is retained.",
+    "CodeContests CC BY 4.0 applies to publisher non-code material while third-party source conditions remain separately relevant.",
+    "No full solution or hidden-test archive was downloaded or read."
+  ]
+}

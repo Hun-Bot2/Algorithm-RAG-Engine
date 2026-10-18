@@ -1,0 +1,117 @@
+{
+ "block_size": 1024,
+ "environment": {
+  "machine": "arm64",
+  "numpy": "2.1.3",
+  "python": "3.13.2",
+  "scipy": "1.14.1",
+  "sklearn": "1.8.0"
+ },
+ "inputs": {
+  "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "crosswalk": "93926f794c9dc08097bbb052ba525ad626443474febcd1c4ee2b3f68e41263f8",
+  "variant_input": "4ad102d9b5429a662aaa9c9678875a13ba4570913d362c25faca2356d6237165"
+ },
+ "methods": {
+  "random": {
+   "counts": {
+    "queries": 13590,
+    "short_lists": 0
+   },
+   "info": {
+    "seed": 20261016
+   },
+   "outputs": {
+    "top10.jsonl": "4186d265580213245fb071d6f6b01269f4bc71df4e7c43975b3c4969e7d088b0",
+    "top20.jsonl": "c181858a581ff8d1f05b6a763c9cf76db9bc79f8d703d3a5553343cb9cf93d37",
+    "top50.jsonl": "130dc3c0d1935c4919730db805ec9dc347bbc7ec90cc6b85b31f73eb27f046bc"
+   },
+   "seconds": 2.643
+  },
+  "tag_jaccard": {
+   "counts": {
+    "queries": 13590,
+    "short_lists": 0
+   },
+   "info": {
+    "concepts": 37,
+    "empty_concept_rows": 403
+   },
+   "outputs": {
+    "top10.jsonl": "2b81a14ee4d8b0cfb83e4589c8b27d3898a991996a8e7e2e1b991748383e3a08",
+    "top20.jsonl": "2da9d70a6cd6529990506f6a092a4063ca882298305fd76ea93cf4bf736eb51e",
+    "top50.jsonl": "c8fe5bd31a4aa8ebab3edcee084334f60343f0f81bde540febaef904eb9acb79"
+   },
+   "params": {
+    "crosswalk_relations": [
+     "equivalent",
+     "narrower"
+    ]
+   },
+   "seconds": 2.637
+  },
+  "tfidf_char": {
+   "counts": {
+    "queries": 13590,
+    "short_lists": 0
+   },
+   "info": {
+    "vocabulary": 47130,
+    "zero_rows": 0
+   },
+   "outputs": {
+    "top10.jsonl": "692e633e8b24521577aaa69d47dd93b58684e2ce20806f261d574f818762b7ab",
+    "top20.jsonl": "400735ccffbeb7fcd5c19866fc520763c5196379753d5e6084d6145a630d1ae1",
+    "top50.jsonl": "88dc08caefb95c5c602d9fb2dd3c58beb731c3bfade01662a53418a089ca281a"
+   },
+   "params": {
+    "analyzer": "char_wb",
+    "dtype": "float32",
+    "lowercase": true,
+    "ngram_range": [
+     3,
+     5
+    ],
+    "norm": "l2",
+    "sublinear_tf": true
+   },
+   "seconds": 10.133
+  },
+  "tfidf_word": {
+   "counts": {
+    "queries": 13590,
+    "short_lists": 0
+   },
+   "info": {
+    "vocabulary": 30613,
+    "zero_rows": 0
+   },
+   "outputs": {
+    "top10.jsonl": "783926693b734e955a28607e96cfe492974e9bb0e20b032dbfa9e94c176cc248",
+    "top20.jsonl": "a14299056c40056afab489eb94d6cdeed13174e15a2e4e66c4bc62ba48282f50",
+    "top50.jsonl": "4892b0afdc57213f5908dac9f2bad059cc0337bc38c2e4cc41d51792b6ad0d7e"
+   },
+   "params": {
+    "analyzer": "word",
+    "dtype": "float32",
+    "lowercase": true,
+    "ngram_range": [
+     1,
+     2
+    ],
+    "norm": "l2",
+    "sublinear_tf": true,
+    "token_pattern": "(?u)\\b\\w+\\b"
+   },
+   "seconds": 3.007
+  }
+ },
+ "mode": "cross",
+ "rows": 13590,
+ "rows_by_platform": {
+  "codeforces": 10702,
+  "leetcode": 2888
+ },
+ "schema": "baseline-receipt.v1",
+ "variant": "A2"
+}

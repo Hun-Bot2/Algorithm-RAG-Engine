@@ -1,0 +1,40 @@
+{
+ "agreement_before_adjudication": {
+  "abstain": {
+   "draft": 839,
+   "review": 776
+  },
+  "both_labelled": 2784,
+  "exact_label_agreement": 0.8809980806142035,
+  "pairs": 3647,
+  "quadratic_weighted_kappa": 0.745193671904471,
+  "resolution": {
+   "agreement": 2840,
+   "conservative_min": 245,
+   "pending_adjudication": 562
+  },
+  "within_one": 0.9992816091954023
+ },
+ "final": {
+  "basis_recognized_any_pass": 2294,
+  "deceptive": 803,
+  "labels": {
+   "0": 2443,
+   "1": 399,
+   "2": 40,
+   "3": 4,
+   "None": 761
+  },
+  "pairs": 3647,
+  "resolution": {
+   "adjudicated": 562,
+   "agreement": 2840,
+   "conservative_min": 245
+  }
+ },
+ "guideline": "research/full_catalog/LABELING.md",
+ "label_source": "ai_reviewed",
+ "labelers": "draft: Claude subagents, model alias 'sonnet' (10, blind); review: Claude subagents, model alias 'opus' (10, blind, independent); adjudication: Claude subagents, model alias 'opus' (3, saw both passes)",
+ "pool": "research/full_catalog/pool.v1.json",
+ "schema": "pool-labels-receipt.v1"
+}

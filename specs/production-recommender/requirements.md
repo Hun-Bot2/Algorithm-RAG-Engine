@@ -1,3 +1,5 @@
+> **Superseded (2026-10-18):** the batch pipeline this spec governs was removed; see git tag `legacy-pipeline-final` and `specs/mastery-system/`.
+
 # Production Recommender Requirements
 
 ## Scope amendment (2026-10-16)

@@ -1,4 +1,8 @@
-"""Trusted local SQLite repository. Hosted authentication is a later boundary."""
+"""Trusted local SQLite repository. Hosted authentication is a later boundary.
+
+Frozen by ADR 003 (2026-10-17): recovery and legacy exports only. The canonical
+learner store is the JS core (hosted/migrations, hosted/local.mjs).
+"""
 from contextlib import closing, contextmanager
 import hashlib
 import json

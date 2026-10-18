@@ -17,3 +17,11 @@ Contest participation is append-only v1 evidence: `schema_version`, globally uni
 ## Validation and rollout
 
 SQLite-backed backup and participation tests passed 4 of 4, covering ownership, duplicate IDs, correction chains, preflight errors, SQL conflict rollback, round-trip restoration of all four learning categories, the durable reconciliation gate, and manual contest policy input. The combined core, notification, backup, provider and UI suites passed 44 of 44. No test proves live D1 export, Slack reconciliation or release-ready backup operations. Keep the source database and its full export until a restored private instance has been independently checked.
+
+## Backup v2 (mastery system, 2026-10-17)
+
+`adaptive-learning-backup` version 2 adds `mastery_ledgers` (git_observations, git_watermarks,
+practice_feedback, rating_observations, catalog_switches), `git_repositories` and an inspect-only
+`mastery_archive` (plan snapshots and weekly reports are not restored, like `mission_archive`).
+Exports are always v2; v1 documents still restore with empty mastery sections. Restore still
+requires an empty owner, now including every mastery table.

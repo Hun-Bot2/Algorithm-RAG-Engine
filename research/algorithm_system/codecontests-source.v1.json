@@ -1,0 +1,3056 @@
+{
+  "schema_version": 1,
+  "dataset": "deepmind/code_contests",
+  "revision": "802411c3010cb00d1b05bad57ca77365a3c699d6",
+  "statement_rows": 9424,
+  "shards": [
+    {
+      "path": "data/test-00000-of-00001-9c49eeff30aacaa8.parquet",
+      "upstream_size": 63077400,
+      "upstream_lfs_sha256_not_fully_verified": "aa426cbdb202bf8703b658bcb31fd1878ca7cfd33ca07d3b703dc94ca6a2b651",
+      "row_count": 165,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 165
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 165,
+      "ranges": [
+        {
+          "start": 63011864,
+          "end": 63077399,
+          "sha256": "64f31506ee8d1b9e8dc43b8c87ea7682b155b11ed2f2f367b9b3c86d2992cf14",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 3568,
+          "sha256": "7e6e04795636a87084abfc343e0905fa943dca7dd03ed1a15e00f7d745037013",
+          "bytes": 3565
+        },
+        {
+          "start": 3686,
+          "end": 157689,
+          "sha256": "47d497c8b820b2975bda6b90144f146bc7841ebe4e4ac8a4c8ebb1f6e0387744",
+          "bytes": 154004
+        },
+        {
+          "start": 5371106,
+          "end": 5371204,
+          "sha256": "5a0b72e66baf8efcaa2bccee9e5b8e2d714ff73c67ccc12ed29fa38c16d12f75",
+          "bytes": 99
+        },
+        {
+          "start": 160157,
+          "end": 168178,
+          "sha256": "b3b1575b3a4c7361cc8747e592ffc4bf6093e6dc89be216f217ceffe960b73fa",
+          "bytes": 8022
+        },
+        {
+          "start": 168274,
+          "end": 172006,
+          "sha256": "63dfa732c6e9a4a02f22799f761de803bd2d17777d0094354d74a9cb3a4429aa",
+          "bytes": 3733
+        }
+      ]
+    },
+    {
+      "path": "data/train-00000-of-00039-e991a271dbfa9925.parquet",
+      "upstream_size": 180227735,
+      "upstream_lfs_sha256_not_fully_verified": "950bfdefde1f274edf93963e7e23c93ab16034de344aa7b7c32d14145e8d5232",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODECHEF": 24,
+        "CODEFORCES": 207,
+        "HACKEREARTH": 30,
+        "ATCODER": 30,
+        "AIZU": 51
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 237,
+      "ranges": [
+        {
+          "start": 180162199,
+          "end": 180227734,
+          "sha256": "11d80d5b9844505c09e8c8f195bab45746acbf490fee28fecfde3f041b4b2316",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7796,
+          "sha256": "6ea9fc7a045cfd243dc722d07df14179b04293fa96ca360f165db5f8537a669a",
+          "bytes": 7793
+        },
+        {
+          "start": 7896,
+          "end": 323519,
+          "sha256": "582c88af2f0331f32fc584cd0cd42bfe662b3d153c8a62472759ea29c1be10ec",
+          "bytes": 315624
+        },
+        {
+          "start": 13726599,
+          "end": 13726734,
+          "sha256": "cdb9122b8860d7a0b3bbc8c6cdc05522df42d9d8fe9c6154433fe51ac5176eae",
+          "bytes": 136
+        },
+        {
+          "start": 326682,
+          "end": 342977,
+          "sha256": "e119db0e61410c0c169b499fedc82bc647165594d8de38d53e80441e6fee0ab0",
+          "bytes": 16296
+        },
+        {
+          "start": 343087,
+          "end": 350638,
+          "sha256": "4dd862141869bde4b5c33f890d3f93505eb2a1d965421ac4e91fc201b2823865",
+          "bytes": 7552
+        }
+      ]
+    },
+    {
+      "path": "data/train-00001-of-00039-e092fe56fda18715.parquet",
+      "upstream_size": 208507780,
+      "upstream_lfs_sha256_not_fully_verified": "7bcc72d98a3d97f07be90ea70bf8db834c8f29ac2c7626d7cfc657bae6f5ddd9",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 29,
+        "ATCODER": 32,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 245,
+      "ranges": [
+        {
+          "start": 208442244,
+          "end": 208507779,
+          "sha256": "c868acd6164d510b6e8e51e2371bfde808386af7996d50138216e37160f5e8e3",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8020,
+          "sha256": "cdc338edc56cf74e723ae6429c275740a13e412ecce5f293375906ff52327667",
+          "bytes": 8017
+        },
+        {
+          "start": 8127,
+          "end": 322116,
+          "sha256": "218bacb107d533ab6ead81416cce1c393b771d7ba24932670ccf837334616474",
+          "bytes": 313990
+        },
+        {
+          "start": 15330729,
+          "end": 15330882,
+          "sha256": "1b021e4491cc143b8e9ad17e81a48f820bf9d9d0e6fc8f97ea251fa1f374aa70",
+          "bytes": 154
+        },
+        {
+          "start": 325494,
+          "end": 340951,
+          "sha256": "6ae013634eb038b6f7dcb060008ede21ee25a8031b7d6ba1917c6dd968df44e7",
+          "bytes": 15458
+        },
+        {
+          "start": 341068,
+          "end": 346985,
+          "sha256": "5b1f80c0c75a3d97ead69f1f45c417faa0be9a6794eceb06c4df694245f93ed9",
+          "bytes": 5918
+        }
+      ]
+    },
+    {
+      "path": "data/train-00002-of-00039-9cea23812e920e41.parquet",
+      "upstream_size": 226940997,
+      "upstream_lfs_sha256_not_fully_verified": "d67c9643019e632941b045f115c6bdf5925a4b32cd9f3fc991734970669b4a29",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 193,
+        "HACKEREARTH": 38,
+        "ATCODER": 43,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 236,
+      "ranges": [
+        {
+          "start": 226875461,
+          "end": 226940996,
+          "sha256": "efe4fdc0a10bb5d7b9ac68b4534862eb9391a32a9cadda570c2c849c45b47171",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7841,
+          "sha256": "6aaaec71bf858d40d8bce96284c079a7b6dc394804cfaa71e120aed6510fe2ca",
+          "bytes": 7838
+        },
+        {
+          "start": 7957,
+          "end": 308821,
+          "sha256": "8ea6e65d90e8f0bb064de8fe3f08de6b333571b40a540fb6c2cafcccc3899071",
+          "bytes": 300865
+        },
+        {
+          "start": 14001165,
+          "end": 14001322,
+          "sha256": "67ad3242370172a407d928edd8321d73b34a62d3d4a44335afe388e64f2d5b96",
+          "bytes": 158
+        },
+        {
+          "start": 312480,
+          "end": 327279,
+          "sha256": "27cfb0721d2fafd986a8990c996c36a1869e231c25ec701255dfa2835b415286",
+          "bytes": 14800
+        },
+        {
+          "start": 327390,
+          "end": 333344,
+          "sha256": "f28c6fc64c0ab4321c4d6c0fc43c39910e60a78d0065bf7a030e5daf70af5ac3",
+          "bytes": 5955
+        }
+      ]
+    },
+    {
+      "path": "data/train-00003-of-00039-e3822fccad6e083a.parquet",
+      "upstream_size": 180680623,
+      "upstream_lfs_sha256_not_fully_verified": "f4952386b2958bddb71ff6713b273b5425b1191084ef75923731b111bc20485f",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 68,
+        "CODECHEF": 24,
+        "CODEFORCES": 189,
+        "HACKEREARTH": 29,
+        "ATCODER": 32
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 221,
+      "ranges": [
+        {
+          "start": 180615087,
+          "end": 180680622,
+          "sha256": "cdf3899f0e7617dfd0bb89552b3b1de1366cc8d9398fde9824fbf892561eba06",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7859,
+          "sha256": "7b826b7d3ccea380ae2b453b13e84dd4ac9feaee7fbfba71fd40059b9093ca40",
+          "bytes": 7856
+        },
+        {
+          "start": 7945,
+          "end": 315968,
+          "sha256": "301eb23f17279fd55f7b8c1ce00d3c79a748347d236f959ddc02f047cd7aee8b",
+          "bytes": 308024
+        },
+        {
+          "start": 17707176,
+          "end": 17707327,
+          "sha256": "6fc41bc05e657b08dc446b14f8d84695e644899adafd2cbe50f3e9c5586e3eb8",
+          "bytes": 152
+        },
+        {
+          "start": 319397,
+          "end": 334718,
+          "sha256": "5e7d9b645e6326308de88e3759978b36ea6b46a9832a8ab9ca2b7d67b9ea3857",
+          "bytes": 15322
+        },
+        {
+          "start": 334889,
+          "end": 340770,
+          "sha256": "2017c087a0617e13e7a32f35115fb86d2c2163e7715b596310291b29efd1a0cb",
+          "bytes": 5882
+        }
+      ]
+    },
+    {
+      "path": "data/train-00004-of-00039-cefe355b4667b27e.parquet",
+      "upstream_size": 195299927,
+      "upstream_lfs_sha256_not_fully_verified": "f28993a19d927561b30873a0adf26d5e06bc649fa2b14fc8223de8fecb0b68a9",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 29,
+        "ATCODER": 32,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 245,
+      "ranges": [
+        {
+          "start": 195234391,
+          "end": 195299926,
+          "sha256": "3deca9388371c7b35421b8563477398a534aaf894d7d963c27f6bcb05ad43eaa",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7913,
+          "sha256": "c37de696a294d4f55e0dc86788d979986760d4625ada179b0e8e67a6c27ccdb8",
+          "bytes": 7910
+        },
+        {
+          "start": 7994,
+          "end": 308362,
+          "sha256": "f7efd9cf40260cd3e51aaa236772f5aa21141a4f878d47daae97244ad3b9ffe2",
+          "bytes": 300369
+        },
+        {
+          "start": 16811081,
+          "end": 16811230,
+          "sha256": "d35e2820d0932c80f886851eb02bc4c01b3d866df90a35878b1c3d9ce326b7cd",
+          "bytes": 150
+        },
+        {
+          "start": 311848,
+          "end": 326138,
+          "sha256": "683783eb213fdaca94e4a6fe69839faef4790fa74d89fe1696f39a8e879ddd02",
+          "bytes": 14291
+        },
+        {
+          "start": 326237,
+          "end": 332193,
+          "sha256": "c9c064ec30a4a477785125d0b288f574c0921ba97ba57bf6fb619871b57d5268",
+          "bytes": 5957
+        }
+      ]
+    },
+    {
+      "path": "data/train-00005-of-00039-b7580d2d846c2136.parquet",
+      "upstream_size": 174068638,
+      "upstream_lfs_sha256_not_fully_verified": "4904c25acd90c3e3882167efd2d70b371e6f8dfc996b65606435e44d58fad78c",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 210,
+        "HACKEREARTH": 33,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 240,
+      "ranges": [
+        {
+          "start": 174003102,
+          "end": 174068637,
+          "sha256": "37dcc4188350edd6693b74a6f6a4bfb473554aba5145dc9223249236c187a05e",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7704,
+          "sha256": "ef147d5259901477dcb62cff29e405682f6310d988385e744f16192f4482c2a0",
+          "bytes": 7701
+        },
+        {
+          "start": 7817,
+          "end": 300527,
+          "sha256": "aeece9b067bd76e92b3d22ddf7ba8f1fceabab643921fe2b32c4b896374aeb5b",
+          "bytes": 292711
+        },
+        {
+          "start": 14966969,
+          "end": 14967105,
+          "sha256": "4de86128467a4382ad0b79fe476317425b90cd0207d0911a86a1f6034bf6ba01",
+          "bytes": 137
+        },
+        {
+          "start": 303937,
+          "end": 317758,
+          "sha256": "2d87670cb61436f820bb6bd7782f074a9ec292a27205f9eb52f3f4096529d331",
+          "bytes": 13822
+        },
+        {
+          "start": 317894,
+          "end": 325391,
+          "sha256": "2bced3db066ac8198bd8b63af3f40cfe01f2134c6f3b6ebd31df4045f9b9c968",
+          "bytes": 7498
+        }
+      ]
+    },
+    {
+      "path": "data/train-00006-of-00039-65184bb9f7d61fde.parquet",
+      "upstream_size": 186169733,
+      "upstream_lfs_sha256_not_fully_verified": "8ab765a7f8595c3f24f2f12eaac0f2d03ac626f9218abce127aa9ab898d011ff",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "HACKEREARTH": 37,
+        "ATCODER": 41,
+        "AIZU": 63,
+        "CODECHEF": 18,
+        "CODEFORCES": 183
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 224,
+      "ranges": [
+        {
+          "start": 186104197,
+          "end": 186169732,
+          "sha256": "00dc8a2bd1df70ca0558bf60621ef48b4015c28ce2e077d1e7e8d9832635984e",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8086,
+          "sha256": "2b1063577d66972247ae89ead5bcfef66ef3a53b6c6fe6a5f79e19eaf58b8ab1",
+          "bytes": 8083
+        },
+        {
+          "start": 8191,
+          "end": 321857,
+          "sha256": "80b5a16b8b266e3efac611204cdddcf01fc1f97e3c70d718f7b5b9b400616b63",
+          "bytes": 313667
+        },
+        {
+          "start": 11464064,
+          "end": 11464219,
+          "sha256": "450323b1b789ff8985ce92eabe79e158bbbaf10b632df2e9410da8dec4a9641b",
+          "bytes": 156
+        },
+        {
+          "start": 325939,
+          "end": 342771,
+          "sha256": "32142b7ddd2a67d7b068072699787e7a867ed0d9c7864609bcd851e9df6047b0",
+          "bytes": 16833
+        },
+        {
+          "start": 342868,
+          "end": 348371,
+          "sha256": "bea17b13aadbd0570e39039839ee2af107f1ee718a94338da2fd01df533027a7",
+          "bytes": 5504
+        }
+      ]
+    },
+    {
+      "path": "data/train-00007-of-00039-05785de21e8b8429.parquet",
+      "upstream_size": 172039390,
+      "upstream_lfs_sha256_not_fully_verified": "b9587e7767286768a039a316600232f49edbcdd6f645097db865f8e2ce262304",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 53,
+        "CODECHEF": 24,
+        "CODEFORCES": 203,
+        "HACKEREARTH": 29,
+        "ATCODER": 33
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 236,
+      "ranges": [
+        {
+          "start": 171973854,
+          "end": 172039389,
+          "sha256": "962e585f89eee8ba41c9cdf8afd34dc1b2b22d4a8e1e519f901bd13f642e1bbf",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7849,
+          "sha256": "508f11db6173e0eb416c06621d7dfb9df6146be05eea0c9fed908798cc6ac9da",
+          "bytes": 7846
+        },
+        {
+          "start": 7943,
+          "end": 322956,
+          "sha256": "eaff2746da6628d3aff6596cdf5554e8e41c1ced0d0c2b0647ae888b3c65f340",
+          "bytes": 315014
+        },
+        {
+          "start": 6425878,
+          "end": 6426037,
+          "sha256": "84206e61e3c32604f68eb673fd38bef39795107f0b9a1381137bdfc220f93a2c",
+          "bytes": 160
+        },
+        {
+          "start": 324411,
+          "end": 339459,
+          "sha256": "c975448b844520a407aa491fcf1b2f3ddf1b4705427fa6b72a68fb4e9aed0e28",
+          "bytes": 15049
+        },
+        {
+          "start": 339555,
+          "end": 345051,
+          "sha256": "7d7e375193a18e325fd2360630a9be71bbd6ba1a98125bdecfd021f499945a5c",
+          "bytes": 5497
+        }
+      ]
+    },
+    {
+      "path": "data/train-00008-of-00039-7246e6b7423b404f.parquet",
+      "upstream_size": 199862972,
+      "upstream_lfs_sha256_not_fully_verified": "fe4e8a9c029563128882a101a06d427b8c7a8fbf7f273c76e09176fbb664fc88",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 29,
+        "ATCODER": 31,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 244,
+      "ranges": [
+        {
+          "start": 199797436,
+          "end": 199862971,
+          "sha256": "799b209d1d6ff8035271fa34ad3c70de9c7fbea142ab2df61610cbd9f363d719",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7851,
+          "sha256": "05180a4abbd4410607ff5244302430d5fd6d1b22a0c870714e077411f8bc1707",
+          "bytes": 7848
+        },
+        {
+          "start": 7969,
+          "end": 325295,
+          "sha256": "514eacb4b8ac9ee3f72ff41b4830bee3bdd06fc571b1a696a0b1905b28a29b49",
+          "bytes": 317327
+        },
+        {
+          "start": 13768553,
+          "end": 13768704,
+          "sha256": "3b2bb6aae4479ce7f18087020d695bcd3e3c8393c6df93308e2737e3f6aaa1fc",
+          "bytes": 152
+        },
+        {
+          "start": 328393,
+          "end": 343076,
+          "sha256": "8f8aa7379c7f7d29687de5989378f01857ab44a411fca903c374ce57ce06d2f2",
+          "bytes": 14684
+        },
+        {
+          "start": 343183,
+          "end": 350811,
+          "sha256": "3dd84d677a19d2d1c21812a2a0893a1c8692bc30d980df88968a1089cde1d1e2",
+          "bytes": 7629
+        }
+      ]
+    },
+    {
+      "path": "data/train-00009-of-00039-b8c920f6629b57b2.parquet",
+      "upstream_size": 204590259,
+      "upstream_lfs_sha256_not_fully_verified": "11844dd410f284f8e4db32970bd3968db82280e2c2971f33699f61baccfa656f",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 195,
+        "HACKEREARTH": 40,
+        "ATCODER": 39,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 234,
+      "ranges": [
+        {
+          "start": 204524723,
+          "end": 204590258,
+          "sha256": "c4f20b0cd9751ff642a8506c44a6081ae23277ac1eb564d620cf8138799fee5a",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8100,
+          "sha256": "dcb4386595c5b923fcb32745400d39788645460d3fe164a966522a2047b7f96a",
+          "bytes": 8097
+        },
+        {
+          "start": 8216,
+          "end": 312850,
+          "sha256": "9c8dbb3e65d169f5f7297fa55d74c6c1b0bcb826ff1698fe04e12b6e63c4dcc6",
+          "bytes": 304635
+        },
+        {
+          "start": 23764163,
+          "end": 23764316,
+          "sha256": "872b0db7689c171453da48576621ce57a9d2f8ccaa46ec43334aaefb9e7b5cad",
+          "bytes": 154
+        },
+        {
+          "start": 317006,
+          "end": 332493,
+          "sha256": "7f20475fd07aa25dcccf1c1b889f74c5eebe41aaccf0c42d5016ff0f4a4a9271",
+          "bytes": 15488
+        },
+        {
+          "start": 332724,
+          "end": 339246,
+          "sha256": "a1b8ecea0a4197f6a43a32aae15ef78197b6e8bef971c815a2c71b9012732779",
+          "bytes": 6523
+        }
+      ]
+    },
+    {
+      "path": "data/train-00010-of-00039-6de28ba20654f69b.parquet",
+      "upstream_size": 178085060,
+      "upstream_lfs_sha256_not_fully_verified": "0b83e96a5a9717ea60c2e6fd44bde4ac2215834e78ba3b78f04b621a9b7b5cdc",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "ATCODER": 33,
+        "AIZU": 68,
+        "CODECHEF": 24,
+        "CODEFORCES": 188,
+        "HACKEREARTH": 29
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 221,
+      "ranges": [
+        {
+          "start": 178019524,
+          "end": 178085059,
+          "sha256": "f6157c44afc4b559f7112f3d4edf533b46bfa80ddf1c3a05ca729621e26f44ee",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7854,
+          "sha256": "2d86361732bda1491c9cb2efa28107aab81d847f1c587c58a50670f0e669102a",
+          "bytes": 7851
+        },
+        {
+          "start": 7976,
+          "end": 329395,
+          "sha256": "3c08ef112fc20eb6c1ed32249e354305bf84cc406788f0f154717a899388226a",
+          "bytes": 321420
+        },
+        {
+          "start": 8821619,
+          "end": 8821772,
+          "sha256": "0979d1133822bdd4b88722050aa8962a9d745f149e48ee07d1d2c7f8faa035f7",
+          "bytes": 154
+        },
+        {
+          "start": 331436,
+          "end": 346773,
+          "sha256": "ceffa1c724a78261fd2adaa1e8eae09818f8b1b91528f2397ead5a178d4f7ac6",
+          "bytes": 15338
+        },
+        {
+          "start": 346871,
+          "end": 353558,
+          "sha256": "9774cfc791cc9d83eb125ed7d41b7f0a7e5cbd8ce22b040be73b0e134e742e0a",
+          "bytes": 6688
+        }
+      ]
+    },
+    {
+      "path": "data/train-00011-of-00039-5de236be5188959d.parquet",
+      "upstream_size": 164271996,
+      "upstream_lfs_sha256_not_fully_verified": "facf7036a71d74cd8415dd2180deabc0d943b67219eb07b239e80af2d490dcdf",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 212,
+        "HACKEREARTH": 30,
+        "ATCODER": 32,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 244,
+      "ranges": [
+        {
+          "start": 164206460,
+          "end": 164271995,
+          "sha256": "f509c8f3ce83dd255f016eff83bcefa3b8418c9b7f8d8de5d518c25b47ac5ffb",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8111,
+          "sha256": "4fdcf4c543ec5781a72e7a57213f5c48754f3e2ff9935a1de14393ceb90fc3d4",
+          "bytes": 8108
+        },
+        {
+          "start": 8227,
+          "end": 329074,
+          "sha256": "50f6f6b3c1b3d0b9cb983c31fd5e1697ec941e2ef9956d86e0344633f837cd76",
+          "bytes": 320848
+        },
+        {
+          "start": 6035544,
+          "end": 6035691,
+          "sha256": "2bef47563719d1a1ab3c291444e95bde3f9a6be26ab54e07717601fc94fa0386",
+          "bytes": 148
+        },
+        {
+          "start": 333295,
+          "end": 347964,
+          "sha256": "ef5404e9ed675e703b971a191af58fbd0a2711d3680f6d5f7d8ddc3e0cbd395e",
+          "bytes": 14670
+        },
+        {
+          "start": 348070,
+          "end": 353889,
+          "sha256": "b0b4a4123ca9891b6f9e38571119880d01a26ce3108f52e26f2541f387cc60b8",
+          "bytes": 5820
+        }
+      ]
+    },
+    {
+      "path": "data/train-00012-of-00039-da9476a39a1bdbb7.parquet",
+      "upstream_size": 199746101,
+      "upstream_lfs_sha256_not_fully_verified": "c4ec5429c2b920173f4662b5dc9ec0db40e9f3ddf5b139bad126d49ab598c635",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 211,
+        "HACKEREARTH": 32,
+        "ATCODER": 31,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 242,
+      "ranges": [
+        {
+          "start": 199680565,
+          "end": 199746100,
+          "sha256": "9208e2942d56ddc238e1b5dd1799074984d0aa2c1b91e2e32b6e8b2ac9c3ae48",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7736,
+          "sha256": "48c60d85cd8e0a0c25cf44b418ef6440457db729887cb2ba9ec89f6faf24485a",
+          "bytes": 7733
+        },
+        {
+          "start": 7843,
+          "end": 320800,
+          "sha256": "1001e5289a25c0e88c2b666a833733154df84cd7a1e5af8cf2eb4db6e92f5f8f",
+          "bytes": 312958
+        },
+        {
+          "start": 23892100,
+          "end": 23892251,
+          "sha256": "2d87fa57e52b7dca54ce72dc6506dbacae1cb16df79574d90fea4e9d9fb21bd5",
+          "bytes": 152
+        },
+        {
+          "start": 323904,
+          "end": 337785,
+          "sha256": "d34e68a0bcbf7bddfae509b3ffcc3d5613a6be8d5620fbec076f7b8639e88a3d",
+          "bytes": 13882
+        },
+        {
+          "start": 337879,
+          "end": 343860,
+          "sha256": "780ce796e0dbe05e5b9778152627ac4e0f78f3bafff2b16a749847130bf21c7b",
+          "bytes": 5982
+        }
+      ]
+    },
+    {
+      "path": "data/train-00013-of-00039-30b8c3829ee3b962.parquet",
+      "upstream_size": 197142293,
+      "upstream_lfs_sha256_not_fully_verified": "a03f874674808641cf4b2a8ac1b13a9cd6a28b4ffda329bc60dd1804ec315186",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "HACKEREARTH": 38,
+        "ATCODER": 41,
+        "AIZU": 62,
+        "CODECHEF": 18,
+        "CODEFORCES": 183
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 224,
+      "ranges": [
+        {
+          "start": 197076757,
+          "end": 197142292,
+          "sha256": "9c671b76a9f4191b505a1081eb831ec66c700755afe945ad520ff2fe53025dc5",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8062,
+          "sha256": "86d699ec263975eb61546ccd9aaa58a8f78f2de2acc616da5515d83468771184",
+          "bytes": 8059
+        },
+        {
+          "start": 8163,
+          "end": 305358,
+          "sha256": "a16fc2dd78cb3309ef468645aba0247c6e09a7790e09c0def2133495c3e36837",
+          "bytes": 297196
+        },
+        {
+          "start": 29233557,
+          "end": 29233697,
+          "sha256": "35509b84957ab35da0ec568edb1d7ed440c74372bab67b0a86c972284337e4c6",
+          "bytes": 141
+        },
+        {
+          "start": 307712,
+          "end": 323014,
+          "sha256": "e54a771052bdaf0f32c83974989155dafda585a69ca6c15dd42dad8719b8b6ef",
+          "bytes": 15303
+        },
+        {
+          "start": 323112,
+          "end": 329035,
+          "sha256": "82a13813b10ca69c5f60f06af71449fc6f13eae5d9b9ea66ff009bd8be984c65",
+          "bytes": 5924
+        }
+      ]
+    },
+    {
+      "path": "data/train-00014-of-00039-dc3ebb07a3cba8e4.parquet",
+      "upstream_size": 211187756,
+      "upstream_lfs_sha256_not_fully_verified": "429d22b44ed3134a1e345bb39e5d395900bb6f4fad1ffe32844e972914f2bc30",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 56,
+        "CODECHEF": 24,
+        "CODEFORCES": 202,
+        "HACKEREARTH": 30,
+        "ATCODER": 30
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 232,
+      "ranges": [
+        {
+          "start": 211122220,
+          "end": 211187755,
+          "sha256": "9fb99087bbfd06688dc32424683b6b5d5eac9004fb66354eebe1ff24c8efb13f",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7639,
+          "sha256": "b2a2ea80b85a290e4358db33191f0b81b91f8b0e320f567339395932409b0bf1",
+          "bytes": 7636
+        },
+        {
+          "start": 7747,
+          "end": 320458,
+          "sha256": "f581ef7c379344c54a9814e7a15832e7a27b76b9ffe806acd1300fc1fa00e60a",
+          "bytes": 312712
+        },
+        {
+          "start": 23493045,
+          "end": 23493188,
+          "sha256": "cecab49fabd215e62df2a5e420bb05aa0c4bc081d7d690f13aa3d8880711165b",
+          "bytes": 144
+        },
+        {
+          "start": 323412,
+          "end": 338538,
+          "sha256": "7be0ed2dc83540bac3f3e90c8dd2fbfffa5192273063f1d07b72cacca8714f3c",
+          "bytes": 15127
+        },
+        {
+          "start": 338668,
+          "end": 344886,
+          "sha256": "f39b87b98a158916b8a22d4f48d8f6fbb6f044171671b196ea927b9708934006",
+          "bytes": 6219
+        }
+      ]
+    },
+    {
+      "path": "data/train-00015-of-00039-19ccd7331d695677.parquet",
+      "upstream_size": 178946180,
+      "upstream_lfs_sha256_not_fully_verified": "130ef71583565d5b2887a186cb0c64578486f1c7dfdff4bcb9c1107f807b0768",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 30,
+        "ATCODER": 31,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 244,
+      "ranges": [
+        {
+          "start": 178880644,
+          "end": 178946179,
+          "sha256": "ced8714a1bdb7db22f5f90e4e7e97dbc0f26d2f64a262dd9e6a8404a9db7e40a",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7892,
+          "sha256": "7333e35e4230088a8aef08727c55d5b6d436afc62a12ecf5019257f79d9d677d",
+          "bytes": 7889
+        },
+        {
+          "start": 8003,
+          "end": 304070,
+          "sha256": "b406d90bded38acbca836f14a0e7c3fa8295bfda6e1bed3468e2032738059dca",
+          "bytes": 296068
+        },
+        {
+          "start": 11547800,
+          "end": 11547949,
+          "sha256": "5270fb7bc2155ee13287ee7fc8608fd5aac854948274a0a49ab5ffd540e3f86b",
+          "bytes": 150
+        },
+        {
+          "start": 306606,
+          "end": 320332,
+          "sha256": "49da86e20ec7b2cacc56ef64caeb18b0fe863828d94daa8e18fa669603767f75",
+          "bytes": 13727
+        },
+        {
+          "start": 320429,
+          "end": 326333,
+          "sha256": "5104a109f9424094ed72116fb9ab8323be5634b57140d3d2bee945736fec2153",
+          "bytes": 5905
+        }
+      ]
+    },
+    {
+      "path": "data/train-00016-of-00039-bf38b0908b322307.parquet",
+      "upstream_size": 202144829,
+      "upstream_lfs_sha256_not_fully_verified": "7528a2ee39b08a78c6f9ffe16d9a18fb3e4de24e34fe2e899c795fc31acf2c76",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 196,
+        "HACKEREARTH": 39,
+        "ATCODER": 38,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 234,
+      "ranges": [
+        {
+          "start": 202079293,
+          "end": 202144828,
+          "sha256": "708f6b604d2d638953480a91a0f37bf71e66184d895c788bad1c3dad28e5c638",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8080,
+          "sha256": "5d02e530fe7af7bccf2f05e95d3a191280b7b95d17308000078b7079bb18dbcb",
+          "bytes": 8077
+        },
+        {
+          "start": 8189,
+          "end": 311183,
+          "sha256": "213a1a1f0b5f0f945b44e6ec0d424b6c2eb908c55cd432b5e9498d01363f22af",
+          "bytes": 302995
+        },
+        {
+          "start": 14357878,
+          "end": 14358025,
+          "sha256": "c0a20401f0dd2f5e3edb63f892153deb352c74993ee957c8c6b88c77e0f1e4dd",
+          "bytes": 148
+        },
+        {
+          "start": 312929,
+          "end": 328456,
+          "sha256": "00c11f026b4e8fe108b86902a9e018c565055ad7fe70acdcc068eee20c808c6c",
+          "bytes": 15528
+        },
+        {
+          "start": 328568,
+          "end": 334015,
+          "sha256": "22fdaae79f051213579b34e3869825e2b04b5665835fb7ad27509f89fa14607a",
+          "bytes": 5448
+        }
+      ]
+    },
+    {
+      "path": "data/train-00017-of-00039-ae5533a2f822e6ef.parquet",
+      "upstream_size": 169304362,
+      "upstream_lfs_sha256_not_fully_verified": "895fe5a77c17f0ab4a364e01745a882b977e6da2e3580e8b171d59fcf816f971",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "ATCODER": 35,
+        "AIZU": 66,
+        "CODECHEF": 24,
+        "CODEFORCES": 187,
+        "HACKEREARTH": 30
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 222,
+      "ranges": [
+        {
+          "start": 169238826,
+          "end": 169304361,
+          "sha256": "2788bcd2085be3e38f6121ddcb36e3122764754abcb65fe2e6ca81ef88de003f",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7895,
+          "sha256": "2eb222fdc34b1945bb9ce12e2cf6a8cced1d5a6b4a2af3b28bf640b14f090df0",
+          "bytes": 7892
+        },
+        {
+          "start": 8017,
+          "end": 316810,
+          "sha256": "a29ca9a61195dd861dbd7dac41913c3df1b82db47a12a8b2f0cf79064aa124ea",
+          "bytes": 308794
+        },
+        {
+          "start": 19305630,
+          "end": 19305784,
+          "sha256": "adaed3e0b63bcdfe4f2fadd9b3328ed5f0a026f77b337223d11059927f1c7fc0",
+          "bytes": 155
+        },
+        {
+          "start": 317841,
+          "end": 331592,
+          "sha256": "b55e64cf235002954bdfd40dc4aa3806603fc6f75580535302c640ddbf39bb11",
+          "bytes": 13752
+        },
+        {
+          "start": 331688,
+          "end": 338032,
+          "sha256": "096f9e1fc4c9c26be20f6b0c787dce09e2b6a6d810f3f886a52e8422263b5a6a",
+          "bytes": 6345
+        },
+        {
+          "start": 169236320,
+          "end": 169237396,
+          "sha256": "c11ed06d4afb4d0e90a52e7f6edfcab51ca463a01c835a225f51388d330f16f1",
+          "bytes": 1077
+        },
+        {
+          "start": 169237512,
+          "end": 169237809,
+          "sha256": "636d51d57c748e6e157051a6160c53fe84e99b5c923446baf37bc4b19513e6a9",
+          "bytes": 298
+        },
+        {
+          "start": 169238268,
+          "end": 169238595,
+          "sha256": "d143460d288d9c8c5dd5ce1344f6a758f13b9e53c31f19af9a8dc9767ae9ae37",
+          "bytes": 328
+        },
+        {
+          "start": 169238691,
+          "end": 169239683,
+          "sha256": "7a9f202a347aea098a174da7ff4d9ef67d52651f2baac38669638e26e039c680",
+          "bytes": 993
+        }
+      ]
+    },
+    {
+      "path": "data/train-00018-of-00039-8c793837880f5507.parquet",
+      "upstream_size": 184831619,
+      "upstream_lfs_sha256_not_fully_verified": "8a214241c33628e6a01952088046b0561bd6e2941a39ce492bb59597bc93e8f6",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 30,
+        "ATCODER": 31,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 244,
+      "ranges": [
+        {
+          "start": 184766083,
+          "end": 184831618,
+          "sha256": "dfcb6b7783230151dcecca7bdb0cd38aaca94f5291e9c1bbf30bc437a270d84e",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7984,
+          "sha256": "662a306e8910ea64debb346adb577152e189ceb9810fc5321085a801a403f7dd",
+          "bytes": 7981
+        },
+        {
+          "start": 8080,
+          "end": 318737,
+          "sha256": "1f6b2877bf0dc3bba724b1b65386a4e6eb52f0029d42ab8d0d5bff184607bbc4",
+          "bytes": 310658
+        },
+        {
+          "start": 11207358,
+          "end": 11207500,
+          "sha256": "5947b0db7c0309e3272872481e3e1ef9a6feb30b44de1aea0f3662787cfc5008",
+          "bytes": 143
+        },
+        {
+          "start": 321614,
+          "end": 335424,
+          "sha256": "3812a6cdc77a0728305043f676346303108d5ec8d4fffcfe39d1ea2d86101ffb",
+          "bytes": 13811
+        },
+        {
+          "start": 335534,
+          "end": 341760,
+          "sha256": "75b79049127be80ec8edf62f188d1467a310da4bed3372b4ed7303e527befa6a",
+          "bytes": 6227
+        }
+      ]
+    },
+    {
+      "path": "data/train-00019-of-00039-d688fad5ee604390.parquet",
+      "upstream_size": 190554330,
+      "upstream_lfs_sha256_not_fully_verified": "bd4b85d9ec0f7b16d38c9a296c6333f15720f0a019582d223480be5c90b2a864",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 210,
+        "HACKEREARTH": 33,
+        "ATCODER": 31,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 241,
+      "ranges": [
+        {
+          "start": 190488794,
+          "end": 190554329,
+          "sha256": "bcd05b3862366efd797d59785e340a2d1e97207d261034c8cb4d9d415c97e717",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7894,
+          "sha256": "81518c346dd83661f52420ddb7d1d9af0abc53b7d0902266f7fad7810fd4b69e",
+          "bytes": 7891
+        },
+        {
+          "start": 8011,
+          "end": 310487,
+          "sha256": "3588d63adeacd1a68327d1774ca7f331983f23d145d4108f173e647697d3b292",
+          "bytes": 302477
+        },
+        {
+          "start": 8484916,
+          "end": 8485062,
+          "sha256": "01f46b44347ed2a4af6478abaee6733c66813ec533c6bc6a5b7489864b5da51a",
+          "bytes": 147
+        },
+        {
+          "start": 317545,
+          "end": 332248,
+          "sha256": "99240092f13ea4a005aa7f7c9e32e3ba184cf0cee21d2bd6104a4ee4d8eaf5db",
+          "bytes": 14704
+        },
+        {
+          "start": 332393,
+          "end": 338619,
+          "sha256": "4d04924105e602678dbeab74d5484819d939c96fef60901214a9bfac6b865158",
+          "bytes": 6227
+        }
+      ]
+    },
+    {
+      "path": "data/train-00020-of-00039-5d59387098675b73.parquet",
+      "upstream_size": 211262604,
+      "upstream_lfs_sha256_not_fully_verified": "b2a03b3940b6de703c18a0b55111e7aa979e2399b29f3f96c4abca706d5830db",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "HACKEREARTH": 37,
+        "ATCODER": 40,
+        "AIZU": 64,
+        "CODECHEF": 18,
+        "CODEFORCES": 183
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 223,
+      "ranges": [
+        {
+          "start": 211197068,
+          "end": 211262603,
+          "sha256": "d5a0a7b38f9da0ff98438885b123972f352614876b57777c5f31403916b10e5a",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7847,
+          "sha256": "56ee435d98b938cde30f48c9ad8358b634e8385b30aea2830b8f09ced395206a",
+          "bytes": 7844
+        },
+        {
+          "start": 7948,
+          "end": 327848,
+          "sha256": "d2d19ce7adc06490af5d90250c579910a2b593572376b461be1dd054190727a4",
+          "bytes": 319901
+        },
+        {
+          "start": 10158024,
+          "end": 10158164,
+          "sha256": "ad0cbc8de65874669e896e789bb175f4ceb83f65acf210865dee622ec20a4372",
+          "bytes": 141
+        },
+        {
+          "start": 330929,
+          "end": 347357,
+          "sha256": "0f93c5532bf33b5e23c458c4b16452ac983f0948b0c56c0457982df6bed9abba",
+          "bytes": 16429
+        },
+        {
+          "start": 347461,
+          "end": 354313,
+          "sha256": "64d7c274801b6c983d318ccef5886d66d41ade48ab50b4a935489da4d18ac825",
+          "bytes": 6853
+        },
+        {
+          "start": 211193153,
+          "end": 211194204,
+          "sha256": "6461e8fe6df1db3cf086b9101ab33d8892dc257a708c8b65e542cec4d5d3f147",
+          "bytes": 1052
+        },
+        {
+          "start": 211194320,
+          "end": 211194596,
+          "sha256": "59deab2ce4c725bade76a8a5639bcbdb017ab5d4759d2ec710d8336c08ddd79e",
+          "bytes": 277
+        },
+        {
+          "start": 211195010,
+          "end": 211195331,
+          "sha256": "55088a62c802caec604e2001a34112e94a0cdc53287ecd41f4e24ce6c32249dd",
+          "bytes": 322
+        },
+        {
+          "start": 211195427,
+          "end": 211196464,
+          "sha256": "fde1feb5af960b70f7ce54e6b60112f86e7826e5e20769bbd1d5364504f2c3c0",
+          "bytes": 1038
+        },
+        {
+          "start": 211196560,
+          "end": 211196631,
+          "sha256": "e402ff0c887979314d94f691809fc8eda580d0c9f58167915e4b6da29ec75032",
+          "bytes": 72
+        }
+      ]
+    },
+    {
+      "path": "data/train-00021-of-00039-b257bf03d6876780.parquet",
+      "upstream_size": 181119876,
+      "upstream_lfs_sha256_not_fully_verified": "444b82044438c76d6e2cf79000615349b1dd7ba165da9118924ebcb427e6febc",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 54,
+        "CODECHEF": 24,
+        "CODEFORCES": 203,
+        "HACKEREARTH": 30,
+        "ATCODER": 31
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 234,
+      "ranges": [
+        {
+          "start": 181054340,
+          "end": 181119875,
+          "sha256": "4ba46b89eac929ef695d96735daee67c94b679924419e0d070131c2ba1aa8d36",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7946,
+          "sha256": "3f8b019ed501abfebd3c6e0b69533974b3245cf0bb05b468e7e0a887aacdc430",
+          "bytes": 7943
+        },
+        {
+          "start": 8040,
+          "end": 332959,
+          "sha256": "12b2684ff40373f4d3eb69fd2e8f1829d474785f82a7977c4f1246ae596da515",
+          "bytes": 324920
+        },
+        {
+          "start": 4763646,
+          "end": 4763797,
+          "sha256": "e14ac56d0ff68af18b967e029ecfd4c3565479606b5697e8a9ac83bb6da48fb2",
+          "bytes": 152
+        },
+        {
+          "start": 336445,
+          "end": 351204,
+          "sha256": "6b98c87c7e7ff3bdd1f454e7bed7be34c399194d37e1125e90d04005eaaf1e9a",
+          "bytes": 14760
+        },
+        {
+          "start": 351356,
+          "end": 358089,
+          "sha256": "ebe05eb57169d5c94d8172d485d30283ceb23f6f6cb1ff7b89d1b7f02446cc07",
+          "bytes": 6734
+        },
+        {
+          "start": 181049874,
+          "end": 181051032,
+          "sha256": "62bb73894f9791cd0f1a2263c6b0b7f798045a94e7c161384a2804b639e8251b",
+          "bytes": 1159
+        },
+        {
+          "start": 181051148,
+          "end": 181051427,
+          "sha256": "1804cdb650834529b41c55a7653a5df18a3dbd93f2ed4abed81b2a2a671e467e",
+          "bytes": 280
+        },
+        {
+          "start": 181051898,
+          "end": 181052234,
+          "sha256": "d8bd4bec83a952cf0a4b0184f4a0a0b487b87c1940ed21efedcda7707f132360",
+          "bytes": 337
+        },
+        {
+          "start": 181052330,
+          "end": 181053431,
+          "sha256": "01b630bdf5dc595b429ea00d302e4f2ddacb8faf635182e99183f14d4cf7928f",
+          "bytes": 1102
+        },
+        {
+          "start": 181053527,
+          "end": 181053596,
+          "sha256": "fc2d2d925134c0a1bc6df7c97adaf3b23662a217e69bdb53f40410e9da786cce",
+          "bytes": 70
+        }
+      ]
+    },
+    {
+      "path": "data/train-00022-of-00039-1cfd39fa43c1917c.parquet",
+      "upstream_size": 193915223,
+      "upstream_lfs_sha256_not_fully_verified": "63ff8266ec628a64417d7dda7754ed0366522c4cef5217e990487f83af2b1e53",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 30,
+        "ATCODER": 31,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 244,
+      "ranges": [
+        {
+          "start": 193849687,
+          "end": 193915222,
+          "sha256": "e6077ab77d311c24af9c750246ebba3230566dcf41135638761f697b7cc9138c",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7867,
+          "sha256": "941289dd7843f5df002b8538a28bb0510c7c57c9e0eeb1f801eab0cfbf4f20f5",
+          "bytes": 7864
+        },
+        {
+          "start": 7970,
+          "end": 326772,
+          "sha256": "164255d83a4651e1af35ca947e6f159b7f9c24ff34c46fefaeb9e8f2ec9df420",
+          "bytes": 318803
+        },
+        {
+          "start": 15909206,
+          "end": 15909350,
+          "sha256": "13c3e38585ecf9a6459ac58186033802619b8a9100b0a9f1c2f07d686b2137ed",
+          "bytes": 145
+        },
+        {
+          "start": 332682,
+          "end": 347648,
+          "sha256": "a9cdd4f6598d35aaffa983cd0495107d0126221520b8a23754a02176f49228d5",
+          "bytes": 14967
+        },
+        {
+          "start": 347819,
+          "end": 362108,
+          "sha256": "b2d0f822d687d0cb507edd55895d7a78dd45b57c40514ad1892bfac239874b04",
+          "bytes": 14290
+        }
+      ]
+    },
+    {
+      "path": "data/train-00023-of-00039-d078bcb55e45cbf0.parquet",
+      "upstream_size": 176115120,
+      "upstream_lfs_sha256_not_fully_verified": "2aa78452a6a3306536b2f000a4431c048282426a47e7197210155bedbad82c49",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 194,
+        "HACKEREARTH": 39,
+        "ATCODER": 41,
+        "AIZU": 50,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 235,
+      "ranges": [
+        {
+          "start": 176049584,
+          "end": 176115119,
+          "sha256": "83be9f5fb62879dd00182c8c753ab9ba9491874b170bbbae0b386e4af8a040c5",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7907,
+          "sha256": "0092547fe6e24137c7c16919a0ec729ccce2d711a18ce17e1491fcbe8499e929",
+          "bytes": 7904
+        },
+        {
+          "start": 8033,
+          "end": 311047,
+          "sha256": "32af6c4576dfe5f6f55b673fc4a10e70754a89a5cf9f8c9e94041c1c6caeb200",
+          "bytes": 303015
+        },
+        {
+          "start": 10002379,
+          "end": 10002530,
+          "sha256": "4d4c3df6a160d47a914eebcd8276dfcfd9a5ba155507ae83f54c68464fdfb888",
+          "bytes": 152
+        },
+        {
+          "start": 315156,
+          "end": 330204,
+          "sha256": "d91507af5b415700a6bbd6e907e126dfb7c65ef3460ac6881df17d6fd62009c8",
+          "bytes": 15049
+        },
+        {
+          "start": 330310,
+          "end": 336398,
+          "sha256": "51f80ea570e95eeb307d6e406e2be50e2cda4f1c0edd5f17ac9e2ce7ca26a49c",
+          "bytes": 6089
+        }
+      ]
+    },
+    {
+      "path": "data/train-00024-of-00039-f4e3da0e5661e6d1.parquet",
+      "upstream_size": 180979071,
+      "upstream_lfs_sha256_not_fully_verified": "c958b0997f636ea83fbf21c08adda22897dd35ca8cd1e5a97e5be16f832af28d",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "ATCODER": 33,
+        "AIZU": 67,
+        "CODECHEF": 24,
+        "CODEFORCES": 189,
+        "HACKEREARTH": 29
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 222,
+      "ranges": [
+        {
+          "start": 180913535,
+          "end": 180979070,
+          "sha256": "b5dfa8d42315db46aa1c031727413f9c994817583619bb8673689d62fd30f134",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7876,
+          "sha256": "7ce0ea9e619db32220682b061f8e5c71f88870745810f6cc895e7a2e1d9b1184",
+          "bytes": 7873
+        },
+        {
+          "start": 7994,
+          "end": 314275,
+          "sha256": "8ca51d224cabf5fbe282b677507fdede977820453f4a67707e4361caf13c0345",
+          "bytes": 306282
+        },
+        {
+          "start": 18546545,
+          "end": 18546703,
+          "sha256": "c8e8b975a202bfe961ceb3c39d6ee656dd3f4213592dedcbef964a03f268b4b7",
+          "bytes": 159
+        },
+        {
+          "start": 316261,
+          "end": 330553,
+          "sha256": "0ca7331ec97c9181a4248dda035e4a56366dc4ea74d911f4cb3aeb084447a0a0",
+          "bytes": 14293
+        },
+        {
+          "start": 330645,
+          "end": 336830,
+          "sha256": "82aef900a04d507025fdcc3cfff0da0f4e52f51f3c4c672d116d2265cb43407e",
+          "bytes": 6186
+        }
+      ]
+    },
+    {
+      "path": "data/train-00025-of-00039-3f6ebfbaba5f4c70.parquet",
+      "upstream_size": 205823196,
+      "upstream_lfs_sha256_not_fully_verified": "5ae9793f8d97c4448d8053475c10007215a9d819168e3f68a9af4cc2e335da84",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 213,
+        "HACKEREARTH": 30,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 243,
+      "ranges": [
+        {
+          "start": 205757660,
+          "end": 205823195,
+          "sha256": "aaad65c35b5d246d725d7245acbb1d5e0800fd06577366eda77a64175d9372c2",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7828,
+          "sha256": "e50bdd972e0b9c8e33a3e5f494de0c0658d7b6fd51c3f266aca5a63ae940c789",
+          "bytes": 7825
+        },
+        {
+          "start": 7948,
+          "end": 332295,
+          "sha256": "66d5e5576c0901edea7bee9171e88bb8ffcb28a21d5fb85dd4e438fc590c964c",
+          "bytes": 324348
+        },
+        {
+          "start": 10511618,
+          "end": 10511754,
+          "sha256": "5373407bdb0288a4eba6a85d825ca639e50d99c716e1852ce0be67b67a2419db",
+          "bytes": 137
+        },
+        {
+          "start": 335798,
+          "end": 350459,
+          "sha256": "d2c07c53270b10f0c0b7b1abca15a6f17df6e5a0fed3213cc45c2954e710b69e",
+          "bytes": 14662
+        },
+        {
+          "start": 350674,
+          "end": 369196,
+          "sha256": "8653089f6175247666b7c9da51970368f009e4a6ae41f0d93a06c1797718c44c",
+          "bytes": 18523
+        }
+      ]
+    },
+    {
+      "path": "data/train-00026-of-00039-7d4898300894cbbe.parquet",
+      "upstream_size": 188681982,
+      "upstream_lfs_sha256_not_fully_verified": "cb60563bba14228dba3addd8a5be6a998654113bd734b3c54271dfe6e30e63c7",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 210,
+        "HACKEREARTH": 33,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 240,
+      "ranges": [
+        {
+          "start": 188616446,
+          "end": 188681981,
+          "sha256": "ff4f2bcb9aed988520eba725ff9e8114d34bab4c5df304a669031537331cf5ea",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7852,
+          "sha256": "af83c7a1c992130a99096f7af09de5e44639d7b8d8ce23a690820544ff1ca08e",
+          "bytes": 7849
+        },
+        {
+          "start": 7968,
+          "end": 332909,
+          "sha256": "693a1c7f01581617c84cfc477833370546abffffb90adc25d17060120d2ff7cd",
+          "bytes": 324942
+        },
+        {
+          "start": 13212415,
+          "end": 13212553,
+          "sha256": "e2c9aaaba5f209ed0de4f6740fbfef82d43df10047f3fcab31fdacd453f4e7c2",
+          "bytes": 139
+        },
+        {
+          "start": 335814,
+          "end": 350749,
+          "sha256": "fdd38437029b09fcaba4a97ff054a1312b4033a74e59ea35225d9556e9cdf20b",
+          "bytes": 14936
+        },
+        {
+          "start": 350848,
+          "end": 357453,
+          "sha256": "2ffc187a5f69d5ec8831bee98e3ff6431d1dc0d41535612b056470ac17a161fc",
+          "bytes": 6606
+        }
+      ]
+    },
+    {
+      "path": "data/train-00027-of-00039-f8196766547533a2.parquet",
+      "upstream_size": 217005966,
+      "upstream_lfs_sha256_not_fully_verified": "8b1464860f954fff785255b6f744aeaaba224c0e6b9ac2c74c6b832eedbbccbb",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "HACKEREARTH": 36,
+        "ATCODER": 42,
+        "AIZU": 63,
+        "CODECHEF": 18,
+        "CODEFORCES": 183
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 225,
+      "ranges": [
+        {
+          "start": 216940430,
+          "end": 217005965,
+          "sha256": "7fcddd63f4e277e56e827369e1f01d166c0ed21c86dc7735856ed1f67bfe1b72",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7988,
+          "sha256": "8d55b3e4b7ee121456108bc6c2ce809bed2963530afa092d0bfb0e22d6f6fbed",
+          "bytes": 7985
+        },
+        {
+          "start": 8081,
+          "end": 305510,
+          "sha256": "f40eb108c63a029715916c06b45a173c34c26fbb9217d2be37e7934431883ac0",
+          "bytes": 297430
+        },
+        {
+          "start": 15061475,
+          "end": 15061628,
+          "sha256": "2b9129b9048efa9441e88136b44f3c91b80f254231a524cc54d2509b52776f3a",
+          "bytes": 154
+        },
+        {
+          "start": 306645,
+          "end": 322545,
+          "sha256": "b1f3ac6b71b19bd877e5c44eab3584f58826861f49f217396c693438d9e72923",
+          "bytes": 15901
+        },
+        {
+          "start": 322642,
+          "end": 328510,
+          "sha256": "f4a3d0da8ab59cc7c0dc8ac1364bfad17e658c64bc38bb92403b7c5a09ec9a18",
+          "bytes": 5869
+        }
+      ]
+    },
+    {
+      "path": "data/train-00028-of-00039-79a302af3c924863.parquet",
+      "upstream_size": 178924886,
+      "upstream_lfs_sha256_not_fully_verified": "f32b70263520ba04d01efda103d8ddbbf2f158b60931caae83d67f5d49b6dc62",
+      "row_count": 342,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 56,
+        "CODECHEF": 24,
+        "CODEFORCES": 201,
+        "HACKEREARTH": 30,
+        "ATCODER": 31
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 232,
+      "ranges": [
+        {
+          "start": 178859350,
+          "end": 178924885,
+          "sha256": "379992121bca2cd3ee46d3ab2ae3322245f90944cd6b5108f25916ebbb21b44c",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7796,
+          "sha256": "f9c8fbd5bef7c6e842f3896fb00d736990a6f065291c5c11f02d67e5536f338a",
+          "bytes": 7793
+        },
+        {
+          "start": 7887,
+          "end": 317275,
+          "sha256": "f6461fb26cd1d251a7bc2afbe2b52862c9c31b9f1bf663973c6e371e46b55bbe",
+          "bytes": 309389
+        },
+        {
+          "start": 10330910,
+          "end": 10331064,
+          "sha256": "3b015a81ef476d9f69d76e2e49e8603dfff69ff61348dbaff24c75e348762a7e",
+          "bytes": 155
+        },
+        {
+          "start": 319902,
+          "end": 333511,
+          "sha256": "06fd62caca2d19080735d66001e533c6e99e6707c063bb6d7478d8e170a38fe2",
+          "bytes": 13610
+        },
+        {
+          "start": 333604,
+          "end": 339345,
+          "sha256": "3d01e274ad1e0fbd7433f070f38b34070c03452d95f17084aa05c548580ac183",
+          "bytes": 5742
+        }
+      ]
+    },
+    {
+      "path": "data/train-00029-of-00039-2b6615897d038115.parquet",
+      "upstream_size": 197596694,
+      "upstream_lfs_sha256_not_fully_verified": "a2d76b2c01471ec07d4a724391f76123d54f66dc11fb24b531c3a056cbbfe7b0",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 212,
+        "HACKEREARTH": 30,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 242,
+      "ranges": [
+        {
+          "start": 197531158,
+          "end": 197596693,
+          "sha256": "5a726f624cf35412105bbea063ba0e23e45e1c9374f4e5ad77e470dfdcafc97d",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7967,
+          "sha256": "b60ede0f412eb8de9c44d20d6c04749a45ed00246c80bb61102f3008fd3161d1",
+          "bytes": 7964
+        },
+        {
+          "start": 8097,
+          "end": 306390,
+          "sha256": "9f16befca29ca5d0ab032f40b3f7b8dd6a0b80fed2d76fb315a7702865d69a18",
+          "bytes": 298294
+        },
+        {
+          "start": 16499868,
+          "end": 16500004,
+          "sha256": "a98d178873f5373cecdc55e1ca6589417ac241b2789b5a13adaae97526c59659",
+          "bytes": 137
+        },
+        {
+          "start": 309379,
+          "end": 322512,
+          "sha256": "9d7e02c7ea4d607d83123bbcc0d07b221712445e2608a6f2f4fd73ecf131fa2b",
+          "bytes": 13134
+        },
+        {
+          "start": 322606,
+          "end": 329252,
+          "sha256": "e043d7b16f9801b9aef7058e48d3aa7156ab94f9df3ca3904268ece6c19c19cd",
+          "bytes": 6647
+        }
+      ]
+    },
+    {
+      "path": "data/train-00030-of-00039-4135cc54050afc22.parquet",
+      "upstream_size": 223399896,
+      "upstream_lfs_sha256_not_fully_verified": "fe9d77f481b639e21867942ad1061f8a3b7bfb82b3357e6c7ec96da55c6373cd",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 197,
+        "HACKEREARTH": 40,
+        "ATCODER": 37,
+        "AIZU": 49,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 234,
+      "ranges": [
+        {
+          "start": 223334360,
+          "end": 223399895,
+          "sha256": "17d18c63d101c3e89e37ae4a679083e87f0da50396d7fb707df77fa5e74f0a86",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7824,
+          "sha256": "dd79820d9865f91d855bd85b743bd0722809dc7d7333d8c23e3a37df9dea44ae",
+          "bytes": 7821
+        },
+        {
+          "start": 7929,
+          "end": 320531,
+          "sha256": "d84ea65330bb80e22546d55b81916486e73cbbb08efc9c89e0e77d28bbbf661b",
+          "bytes": 312603
+        },
+        {
+          "start": 13405278,
+          "end": 13405426,
+          "sha256": "fbf73a04eb2d7393d47a307406f3387147ee24605dbd8096662015f7f22fc2ad",
+          "bytes": 149
+        },
+        {
+          "start": 324535,
+          "end": 339942,
+          "sha256": "2ad422df1f4a7dff3bfa569330704debf7a105838161bd124125acb1abc9fda7",
+          "bytes": 15408
+        },
+        {
+          "start": 340051,
+          "end": 345791,
+          "sha256": "da6a85eab09c1c5b589ed96494d9723dffb46c52d0bf77ca62390f991ae4a19d",
+          "bytes": 5741
+        }
+      ]
+    },
+    {
+      "path": "data/train-00031-of-00039-40309dd907c042b7.parquet",
+      "upstream_size": 181140154,
+      "upstream_lfs_sha256_not_fully_verified": "2daeff73dc92b289ec9aeaa6f52af9e7665aae45ade8a172e5dad9a130a48fb2",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "ATCODER": 35,
+        "AIZU": 68,
+        "CODECHEF": 24,
+        "CODEFORCES": 184,
+        "HACKEREARTH": 30
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 219,
+      "ranges": [
+        {
+          "start": 181074618,
+          "end": 181140153,
+          "sha256": "7dd936fe7ef1abdbc8ac6083ea3fe3fb78c1d66e8d19d4a7202042464a5314d6",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8012,
+          "sha256": "6f8851ad12ad22404cf5f2b0637af121a0528a645c7bf817e3936f84960b8b0e",
+          "bytes": 8009
+        },
+        {
+          "start": 8127,
+          "end": 317780,
+          "sha256": "fa820c849e5fca5679af7ed6b4f6bef4298d7df3ce1d18270dc344760fd6790b",
+          "bytes": 309654
+        },
+        {
+          "start": 16499898,
+          "end": 16500037,
+          "sha256": "25f39102f0ec25d412ac1e09068c7ee3013a55837ee324892d1d1c65dbe93b09",
+          "bytes": 140
+        },
+        {
+          "start": 320280,
+          "end": 335935,
+          "sha256": "65c21b9e61eeab0d04b30361475371aaca2916c1f06c5aa24f0a2419a4534c79",
+          "bytes": 15656
+        },
+        {
+          "start": 336031,
+          "end": 342539,
+          "sha256": "f2d9fc4242106347c0622056ed640c6c717ea650b338a0d6ab9ce48c7a3d1bca",
+          "bytes": 6509
+        }
+      ]
+    },
+    {
+      "path": "data/train-00032-of-00039-7b7d2068a3d9c359.parquet",
+      "upstream_size": 186381035,
+      "upstream_lfs_sha256_not_fully_verified": "fe24e9818595a3fa467a8986f4d341cf1cbcdb6f1d2c0900b4e995b25597f9ad",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 212,
+        "HACKEREARTH": 29,
+        "ATCODER": 31,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 243,
+      "ranges": [
+        {
+          "start": 186315499,
+          "end": 186381034,
+          "sha256": "f8a83ea65a7040e8e18d3909ecab53b8bc18e2949e5d83d6ceef8d5eedda8c84",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7921,
+          "sha256": "40bb7e8c5217190b1d31fc8ce5edbd282bef1aed9ad97c543e46f12725d7476c",
+          "bytes": 7918
+        },
+        {
+          "start": 8038,
+          "end": 324995,
+          "sha256": "dbc21ab8faf7616a9fbb3eeabdaff160818c06cbeac83a5f9f43992263119eee",
+          "bytes": 316958
+        },
+        {
+          "start": 5413513,
+          "end": 5413664,
+          "sha256": "752415bb8f40c880e9ac18c5d8ab81b753ca9b38cda133bb5ca8a3499bff316c",
+          "bytes": 152
+        },
+        {
+          "start": 326745,
+          "end": 342358,
+          "sha256": "f4a9e98bc98510210df31dc43bd46961c19f2ded0412ff78c40818e194b1b30c",
+          "bytes": 15614
+        },
+        {
+          "start": 342480,
+          "end": 348111,
+          "sha256": "cb377047939e2ab2ba3b0ad7f1fa26a65eccf042145be161a96e4365cd2f1550",
+          "bytes": 5632
+        }
+      ]
+    },
+    {
+      "path": "data/train-00033-of-00039-53b0f749aacff9c1.parquet",
+      "upstream_size": 203741870,
+      "upstream_lfs_sha256_not_fully_verified": "65366660f211cfa6e18c81086348713805dd874b708b0bf2e3d0b6de2556cebf",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 211,
+        "HACKEREARTH": 30,
+        "ATCODER": 31,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 242,
+      "ranges": [
+        {
+          "start": 203676334,
+          "end": 203741869,
+          "sha256": "a070b9f71d23c6bcb6b7059f15b6cfb97bd94a0410fe7e18474562521759eeb0",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7868,
+          "sha256": "fbbb5319765dc24a721be20016efa337ede9f1292e0839c6cb4936e62e32c195",
+          "bytes": 7865
+        },
+        {
+          "start": 7956,
+          "end": 324958,
+          "sha256": "06b50b94759c43b500302bfd1e0e6d9cbce06ec4072c5c38e658224438dac83f",
+          "bytes": 317003
+        },
+        {
+          "start": 17829505,
+          "end": 17829652,
+          "sha256": "d67e0b8fef05dcdf0aee6926cc2bdf20675aabfc14f80b4c9820dd9a48d60a81",
+          "bytes": 148
+        },
+        {
+          "start": 329458,
+          "end": 344569,
+          "sha256": "3a3ff97810a296e6fa25e5d7bfdda805d36ac0290ec450a0291a8db8cbd33296",
+          "bytes": 15112
+        },
+        {
+          "start": 344695,
+          "end": 351422,
+          "sha256": "a3385bb45d4a139a20ea1bc81ebe44cd8a3de3830375d5f8ca354ad3cdca9034",
+          "bytes": 6728
+        }
+      ]
+    },
+    {
+      "path": "data/train-00034-of-00039-a36ff0bff7d2a76f.parquet",
+      "upstream_size": 187767858,
+      "upstream_lfs_sha256_not_fully_verified": "5ea8c872ec944013b661f23203f8d4b82e46dc8dec204c32af89ba7153035171",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 187,
+        "HACKEREARTH": 40,
+        "ATCODER": 42,
+        "AIZU": 54,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 229,
+      "ranges": [
+        {
+          "start": 187702322,
+          "end": 187767857,
+          "sha256": "4e215e5a1f1ac6cbc08eb0a0fd6845120fe75594c53cbd1d70d70c33b0a370e8",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7929,
+          "sha256": "cdddad4e694e9ebe12a291edc2796233bb3a1dd67d1715769be38adf9bac8559",
+          "bytes": 7926
+        },
+        {
+          "start": 8033,
+          "end": 313810,
+          "sha256": "cd5c5f6c8e54bb2bbb8ef8ef3d367f3af40626d3f199d4ba41eafa1a7dd1e0f7",
+          "bytes": 305778
+        },
+        {
+          "start": 10913240,
+          "end": 10913398,
+          "sha256": "af02aa0c14b6b1eaf5d803a8e50691d402f48e562b42078be6fbf89df98444a8",
+          "bytes": 159
+        },
+        {
+          "start": 315173,
+          "end": 330153,
+          "sha256": "8c5918c9f5e0508fad4b360c73f76d2abdcbbdb9b2fc34ae5d65ae72750cdada",
+          "bytes": 14981
+        },
+        {
+          "start": 330246,
+          "end": 336058,
+          "sha256": "93d63e2c0ec35d49ff92efac6fee3974551c42067b57f1739c619651d63dbcb4",
+          "bytes": 5813
+        }
+      ]
+    },
+    {
+      "path": "data/train-00035-of-00039-d28f9be60314601f.parquet",
+      "upstream_size": 151356957,
+      "upstream_lfs_sha256_not_fully_verified": "4a7ed07e1f67ca32ed03a874b96dfc9f4f43be0563734b33085bf0b653c65c47",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "AIZU": 62,
+        "CODECHEF": 24,
+        "CODEFORCES": 194,
+        "HACKEREARTH": 30,
+        "ATCODER": 31
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 225,
+      "ranges": [
+        {
+          "start": 151291421,
+          "end": 151356956,
+          "sha256": "05fb7fee1c5d615f197aa8de1ad5f29fd78d0f7d3fd77eabcfa2073cb89a918c",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7694,
+          "sha256": "29abc61ae387c87076e8e439d2f740cebf60b6d28a40127e41327fa336c1626e",
+          "bytes": 7691
+        },
+        {
+          "start": 7797,
+          "end": 307852,
+          "sha256": "c7a9459d376489c21247b92d4ac8b3b370d7bb80b220e87eb5dca9c1ca408e24",
+          "bytes": 300056
+        },
+        {
+          "start": 17954291,
+          "end": 17954440,
+          "sha256": "9fee29f800f289fc8c50128e86367e2c10fdd39be0fbe63f4a7d8f80d21d3f65",
+          "bytes": 150
+        },
+        {
+          "start": 310472,
+          "end": 324163,
+          "sha256": "0ca4322e1d4cd796af72e8a787293dfebb94b01b1067379889da70d893d6da6e",
+          "bytes": 13692
+        },
+        {
+          "start": 324272,
+          "end": 329806,
+          "sha256": "59e89edcf4d7980a970c370de5018bdc48586c5617d1b608ab4b0c6f39e28f12",
+          "bytes": 5535
+        }
+      ]
+    },
+    {
+      "path": "data/train-00036-of-00039-146e1a11c054aeab.parquet",
+      "upstream_size": 204394454,
+      "upstream_lfs_sha256_not_fully_verified": "cb14ebff9529e89c5fd5659b7de0352858f6a514fc63e2111daed392511eafa8",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 212,
+        "HACKEREARTH": 30,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 242,
+      "ranges": [
+        {
+          "start": 204328918,
+          "end": 204394453,
+          "sha256": "3cf8376f3cb1c3a765f9bd49f2d32cd8302d3181f7185dde525fa9bff7b323ec",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 7933,
+          "sha256": "474f8dd236fc34f85f0f3306ace8872cc4042cc11f1308f00a3c47f39868d9a0",
+          "bytes": 7930
+        },
+        {
+          "start": 8028,
+          "end": 319405,
+          "sha256": "04b4c8ad79c4474aac92cedf1a65e673741da67f1fcc1315fa060648f02eb30b",
+          "bytes": 311378
+        },
+        {
+          "start": 21411271,
+          "end": 21411407,
+          "sha256": "c21e07d6c869fc290bcb7cfb769f11e8e76baec5817df2fd59f8ac76e7632b43",
+          "bytes": 137
+        },
+        {
+          "start": 321862,
+          "end": 337864,
+          "sha256": "852c166b0292bc9430d4813609e140e8ac712379360d85b64baa8a3597dedb1c",
+          "bytes": 16003
+        },
+        {
+          "start": 337959,
+          "end": 344083,
+          "sha256": "8f4deddb85d3a9e7a442a10a5d3145c5af1f4bfd7929788774af8743d6122eaa",
+          "bytes": 6125
+        }
+      ]
+    },
+    {
+      "path": "data/train-00037-of-00039-995207c374a4e6f2.parquet",
+      "upstream_size": 231402023,
+      "upstream_lfs_sha256_not_fully_verified": "bc6e40d8b2de70a52056f0d25d70cac57dd77b8671fa5d1e467e330156addca0",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 204,
+        "HACKEREARTH": 38,
+        "ATCODER": 30,
+        "AIZU": 51,
+        "CODECHEF": 18
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 234,
+      "ranges": [
+        {
+          "start": 231336487,
+          "end": 231402022,
+          "sha256": "96049b457003ea13799dafdc80a557c466bb60779ecc7d9e6db021894f3dbad7",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8041,
+          "sha256": "d6972b8bb3afa2f9a9f45e0424b58ce06ede9948d2bd2de5e4cce0418af95d39",
+          "bytes": 8038
+        },
+        {
+          "start": 8158,
+          "end": 307810,
+          "sha256": "f3d661f656a8e6aa798f0ce25316fa8cef68254858b5c8657a43fd64bdbbd770",
+          "bytes": 299653
+        },
+        {
+          "start": 27520614,
+          "end": 27520750,
+          "sha256": "88898ec529b321dbbd35ff6af4468aa2d9fcf54c7485b61f31ab7e9aed440919",
+          "bytes": 137
+        },
+        {
+          "start": 310163,
+          "end": 324903,
+          "sha256": "22869988caddd8dc99a8fc9af32b5f6103964d234694c9adfc598a02636eb28c",
+          "bytes": 14741
+        },
+        {
+          "start": 325038,
+          "end": 331744,
+          "sha256": "1c5843d7fb91aefd78ce3ce1a0b1474803a9ac66f3f7435563a847d8795498e1",
+          "bytes": 6707
+        }
+      ]
+    },
+    {
+      "path": "data/train-00038-of-00039-96a59dd6a98cd075.parquet",
+      "upstream_size": 204141641,
+      "upstream_lfs_sha256_not_fully_verified": "62a3f1e1a56485b7b8514d969e803a844fae89e29b985995109f860f50d042ed",
+      "row_count": 341,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "HACKEREARTH": 32,
+        "ATCODER": 41,
+        "AIZU": 67,
+        "CODECHEF": 18,
+        "CODEFORCES": 183
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 224,
+      "ranges": [
+        {
+          "start": 204076105,
+          "end": 204141640,
+          "sha256": "3ed52f91dbc94e1ad31bb9a2fd487db2192428ad65c2dae259f975e3928780b9",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 8143,
+          "sha256": "c9b3f4f9ef0693e3e111e6ee099ebb6ea5672594e08a33f1f27bf787426b42dd",
+          "bytes": 8140
+        },
+        {
+          "start": 8243,
+          "end": 304575,
+          "sha256": "282c30102655878a8d8d8fdc856a091ea7430e845da9d2ea2e6129439c4efdd4",
+          "bytes": 296333
+        },
+        {
+          "start": 14960052,
+          "end": 14960192,
+          "sha256": "0e7545008719ea41b3a12c5e26cf8f24ba83ffe0914a435992d80bcd77f35bad",
+          "bytes": 141
+        },
+        {
+          "start": 305955,
+          "end": 320905,
+          "sha256": "c73e5f7330f53d79cfb216428a3f212ed2932518e1f4cc65ceda9a62129d3e31",
+          "bytes": 14951
+        },
+        {
+          "start": 321006,
+          "end": 327607,
+          "sha256": "2bba9e04e34a9acd5152bf5d19f5da77cfc800e6dd6952435dceea250f5faf3e",
+          "bytes": 6602
+        }
+      ]
+    },
+    {
+      "path": "data/valid-00000-of-00001-5e672c5751f060d3.parquet",
+      "upstream_size": 51829044,
+      "upstream_lfs_sha256_not_fully_verified": "02e8c1ccedae716f1e43cc813fcb7823c3db666ea92638820aba80e8cef451ab",
+      "row_count": 117,
+      "source_names": [
+        "UNKNOWN_SOURCE",
+        "CODECHEF",
+        "CODEFORCES",
+        "HACKEREARTH",
+        "CODEJAM",
+        "ATCODER",
+        "AIZU"
+      ],
+      "observed_sources": {
+        "CODEFORCES": 117
+      },
+      "selected_columns": [
+        "name",
+        "description",
+        "source",
+        "public_tests",
+        "cf_contest_id",
+        "cf_index",
+        "cf_rating",
+        "cf_tags",
+        "is_description_translated"
+      ],
+      "statements_written": 117,
+      "ranges": [
+        {
+          "start": 51763508,
+          "end": 51829043,
+          "sha256": "e2524492c969de02dc262a84549a4956b570fec51dcdee13e2b612d5613cee5d",
+          "bytes": 65536
+        },
+        {
+          "start": 4,
+          "end": 2526,
+          "sha256": "738d9a468952471f6c55d6bf4669e87aa5b863a4cc52fb4aea2d9b56280d95b6",
+          "bytes": 2523
+        },
+        {
+          "start": 2635,
+          "end": 111913,
+          "sha256": "0f9204e8bdb2d1f765f2007f87d20e95e0d8f37b9a833c7ff187f45fd09c6623",
+          "bytes": 109279
+        },
+        {
+          "start": 3580768,
+          "end": 3580866,
+          "sha256": "62551af2a4e800ab99b74bf61a9f9a2ba36d8f2309ba1dcb50fb83c10ccc2a16",
+          "bytes": 99
+        },
+        {
+          "start": 117616,
+          "end": 122895,
+          "sha256": "c7fd5513944291edd4e5b2f7bdf7f56ff0f3b233cd3bd65775bcd10d53742e1f",
+          "bytes": 5280
+        },
+        {
+          "start": 123082,
+          "end": 125680,
+          "sha256": "69829e8f93e90ae3cb735fa91688a8564feaaf942d43c11b1a9d73af1582194f",
+          "bytes": 2599
+        }
+      ]
+    }
+  ],
+  "transferred_bytes": 16209154,
+  "whole_shards_downloaded": false,
+  "solution_private_generated_test_columns_read": false,
+  "schema_sidecar_sha256": "6289cbfb168f2bde925e27bdada4cdaed65d7a4b9c060c75946504584f3cbdc0",
+  "metadata_sha256": "ae6e380e42e43b8960e30934037474a671ff43e3892375045a22aabf953ccbb4",
+  "columns": [
+    "name",
+    "description",
+    "source",
+    "public_tests",
+    "cf_contest_id",
+    "cf_index",
+    "cf_rating",
+    "cf_tags",
+    "is_description_translated"
+  ],
+  "output_sha256": "369f072ebef82d7c7fc12b881ae8a9f5bef4753b4b141c566d69cc153d8295b6",
+  "seconds": 299.7238590409979,
+  "license_source": "https://github.com/google-deepmind/code_contests/blob/main/README.md#license",
+  "license_scope": "Publisher non-code CC-BY-4.0 grant with attribution and separate third-party conditions; no direct platform permission inferred"
+}

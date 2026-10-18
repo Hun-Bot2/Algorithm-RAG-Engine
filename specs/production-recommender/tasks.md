@@ -1,3 +1,5 @@
+> **Superseded (2026-10-18):** the batch pipeline this spec governs was removed; see git tag `legacy-pipeline-final` and `specs/mastery-system/`.
+
 # Production Recommender Tasks
 
 This task list implements the production recommender refactor from

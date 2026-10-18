@@ -3,13 +3,15 @@ import {createServer} from 'node:http';
 import {readFile, mkdir, chmod} from 'node:fs/promises';
 import {resolve, dirname, extname} from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {createJournalService} from './mastery/journal.mjs';
 import {createApp} from './core/app.mjs';
 import {createDatabase} from './test/helpers/d1.mjs';
 
+const ROOT=resolve(new URL('..',import.meta.url).pathname);
 const PUBLIC = new URL('./public/',import.meta.url);
 const TYPES = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
-export async function startLocal({port=8787,database='private-learning/hosted.sqlite3',learnerId='local-owner',
-  curriculum,annotations={}}={}) {
+export async function startLocal({port=8787,database=resolve(ROOT,'private-learning/hosted.sqlite3'),learnerId='local-owner',
+  curriculum,annotations={},catalogRoot=resolve(ROOT,'private-learning/mastery'),catalogProvider=null}={}) {
   const databasePath = database === ':memory:' ? database : resolve(database);
   if (databasePath !== ':memory:') await mkdir(dirname(databasePath),{recursive:true,mode:0o700});
   const db = createDatabase(databasePath);
@@ -21,7 +23,8 @@ export async function startLocal({port=8787,database='private-learning/hosted.sq
     try { return new Response(await readFile(new URL(filename,PUBLIC)),{headers:{'content-type':TYPES[extname(filename)]}}); }
     catch { return new Response('Not found',{status:404}); }
   }};
-  const app = createApp({db,curriculum,annotations,assets,authenticate:async()=>({learner_id:learnerId})});
+  const journal=createJournalService({db,catalogRoot,catalogProvider});
+  const app = createApp({db,journal,curriculum,annotations,assets,authenticate:async()=>({learner_id:learnerId})});
   const server = createServer(async (incoming,outgoing) => {
     try {
       const host = incoming.headers.host;
@@ -46,7 +49,7 @@ export async function startLocal({port=8787,database='private-learning/hosted.sq
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const {curriculum,annotations} = await import('./generated/curriculum.mjs');
-  const service = await startLocal({port:Number(process.env.PORT ?? 8787),database:process.env.LOCAL_DATABASE ?? 'private-learning/hosted.sqlite3',learnerId:process.env.LOCAL_LEARNER_ID ?? 'local-owner',curriculum,annotations});
+  const service = await startLocal({port:Number(process.env.PORT ?? 8787),database:process.env.LOCAL_DATABASE,learnerId:process.env.LOCAL_LEARNER_ID ?? 'local-owner',curriculum,annotations});
   console.log(`Private development service: ${service.url} (loopback only; not Access authentication)`);
   const stop = async()=>{await service.close();process.exit(0);};
   process.once('SIGINT',stop);process.once('SIGTERM',stop);

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "mapping_path": "private-learning/verification-workbench/identity-mappings/user-approved-v1.json",
+  "mapping_sha256": "6e2a2b7dc08da2bb0cd764b27b6b01f0af5e4c01f74fcee9692d71ac5f60145d",
+  "evidence_sha256": "f6f67e83f41240a235484885be07810687292f78034e1a885726f801f54c2426",
+  "approved": 36,
+  "unresolved": 1,
+  "unresolved_publisher_id": "p03510",
+  "abc084_c_quality_flags": [
+    "official_en_ja_constraint_disagreement",
+    "sample_exceeds_english_bound"
+  ],
+  "source_hashes_unchanged": {
+    "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/algorithm-system/statement-run-v1/corpus.jsonl": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+    "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/full-catalog/catalog-v1/catalog.v1.jsonl": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a"
+  },
+  "protected_files_verified": 191,
+  "workbench_audit_unchanged": {
+    "records": 119,
+    "chain_head": "4f2184a08a47dd1ec9f3ed7943de5b87c0448944c6672d6b550bb3a0fec70195",
+    "pilot_sha256": "0ea6ebabb20a80192cd8268e2995f22f63719937a9c5e63827ce15079923a563",
+    "exposures_sha256": "5a0b8c82514cff245304c59c593767b19c47b8bc119548988fd507f225f99884"
+  },
+  "approval_basis": "explicit_user_instruction",
+  "independent_adjudication": false,
+  "identity_tests_passed": 22,
+  "workbench_tests_passed": 17
+}

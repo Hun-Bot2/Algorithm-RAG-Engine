@@ -1,0 +1,21 @@
+{
+  "catalog_atcoder_records": 9787,
+  "catalog_records_without_dataset_match": 4636,
+  "codeforces_native_rating_nulls": 305,
+  "cross_platform_equivalence": "not_established",
+  "dataset_records": 5175,
+  "dataset_records_without_catalog_match": 24,
+  "http_status": 200,
+  "lc_paid_status": "not_persisted; no LeetCode refresh performed",
+  "matched_catalog_records": 5151,
+  "matched_with_difficulty": 4867,
+  "matched_with_null_difficulty": 284,
+  "negative_difficulty_values": 948,
+  "raw_republication": "not included",
+  "raw_sha256": "2bdb4d6cdde49d76a40dceb8e02be5ad59f86717bf83b57374de625ffb890a58",
+  "retrieved_at_utc": "2026-10-16T11:44:17+00:00",
+  "schema_version": 1,
+  "source": "AtCoder Problems community dataset; not an AtCoder-native rating",
+  "source_documentation": "https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md",
+  "source_url": "https://kenkoooo.com/atcoder/resources/problem-models.json"
+}

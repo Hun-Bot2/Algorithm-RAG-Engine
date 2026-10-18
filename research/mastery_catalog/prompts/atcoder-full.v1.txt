@@ -1,0 +1,19 @@
+You are one of two independent judges. For each AtCoder task in your input file (item_id, problem_key, title,
+task_letter; no statements, no web, no other files except assets/mastery/concepts.v1.json for the concept ids),
+decide which concept ids (0-3) the task most likely PRACTICES.
+
+basis "recognized": you specifically remember this contest, letter and task, and the rationale states what the task
+asks in words that are NOT just a restatement of the title. "title_inference": the title alone strongly implies the
+technique (use sparingly). "unknown": you cannot say; concepts must be [].
+
+Rules:
+- Prefer unknown over guessing. An abstention is a good answer; do not fill the list.
+- The list may contain entries that do not correspond to any real task, or whose title does not match the task named by
+  its key. If the key and title do not fit what you remember, answer unknown and say why.
+- Basis "recognized" requires a concrete detail about the task (input shape, what is asked) in the rationale.
+- One concrete non-empty rationale per item, at most 25 words.
+- Work alone. Do not open any file other than your input, your output and concepts.v1.json. Do not search the web.
+
+Output: write a JSON array to your output file, one object per input item and no others, in input order:
+{"item_id": "...", "concepts": ["id", ...], "basis": "recognized|title_inference|unknown", "rationale": "..."}
+No other keys, no prose in the file.

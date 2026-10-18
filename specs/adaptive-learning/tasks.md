@@ -95,3 +95,11 @@ Do not equate completed local code with the still-open release/research gates.
 - [x] Execute and inspect notebook/HTML/PNG reports; preserve token/resource/hash/warning evidence and numerical cross-checks.
 - [x] Record semantic failure examples and sparse evaluation limits; no model training or promotion.
 - [ ] Expand independent query-level judgments and input coverage before any deployable quality claim. The current similarity diagnostic has only three rankable groups.
+
+## Full-catalog similarity research (2026-10-16)
+
+- [x] Phase 1 offline catalog audit: 3,053 LeetCode records with statements; 21,244 CF/AtCoder records with none; LeetCode `isPaidOnly` filtered but not persisted ([audit](../../research/full_catalog/AUDIT.md)).
+- [x] Terms review recorded; user rejected CF/LeetCode collection and the isPaidOnly refresh, and skipped AtCoder statements ([statement spec](statement-collection.md) closed).
+- [x] Stored LeetCode statements quarantined for research (D1): kept byte-identical, not read by new research.
+- [ ] Phases 2-5 on existing metadata per [full-catalog-similarity.md](full-catalog-similarity.md) (tasks 1-9 there).
+- [ ] Production decision: keep, rebuild from metadata or retire the statement-derived `indexes/numpy_leetcode` index.

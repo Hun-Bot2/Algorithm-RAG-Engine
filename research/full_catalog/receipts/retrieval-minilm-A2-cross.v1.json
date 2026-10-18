@@ -1,0 +1,34 @@
+{
+ "block_size": 1024,
+ "counts": {
+  "dim": 384,
+  "queries": 13590,
+  "rows": 13590,
+  "short_lists": 0
+ },
+ "environment": {
+  "machine": "arm64",
+  "numpy": "2.1.3",
+  "python": "3.13.2"
+ },
+ "exclude_candidates": true,
+ "inputs": {
+  "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "keys": "333ef5d2eccff5a178537ce81e63a92b6bb1f8b4123d923dc94db89207fb2328",
+  "vectors": "4b295d8daac845a0c0fb2a548d3204b19e921032890626fda5e270390f67e855"
+ },
+ "ks": [
+  10,
+  20,
+  50
+ ],
+ "mode": "cross",
+ "outputs": {
+  "top10.jsonl": "7963874bd0c9cc93cd3a21577fe8451f189cdc5d9109195ad96250cd0147d48d",
+  "top20.jsonl": "136a1fcb24608fec46dbba25b015cbc1b4b34799aef0b59c4db8b235c878a1da",
+  "top50.jsonl": "2d1f3bc736f804e27ddc941a238864ad0d54a0922aba6650bd8c800ce2bdf0e5"
+ },
+ "schema": "retrieval-receipt.v1",
+ "seconds": 2.509,
+ "tie_break": "score desc, key asc; scores rounded to 6 decimals only in output files"
+}

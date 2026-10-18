@@ -1,0 +1,41 @@
+{
+  "schema": "atcoder-model-provenance.v1",
+  "validated_at": "2026-10-17",
+  "task": "specs/mastery-system/tasks.md MS-401",
+  "data": {
+    "source_url": "https://kenkoooo.com/atcoder/resources/problem-models.json",
+    "snapshot": "private-learning/algorithm-system/atcoder-problem-models-2026-10-16-v1/problem-models.json",
+    "sha256": "2bdb4d6cdde49d76a40dceb8e02be5ad59f86717bf83b57374de625ffb890a58",
+    "sha256_matches": ["SHA256SUMS in the snapshot directory", "research/algorithm_system/atcoder-difficulty-source.v1.json raw_sha256"],
+    "retrieved_at_utc": "2026-10-16T11:44:17+00:00",
+    "nature": "AtCoder Problems community IRT estimates; not AtCoder-native; not republished",
+    "entries": 5175,
+    "with_difficulty_and_discrimination": 4889,
+    "is_experimental_true": 565,
+    "negative_difficulty": 948,
+    "discrimination_distinct_values": [0.004479398673070138],
+    "outliers": {"agc010_a": -10000},
+    "outlier_rule": "difficulty < -2000 is treated as unknown (sentinel); next lowest observed value is -1438"
+  },
+  "formula_source": {
+    "repository": "https://github.com/kenkoooo/AtCoderProblems",
+    "commit": "ff203e2dc12fece1e5c85dfcbd92db7312313634",
+    "files_sha256": {
+      "atcoder-problems-frontend/src/utils/ProblemModelUtil.ts": "3960fd5d793647c0d1eb3162c4e886e2863788de7591efd22ea490995b84e727",
+      "atcoder-problems-frontend/src/utils/RatingInfo.ts": "ad9f3d99319e4d7e80ea2b198d8310f604230e0d77891c1f39dce016fac410e8",
+      "atcoder-problems-frontend/src/utils/index.ts": "76b2182535416ca781ef78fc0a8c77a22d8a2516497a252e40f36f2988f65970",
+      "atcoder-problems-frontend/src/api/APIClient.ts": "4960457c6eb237987a072dd8a557a585960ee2ae3b99523846977ce26211657a"
+    },
+    "note": "Formulas reimplemented from reading; no source code copied."
+  },
+  "findings": {
+    "solve_probability": "P = 1 / (1 + exp(-discrimination * (internalRating - rawDifficulty)))  (ProblemModelUtil.predictSolveProbability)",
+    "raw_vs_display": "JSON field `difficulty` is raw. The frontend sets rawDifficulty = model.difficulty and difficulty = clipDifficulty(model.difficulty) (APIClient.ts). Negative values in the snapshot confirm the JSON is unclipped.",
+    "display_clip": "clipDifficulty(d) = d >= 400 ? d : 400 / exp(1 - d/400)  (display only)",
+    "internal_rating": "n = rated participations; r' = rating <= 400 ? 400 * (1 - ln(400/rating)) : rating; internal = r' + ((sqrt(1 - 0.9^(2n)) / (1 - 0.9^n) - 1) / (sqrt(19) - 1)) * 1200; null when n = 0  (RatingInfo.ts)",
+    "condition": "Model predicts contest-time solving by rated participants, not untimed practice.",
+    "single_slope": "All models share one discrimination, so the model is a one-parameter logistic with slope 1/223.24 per rating point."
+  },
+  "design_deviation": "design.md section 4 planned a Laplace update over per-problem discrimination. Because discrimination is constant, the learner update uses the same logistic with a conservative Elo-style step and an explicit uncertainty SD; practice ability stays separate from contest internal rating.",
+  "acceptance": "JS implementation equals an independent Python evaluation of the cited formulas within 1e-12 on 5 sampled tasks (hosted/test/calibration.test.mjs fixture)."
+}

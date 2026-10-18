@@ -1,0 +1,7 @@
+For each AtCoder Beginner Contest task (problem_key, title, task_letter; no statements, no web),
+decide which concept ids (0-3, from assets/mastery/concepts.v1.json) the task most likely PRACTICES.
+basis "recognized" (specific memory of contest+letter+title, with a short citation-style description),
+"title_inference" (title strongly implies the technique; sparingly) or "unknown" (concepts must be []).
+Prefer unknown over guessing. One concrete non-empty rationale per item. Work alone; do not open other
+judges' outputs. Sample: 40 tasks each from ABC300-329, ABC400-429 and ABC450-479 (C-F, with an
+AtCoder Problems difficulty model), first by key, from private-learning/mastery/catalog-v1.

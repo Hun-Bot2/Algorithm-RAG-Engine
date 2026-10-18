@@ -1,0 +1,96 @@
+{
+ "block_size": 1024,
+ "environment": {
+  "machine": "arm64",
+  "numpy": "2.1.3",
+  "python": "3.13.2",
+  "scipy": "1.14.1",
+  "sklearn": "1.8.0"
+ },
+ "inputs": {
+  "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "crosswalk": "93926f794c9dc08097bbb052ba525ad626443474febcd1c4ee2b3f68e41263f8",
+  "variant_input": "02ad40c9a2b6c92cf7620a681fb880505c771cc29dda94839e408487e8a0f9c4"
+ },
+ "methods": {
+  "random": {
+   "counts": {
+    "queries": 21297,
+    "short_lists": 0
+   },
+   "info": {
+    "seed": 20261016
+   },
+   "outputs": {
+    "top10.jsonl": "eeac491188945cdb8d97a16283e0aa18bf0943e04db3d3941fe9e29fc155008c",
+    "top20.jsonl": "f6c00505b4b1b9d30db568264bc1139caa264353a6e13eef2af16cf7c4b81bd7",
+    "top50.jsonl": "84337837e7b5156d8485375b951ec627d888eaa35240503fb6bedf81d965cff9"
+   },
+   "seconds": 6.435
+  },
+  "tfidf_char": {
+   "counts": {
+    "queries": 21297,
+    "short_lists": 0
+   },
+   "info": {
+    "vocabulary": 54557,
+    "zero_rows": 0
+   },
+   "outputs": {
+    "top10.jsonl": "da2f926afe4d6867823795575fdc7a9a31ffc297724c78a52bee2a435b4a5584",
+    "top20.jsonl": "17fed36198b53791f8c7fe859b5b0162f7655eb86c1e8c3f27ed6bf326a61baf",
+    "top50.jsonl": "70ceaf27cded320a5eee98a91a8166c4ae8016754beca8e0e0a594a21eb303b3"
+   },
+   "params": {
+    "analyzer": "char_wb",
+    "dtype": "float32",
+    "lowercase": true,
+    "ngram_range": [
+     3,
+     5
+    ],
+    "norm": "l2",
+    "sublinear_tf": true
+   },
+   "seconds": 6.708
+  },
+  "tfidf_word": {
+   "counts": {
+    "queries": 21297,
+    "short_lists": 0
+   },
+   "info": {
+    "vocabulary": 34986,
+    "zero_rows": 7
+   },
+   "outputs": {
+    "top10.jsonl": "858835a009589cca243b040ac5b323df33a5e7d81684b5564caf8a91d181a17d",
+    "top20.jsonl": "ee89b4b022ecc2b99facdbb2f72f06f0eb99a790aac6a29606b2ccb05b99192a",
+    "top50.jsonl": "0d9804f14c8adaaace29158814fc8b08ac295351e6986679670cebf46ef518ca"
+   },
+   "params": {
+    "analyzer": "word",
+    "dtype": "float32",
+    "lowercase": true,
+    "ngram_range": [
+     1,
+     2
+    ],
+    "norm": "l2",
+    "sublinear_tf": true,
+    "token_pattern": "(?u)\\b\\w+\\b"
+   },
+   "seconds": 3.995
+  }
+ },
+ "mode": "cross",
+ "rows": 21297,
+ "rows_by_platform": {
+  "atcoder": 7467,
+  "codeforces": 10881,
+  "leetcode": 2949
+ },
+ "schema": "baseline-receipt.v1",
+ "variant": "A1"
+}

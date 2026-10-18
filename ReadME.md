@@ -1,15 +1,45 @@
-# Algorithm RAG Engine
-백준 풀이 기록을 분석해 유사한 LeetCode 문제를 자동 추천하고, 매일 07:00 KST에 Slack으로 알림을 보냅니다.
+# Algorithm RAG Engine — Adaptive Algorithm Mastery System
 
-![actions](images/Algo-RAGv2.png)
+## 현재 상태 (2026-10-18)
+
+백준이 서비스를 종료해서 아래 "초기 파이프라인"은 입력(백준 풀이 노트)을 잃었고, 그 GitHub Actions 워크플로우 2개
+(`daily_algorithm_pipeline.yml`, `publish_docker.yml`)는 삭제했습니다(git 이력에서 복구 가능). 현재 방향은 다음과 같습니다.
+
+- **로컬 우선 학습 시스템** (`hosted/`, `specs/mastery-system/`): LeetCode, Codeforces, AtCoder 풀이 기록을 읽고 개인 맞춤 연습을 계획합니다.
+  유료 API와 서버 없이 로컬에서만 동작합니다. 날짜별 학습 일지, O/X 기록, 우선 복습과 Easy → Medium → 전이 → 지연 복습을 지원합니다.
+  사용법은 [학습 일지 시작 안내](specs/mastery-journal/runbook.md)를 보세요.
+- **풀이 기록 저장소**: 별도 private repo `algorithm-solution`. 이 저장소의 커밋을 `node hosted/cli.mjs repo ingest`가 읽습니다.
+  push 없이 로컬 Git을 읽으며, 현재 커리큘럼 추천은 `node hosted/cli.mjs journal` 또는 로컬 학습 일지에서 확인합니다. 기존 `plan`의 일별 동결 계약도 보존합니다.
+- **연구** (`research/`): 세 플랫폼 24,297문제의 제목 기반 유사도 지도, 언어 편향 보정, AtCoder 개념 분류. 결과는 `research/*/REPORT.md`와 `specs/`에 있습니다.
+- 초기 파이프라인 코드(`src/main/`, `Dockerfile`, `docker-compose.yml` 등)는 2026-10-18에 삭제했고 git 태그 `legacy-pipeline-final`에서 복구할 수 있습니다.
+
+
+### 학습 일지 실행
+
+```sh
+# 아직 카탈로그를 선택하지 않았다면 최초 1회 (기존 선택은 유지 가능)
+node hosted/cli.mjs catalog use --version catalog-v4
+node hosted/local.mjs
+# http://127.0.0.1:8787
+```
+
+기존 SQLite를 사용하며 실행 위치와 관계없이 CLI와 같은 기본 DB 경로를 씁니다.
+실패·도움 풀이도 다음 날 우선 복습에 들어갑니다. 성공한 복습과 새로운 전이 문제의
+독립 해결은 구분합니다. 테스트는 합성 학습 이력으로 수행했으며 실제 교육 효과를
+입증한 것은 아닙니다. [설계·검증 기록](specs/mastery-journal/validation.md).
+
+아래 내용은 2026-01 시점의 초기 파이프라인 기록입니다.
+
+---
+
+백준 풀이 기록을 분석해 유사한 LeetCode 문제를 자동 추천하고, 매일 07:00 KST에 Slack으로 알림을 보냅니다.
 
 ## 아키텍처 개요
 - Heavy Job (`src/main/generate_index_map.py`):
 	- Baekjoon MDX → OpenAI 임베딩(text-embedding-3-small) → Numpy(LeetCode 인덱스) 유사도 검색 → GPT-4o-mini로 추천 이유 생성 → `artifacts/recommendation_map.json` 저장
 - Light Job (`src/main/slack_bot_daily_review.py`):
 	- JSON 로드 → Slack Webhook으로 메시지 전송
-- GitHub Actions (`.github/workflows/daily_algorithm_pipeline.yml`):
-	- 매일 07:00 KST 스케줄 실행 + 수동 실행 지원(workflow_dispatch)
+- GitHub Actions: 워크플로우 삭제됨(2026-10-18). 이전에는 수동 실행(workflow_dispatch)만 지원했습니다.
 - S3 사용(워크플로우에서만):
 	- Job1: `aws s3 sync ./artifacts s3://hunbot-algo-rag-data/ --delete`
 	- Job2: `aws s3 cp s3://hunbot-algo-rag-data/recommendation_map.json .`
@@ -48,8 +78,6 @@ GitHub Actions 실행 시점에만 S3에서 인덱스를 다운로드하고 Dock
 * 선별된 문제에 대해 임베딩 및 유사도 검색을 수행하고, 추천 결과(JSON)를 **S3**에 업로드(Sync)합니다.
 * **Light Job 컨테이너**가 S3에서 JSON을 받아 Slack API를 통해 지정한 형식의 시각화된 메시지를 전송합니다.
 
-![Slack-Bot](images/slack-bot-message.png)
-
 ### 최적화 성과
 
 * **실행 시간 단축**: 사전 빌드 이미지 도입과 의존성 최적화를 통해 전체 파이프라인 실행 시간을 초기 약 12분에서 **2분 미만**으로 80% 이상 단축했습니다.
@@ -61,11 +89,11 @@ GitHub Actions 실행 시점에만 S3에서 인덱스를 다운로드하고 Dock
 - Python 코드 내부의 병렬 처리 (Parallelism) 기법을 도입하여 대량의 알고리즘 문제를 동시에 처리하는 기능도 검토하고 있습니다. -> 공부한 뒤 적용할 계획입니다.
 - 다른 사용자들이 사용할 수도 있어서(?) 최대한 범용적으로 바꿔보려고 합니다.
 
-## 주요 파일
+## 주요 파일 (초기 파이프라인, 삭제됨: 태그 `legacy-pipeline-final`)
 - `src/main/generate_index_map.py` — Baekjoon MDX → OpenAI 임베딩 → NumPy 검색 → GPT-4o-mini 이유 → JSON 저장
 - `src/main/slack_bot_daily_review.py` — JSON 로드 → Slack Webhook 알림
 - `Dockerfile` — heavy/light 멀티스테이지 빌드 (heavy:  NumPy+LangChain, light: Slack 최소 의존성)
-- `.github/workflows/daily_algorithm_pipeline.yml` — Job1(heavy) → S3 업로드 → Job2(light) → Slack
+- `.github/workflows/daily_algorithm_pipeline.yml` — 삭제됨(2026-10-18, git 이력 참고)
 - `indexes/faiss_leetcode/ → indexes/numpy_leetcode/` — 사전 구축된 LeetCode → NumPy 인덱스 (필수)
 - `artifacts/recommendation_map.json` — 생성된 추천 맵 (S3 업로드 대상)
 

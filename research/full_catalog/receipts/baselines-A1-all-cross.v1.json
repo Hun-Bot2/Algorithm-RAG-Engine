@@ -1,0 +1,68 @@
+{
+ "block_size": 1024,
+ "environment": {
+  "machine": "arm64",
+  "numpy": "2.1.3",
+  "python": "3.13.2",
+  "scipy": "1.14.1",
+  "sklearn": "1.8.0"
+ },
+ "inputs": {
+  "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+  "crosswalk": "93926f794c9dc08097bbb052ba525ad626443474febcd1c4ee2b3f68e41263f8",
+  "variant_input": "7a268fa389617be09fb786fbb35b16de00474a57de854ecf4112fefed3e67adc"
+ },
+ "methods": {
+  "random": {
+   "counts": {
+    "queries": 23454,
+    "short_lists": 0
+   },
+   "info": {
+    "seed": 20261016
+   },
+   "outputs": {
+    "top10.jsonl": "77e4388cdc26cda6e7996cdc1338ea6608e7c640c4144048a3c98ffe82bdb157",
+    "top20.jsonl": "47aba49a15fb5541fae2bd29a6adafa67afbc1828fd07738ad0a05c91a8762a4",
+    "top50.jsonl": "0a627332a0ab2f73202289d34daafedda473ce008f6e420421fbd73b8e67d7a2"
+   },
+   "seconds": 7.603
+  },
+  "tfidf_char": {
+   "counts": {
+    "queries": 23454,
+    "short_lists": 0
+   },
+   "info": {
+    "vocabulary": 79510,
+    "zero_rows": 0
+   },
+   "outputs": {
+    "top10.jsonl": "19a2be561466b96bde4aa4eb860aee7e16e563339f630ea5224ff724fafd2f7a",
+    "top20.jsonl": "3992e8c42787abede250f844a4aebcc1282cc3960615af0fe19258ea3cea63c4",
+    "top50.jsonl": "d04dadf6d4dd223a5dd21978e60e990154179fec53c7a72f7494f815d3ea5e26"
+   },
+   "params": {
+    "analyzer": "char_wb",
+    "dtype": "float32",
+    "lowercase": true,
+    "ngram_range": [
+     3,
+     5
+    ],
+    "norm": "l2",
+    "sublinear_tf": true
+   },
+   "seconds": 7.486
+  }
+ },
+ "mode": "cross",
+ "rows": 23454,
+ "rows_by_platform": {
+  "atcoder": 9608,
+  "codeforces": 10897,
+  "leetcode": 2949
+ },
+ "schema": "baseline-receipt.v1",
+ "variant": "A1-all"
+}

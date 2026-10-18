@@ -1,0 +1,36 @@
+{
+  "schema": "codenet-source-aggregate.v1",
+  "status": "private_import_complete",
+  "source": {
+    "name": "IBM Project CodeNet problem descriptions",
+    "repository": "https://github.com/IBM/Project_CodeNet",
+    "pinned_commit": "55c323b527ab3d6510d55edff188bc0a0d7bc5e5",
+    "artifact": "problem_descriptions.tar.gz",
+    "archive_bytes": 3492211,
+    "archive_sha256": "8b631ae168ba84dce69c7d8e1b6c632256e0155858c2664c6493a5f001b45fdd",
+    "git_blob_sha1": "22a8342ab304d69edd537be86e38743584296ef3",
+    "pinned_blob_match": true,
+    "dataset_license": "CDLA-Permissive-2.0",
+    "dataset_license_evidence": "https://www.linuxfoundation.org/press/press-release/enabling-easier-collaboration-on-open-data-for-ai-and-ml-with-cdla-permissive-2-0",
+    "tools_repository_license": "Apache-2.0 (tools repository; not used as the dataset license basis)",
+    "attribution": "IBM Project CodeNet",
+    "scope_caveat": "Dataset license evidence does not erase separate rights in original problem descriptions; retain upstream copyright and terms status."
+  },
+  "import": {
+    "parser_version": "codenet-description-html.v1",
+    "private_records_sha256": "07dec9505b886798c25890ce53af632cd3d373ee3186fa95e3d38290f6b453e6",
+    "metadata_csv_present": false,
+    "description_members": 3999,
+    "descriptions_without_metadata": 3999,
+    "joined_current_catalog_keys": 0,
+    "native_atcoder_keys_from_explicit_urls": 0,
+    "identity_status": "all 3999 remain platform/native-identity unknown",
+    "source_platform_counts": {
+      "unknown": 3999
+    },
+    "raw_content_private": true,
+    "full_submission_archive_acquired": false
+  },
+  "private_receipt_path": "private-learning/codenet/import-description-v1/receipt.json",
+  "public_artifact_contains_raw_description_text": false
+}

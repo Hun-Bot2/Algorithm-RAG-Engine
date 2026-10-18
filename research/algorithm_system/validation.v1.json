@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "tests": [
+    {
+      "command": ".venv/bin/python -m unittest discover -s research/algorithm_system -q",
+      "passed": 51
+    },
+    {
+      "command": ".venv/bin/python -m unittest discover -s tests/learning -q",
+      "passed": 74
+    },
+    {
+      "command": ".venv/bin/python -m unittest discover -s research/full_catalog -q",
+      "passed": 48
+    }
+  ],
+  "notebook_executed_code_cells": 5,
+  "notebook_errors": 0,
+  "visual_checks": [
+    "Both aggregate PNG figures inspected",
+    "Headless Chrome HTML top viewport inspected; not an all-scroll browser test"
+  ],
+  "production_modified": false,
+  "model_promoted": false,
+  "artifacts": {
+    "difficulty-cdf.v1.svg": "785e2b0db651adaa5f01db13140ba53fb4e2baddedd10297bee4402c39d01fb9",
+    "comparison.html": "eb2f7333e88370a068c7b5403eb4f4edd6e133bbd80539442eda606cd0f51f69",
+    "comparison.ipynb": "658edfc2aef5ad13aea505a8076fcad9cf5b3e166a14636b309bb285767004fb",
+    "figures/statement-baseline.png": "8f3cbe6cdca50aa67e0600e62bc76aa2ed94f9f7334451fca0bcb4c8154dbc99",
+    "figures/compression-ablation.png": "d4ecbd98385305be806c4e45e38d6881ddad486ddb45750cfdcee9c7df14fbc8"
+  }
+}

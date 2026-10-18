@@ -1,0 +1,32 @@
+{
+  "all_byte_identical": true,
+  "baseline_manifest_path": "research/statements/BASELINE-PRESERVATION.v1.json",
+  "baseline_manifest_sha256": "29a518ee52a03a13c89acdb14d0b7a0efc947ef0c8f09170e3fad6a729edcca1",
+  "changed": [],
+  "current_manifest_sha256": "55d57e10cc3b4cff4091cac43069d0ed035cdd4b1a944b1ff546b4c3c75f0802",
+  "expected_protected_files": 191,
+  "frozen_labels": {
+    "distinct_pair_ids": 3647,
+    "judged_nonnull": 2886,
+    "malformed": 0,
+    "path": "research/full_catalog/labels.v1.jsonl",
+    "receipt_final_label_counts": {
+      "0": 2443,
+      "1": 399,
+      "2": 40,
+      "3": 4,
+      "None": 761
+    },
+    "receipt_path": "research/full_catalog/receipts/labels.v1.json",
+    "receipt_sha256": "7c2ff0b4f27e111235cdeddd6e92796684a597b1346a48745554f9c6255a1dbe",
+    "row_counts_match_receipt": true,
+    "rows": 3647,
+    "sha256": "f2ae204931195763ba745a2e0378b03518eaf3ca2bc19c958f191f4fe0c6e503",
+    "unjudged_null": 761
+  },
+  "manifest_hash_equal": true,
+  "missing": [],
+  "original_manifest_sha256": "55d57e10cc3b4cff4091cac43069d0ed035cdd4b1a944b1ff546b4c3c75f0802",
+  "schema": "algorithm-system-preservation.v1",
+  "verified_protected_files": 191
+}

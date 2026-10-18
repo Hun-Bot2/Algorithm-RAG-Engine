@@ -167,25 +167,12 @@ After changing code:
 
 ## Project Snapshot
 
-Algorithm RAG Engine recommends English LeetCode follow-up problems from Korean
-Baekjoon study notes. The current production path is a batch pipeline:
-
-1. Detect changed Baekjoon Markdown/MDX study files.
-2. Parse problem metadata.
-3. Embed the source problem with OpenAI `text-embedding-3-small`.
-4. Search the local NumPy LeetCode index.
-5. Generate a Korean recommendation reason with GPT-4o-mini.
-6. Write `artifacts/recommendation_map.json`.
-7. Send the result to Slack through a lightweight Slack job.
-
-Read the docs before making architectural changes:
-
-- `README.md` - project overview and current pipeline narrative.
-- `STAR.md` - portfolio summary, accurate caveats, file inventory.
-- `improve.md` - production improvement roadmap.
-- `docs/leetcode_update.md` - LeetCode data update strategy.
-- `docs/embedding_visualization.md` - embedding visualization notes.
-- `Evaluation_100/docs/*.md` - evaluation and benchmark context.
+Algorithm RAG Engine began (2026-01) as a batch pipeline that recommended English LeetCode follow-ups from Korean Baekjoon
+study notes (OpenAI embeddings, NumPy index, GPT-4o-mini reasons, Slack). Baekjoon shut down and the pipeline, its Docker
+files, workflows and evaluation scripts were removed on 2026-10-18; the last state is the git tag `legacy-pipeline-final`
+(`git checkout legacy-pipeline-final -- <path>` restores any file). The repository is now the local-first mastery system plus
+research (see "Current direction" at the end). Historical docs (`README.md` lower half, `STAR.md`, `specs/production-recommender/`)
+describe the removed pipeline.
 
 ## Strict Architectural Constraints
 
@@ -233,75 +220,38 @@ If validation cannot be performed, explicitly explain why.
 
 ## Production Code vs Experiments
 
-Treat these as the current production entry points:
-
-- `src/main/generate_index_map.py` - heavy recommendation generation job.
-- `src/main/slack_bot_daily_review.py` - light Slack delivery job.
-- `Dockerfile` - multi-stage heavy/light image.
-- `docker-compose.yml` - local/container orchestration.
-- `.github/workflows/daily_algorithm_pipeline.yml` - pipeline orchestration.
-
-Treat these as legacy or experimental unless the task explicitly targets them:
-
-- `src/rag/faiss_recommendation_engine.py` - older FAISS-based recommender.
-- `scripts/preprocessing/build_faiss_index.py`
-- `scripts/preprocessing/build_production_faiss_index.py`
-- `Evaluation_100/**` - evaluation research, benchmark scripts, notebooks, images.
-
-Do not claim that `Evaluation_100` is the exact deployed production code path.
-It is useful for ideas such as hybrid scoring and GPT reranking, but production
-currently runs through `src/main/generate_index_map.py`.
+There is no production service. Current code, in priority order: `hosted/` (mastery CLI and policy modules, the only learner-state
+engine), `curriculum/`, `src/learning` (stdlib foundation, embedding backend), `scripts/learning/`, and `research/`.
+Removed 2026-10-18 and recoverable from the tag: `src/main`, `src/rag`, `src/evaluation`, `src/utils`, `scripts/collection`
+(LeetCode collection), `scripts/preprocessing`, `scripts/evaluation`, Dockerfile, docker-compose.yml, requirements-heavy/light,
+`artifacts/`, `images/`, `Evaluation_100/` (except `Evaluation_100/data/*.json`, which the asset manifests pin by hash).
+The one-off audit scripts `research/full_catalog/audit_catalog.py` and `research/statements/audit_availability.py` read removed
+files; their receipts are committed, and re-running them needs those files restored from the tag.
 
 ## Current Important Caveats
 
-- The main production search path uses NumPy, not FAISS.
-- FAISS files and scripts remain for migration history and experiments.
-- The workflow schedule is documented historically, but the checked-in
-  `.github/workflows/daily_algorithm_pipeline.yml` currently uses manual
-  `workflow_dispatch`; verify before saying it runs daily.
-- `generate_index_map.py` relies on OpenAI API access and a NumPy index.
-- `artifacts/recommendation_map.json` is generated output and may contain sample
-  recommendations; do not use it as proof of quality without evaluation.
-- LangSmith and Slack feedback helper modules exist, but feedback is not yet in
-  the main production ranking loop.
+- No GitHub Actions workflow, schedule, Docker image or hosted service exists in this repository.
+- FAISS and OpenAI-based code is gone from the tree; do not reintroduce FAISS, PyTorch in production dependencies, paid APIs or cloud storage.
+- Local data under `data/`, `indexes/` and `algorithm_indexes_v1.tar.gz` is untracked and pinned by `assets/*.manifest*.json`; the stored
+  LeetCode statements stay quarantined (see "Statement sources and terms").
 
 ## Data and Artifacts
 
 Important paths:
 
-- `data/raw/leetcode_raw_data.jsonl` - raw LeetCode records.
-- `data/processed/leetcode_processed.jsonl` - processed LeetCode records.
-- `data/raw/leetcode_slugs.txt` - slug manifest for duplicate detection.
-- `indexes/numpy_leetcode/vectors.npy` - current production vector index.
-- `indexes/numpy_leetcode/metadata.json` - current production metadata.
-- `artifacts/recommendation_map.json` - generated recommendation map.
-- `Evaluation_100/data/ground_truth_v2.json` - 100-pair evaluation ground truth.
+- `private-learning/` (git-ignored): catalogs, models, maps, judgments, learner database. Never commit it.
+- `assets/` and `curriculum/`: reviewed, hash-pinned inputs. A manifest mismatch needs review and a new version, not regeneration.
+- `data/raw/leetcode_raw_data.jsonl`, `data/processed/leetcode_processed.jsonl`, `data/raw/leetcode_slugs.txt`,
+  `indexes/numpy_leetcode/*` (untracked, pinned by the asset manifest; statements quarantined).
+- `Evaluation_100/data/ground_truth_v2.json` and `potential_gt.json` (tracked, pinned by the asset manifest).
 
-Large data, indexes, generated images, and artifacts may be intentionally stored
-outside Git or synced through S3 in workflows. Do not delete or regenerate them
-unless the user asks.
+Do not delete or regenerate pinned files unless the user asks.
 
 ## Recommended Development Direction
 
-The current documented roadmap prioritizes recommendation quality before product
-UI:
-
-1. Refactor the recommender into reusable production modules under `src/rag/`.
-2. Parse Baekjoon MDX into structured algorithm profiles.
-3. Add hybrid scoring with explicit score components.
-4. Add GPT reranking as a decision layer.
-5. Make evaluation call the same recommender code path used by production.
-6. Add API, database, notification routing, feedback loop, and observability.
-
-When making changes, keep new code aligned with that direction instead of adding
-more one-off scripts.
-
-The final platform direction is:
-
-> A production-style personalized algorithm training platform with validated
-> AI-generated problems, secure sandboxed judging, concept-level
-> personalization, spaced repetition learning, explainable recommendations, and
-> feedback-driven adaptation.
+The roadmap is the local-first mastery system (`specs/mastery-system/`, ADR 003): explainable plans from the learner's own solution
+history, AI-reviewed concepts kept separate from user-confirmed ones, no paid services. Research results are exploratory and never
+promoted to recommendations without evaluation. The older platform vision (judge, AI problem generation, hosted app) is not being built.
 
 ## Coding Guidelines
 
@@ -334,62 +284,24 @@ The final platform direction is:
 
 ## Useful Commands
 
-Install production-heavy dependencies:
-
 ```bash
-pip install -r requirements-heavy.txt
+node hosted/cli.mjs catalog use --version catalog-v4
+node hosted/cli.mjs repo add --id solutions --path ~/algorithm-solution
+node hosted/cli.mjs repo ingest
+node hosted/cli.mjs plan
+node --test hosted/test/*.test.mjs
+python3 -m unittest discover -s tests -v
+python3 scripts/learning/assets.py verify
+.venv/bin/python -m unittest discover -s research/full_catalog -v
+.venv/bin/python -m research.unified_map.verify private-learning/unified-map/map-v2
 ```
 
-Install light Slack dependencies:
-
-```bash
-pip install -r requirements-light.txt
-```
-
-Run the heavy generator locally, assuming required environment variables and
-index paths are configured:
-
-```bash
-python3 src/main/generate_index_map.py
-```
-
-Run the Slack delivery job locally:
-
-```bash
-python3 src/main/slack_bot_daily_review.py
-```
-
-Check for new LeetCode problems without GraphQL:
-
-```bash
-python3 scripts/collection/leetcode_check_new_fast.py
-```
-
-Collect LeetCode details when new problems exist:
-
-```bash
-python3 scripts/collection/leetcode_data_collection.py
-```
-
-Run retrieval evaluation:
-
-```bash
-python3 scripts/evaluation/evaluate_retrieval.py
-```
+More commands: `specs/mastery-system/runbook.md`.
 
 ## Testing and Verification
 
-There is no single documented test command for the whole repository. Choose
-verification based on the change:
-
-- Parser/scoring changes: add or run focused unit-style checks if available.
-- Generator changes: verify JSON output shape and no missing required fields.
-- Slack changes: validate Block Kit payload shape without sending live messages
-  unless the user approves real delivery.
-- Workflow/Docker changes: inspect commands and paths carefully; local execution
-  may require API keys, S3 data, or Docker credentials.
-- Evaluation changes: report Recall@K/MRR changes against the documented
-  100-pair ground truth when possible.
+Choose verification by change: Node tests for `hosted/`, `unittest` for `src/learning`, `scripts/learning` and `research/`, the asset
+verifier for pinned inputs, and the unified-map verifier for the preservation snapshot. Say what ran and what did not.
 
 ## Documentation Requirements
 
@@ -418,11 +330,9 @@ Tasks should be:
 
 Keep these distinctions clear in summaries and docs:
 
-- "Current production" means the NumPy-based heavy/light Slack pipeline.
-- "Evaluation_100" means experimental benchmark work.
-- "FAISS" means legacy or alternate indexing unless a task explicitly revives it.
-- "Daily schedule" should be described as disabled/manual unless the workflow is
-  changed and verified.
+- There is no production pipeline or schedule; the batch pipeline is removed (tag `legacy-pipeline-final`).
+- Similarity maps use title embeddings and say nothing about algorithm equivalence.
+- AI-reviewed means AI judgment; user-confirmed (`approved`) comes only from the user.
 
 ## Adaptive learning foundation (2026-10-16)
 
@@ -502,3 +412,230 @@ Keep these distinctions clear in summaries and docs:
   catalog/statements. Only three similarity query groups support conditional
   ranking; observed nearest neighbors include narrative/technique mismatches.
   No quality promotion or inference service follows from a successful model run.
+
+## Statement sources and terms (2026-10-16)
+
+- Read research/full_catalog/terms-review.v1.json before any statement or LeetCode
+  fetch. LeetCode terms forbid crawling/scraping and robots.txt disallows /graphql
+  and /api/; the stored 3,053 LeetCode statements came from /graphql. Codeforces
+  robots.txt limits scraping tools to /api/ (no statements there). AtCoder task
+  pages are robots-allowed but opt out of AI-training crawlers. No collection is
+  approved; the CF/AtCoder catalogs have titles/metadata only.
+- 2026-10-16 decision: all statement collection rejected/skipped. Stored LeetCode
+  `content`/`content_clean` and vectors derived from them are quarantined: keep the
+  files byte-identical (production still uses them) but never read them in new
+  research. Full-catalog work follows specs/adaptive-learning/full-catalog-similarity.md.
+- Full-catalog Phase 2: `python3 research/full_catalog/catalog.py --private-output
+  private-learning/full-catalog/<new> --receipt <new>.json`. Outputs refuse to
+  overwrite, and the script fails if input hashes differ from audit.json. LeetCode
+  statement fields are dropped while parsing via object_pairs_hook. Run its tests with
+  `python3 -m unittest discover -s research/full_catalog -v`. Kenkoooo AtCoder task IDs
+  are already unique across reused contests (ADT and ABC/ARC share task IDs), so
+  contest reuse is not a duplicate.
+- research/full_catalog/retrieve.py needs numpy, so run its tests with .venv/bin/python.
+  numpy 2.1.3 + Accelerate emits spurious divide/overflow RuntimeWarnings on finite
+  float32 matmul. dense_cosine suppresses them with errstate, and topk rejects
+  non-finite blocks. Do not "fix" this by switching to float64.
+- Phase 3-5 methods must take rows and text from research/full_catalog/inputs.py
+  (variants A1, A1-all, A2) so that inputs stay matched. baselines.py imports its
+  sibling modules by name, so run it as a script or through discover -s research/full_catalog.
+- research/full_catalog/embed.py loads MiniLM only through the hash-verified
+  LocalEmbeddingBackend. Its outputs are private-learning/full-catalog/embeddings-v1/.
+  CPU with 1 thread is bitwise-reproducible here. Titles are short (max 48 tokens
+  in A2), so B/C statement variants stay unmeasured by decision D1, not by truncation.
+- The judged pool (research/full_catalog/pool.v1.json) is frozen. Never regenerate it
+  after labeling starts. A new pool needs a new version, and labels must reference
+  pair_id. Unjudged pairs are not negatives.
+- Labeling via subagents: label validators must reject empty rationales for labeled
+  pairs (v1 did not). Self-reported `basis: recognized_problem` is unreliable across
+  agents. `deceptive` is the least reliable field; adjudicators needed a stricter
+  definition. Agents can misread batch fields, so spot-check their claims against the files.
+
+## Statement-first research priority (2026-10-16, supersedes next-work priority)
+
+- Follow specs/statement-similarity/ for new research. A1/A2 title/tag runs and
+  3,647 pair records remain frozen preliminary baselines; do not optimize those
+  baselines or start PCA/SVD before a permitted full-statement 384D baseline.
+- Availability/feasibility report: research/statements/AVAILABILITY-AND-FEASIBILITY.md.
+  The deterministic audit inspects aggregate availability only, including stored
+  quarantined content. It does not release that content for new retrieval work.
+- Current acquisition decisions are in research/statements/acquisition-review.v2.json.
+  Prior terms-review.v1.json stays historical and byte-identical. Do not equate
+  robots allowance, model-inference use or a code-repository license with verified
+  rights to collect/reuse every statement. CodeContests explicitly licenses non-code
+  CC BY 4.0 but also retains separate third-party conditions; preserve both facts.
+- The frozen full-catalog labels contain 3,647 distinct pair records: 2,886 non-null
+  judgments and 761 abstentions. Reuse their evidence/basis faithfully; do not treat
+  abstentions as negatives or relabel title-pooled judgments as statement-grounded.
+
+## Full-catalog research continuation (2026-10-16)
+
+- `specs/algorithm-system/` extends statement-first research. Publisher non-code
+  dataset imports are admitted privately under the scoped decision in
+  `research/algorithm_system/CHECKPOINT2.md`; the earlier acquisition review stays
+  historical. LeetCode text remains quarantined. No direct platform scraping or
+  public statement redistribution is authorized by that decision.
+- Hugging Face CodeContests revision `802411c3010cb00d1b05bad57ca77365a3c699d6`
+  uses source ClassLabel AtCoder=5/Aizu=6, unlike the original protobuf 6/7.
+  Bare Parquet int64 values require the pinned, hash-checked dataset_infos.json;
+  never infer the enum from prose or reuse the protobuf mapping.
+- `research/algorithm_system/verify_capture.py` reconstructs selected statement
+  columns from hashed local HTTP ranges without network. Whole Parquet shards,
+  solution archives, private tests, and generated tests are unnecessary.
+- The CodeNet small description archive lacks metadata/native URLs in this
+  snapshot. Its pNNNNN IDs remain unresolved, not guessed AtCoder task IDs.
+  AtCoder CodeContests rows likewise retain dataset identities when IDs are absent.
+- Similarity judgments are not difficulty-ordering labels. Native percentile
+  alignment is provisional, not an equality of cross-platform learner effort.
+- Run the new scientific suite with `.venv/bin/python -m unittest discover -s
+  research/algorithm_system -v`. Compression requires the complete hash-bound
+  384D chunk baseline. Neighbor preservation alone cannot promote a model.
+
+## Local verification pilot (2026-10-16)
+
+- `research/verification_workbench/server.py serve` opens the loopback-only
+  identity/relationship workbench; its frozen 40-pair pilot and SQLite evidence
+  live under `private-learning/verification-workbench/pilot-v1/`.
+- Role and independence are self-attestations, not authenticated human proof.
+  Two independent human reviews plus a third adjudicator gate accepted overlays;
+  AI reviews, title candidates and direct assertions never resolve source IDs.
+- Reveal mode logs exposure and blocks later independent claims for that pair.
+  Browser forms clear across reviewers/problems; stale responses are discarded.
+  Corrections suspend accepted overlays that referenced an earlier review.
+- Workbench tests use authored fixtures: `python3 -m unittest discover -s
+  research/verification_workbench -v`; two tests require loopback socket access.
+  Browser test writes MUST use the disposable synthetic server, not the real pilot.
+  Real statement screenshots and exports stay private. Production import is absent.
+- User-requested AI-first reviews remain role=ai/independent=false; their private
+  40-pair report is under `private-learning/verification-workbench/ai-review-v1/`.
+  View AI draft exposes only AI+own records, keeps ranks hidden, and persists an
+  exposure lock; assisted human judgments are allowed but cannot satisfy the
+  independent-human verification gates. AI-only import validates exact pilot
+  coverage before writing and is resumable/idempotent. Never call these drafts gold.
+
+## Bounded identity investigation (2026-10-17)
+
+- Preserve numeric problem-title prefixes when stripping publisher/contest
+  wrappers: “3 Steps” and “01 Unbalanced” are complete titles, not task labels.
+- `research/identity_resolution/` validates manually authored primary-source
+  comparison notes and emits only AI identity proposals. Cached web observations
+  are not live response receipts or bulk statement reuse permission. Native task
+  IDs may differ from displayed task letters; compare canonical links.
+- Identity agreement does not establish full statement fidelity. Keep language
+  discrepancies and inaccessible sources explicit; never infer an unavailable
+  statement from a title or editorial alone.
+
+## Unified similarity research (2026-10-17)
+
+- `research/unified_map/` links all native catalog nodes and a separate admitted
+  statement source index. Semantic title neighbors, statement neighbors and
+  algorithm-tag proxies are separate channels; missing tags remain unknown.
+- Use package-qualified imports for new research helpers. Inserting another
+  research directory at sys.path[0] can make unittest discover the wrong test module.
+- Hybrid RRF MUST NOT grant algorithm evidence to zero-Jaccard rank ties. Inspect
+  component support; tag consistency of a tag ranker is circular, not validation.
+- Native map-v2 and reduction-v2 are the reviewed runs; v1 remains preliminary.
+  2D UMAP/t-SNE use a disclosed stratified sample, not all-catalog relevance proof.
+
+## Full-catalog interactive map (2026-10-17)
+
+- Spec: specs/unified-similarity-map/interactive-map.md. Code: research/unified_map/full_{embed,project,quality,html,verify}.py
+  and full_map_template.html. Outputs are private (private-learning/unified-map/full-v1/), including interactive.html,
+  which embeds titles/tags/URLs. Never commit it; only receipts under research/unified_map/full-receipts/ and
+  point-only figures are committed.
+- research/full_catalog/retrieve.py is hash-pinned by research/unified_map/PRESERVATION.v1.json. Do not edit it or other pinned
+  files. Run `.venv/bin/python -m research.unified_map.verify private-learning/unified-map/map-v2` before finishing; put new
+  retrieval modes in new modules (the any-platform mode lives in full_quality.py).
+- scikit-learn t-SNE with init="pca" ignores random_state: seed repeats give a bit-identical layout. Measure stability with
+  --tsne-init random. UMAP/t-SNE run with one thread for reproducibility (t-SNE ~3 min, UMAP ~30 s for 24,297 nodes).
+- Tokenizer unknown-share alone overstates embedding reliability: Cyrillic titles tokenize into known word pieces. A non-Latin
+  title is capped at "degraded". Latin-script romanized Japanese titles cannot be detected and stay "reliable".
+- Compare neighbor tag agreement with a platform-matched random baseline, not random pairs: cross-platform concept sets differ,
+  so an all-pairs baseline is unfair.
+- Port 8765 is the verification workbench (private statements). Preview static HTML on another loopback port from a directory
+  that contains only the HTML; never stop servers you did not start.
+- Tests: `.venv/bin/python -m unittest research.unified_map.test_full_embed research.unified_map.test_full_quality
+  research.unified_map.test_full_html`. Spurious Accelerate FP warnings appear in float32 matmuls; wrap test calls in np.errstate.
+
+## Language-bias study (2026-10-17)
+
+- Spec specs/unified-similarity-map/language-bias.md; code and report in research/language_bias/. The selected representation (C2) embeds
+  English-translated titles with the same pinned MiniLM; full-v2 holds its vectors, neighbors, maps and page. full-v1 is preserved: do not
+  modify it (research.language_bias.verify proves its hashes). Never judge a language fix by low homophily or platform mixing alone: random vectors
+  score best on both. Use neighbor consistency, translation retrieval, English-quality retention and the random control.
+- Models live under private-learning/models/ with the manifest OUTSIDE the directory; the verifier checks exact membership, so move any CLI
+  `.cache` folder out (huggingface-cli leaves one inside --local-dir). The translator ships only pickle weights: it is quarantined and converted once
+  with torch weights-only loading and the network blocked; never load that .bin any other way. Only user-approved models may be fetched, and a
+  downloader must refuse everything else; get approval before any package install (sentencepiece 0.2.1 is the only addition, research .venv only).
+- Marian (opus-mt) needs sentencepiece; its output ends with a period that real titles lack, so the translator strips it. The model reads Japanese
+  only: Russian and Korean titles stay untranslated and still cluster by language. Machine translation can fail badly on numbered tutorial titles and
+  place names; those nodes are tiered degraded.
+- Helper methods named `run` in a unittest.TestCase shadow TestCase.run and break the suite; name them otherwise. scikit-learn's centroid-style
+  fixes need a minimum group size: a one-node group's centroid is the node itself (zero vector).
+- An interrupted tool call may already have run part of its command (an edit and a delete ran before the interrupt): check the state afterwards.
+
+## Mastery system (implemented locally, 2026-10-17)
+
+- Spec: specs/mastery-system/ (design.md section 15 lists deviations; runbook.md has commands). Code:
+  hosted/mastery/*.mjs, hosted/cli.mjs, migrations 007-008, research/mastery_catalog/. ADR 003 accepted:
+  local SQLite is canonical, the JS core is the only learner-state engine, hosting is optional.
+- Tests: `node --test hosted/test/*.test.mjs`; `.venv/bin/python -m unittest research.mastery_catalog.test_build
+  research.mastery_catalog.test_refresh research.mastery_catalog.test_archive research.mastery_catalog.test_relatedness`.
+  The CLI test builds a fixture catalog with system python3 (`-I`) and needs git.
+- hosted/core/events.mjs requires exact payload fields and events has CHECK constraints: add evidence as
+  append-only side tables (hosted/mastery/side-ledger.mjs contract), read only through ledger.mjs. Snapshots
+  store per-table sequence high-water marks. Node-only modules (git-ingest, catalog, views, cli) must never be
+  imported by core/ or worker.mjs; `wrangler deploy --dry-run` confirms the bundle.
+- AtCoder Problems: problem-models `difficulty` is raw (unclipped); all models share one discrimination;
+  agc010_a = -10000 is a sentinel. problems.json points shared ABC tasks at the latest ADT reuse, so derive
+  canonical contests from contest-problem.json. MiniLM batch padding makes identical texts differ by ~1e-7:
+  reuse vectors by (problem_key, text) to keep neighbors byte-identical across refreshes.
+- Never mark reported_completion or Git commits without explicit Outcome/Hints trailers as independent.
+  Difficulty stays per platform; selection uses mean minus one SD while history is sparse.
+- AI judgments: two different model roles, blind; agreement -> ai_reviewed, else abstained; never gold.
+  Two Claude judges share training memory, so their agreement is not independent verification.
+- Catalog versions are immutable: catalog-v2 is superseded by catalog-v3 (ADT URL fix). Do not edit or
+  delete private-learning/mastery/catalog-v*; make a new version.
+
+## AtCoder concept classification (2026-10-17)
+
+- Spec specs/mastery-system/atcoder-concepts.md, result atcoder-concepts-report.md. Only a 450-problem random sample was judged (cost: about
+  3,800 tokens per labeled problem, 5M projected for ABC/ARC/AGC); other problems stay unclassified. Judge batches mix blind decoys (invented
+  tasks, swapped titles); judge files and truth.json live under private-learning/mastery/judgments/ and stay out of Git.
+- ai_reviewed needs both judges plus at least one `recognized`; title-inference-only agreement is `proposed` (untrusted). Only the `confirm`
+  command writes approved/rejected. catalog-v4 is the offline replay with the new rows; never edit v1-v3.
+- related-v1 has a semantic-only fallback: unclassified candidates from a title channel, reliable titles on both sides, label
+  "Semantic title neighbor...", -1.5 penalty, never credited to a concept. Before estimating cost for a subagent run, state the agent count and
+  total tokens up front: the user stopped a 10-agent wave that had been described only as "5M tokens".
+
+## Current direction (2026-10-18)
+
+- Baekjoon has shut down: the legacy batch pipeline (`src/main/generate_index_map.py`, Docker, S3, OpenAI, Slack) has no input and no
+  automation. Its code stays as history; do not revive it or add paid-API or cloud dependencies for it.
+- The product direction is the local-first mastery system (`hosted/`, `specs/mastery-system/`, ADR 003): LeetCode, Codeforces and AtCoder
+  only, no paid APIs, no hosting. Minimize cost and storage; ask before adding anything that costs money or large disk.
+- Solutions live in the separate private repo `algorithm-solution` (layout `leetcode/`, `codeforces/`, `atcoder/`; commit trailers
+  `Problem:`, `Outcome:`, `Hints:`). Its own Actions only check naming and trailers. Pushing never produces recommendations: run
+  `node hosted/cli.mjs repo ingest` and `plan` locally.
+- This repository is not a portfolio or a commercial service. Do not add features for external users.
+
+## Local mastery journal (2026-10-18)
+
+- Local runtime/CLI share repository-root defaults for learner SQLite and catalog
+  paths. Never initialize or migrate the real learner DB while testing; use
+  :memory: or a temporary path and synthetic learner IDs.
+- `mastery/journal.mjs` composes the existing planner and versioned progression;
+  journal handlers are injected only by the local runtime, not into Worker code.
+  Core review replay schedules every attempted problem; hints/failures reset to
+  next-day priority, imported completion is never independent mastery.
+- Journal snapshots fingerprint relevant evidence/config/code. Timer-only events
+  must not rotate the current recommendation. Corrections remain visible as
+  superseded history; do not emit initial unknown-state changes for every concept.
+- Backup-v2 recommendation archives are inert `archive-...` snapshot rows with
+  wrapper metadata. Unwrap them for historical display only; never activate them
+  as current plans. Export flattens wrappers, preventing recursive nesting.
+- Novel transfer cannot reuse an attempted canonical key; known-problem review is
+  retention evidence, not a new transfer. Hard evidence stays separate from Easy
+  and Medium gates. Metadata variation is a proxy, not proven algorithm equivalence.
+- Browser writes require an isolated `browser-smoke` learner and disposable store.
+  Set SMOKE_OUTPUT_DIR to a fresh private path; preserve earlier evidence receipts.

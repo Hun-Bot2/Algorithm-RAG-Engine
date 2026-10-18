@@ -1,0 +1,27 @@
+{
+  "nodes": 24297,
+  "methods": {
+    "matched_semantic": {
+      "queries": 13590,
+      "slots": 679500
+    },
+    "semantic": {
+      "queries": 21297,
+      "slots": 1064850
+    },
+    "tag": {
+      "queries": 13590,
+      "slots": 679500
+    },
+    "hybrid": {
+      "queries": 13590,
+      "slots": 679500
+    }
+  },
+  "preserved_input_files": 501,
+  "quality_flags": [
+    "official_en_ja_constraint_disagreement",
+    "sample_exceeds_english_bound"
+  ],
+  "all_checks_passed": true
+}

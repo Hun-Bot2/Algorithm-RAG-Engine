@@ -1,0 +1,380 @@
+{
+  "compression": {
+    "fit": {
+      "pca128": {
+        "component_bytes": 196608,
+        "components": 128,
+        "explained_variance_ratio_sum": 0.76631665,
+        "seconds": 0.1144
+      },
+      "pca256": {
+        "component_bytes": 393216,
+        "components": 256,
+        "explained_variance_ratio_sum": 0.95854008,
+        "seconds": 0.2364
+      },
+      "pca64": {
+        "component_bytes": 98304,
+        "components": 64,
+        "explained_variance_ratio_sum": 0.55945063,
+        "seconds": 0.0641
+      },
+      "svd128": {
+        "component_bytes": 196608,
+        "components": 128,
+        "explained_variance_ratio_sum": 0.76810443,
+        "seconds": 0.1602
+      },
+      "svd256": {
+        "component_bytes": 393216,
+        "components": 256,
+        "explained_variance_ratio_sum": 0.95883298,
+        "seconds": 0.3153
+      },
+      "svd64": {
+        "component_bytes": 98304,
+        "components": 64,
+        "explained_variance_ratio_sum": 0.56105882,
+        "seconds": 0.0866
+      }
+    },
+    "original384": {
+      "dimension": 384,
+      "estimated_score_block_bytes": 43616256,
+      "seconds": 3.3424,
+      "top10_preservation": {
+        "mean_top10_overlap": 1.0,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 21297
+      },
+      "vector_bytes": 32712192
+    },
+    "pca128": {
+      "dimension": 128,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "pca128.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 588890112,
+      "process_peak_rss_bytes": 588890112,
+      "seconds": 3.3566,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.77031976,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 1987
+      },
+      "vector_bytes": 10904064
+    },
+    "pca256": {
+      "dimension": 256,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "pca256.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 573833216,
+      "process_peak_rss_bytes": 588890112,
+      "seconds": 3.421,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.87720336,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 5761
+      },
+      "vector_bytes": 21808128
+    },
+    "pca64": {
+      "dimension": 64,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "pca64.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 588890112,
+      "process_peak_rss_bytes": 588890112,
+      "seconds": 3.3651,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.59660046,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 440
+      },
+      "vector_bytes": 5452032
+    },
+    "svd128": {
+      "dimension": 128,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "svd128.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 588890112,
+      "process_peak_rss_bytes": 588906496,
+      "seconds": 3.2753,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.79922055,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 2519
+      },
+      "vector_bytes": 10904064
+    },
+    "svd256": {
+      "dimension": 256,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "svd256.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 588890112,
+      "process_peak_rss_bytes": 588890112,
+      "seconds": 3.2804,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.9573555,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 13508
+      },
+      "vector_bytes": 21808128
+    },
+    "svd64": {
+      "dimension": 64,
+      "estimated_score_block_bytes": 43616256,
+      "neighbors_file": "svd64.top10.npy",
+      "neighbors_file_bytes": 852008,
+      "peak_rss_before_bytes": 588906496,
+      "process_peak_rss_bytes": 588906496,
+      "seconds": 3.2172,
+      "top10_preservation": {
+        "mean_top10_overlap": 0.61174344,
+        "queries": 21297,
+        "queries_with_candidates": 21297,
+        "queries_with_exact_top10": 472
+      },
+      "vector_bytes": 5452032
+    }
+  },
+  "coverage": {
+    "eligible_catalog_rows": 23454,
+    "input_dimensions": 384,
+    "input_dtype": "float32",
+    "input_rows": 21297,
+    "platform_rows": {
+      "atcoder": 7467,
+      "codeforces": 10881,
+      "leetcode": 2949
+    },
+    "retrieval": "all vector rows queried; cross-platform targets only; same candidate group excluded",
+    "sample": {
+      "2d_distance": "Euclidean; cross-platform targets; same candidate group excluded",
+      "neighborhood_baseline": "exact cosine within sampled cohort; cross-platform targets; same candidate group excluded",
+      "platform_rows": {
+        "atcoder": 1000,
+        "codeforces": 1000,
+        "leetcode": 1000
+      },
+      "requested_cap": 3000,
+      "rows": 3000,
+      "seed": 17
+    }
+  },
+  "environment": {
+    "machine": "arm64",
+    "numpy": "2.1.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.13.2"
+  },
+  "implementation_sha256": "c06a2750de925d7a09e13da07ecb2a96271d8eb9a4e4841a17d269c4679c62bb",
+  "inputs": {
+    "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/full-catalog/catalog-v1/catalog.v1.jsonl": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+    "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/full-catalog/embeddings-v1/A1/keys.json": "9f25d5c0430b7ada95c78e0f3d966e61e6ba2c11fe838778d386e8707f24bdff",
+    "/Users/jeonghun/Algorithm-RAG-Engine/private-learning/full-catalog/embeddings-v1/A1/vectors.npy": "f5669fbed78ab8aae760088e19f85ee35702977fe9dd0428c0ea8afd04ff85f1"
+  },
+  "method": "A1 title embedding dimensionality reduction ablation",
+  "outputs": {
+    "original384.top10.npy": {
+      "bytes": 852008,
+      "sha256": "bb3aba72430dd0fc275e374a016d7cf6c75996b88440c8404c33ed985bdef583"
+    },
+    "pca128.top10.npy": {
+      "bytes": 852008,
+      "sha256": "072603de86108f6e8557b979edd786bb5879e4a9f6409840232fe461b9cb73ee"
+    },
+    "pca256.top10.npy": {
+      "bytes": 852008,
+      "sha256": "fd8d9e59612e0cf29115ca1ff165eb5c064cd29b3905f4d72ad8ad4c931d6b73"
+    },
+    "pca64.top10.npy": {
+      "bytes": 852008,
+      "sha256": "ac29cc14be9351ccfebdc280c66abe6c605132b52eb404c61ee1a33c7a6cadbf"
+    },
+    "sample-indices.npy": {
+      "bytes": 24128,
+      "sha256": "740ca704a97b4395d1bed77c9a7f131a34bc65ac0b2653d09be1fb7f251f9902"
+    },
+    "sample-keys.json": {
+      "bytes": 86464,
+      "sha256": "20fbe450453cadbec4921e6e511880f1f073b1356609b77dbbb22b5f909c1cbf"
+    },
+    "sample-pca2.npy": {
+      "bytes": 24128,
+      "sha256": "bc8b4861f3ccc849234f446bb3eebaf8d8a084dd1f6f466f33936d0290430af1"
+    },
+    "sample-pca2.png": {
+      "bytes": 245880,
+      "sha256": "4460952e06977d0b7555723103beb79c962a541e570eb9253a8575ad36713e9e"
+    },
+    "sample-svd2.npy": {
+      "bytes": 24128,
+      "sha256": "44a1421b511daf5150b3713d442ab42c372157a77deaccbee80272d327875a60"
+    },
+    "sample-svd2.png": {
+      "bytes": 243916,
+      "sha256": "6c4f5d247912e7b2b38a3992903c0004edbff40d7cbc4971d6ceb2326f7d475a"
+    },
+    "sample-tsne2.npy": {
+      "bytes": 24128,
+      "sha256": "1ca1b47a4edad0911794b13abeafde163fa823177ef0393685356067d87acd4b"
+    },
+    "sample-tsne2.png": {
+      "bytes": 272440,
+      "sha256": "940a36d9006989761e6b7c7c26f515ad9477dff9d632ac8d863345a952a3300d"
+    },
+    "sample-umap2.npy": {
+      "bytes": 24128,
+      "sha256": "26adba8b73466d874ad29b8197016d5def56a602831351bc4e0450e5161f4e39"
+    },
+    "sample-umap2.png": {
+      "bytes": 248481,
+      "sha256": "e5b16ac1477053f7d754665af46633a7043855d242c98efc06267f0358a442e6"
+    },
+    "svd128.top10.npy": {
+      "bytes": 852008,
+      "sha256": "361ac8350b37119d8f4f37958e02e1d0d7c56d5b909c5e0ec0c0ad437a74e0ad"
+    },
+    "svd256.top10.npy": {
+      "bytes": 852008,
+      "sha256": "12a88176c2f071e71daa613477d29c5911b0fe600e50ede01fbfd3f420da66a3"
+    },
+    "svd64.top10.npy": {
+      "bytes": 852008,
+      "sha256": "798777c3320f441d100ca4bd83de2c60faef5c9b939d1b3e668dc7e5fe7d0587"
+    }
+  },
+  "package_versions": {
+    "matplotlib": "3.10.8",
+    "numpy": "2.1.3",
+    "scikit-learn": "1.8.0",
+    "threadpoolctl": "3.6.0",
+    "umap-learn": "0.5.9.post2"
+  },
+  "persisted_artifacts": {
+    "<method>.top10.npy": "query-row order; target values are zero-based indices into input keys.json",
+    "original384.top10.npy": "query-row order; target values are zero-based indices into input keys.json",
+    "sample-<method>.npy": "2D coordinates in sample-keys.json row order",
+    "sample-indices.npy": "source-row indices into input keys.json, in coordinate row order",
+    "sample-keys.json": "problem keys in coordinate row order",
+    "transform_parameters": "recorded in receipt; PCA/SVD/UMAP/t-SNE fitted objects are not serialized"
+  },
+  "sampled_2d": {
+    "pca2": {
+      "coordinates_file": "sample-pca2.npy",
+      "coordinates_file_bytes": 24128,
+      "distance": "Euclidean",
+      "figure_file": "sample-pca2.png",
+      "figure_file_bytes": 245880,
+      "parameters": {
+        "seed": 17,
+        "solver": "randomized"
+      },
+      "process_peak_rss_bytes": 900300800,
+      "sample_rows": 3000,
+      "seconds": 0.0044,
+      "top10_overlap_vs_sampled_384d": {
+        "mean_top10_overlap": 0.05143333,
+        "queries": 3000,
+        "queries_with_candidates": 3000,
+        "queries_with_exact_top10": 0
+      }
+    },
+    "svd2": {
+      "coordinates_file": "sample-svd2.npy",
+      "coordinates_file_bytes": 24128,
+      "distance": "Euclidean",
+      "figure_file": "sample-svd2.png",
+      "figure_file_bytes": 243916,
+      "parameters": {
+        "seed": 17,
+        "solver": "randomized"
+      },
+      "process_peak_rss_bytes": 900300800,
+      "sample_rows": 3000,
+      "seconds": 0.0039,
+      "top10_overlap_vs_sampled_384d": {
+        "mean_top10_overlap": 0.03203333,
+        "queries": 3000,
+        "queries_with_candidates": 3000,
+        "queries_with_exact_top10": 0
+      }
+    },
+    "tsne2": {
+      "coordinates_file": "sample-tsne2.npy",
+      "coordinates_file_bytes": 24128,
+      "distance": "Euclidean",
+      "figure_file": "sample-tsne2.png",
+      "figure_file_bytes": 272440,
+      "parameters": {
+        "init": "pca",
+        "learning_rate": "auto",
+        "max_iter": 1000,
+        "method": "barnes_hut",
+        "metric": "cosine",
+        "n_components": 2,
+        "n_jobs": 1,
+        "perplexity": 30,
+        "random_state": 17
+      },
+      "process_peak_rss_bytes": 900300800,
+      "sample_rows": 3000,
+      "seconds": 5.5812,
+      "top10_overlap_vs_sampled_384d": {
+        "mean_top10_overlap": 0.36513333,
+        "queries": 3000,
+        "queries_with_candidates": 3000,
+        "queries_with_exact_top10": 8
+      }
+    },
+    "umap2": {
+      "coordinates_file": "sample-umap2.npy",
+      "coordinates_file_bytes": 24128,
+      "distance": "Euclidean",
+      "figure_file": "sample-umap2.png",
+      "figure_file_bytes": 248481,
+      "parameters": {
+        "metric": "cosine",
+        "min_dist": 0.1,
+        "n_components": 2,
+        "n_jobs": 1,
+        "n_neighbors": 15,
+        "random_state": 17,
+        "transform_seed": 17
+      },
+      "process_peak_rss_bytes": 900300800,
+      "sample_rows": 3000,
+      "seconds": 10.6339,
+      "top10_overlap_vs_sampled_384d": {
+        "mean_top10_overlap": 0.31496667,
+        "queries": 3000,
+        "queries_with_candidates": 3000,
+        "queries_with_exact_top10": 0
+      }
+    }
+  },
+  "schema": "unified-map-reduction.v1",
+  "seed": 17,
+  "source_verification": {
+    "receipt": "/Users/jeonghun/Algorithm-RAG-Engine/research/full_catalog/receipts/embeddings-A1.v1.json",
+    "receipt_sha256": "2f9e6573d731f6985879afd2e635e335b81fdca73c6a34383f3f9b23f9a66927",
+    "source_selection_digest": "02ad40c9a2b6c92cf7620a681fb880505c771cc29dda94839e408487e8a0f9c4",
+    "variant": "A1",
+    "verified_hashes": {
+      "catalog": "8bb5c753a62145c1b8104b5c55d6530cf59f4836a40de6200856cd960071e66a",
+      "keys.json": "9f25d5c0430b7ada95c78e0f3d966e61e6ba2c11fe838778d386e8707f24bdff",
+      "vectors.npy": "f5669fbed78ab8aae760088e19f85ee35702977fe9dd0428c0ea8afd04ff85f1"
+    }
+  },
+  "thread_cap": 1
+}

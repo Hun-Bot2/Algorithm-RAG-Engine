@@ -1,3 +1,5 @@
+> **2026-10-18:** the pipeline described below was removed after Baekjoon shut down; restore files from git tag `legacy-pipeline-final`. This document is historical.
+
 # Algorithm RAG Engine - STAR+Alpha Portfolio
 
 ## One-Line Summary
@@ -95,7 +97,7 @@ Benchmark results documented in `Evaluation_100/docs/REPORT.md` and `Evaluation_
 | Jina-v3 | 0.17 | 0.47 | 0.63 | 0.319 |
 | BGE-M3 | 0.15 | 0.40 | 0.53 | 0.272 |
 
-Important accuracy note: `README.md` describes a daily 07:00 KST Slack pipeline, but the current `.github/workflows/daily_algorithm_pipeline.yml` has the schedule commented out. In the current checked-in workflow, execution is manual through `workflow_dispatch`. The Docker Compose and workflow structure still support the heavy-job then light-job pipeline.
+Important accuracy note (updated 2026-10-18): the GitHub Actions workflows (`daily_algorithm_pipeline.yml`, `publish_docker.yml`) were removed after Baekjoon shut down; they were manual-only (`workflow_dispatch`) with the schedule commented out, so no daily run exists. The Docker Compose and workflow structure still support the heavy-job then light-job pipeline.
 
 ## Problem -> Solution -> Result -> Functions
 
@@ -354,8 +356,8 @@ Functions/classes:
 | LangSmith | Intended tracing/evaluation/feedback storage for LLM recommendation quality. | Evaluation helper modules. |
 | Docker multi-stage build | Separates heavy recommendation dependencies from light Slack delivery dependencies. | `heavy` and `light` stages in `Dockerfile`. |
 | Docker Compose | Runs heavy and light jobs with volumes and environment variables. | `docker-compose.yml`. |
-| GitHub Actions | CI workflow orchestration and GHCR image publishing. | `.github/workflows/*.yml`. |
-| GitHub Container Registry | Stores prebuilt heavy Docker image. | `publish_docker.yml`, `docker-compose.yml` image reference. |
+| GitHub Actions | Removed 2026-10-18 (CI orchestration and GHCR publishing); recoverable from git history. | none |
+| GitHub Container Registry | Stored the prebuilt heavy Docker image; its publish workflow was removed 2026-10-18. | `docker-compose.yml` image reference. |
 | AWS S3 | Stores indexes/artifacts outside Git and passes generated JSON between workflow jobs. | Workflow downloads NumPy index and uploads/downloads `recommendation_map.json`. |
 | JSON / JSONL | Simple durable format for records, metadata, ground truth, and recommendation maps. | Data, index metadata, evaluation files, artifacts. |
 | Pandas | Convenient tabular analysis in the evaluation experiments. | `Evaluation_100` analysis and production experiment engine. |
@@ -555,8 +557,8 @@ This inventory is generated from the checked-in Python files under `src`, `scrip
 |---|---|
 | `Dockerfile` | Multi-stage Docker image: `heavy` for recommendation generation, `light` for Slack bot. |
 | `docker-compose.yml` | Runs heavy job with sparse checkout and mounted indexes/artifacts; runs light bot with artifact volume. |
-| `.github/workflows/daily_algorithm_pipeline.yml` | Manual GitHub Actions pipeline: download NumPy index from S3, run heavy job, upload artifact, download artifact, run light bot. Schedule is currently commented out. |
-| `.github/workflows/publish_docker.yml` | Manual workflow that builds and pushes the heavy Docker image to GHCR. |
+| `.github/workflows/daily_algorithm_pipeline.yml` (removed 2026-10-18) | Manual GitHub Actions pipeline: download NumPy index from S3, run heavy job, upload artifact, download artifact, run light bot. Schedule is currently commented out. |
+| `.github/workflows/publish_docker.yml` (removed 2026-10-18) | Manual workflow that builds and pushes the heavy Docker image to GHCR. |
 | `artifacts/recommendation_map.json` | Sample/current generated recommendation output. |
 | `indexes/faiss_leetcode` | Earlier FAISS index files. |
 | `indexes/faiss_production` | Production-style FAISS index files from the older pipeline. |

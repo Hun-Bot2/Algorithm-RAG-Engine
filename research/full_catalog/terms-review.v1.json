@@ -1,0 +1,101 @@
+{
+  "schema": "terms-review.v1",
+  "spec": "specs/adaptive-learning/statement-collection.md#4-terms-review-gate-all-pending",
+  "prepared_by": "agent (read-only review; summaries paraphrased, not legal advice)",
+  "prepared_at": "2026-10-16",
+  "approval": {
+    "status": "approved",
+    "approved_by": "user (repository owner, via chat)",
+    "approved_at": "2026-10-16",
+    "decision": "Accept agent recommendations. Reject Codeforces and LeetCode statement collection and the LeetCode isPaidOnly refresh. Skip AtCoder statement collection. Re-plan research on existing metadata. Agent to decide disposition of the 3,053 stored LeetCode statements (recorded in specs/adaptive-learning/full-catalog-similarity.md, D1)."
+  },
+  "method": "robots.txt fetched once per host with curl (User-Agent AlgorithmRAGEngine-terms-review/1.0) and hashed; terms pages read once (WebFetch for Codeforces/AtCoder, in-app browser for LeetCode because WebFetch received HTTP 403). No problem page, API or GraphQL endpoint was requested.",
+  "robots_snapshots": {
+    "codeforces.com": {
+      "url": "https://codeforces.com/robots.txt",
+      "http_status": 200,
+      "bytes": 3518,
+      "sha256": "7d930df0b686fb0b52a5a41273832543e0cd5e87d67d19e5766c20be847e8e71"
+    },
+    "atcoder.jp": {
+      "url": "https://atcoder.jp/robots.txt",
+      "http_status": 200,
+      "bytes": 350,
+      "sha256": "ac6bc56f9ecbcb004f92c462d2c569aeea84077aaf32eaf34767947a51d84210"
+    },
+    "leetcode.com": {
+      "url": "https://leetcode.com/robots.txt",
+      "http_status": 200,
+      "bytes": 514,
+      "sha256": "c09c8c0bfb00a5ab3de9d1fd8e9fd8c1b3307dd37fbd688cd1196ec0a934708d"
+    }
+  },
+  "items": [
+    {
+      "id": "T1",
+      "subject": "Codeforces terms on automated access and storing problem content",
+      "source": "https://codeforces.com/terms",
+      "source_revision": "no effective/revision date shown; footer copyright 2010-2026",
+      "summary": "The Terms and Conditions contain no clause on crawling, scraping or automated access, and none on problem statements or research use. Restrictions forbid using the site in ways that impact other users' access or damage the site, and forbid selling, sublicensing or otherwise commercializing site material. Governing law is UAE. Silence is not permission: community blog posts (non-authoritative) report active anti-crawling measures and concern about scraping for AI training.",
+      "agent_recommendation": "unclear_lean_reject",
+      "status": "rejected"
+    },
+    {
+      "id": "T2",
+      "subject": "Codeforces robots.txt for problem pages",
+      "source": "https://codeforces.com/robots.txt",
+      "summary": "For all agents, '/contest' is disallowed (prefix match covers /contest/{id}/problem/{index}); '/problemset/problem/' is not disallowed. Named scraping tools (Scrapy, python-requests, curl, Wget) are disallowed everywhere except /api/. Named AI crawlers (including GPTBot, anthropic-ai, Claude-Web, Google-Extended, CCBot, HuggingFaceBot) are disallowed entirely. A custom stdlib User-Agent would technically fall under '*', but the file's evident intent is that programmatic clients use /api/ only, and the API provides no statements.",
+      "agent_recommendation": "reject_html_statement_collection",
+      "status": "rejected"
+    },
+    {
+      "id": "T3",
+      "subject": "AtCoder Terms of Use on automated access, copying and storing task statements",
+      "source": "https://atcoder.jp/tos?lang=en",
+      "source_revision": "effective 2012-02-01; latest revision applied 2026-06-29",
+      "summary": "No clause mentions crawling, scraping or automated access, and there is no research or private-use exception. Prohibited matters include acts that cause or may cause damage to the services or the company, and a catch-all for acts AtCoder deems inappropriate. Rights in website text, images and programs belong to AtCoder or third parties (excluding user-created works). Separately, AtCoder reserves the right to provide user answer data to AI developers with consent, indicating it treats ML use of its data as something it controls. Governing law is Japan. No official guideline on reproducing statements was found.",
+      "agent_recommendation": "unclear_needs_user_decision",
+      "status": "skipped_by_user"
+    },
+    {
+      "id": "T4",
+      "subject": "AtCoder robots.txt for task pages",
+      "source": "https://atcoder.jp/robots.txt",
+      "summary": "For all agents, /contests/*/tasks/ is not disallowed (standings, submissions, clarifications, user history and servertime are). bingbot is asked for a 30-second crawl delay. Google-Extended and Applebot-Extended (AI-training opt-out tokens) are disallowed entirely, signalling opposition to AI training use of site content.",
+      "agent_recommendation": "technically_allowed_with_ai_use_signal",
+      "status": "skipped_by_user"
+    },
+    {
+      "id": "T5",
+      "subject": "LeetCode Terms of Service on automated access to GraphQL list metadata",
+      "source": "https://leetcode.com/terms/",
+      "source_revision": "last modified 2024-04-05",
+      "summary": "Use of Services > Restrictions states that crawling, scraping or spidering any part of the Service is strictly forbidden, and also forbids processes that run while not logged in or place undue load. The Content section defines questions and solutions as LeetCode's exclusive copyrighted property. There is no research exception. This applies to a metadata-only GraphQL refresh as well as to statements.",
+      "agent_recommendation": "reject",
+      "status": "rejected"
+    },
+    {
+      "id": "T6",
+      "subject": "LeetCode robots.txt for /graphql",
+      "source": "https://leetcode.com/robots.txt",
+      "summary": "For all agents, /graphql and /api/ are disallowed. Problem description pages under /problems/ are not disallowed, but T5 forbids scraping regardless.",
+      "agent_recommendation": "reject",
+      "status": "rejected"
+    },
+    {
+      "id": "T7",
+      "subject": "Is private, non-redistributed, research-only use acceptable per source?",
+      "summary": "None of the three sources grants a research or private-use exception. LeetCode explicitly forbids scraping. Codeforces restricts scraping tools to /api/ in robots.txt. AtCoder neither forbids nor permits it, but opts out of AI-training crawlers. Consequence for existing data: the 3,053 stored LeetCode statements were collected through /graphql by scripts/collection/leetcode_data_collection.py, which conflicts with current LeetCode terms and robots.txt. The stored data is not deleted by this review, but its continued research use is a user decision. The third-party mirror used by leetcode_check_new_fast.py is itself derived from LeetCode and does not cure this.",
+      "agent_recommendation": "per_source: leetcode=reject_new_collection_and_decide_existing_data; codeforces=reject; atcoder=user_decision (contact AtCoder or skip)",
+      "status": "rejected_for_new_collection"
+    },
+    {
+      "id": "T8",
+      "subject": "May aggregate-only results (no statement text) be committed?",
+      "summary": "Counts, IDs, hashes, metrics and plots derived from statements contain no copyrighted text. No source terms address derived aggregates. This is lower risk than storing statements, but it inherits the legitimacy of the collection itself.",
+      "agent_recommendation": "accept_only_for_sources_whose_collection_is_approved",
+      "status": "accepted_for_existing_metadata_aggregates_only"
+    }
+  ],
+  "overall_assessment": "Under the spec's own rule (any rejected or unclear item removes that source), the evidence supports no new statement collection from Codeforces or LeetCode and no LeetCode isPaidOnly refresh. AtCoder is the only source with no explicit prohibition; proceeding there needs explicit user acceptance of the AI-use signal, or written permission from AtCoder. Metadata already collected through documented APIs (Codeforces problemset.problems, kenkoooo AtCoder Problems) is unaffected."
+}
