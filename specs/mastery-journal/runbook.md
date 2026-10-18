@@ -147,3 +147,35 @@ record an attempt or infer an outcome. O/X/hint metadata uses the existing commi
 convention; missing metadata stays unverified. Rewritten history stops ingestion
 and surfaces a warning, requiring explicit investigation/re-anchoring rather than
 silently replaying history. No Git hooks or background OS service are installed.
+
+## Markdown-only solution entry
+
+Copy `../algorithm-solution/templates/solution.md` into a recognized problem path,
+for example `leetcode/two-sum.md` or `leetcode/two-sum/README.md`. Replace the
+attempt, outcome and hints placeholders. No TXT file or Outcome commit trailer is
+required. The detailed Korean guide is `templates/MARKDOWN-GUIDE.md` in that repo.
+
+```md
+---
+learning_schema: 1
+attempt: 2026-10-18-01
+outcome: O
+hints: none
+activity: practice
+---
+# Solution
+```
+
+Use X for failure and assisted for a non-independent solution. Optional minutes
+must be measured; omit unknown time. Use a new attempt token only for a real new
+attempt. Prose-only edits retain one observation. Changed outcome metadata under
+an existing token is flagged, never used to overwrite history. Existing explicit
+commit outcome/hints trailers retain precedence. Invalid marked blocks are
+skipped, with warnings exposed through local sync status. Templates are ignored.
+
+With the solutions repository registered and the local journal running, ordinary
+local commits are read on the existing five-second poll; the idle visible journal
+then refreshes. Push is optional. A push from another computer must first reach
+this local checkout; this service does not fetch, pull, or install remote hooks.
+Previously processed commits are not silently rescanned. No real learner import
+or repository registration was performed while implementing this feature.

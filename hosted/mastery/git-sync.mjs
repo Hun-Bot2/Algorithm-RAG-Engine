@@ -6,8 +6,9 @@ export function createGitSync({db,learnerId,intervalMs=5000}) {
   if (!db || typeof learnerId!=='string' || !learnerId) throw new TypeError('db and learnerId are required');
   if (!Number.isFinite(intervalMs) || intervalMs<1) throw new RangeError('intervalMs must be a positive number');
   let timer=null, inFlight=null, closed=false;
-  const state={running:false,started:false,closed:false,lastStartedAt:null,lastFinishedAt:null,lastResults:[],lastError:null};
+  const state={running:false,started:false,closed:false,lastStartedAt:null,lastFinishedAt:null,lastResults:[],lastWarnings:[],lastError:null};
 
+  const warningsByRepo=new Map();
   async function runTick() {
     state.running=true;
     state.lastStartedAt=new Date().toISOString();
@@ -20,6 +21,12 @@ export function createGitSync({db,learnerId,intervalMs=5000}) {
         catch (error) { results.push({repo_id:repoId,status:'error',error:String(error?.message ?? error)}); }
       }
       state.lastResults=results;
+      for(const result of results)if(result.status==='ok' && result.commits>0){
+        const warnings=Object.values(result.flags ?? {}).flat();
+        if(result.unclassified?.length)warnings.push('unclassified_commits');
+        warningsByRepo.set(result.repo_id,warnings);
+      }
+      state.lastWarnings=[...warningsByRepo].filter(([,flags])=>flags.length).map(([repo_id,flags])=>({repo_id,flags:[...new Set(flags)]}));
       const failures=results.filter(result=>result.status==='error');
       state.lastError=failures.length ? failures.map(result=>`${result.repo_id}: ${result.error}`).join('; ') : null;
     } catch (error) {
@@ -49,7 +56,7 @@ export function createGitSync({db,learnerId,intervalMs=5000}) {
     return status();
   }
 
-  function status() { return {...state,lastResults:state.lastResults.map(result=>({...result}))}; }
+  function status() { return {...state,lastWarnings:state.lastWarnings.map(w=>({...w,flags:[...w.flags]})),lastResults:state.lastResults.map(result=>({...result}))}; }
 
   async function close() {
     if (timer) clearInterval(timer);

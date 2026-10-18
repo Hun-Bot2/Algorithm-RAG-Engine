@@ -36,11 +36,15 @@ test('manual ticks ingest only new commits and retain failed independent-claim p
   assert.equal(ledger.attempts.length,1);
   assert.equal(ledger.attempts[0].outcome,'reported_completion');
   assert.equal(ledger.git_observations[0].payload.outcome,'reported_completion');
-  assert.equal((await sync.tick()).lastResults[0].status,'up_to_date');
+  assert.ok(first.lastWarnings[0].flags.includes('independent_without_hints_trailer'));
+  const unchanged=await sync.tick();
+  assert.equal(unchanged.lastResults[0].status,'up_to_date');
+  assert.deepEqual(unchanged.lastWarnings,first.lastWarnings,'warnings survive idle polling');
   assert.equal((await readLedger(db,'owner')).attempts.length,1,'repeat tick adds no duplicate');
   r.commit('atcoder/abc300_d/main.py','two','second\n\nOutcome: failed','2026-10-17T11:00:00+09:00');
   const second=await sync.tick();
   assert.equal(second.lastResults[0].observed,1);
+  assert.deepEqual(second.lastWarnings,[],'clean subsequent ingestion clears warnings');
   ledger=await readLedger(db,'owner');
   assert.deepEqual(ledger.attempts.map(row=>row.outcome),['reported_completion','failed']);
 });

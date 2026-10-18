@@ -98,3 +98,20 @@ per-repository error containment, close waiting and missing outcome/hint provena
 The prior mobile browser receipt predates automatic polling; it is not presented
 as proof of this new timer-driven refresh. Actual repositories/learner DBs were
 not registered, changed or ingested during implementation.
+
+## Markdown-first ingestion — 2026-10-18
+
+Full Node regression suite: **143/143 passed**, with loopback socket permission.
+The initial restricted run could not bind localhost (EPERM); the permitted rerun
+passed. The new eight-test Markdown suite covers outcome/hints validation,
+per-file multi-problem metadata, trailer precedence, note-edit deduplication,
+new attempt tokens, conflicting reused tokens, invalid blocks, template exclusion,
+folder README identity and legacy behavior. Sync tests additionally verify that
+warnings survive idle polling and clear after clean subsequent ingestion.
+The actual sibling solution template was parsed: unfilled placeholders reject,
+and filled metadata yields independent success. Post-validation learner SQLite SHA-256 was recorded as
+fd0745a387cce626d7431701d932cd76770a11c306c792849c6a24eaa9dc0141;
+this is a current receipt, not a before/after integrity assertion.
+No real solutions were imported; no schema, remote hooks, fetch/pull or deployment
+was added. The existing sibling convention checker may still warn about absent
+Outcome commit trailers; the new ingester accepts valid Markdown metadata.

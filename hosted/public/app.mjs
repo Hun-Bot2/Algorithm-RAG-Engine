@@ -1230,7 +1230,7 @@ async function pollLocalEvidence(){
   try{
     const result=await request("/local/sync");
     const blocked=result.status?.lastResults?.find(item=>['history_rewritten','error'].includes(item.status));
-    const warning=blocked ? '풀이 저장소 자동 읽기를 멈췄어요. 경로나 Git 이력 변경 여부를 확인해 주세요.' : null;
+    const warning=blocked ? '풀이 저장소 자동 읽기를 멈췄어요. 경로나 Git 이력 변경 여부를 확인해 주세요.' : result.status?.lastWarnings?.length ? '일부 풀이 기록에 확인할 항목이 있어요. Markdown 형식과 중복 시도 ID를 확인해 주세요.' : null;
     if(warning!==localSyncWarning){localSyncWarning=warning;if(warning)showNotice(warning,true);}
     if(result.revision===localRevision)return;
     const filters=[...document.querySelectorAll('.journal-filters input,.journal-filters select')].map(el=>[el.id,el.value]);

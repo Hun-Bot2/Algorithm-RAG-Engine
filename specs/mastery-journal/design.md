@@ -67,3 +67,17 @@ revision/status endpoint, and refresh a visible idle journal only when evidence
 changes; do not disrupt an open attempt form. Stop polling before closing SQLite.
 Validate with synthetic repositories and in-memory learners. No real repo/store
 registration or ingestion during implementation.
+
+## Markdown-first ingestion
+
+Reuse git_observations and Git watermarks. A small dependency-free flat front-matter
+parser accepts only learning_schema: 1, problem, attempt, outcome, hints, activity,
+transfer_from and minutes. Read the committed blob, not the live worktree. Never
+execute YAML or infer metadata from solution prose. Per-file metadata allows multiple
+problems in one commit without copying one outcome across unrelated files. Explicit
+commit outcome/hint/activity metadata retains precedence; Problem alone can select
+identity without suppressing Markdown metadata. Conflicts/identity mismatches fail
+closed and are reported. Stable attempt IDs and normalized metadata hashes prevent
+note edits from adding success evidence; source path/commit/hash remain provenance.
+Unmarked Markdown retains the legacy unverified first-touch path. No schema changes,
+LLM calls, automatic commits, pulls or push hooks are introduced.

@@ -24,3 +24,15 @@
   time MUST remain distinct from explicitly confirmed timer intervals.
 - Test synthetic databases only. Preserve real learner data, catalog/research files
   and unrelated work. Core SHALL require no API/LLM/cloud; no deployment or push.
+
+## Markdown-first attempt entry
+
+The registered Git ingester SHALL accept explicit, versioned flat front matter from
+committed Markdown/MDX. No duplicate TXT/commit outcome entry is required. The body
+SHALL NOT be used to infer independent success/hints. `O` requires explicit no hints;
+unknown outcome remains unverified. Problem keys must agree with recognized paths.
+An attempt token scopes a real attempt per problem/repository: note-only changes
+MUST NOT add attempts, while a new token permits review/new attempts. Changing a
+counted token's metadata SHALL be flagged instead of silently overwriting history.
+Existing explicit commit outcome trailers remain supported and take precedence.
+Original files, real learner history and remote Git configuration remain untouched.
