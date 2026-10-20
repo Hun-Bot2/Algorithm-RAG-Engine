@@ -1,8 +1,9 @@
 // Local polling wrapper for registered Git repositories. It never registers repos
 // or inspects working-tree files; git-ingest reads committed history only.
 import {ingestRepository} from './git-ingest.mjs';
+import {readLedger} from './ledger.mjs';
 
-export function createGitSync({db,learnerId,intervalMs=5000}) {
+export function createGitSync({db,learnerId,intervalMs=5000,catalogRoot,catalogProvider=null}) {
   if (!db || typeof learnerId!=='string' || !learnerId) throw new TypeError('db and learnerId are required');
   if (!Number.isFinite(intervalMs) || intervalMs<1) throw new RangeError('intervalMs must be a positive number');
   let timer=null, inFlight=null, closed=false;
@@ -17,7 +18,7 @@ export function createGitSync({db,learnerId,intervalMs=5000}) {
     try {
       const repos=(await db.prepare('SELECT repo_id FROM git_repositories WHERE learner_id=? ORDER BY repo_id').bind(learnerId).all()).results;
       for (const {repo_id:repoId} of repos) {
-        try { results.push(await ingestRepository(db,learnerId,repoId)); }
+        try { results.push(await ingestRepository(db,learnerId,repoId,{catalogRoot,catalog:catalogProvider ? await catalogProvider(await readLedger(db,learnerId)) : null})); }
         catch (error) { results.push({repo_id:repoId,status:'error',error:String(error?.message ?? error)}); }
       }
       state.lastResults=results;

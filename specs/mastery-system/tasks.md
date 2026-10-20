@@ -135,3 +135,11 @@ Commands:
   the CLI plus SQL views satisfy R13 locally.
 - MS-904 not triggered: no review retention data.
 - Deviations are listed in `design.md` section 15.
+
+
+## Daily study logs
+
+- [x] Parse platform/date files and resolve table identities against the active catalog.
+- [x] Reuse immutable observation tokens for edit deduplication and conflict reporting.
+- [x] Connect CLI and polling to the same catalog configuration.
+- [x] Validate regression tests and replay the committed three-problem study log in an isolated DB (150 Node tests; 3 independent attempts; repeat ingest 0).

@@ -66,3 +66,43 @@ Date filters must name their basis (`attempt:`, `contest:`, `first_seen:`).
 
 `python3 -m research.mastery_catalog.relatedness export|merge|agreement` (see its docstring).
 AI judgments are recorded as `ai_reviewed`, never gold; learner verdicts are the primary signal.
+
+
+## Daily Markdown study logs
+
+Commit `leetcode/YY-MM-DD.md`, `atcoder/YY-MM-DD.md`, `codeforces/YY-MM-DD.md`,
+or `daily/YY-MM-DD.md`. The first heading is `# YYYY-MM-DD` and the summary is:
+
+```md
+| 문제 | 결과 | 메모 |
+| --- | --- | --- |
+| Two Sum | O | optional note |
+| https://codeforces.com/problemset/problem/4/A | X | |
+```
+
+Problem names, pasted URLs, and Markdown links to original problem URLs are accepted.
+The pasted `[|Title](URL)|O|memo|` form is also accepted without editing the source.
+Titles match exactly after case/whitespace normalization within the directory's platform;
+`daily/` searches all platforms. No fuzzy matching or title-to-slug guessing is used.
+URL identities must also exist in the active, hash-verified catalog. Ambiguous/unresolved
+rows produce flags with file/line and are skipped. Activate a catalog before ingestion;
+without it ingestion throws before advancing the watermark and can be retried.
+
+O declares independent success (hints false); X declares failed/non-independent
+(hints unknown). `-` remains unrecorded: it produces a flag and no attempt, rather
+than inventing completion evidence. Memo text and detailed sections do not infer outcomes.
+Daily rows use their own outcome, never a commit-wide trailer. Duplicate rows collapse;
+conflicting outcomes for the same problem in a table are skipped with a flag.
+
+Identity is repository + canonical problem + date, independent of row order, memo and file
+location. Note edits and repeated polling are idempotent; the same problem on a new date
+is a new attempt. An outcome change for an imported date is flagged, never overwritten.
+Daily logs record only a date: `occurred_at` uses the Seoul date boundary (clamped to ingest
+now), not a claimed solve time. Provenance retains source SHA, path, row, date and catalog
+version (oversized source paths/rows retain a hash, with originals in the source commit). Legacy schema 1/2 files and trailer-based imports stay supported.
+
+Run `repo ingest` followed by `journal` for an evidence-refreshed recommendation.
+The legacy `plan` command freezes a date's first plan and does not refresh an existing one.
+No backfill, learner-DB migration, or repair of previously misidentified date-file rows is
+automatic. To import already-watermarked daily files, use a reviewed explicit anchor;
+inspect any existing wrong IDs separately instead of silently deleting history.

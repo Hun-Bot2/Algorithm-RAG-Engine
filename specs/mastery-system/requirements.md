@@ -56,8 +56,9 @@ so.
   opt-in CF/AtCoder sync (existing).
 - R2.2 Git ingestion SHALL walk all commits after the stored watermark. Rewritten
   history MUST stop ingestion for that repository and be reported.
-- R2.3 A Git outcome counts as independent only with explicit trailers. Otherwise
-  it is `reported_completion`, which never advances evidence state or ability.
+- R2.3 A Git outcome counts as independent only with an explicit independent/no-hints
+  trailer pair, valid schema-1/2 Markdown evidence, or an explicit O in a resolved daily row.
+  Unmarked legacy files are `reported_completion`; daily `-` creates no attempt.
 - R2.4 Self-reported minutes and confirmed timer intervals MUST be reported
   separately and never summed.
 - R2.5 The system MUST NOT call LeetCode `/api/`, `/graphql`, `/submissions` or
@@ -227,3 +228,12 @@ so.
 - Online-judge execution, AI-generated problems and learned mastery models.
 - Multi-user support.
 - Any statement collection rejected on 2026-10-16.
+
+
+## Daily study-log compatibility
+
+- Daily date-named Markdown files SHALL be interpreted as multi-problem tables, never as problem IDs.
+- An explicit O/X per row SHALL be independent/failed evidence respectively; an unrecorded `-` SHALL NOT create an attempt.
+- Problem identity SHALL resolve from exact catalog titles or supported original URLs, scoped by platform where available. Unknown or ambiguous identities SHALL be flagged and skipped.
+- Repository/canonical-problem/date SHALL identify one daily attempt. Memo edits SHALL be idempotent; changed outcomes SHALL be flagged without rewriting prior evidence.
+- CLI and local polling SHALL use the active verified catalog and the same ingestion path. Legacy formats SHALL remain compatible.

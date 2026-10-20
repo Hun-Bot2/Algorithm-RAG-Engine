@@ -25,7 +25,7 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
     try { return new Response(await readFile(new URL(filename,PUBLIC)),{headers:{'content-type':TYPES[extname(filename)]}}); }
     catch { return new Response('Not found',{status:404}); }
   }};
-  const gitSync=createGitSync({db,learnerId,intervalMs:gitSyncIntervalMs});
+  const gitSync=createGitSync({db,learnerId,intervalMs:gitSyncIntervalMs,catalogRoot,catalogProvider});
   const journal=createJournalService({db,catalogRoot,catalogProvider});
   const app = createApp({db,journal,curriculum,annotations,assets,authenticate:async()=>({learner_id:learnerId})});
   const server = createServer(async (incoming,outgoing) => {

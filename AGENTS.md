@@ -639,3 +639,11 @@ Keep these distinctions clear in summaries and docs:
   and Medium gates. Metadata variation is a proxy, not proven algorithm equivalence.
 - Browser writes require an isolated `browser-smoke` learner and disposable store.
   Set SMOKE_OUTPUT_DIR to a fresh private path; preserve earlier evidence receipts.
+
+
+## Daily study-log ingestion
+
+- Platform/date Markdown and `daily/YY-MM-DD.md` are multi-problem tables, never path-derived problem IDs.
+- Resolve plain titles exactly within the platform or validate supported URLs against the active catalog; ambiguous/missing identities are flagged, not guessed.
+- O/X are explicit row evidence. `-` creates no attempt. Date/problem tokens prevent memo edits from counting twice; outcome edits are flagged conflicts.
+- Use `repo ingest` then `journal` to see evidence-refreshed recommendations; `plan` is frozen per date. Test with temporary DBs, preserving the real learner DB.

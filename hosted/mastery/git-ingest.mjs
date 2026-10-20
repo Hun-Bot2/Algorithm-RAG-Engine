@@ -6,6 +6,10 @@ import {CONVENTION_VERSION,classify,frontMatterKey,keyFromPath,parseTrailers} fr
 import {markdownAttemptSignature,markdownBlobHash,parseMarkdownAttempt} from './markdown-attempt.mjs';
 import {appendLedger,listEntries} from './side-ledger.mjs';
 import {readLedger} from './ledger.mjs';
+import {dailyPath,parseDailyLog} from './daily-log.mjs';
+import {attachCatalog,loadCatalog} from './catalog.mjs';
+import {fileURLToPath} from 'node:url';
+import {join} from 'node:path';
 
 const git = (cwd,args,{allowFail=false}={}) => {
   try { return execFileSync('git',['-C',cwd,...args],{encoding:'utf8',maxBuffer:256*1024*1024,stdio:['ignore','pipe','pipe']}); }
@@ -32,12 +36,21 @@ function currentWatermark(ledger,repoId) {
 
 // Reads commits after the watermark, maps them to observations, and appends observations
 // plus the new watermark in one transaction. Returns a report; never rescans silently.
-export async function ingestRepository(db,learnerId,repoId,{now=new Date(),anchorSha=null}={}) {
+export async function ingestRepository(db,learnerId,repoId,{now=new Date(),anchorSha=null,catalog=null,catalogRoot=fileURLToPath(new URL('../../private-learning/mastery/',import.meta.url))}={}) {
   const repo=await db.prepare('SELECT * FROM git_repositories WHERE learner_id=? AND repo_id=?').bind(learnerId,repoId).first();
   if (!repo) throw new Error('unknown repository');
   const recordedAt=utc(now.toISOString());
   const ledger=await readLedger(db,learnerId);
   const mark=currentWatermark(ledger,repoId);
+  const getDailyCatalog=()=>{
+    if(catalog)return catalog;
+    const current=ledger.catalog_switches.at(-1);
+    if(!current)throw new Error('daily logs require an active catalog; run catalog use, then retry repo ingest');
+    const version=current.payload.to_version;
+    const info=attachCatalog(db.sqlite,join(catalogRoot,version,`${version}.sqlite3`));
+    if(info.sha256!==current.payload.catalog_sha256)throw new Error('active catalog file differs from the logged switch');
+    catalog=loadCatalog(db.sqlite);return catalog;
+  };
   const watermarkEntry=(sha,status,observed,detail)=>({schema_version:1,entry_id:'wm-'+hash(repoId,recordedAt,sha ?? '',status).slice(0,32),learner_id:learnerId,
     occurred_at:recordedAt,recorded_at:recordedAt,source:'git',supersedes:null,payload:{repo_id:repoId,branch:repo.branch,last_processed_sha:sha,status,observed,detail}});
   const head=git(repo.path_hint,['rev-parse',`${repo.branch}^{commit}`]).trim();
@@ -82,6 +95,22 @@ export async function ingestRepository(db,learnerId,repoId,{now=new Date(),ancho
         if (parts.some(x=>['template','templates','example','examples'].includes(x)) || /(?:^|[-_.])template(?:[-_.]|$)/i.test(parts.at(-1)) || (!pathKey && /^(?:readme|index|notes?)(?:\.|$)/i.test(parts.at(-1)))) continue;
         const blob=git(repo.path_hint,['show',`${c.sha}:${path}`],{allowFail:true});
         if (blob===null) continue;
+        if(dailyPath(path)) {
+          const parsed=parseDailyLog(path,blob,getDailyCatalog());
+          if(parsed.flags.length)(flagsByCommit[c.sha]??=[]).push(...parsed.flags.map(flag=>`${path}:${flag}`));
+          for(const row of parsed.rows) {
+            const md=row.metadata,key=md.problem_key,semantic=markdownAttemptSignature(md),token=`${key}\0${md.attempt}`;
+            const prior=priorMarkdown.get(token);
+            if(prior!==undefined){if(prior!==semantic)(flagsByCommit[c.sha]??=[]).push('markdown_attempt_conflict:'+key);continue;}
+            priorMarkdown.set(token,semantic);
+            const observedAt=utc(new Date(Math.min(Date.parse(`${row.date}T00:00:00+09:00`),now.getTime())).toISOString());
+            const provenance={markdown_source:path.length<=500?path:`path_sha256:${hash(path)}`,markdown_sha256:markdownBlobHash(blob),markdown_attempt:md.attempt,markdown_semantic:semantic,
+              daily_date:row.date,daily_line:String(row.line),daily_row:row.raw.length<=500?row.raw:`row_sha256:${hash(row.raw)}`,daily_catalog_version:catalog.version};
+            observations.push({schema_version:1,entry_id:'git-'+hash(repoId,key,md.attempt).slice(0,40),learner_id:learnerId,occurred_at:observedAt,recorded_at:recordedAt,source:'git',supersedes:null,
+              payload:{repo_id:repoId,sha:c.sha,path,problem_key:key,outcome:md.outcome,hints:md.hints,self_minutes:null,activity_type:'practice',transfer_from:null,trailers:provenance}});
+          }
+          continue;
+        }
         const parsed=parseMarkdownAttempt(blob,{inferredProblem:pathKey});
         if (parsed.marked) {
           const inferred=pathKey ?? frontMatterKey(path,blob);

@@ -25,6 +25,7 @@ const stem = name => name.replace(/\.[A-Za-z0-9]+$/,'');
 const NON_PROBLEM = /^(readme|index|notes?|template|license|overview|intro|algorithm|\.gitkeep)$/i;
 // Maps one repository path to a platform-qualified key, or null.
 export function keyFromPath(path) {
+  if (/^(?:daily|leetcode|atcoder|codeforces)\/\d{2}-\d{2}-\d{2}\.md$/.test(String(path))) return null;
   const parts=String(path).split('/').filter(Boolean);
   for (let i=0;i<parts.length-1;i++) {
     const platform=PLATFORM_DIRS[parts[i].toLowerCase()];

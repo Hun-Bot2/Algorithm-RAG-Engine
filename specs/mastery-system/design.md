@@ -477,3 +477,15 @@ Explore rotation is reproducible scheduling. It does not establish that any sub-
 better; channel comparisons in reports are descriptive.
 
 Runbook: `specs/mastery-system/runbook.md`.
+
+
+## Daily log ingestion
+
+`hosted/mastery/daily-log.mjs` is a pure parser/resolver; `git-ingest.mjs` calls it before
+legacy path inference. The active catalog is verified using its receipt and logged hash,
+then lazily loaded once per ingest. CLI passes its catalog root; local polling passes the
+same root/provider used by the journal. No new SQL schema or external services are needed.
+The existing Markdown token/signature provenance and append-only Git observation ledger
+provide deduplication/conflict reporting. Daily per-row outcomes override no other rows;
+commit-wide trailers apply only to legacy files. Date-only timestamps and missing outcomes
+are defined in the runbook; uncertain identity never falls back to a guessed slug.

@@ -88,7 +88,7 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
     if (command==='repo' && sub==='ingest') {
       const repos=(await db.prepare('SELECT repo_id FROM git_repositories WHERE learner_id=? ORDER BY repo_id').bind(learnerId).all()).results.map(r=>r.repo_id).filter(id=>!o.id || id===o.id);
       const reports=[];
-      for (const id of repos) reports.push(await ingestRepository(db,learnerId,id,{now,anchorSha:o.anchor ?? null}));
+      for (const id of repos) reports.push(await ingestRepository(db,learnerId,id,{now,anchorSha:o.anchor ?? null,catalogRoot}));
       out(reports); return reports.some(r=>r.status==='history_rewritten') ? 3 : 0;
     }
     if (command==='attempt') {
