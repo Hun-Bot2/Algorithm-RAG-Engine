@@ -43,7 +43,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   Accept: CF same problem ×20 equals ×1; predictions use `p_mean` with the ±1.2816 SD interval and lo ≤ p ≤ hi always
   (property test over random inputs); `calibration.mjs` tests unchanged and passing.
 
-- [ ] **T5 Readiness, follow-up, v2 reviews** [§7]. Depends on: T3, T4.
+- [x] **T5 Readiness, follow-up, v2 reviews** [§7]. Depends on: T3, T4.
   Files: `progression-v2.mjs` (readiness, follow-up), `hosted/mastery/reviews-v2.mjs`, `hosted/test/mastery-progression-v2-state.test.mjs`.
   Accept: readiness needs both the posterior condition and ≥1 own observation (carry-over alone is never ready);
   prerequisite readiness excludes problems carrying the dependent concept; empty or exhausted cells are waived with the
@@ -90,3 +90,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T2 (2026-10-29): SciPy 1.14.1 reference 49 points; focused 2/2, full Node 261/261 pass. CDF tolerance 1e-9, quantile 1e-7.
 - T3 (2026-10-29): 10 independent SciPy cell scenarios matched within 1e-9; full Node 266/266 pass (includes independently added review fixtures). v1 files unchanged.
 - T4 (2026-10-29): platform repeat/interval property fixtures pass; full Node 267/267 pass.
+- T5 (2026-10-29): readiness/follow-up/review focused fixtures pass; independent Terra review corrected sparse config validation and failure due-day; full Node 269/269 pass.

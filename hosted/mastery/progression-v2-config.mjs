@@ -31,7 +31,7 @@ export function loadProgressionConfig(input=authoredConfig) {
   for (const level of ['1','2','3']) {
     const pair=input.level_priors[level];
     if (!Array.isArray(pair) || pair.length!==2) throw new TypeError(`Invalid level_priors.${level}`);
-    pair.forEach(x=>number(x,`level_priors.${level}`,0,Infinity,true));
+    Array.from(pair).forEach(x=>number(x,`level_priors.${level}`,0,Infinity,true));
     priors[level]=Object.freeze([...pair]);
   }
   const weightKeys=['challenge_fit','information','coverage','follow_up','continuity'];
@@ -40,7 +40,7 @@ export function loadProgressionConfig(input=authoredConfig) {
   for (const key of weightKeys) { number(input.weights[key],`weights.${key}`,0,Infinity); weights[key]=input.weights[key]; }
   days(input.follow_up_days,'follow_up_days');
   if (!Array.isArray(input.review_days) || input.review_days.length===0) throw new TypeError('Invalid review_days');
-  input.review_days.forEach((value,i)=>{
+  Array.from(input.review_days).forEach((value,i)=>{
     days(value,'review_days');
     if (i && value<=input.review_days[i-1]) throw new TypeError('Invalid review_days');
   });
