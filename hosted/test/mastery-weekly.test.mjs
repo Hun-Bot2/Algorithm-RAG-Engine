@@ -91,7 +91,7 @@ test('weekly report is deterministic, lists focus and data quality, and renders 
   assert.equal(md,renderMarkdown(report));
   for (const line of ['# Weekly report 2026-10-19 to 2026-10-25','## Calibration','- Focus: tries','Confirmed timer minutes: 25; self-reported minutes: 20','do not prove','descriptive, not causal'])
     assert.ok(md.includes(line),line);
-  assert.ok(md.includes('Solve rate (this week): 3/9 (insufficient evidence; need 10)'));
+  assert.ok(md.includes('Completion rate (policy v3) (this week): 3/9 (insufficient evidence; need 10)'));
 });
 
 import {weeklySlackPayload} from '../mastery/slack-weekly.mjs';

@@ -25,7 +25,7 @@ function fixtureCatalog(){
 function setup(t,{catalogProvider=()=>fixtureCatalog(),catalogRoot='/no-such-catalog-root',clock=at('2026-10-19',12)}={}){
   const db=createDatabase(':memory:');t.after(()=>db.close());
   let currentClock=clock;
-  const journal=createJournalService({db,catalogRoot,catalogProvider});
+  const journal=createJournalService({db,catalogRoot,catalogProvider,progressionVersion:'v1'});
   const app=createApp({db,journal,curriculum:CURRICULUM,authenticate:async()=>({learner_id:OWNER}),now:()=>new Date(currentClock)});
   const request=async(path,{method='GET',body,clock:nextClock}={})=>{
     if(nextClock)currentClock=nextClock;

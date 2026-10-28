@@ -633,7 +633,7 @@ function journalDifficulty(platform, value) {
 }
 
 function progressionStageLabel(value) {
-  return ({ leetcode_easy: "Easy 기초", leetcode_medium: "Medium 적용", cross_platform_transfer: "다른 플랫폼 전이", retention_review: "간격 복습" })[value] || value || "단계 미확인";
+  return ({ step_down: "기초로 돌아가기", consolidate: "현재 수준 다지기", step_up: "다음 수준 도전", stretch: "상위 수준 탐색", transfer: "다른 플랫폼 전이", leetcode_easy: "Easy 기초", leetcode_medium: "Medium 적용", cross_platform_transfer: "다른 플랫폼 전이", retention_review: "간격 복습" })[value] || value || "단계 미확인";
 }
 
 function progressionStatusLabel(value) {

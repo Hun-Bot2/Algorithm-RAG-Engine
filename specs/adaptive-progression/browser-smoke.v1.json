@@ -1,0 +1,56 @@
+{
+  "synthetic": true,
+  "receipts": [
+    {
+      "scenario": "dual_success",
+      "desktop_side_by_side": true,
+      "mobile_stacked": true,
+      "no_overflow": true,
+      "cache_view_no_new_api_attempts": true,
+      "provider_calls": 2,
+      "real_providers": false,
+      "responsive_widths": [
+        1440,
+        834,
+        390
+      ],
+      "record_edit_and_offline_retry": true,
+      "contest_sync_and_kst_dates": true,
+      "contest_fixture_calls": 3
+    },
+    {
+      "scenario": "partial_failure",
+      "desktop_side_by_side": true,
+      "mobile_stacked": true,
+      "no_overflow": true,
+      "cache_view_no_new_api_attempts": true,
+      "provider_calls": 2,
+      "real_providers": false,
+      "responsive_widths": [
+        1440,
+        834,
+        390
+      ],
+      "record_edit_and_offline_retry": false,
+      "contest_sync_and_kst_dates": false,
+      "contest_fixture_calls": 0
+    },
+    {
+      "scenario": "both_failed",
+      "desktop_side_by_side": true,
+      "mobile_stacked": true,
+      "no_overflow": true,
+      "cache_view_no_new_api_attempts": true,
+      "provider_calls": 2,
+      "real_providers": false,
+      "responsive_widths": [
+        1440,
+        834,
+        390
+      ],
+      "record_edit_and_offline_retry": false,
+      "contest_sync_and_kst_dates": false,
+      "contest_fixture_calls": 0
+    }
+  ]
+}

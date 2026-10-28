@@ -69,7 +69,7 @@ export function renderMarkdown(report) {
   for (const [days,r] of Object.entries(report.review.by_interval)) if (r.n) L.push(`- ${days}-day retention: ${fmtRate(r)}`);
   L.push('','## Outcomes','');
   for (const scope of ['week','rolling']) {
-    L.push(`- Solve rate (${scope==='week'?'this week':'4 weeks'}): ${fmtRate(report.outcomes.isr[scope].overall)}`);
+    L.push(`- Completion rate (policy v3) (${scope==='week'?'this week':'4 weeks'}): ${fmtRate(report.outcomes.isr[scope].overall)}`);
     for (const [p,r] of Object.entries(report.outcomes.isr[scope].by_platform)) L.push(`  - ${p}: ${fmtRate(r)}`);
     const e=report.outcomes.excess[scope];
     L.push(`- Excess solve rate vs stored predictions (${scope}): ${e.excess_solve_rate===null?'no data':e.excess_solve_rate} (n=${e.n}, ${e.status}; ${e.without_stored_prediction} attempts had no stored prediction)`);

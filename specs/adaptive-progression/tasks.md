@@ -77,7 +77,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   no alphabetical dependence (shuffling key order changes no winner except via the hash); the receipt states it measures behaviour, not relevance or learning.
   Reviewer sign-off before T9.
 
-- [ ] **T9 Default switch and docs** [§10]. Depends on: T8 + reviewer sign-off.
+- [x] **T9 Default switch and docs** [§10]. Depends on: T8 + reviewer sign-off.
   Files: `journal.mjs` default `'v2'`, CLI `--progression v1|v2` (optional), `specs/mastery-journal/runbook.md`,
   `RECOMMENDATION_ENGINE/` pointer, `AGENTS.md`, and rename the weekly "independent solve rate" label to "completion rate
   (policy v3)".
@@ -95,3 +95,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T7 (2026-10-29): default/explicit v1 serialized output matches pre-integration fixture; v2 snapshot/config isolation, evidence-prefix transitions and independent review lane tests pass. Future ratings excluded at each prefix; full Node 281/281 pass. catalog-v4 synthetic 10-plan run: 618.259292 ms; 10-prefix transition replay: 619.67925 ms (Node26.8.1 macOS arm64, one run, not a general benchmark).
 - T8 (2026-10-29): catalog-v4 verified read-only. Four synthetic scenarios completed (CF-only exhausted after 25 steps; others60), 36 sensitivity combinations plus explicit research-only unit-attribution counterfactual; 41 runs, zero reversed-order mismatches. Receipt preserved at research/recommendation_audit/receipts/adaptive_replay.out. Independent Terra AI review signed off on behavioral scope only; not human validation or relevance/learning evidence.
 - T8 full regression after receipt preservation: Node283/283 pass (includes T9 completion-label preparation).
+- T9 (2026-10-29): v2 default after T8 sign-off; explicit v1 remains byte-identical, actual learner seed forwarded, CLI invalid option rejected before DB open. Node286/286, Python74/74 passed; Chrome workspace smoke3/3 synthetic provider scenarios passed (no real providers), widths1440/834/390. Final label-only Slack parity regression included before commit.

@@ -42,7 +42,7 @@ const USAGE=`usage: node hosted/cli.mjs <command> [options]
   explanation-records                        private local research records as JSON
   explanation-costs --path FILE               append user-supplied actual USD cost receipts
   explanation-otel [--out FILE]               redacted offline OTLP export (no network)
-  journal                                    current curriculum journal as JSON (immutable evidence revisions)
+  journal [--progression v1|v2]               current curriculum journal as JSON (immutable evidence revisions)
   plan [--date YYYY-MM-DD]                    build (or show the frozen) plan for a day
   mock-contest create|show [--date YYYY-MM-DD] [--count 5-7] [--minutes N]   weekly LeetCode mock contest: date + solving time (default 120m), immutable, no attempts
   related --problem KEY [--channel concept|title_v2|title_v2_cross]
@@ -53,7 +53,7 @@ const USAGE=`usage: node hosted/cli.mjs <command> [options]
 common: --db PATH (default private-learning/hosted.sqlite3) --learner ID (default local-owner) --catalog-root DIR (default private-learning/mastery)`;
 
 const ROOT=fileURLToPath(new URL('..',import.meta.url));
-const options={db:{type:'string'},learner:{type:'string'},'catalog-root':{type:'string'},version:{type:'string'},id:{type:'string'},path:{type:'string'},branch:{type:'string'},
+const options={progression:{type:'string'},db:{type:'string'},learner:{type:'string'},'catalog-root':{type:'string'},version:{type:'string'},id:{type:'string'},path:{type:'string'},branch:{type:'string'},
   anchor:{type:'string'},problem:{type:'string'},outcome:{type:'string'},minutes:{type:'string'},hints:{type:'string'},activity:{type:'string'},from:{type:'string'},at:{type:'string'},
   plan:{type:'string'},candidate:{type:'string'},verdict:{type:'string'},source:{type:'string'},channel:{type:'string'},platform:{type:'string'},rating:{type:'string'},
   participations:{type:'string'},handle:{type:'string'},mastery:{type:'string'},'weekday-minutes':{type:'string'},date:{type:'string'},week:{type:'string'},out:{type:'string'},
@@ -64,6 +64,7 @@ export async function run(argv,{print=console.log,fetcher=fetch,env=process.env}
   const {values:o,positionals}=parseArgs({args:argv,options,allowPositionals:true});
   const [command,sub]=positionals;
   if (!command) { print(USAGE); return 1; }
+  if(o.progression&&!['v1','v2'].includes(o.progression))throw new Error('progression must be v1 or v2');
   const dbPath=resolve(o.db ?? join(ROOT,'private-learning/hosted.sqlite3'));
   mkdirSync(dirname(dbPath),{recursive:true,mode:0o700});
   const db=createDatabase(dbPath);
@@ -157,7 +158,7 @@ export async function run(argv,{print=console.log,fetcher=fetch,env=process.env}
     }
     if(command==='journal'||command==='explain'){
       const explanations=createExplanationService({cacheRoot:join(dirname(dbPath),'explanations'),env,fetcher});
-      const journal=withExplanations(createJournalService({db,catalogRoot}),explanations,db);
+      const journal=withExplanations(createJournalService({db,catalogRoot,progressionVersion:o.progression??'v2'}),explanations,db);
       const view=await journal.view(learnerId,now);
       out(command==='explain'?await explanations.decorate(learnerId,view,{generate:true,retryFailed:Boolean(o['retry-failed']),snapshotPlan:snapshotPlanReader(db,learnerId)}):view);return 0;
     }

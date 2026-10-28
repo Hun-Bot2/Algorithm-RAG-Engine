@@ -1,6 +1,6 @@
 # Adaptive progression: requirements (progression-v2)
 
-Status: accepted 2026-10-29 (ADR 006), implementation pending (`tasks.md`). Governs `progression-v2` only; v1 remains
+Status: accepted 2026-10-29 (ADR 006), implemented T1-T9 (`tasks.md`, `validation.md`). Governs `progression-v2` only; v1 remains
 for history. Decisions: ADR 006 D1–D11. Provisional assumptions are marked (P) and SHALL NOT be described as optimised.
 
 ## Input and preservation

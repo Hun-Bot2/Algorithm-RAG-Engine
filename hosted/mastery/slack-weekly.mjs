@@ -7,7 +7,7 @@ const section=text=>({type:'section',text:{type:'mrkdwn',text:text.length>MAX_SE
 export function weeklySlackPayload(report) {
   const blocks=[{type:'header',text:{type:'plain_text',text:`Weekly report ${report.week_start} – ${report.week_end}`.slice(0,150)}}];
   blocks.push(section(`*Activity* ${report.activity.total} attempts · ${Object.entries(report.activity.by_platform).map(([k,v])=>`${escape(k)} ${v}`).join(', ') || 'none'}`));
-  blocks.push(section(`*Independent solve rate* week ${rate(report.outcomes.isr.week.overall)} · 4 weeks ${rate(report.outcomes.isr.rolling.overall)}\n*Transfer* ${rate(report.outcomes.transfer)} · *On-time reviews* ${rate(report.review.on_time)}`));
+  blocks.push(section(`*Completion rate (policy v3)* week ${rate(report.outcomes.isr.week.overall)} · 4 weeks ${rate(report.outcomes.isr.rolling.overall)}\n*Transfer* ${rate(report.outcomes.transfer)} · *On-time reviews* ${rate(report.review.on_time)}`));
   const t=report.outcomes.trajectory;
   blocks.push(section(`*Practice ability* CF ${t.codeforces.current.mean}±${t.codeforces.current.sd} (${t.codeforces.current.status}) · AtCoder ${t.atcoder.current.mean}±${t.atcoder.current.sd} (${t.atcoder.current.status})`));
   if (report.next_week_focus.length) blocks.push(section(`*Next week* ${report.next_week_focus.map(f=>`${escape(f.concept)} — ${escape(f.reason)}`).join('\n')}`));

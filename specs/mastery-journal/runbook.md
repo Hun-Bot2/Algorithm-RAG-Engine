@@ -189,3 +189,32 @@ leetcode/solution.md was moved there to avoid a fake problem identity. The
 standalone checker ships a snapshot of the exact parser with only its problem-key
 import replaced; parser changes must synchronize both copies. No real attempts,
 registration, background service startup or push was performed.
+
+## 적응형 progression-v2 (2026-10-29)
+
+T8 합성 재생과 독립 AI 검토 후 일지의 기본 추천을 v2로 전환했습니다. `plan` 명령의 기존 일별 동결 정책은 그대로입니다.
+
+```sh
+node hosted/cli.mjs journal                      # v2; 네트워크 호출 없음
+node hosted/cli.mjs journal --progression v1     # 이전 정책으로 조회
+PROGRESSION_VERSION=v1 node hosted/local.mjs     # 로컬 화면도 이전 정책으로 실행
+```
+
+날짜별 Markdown 형식은 바꾸지 않습니다. 같은 문제의 같은 서울 날짜 기록은 마지막 결과 하나만 씁니다. 첫 날짜는 능력 관측,
+다음 날짜부터는 실제 결과와 간격을 가진 복습 관측입니다. 복습 표시와 메모는 능력 근거가 아니며 시간은 보여주기만 합니다.
+새 개념은 authored prior에서 시작하고, 해당 개념의 첫 능력 관측 이후 다른 개념의 이력으로 수준별 prior를 보정합니다.
+
+추천의 `action`은 기초로 돌아가기(step_down), 현재 수준 다지기(consolidate), 다음 수준 도전(step_up), 상위 수준 탐색(stretch),
+다른 플랫폼 전이(transfer)입니다. `estimate.p`와 `interval`은 모형의 추정 평균과 구간이며 실측 정답률이 아닙니다.
+`benefit_proxy`는 추천 순서를 위한 가정적 점수이며 확률이나 학습 효과가 아닙니다. 구성요소 `D/I/C/F/K`는 도전 수준 적합도,
+추정 불확실성 감소, 새 태그 변형, 미해결 후속 연습, 현재 개념의 연속성입니다. 가중치와 `config_sha256`도 함께 기록합니다.
+
+`readiness`에는 준비도와 선행 조건 면제가, `coverage`에는 개념 기반 후보 부족이 표시됩니다. 제목 유사도로 대체하지 않습니다.
+실패 후속 연습은 같은 수준 이하의 해결로 닫히거나 14일 뒤 만료됩니다. 이 기간과 가중치는 경험적으로 최적화되지 않았습니다.
+복습과 progression은 별도 레인이어서 제안 시간 합계가 하루 예산을 넘을 수 있으며 그 경우 안내가 표시됩니다.
+
+기존 기록과 과거 스냅샷을 수정하지 않습니다. 새 버전·설정·근거에 대해 새 일지 스냅샷이 생성됩니다. 이전 AI 설명은 과거
+스냅샷에 남고, 새 추천의 설명은 별도 명시적 `explain` 실행 전에는 생성하지 않습니다. 주간 표시는 completion rate (policy v3)로
+정정했지만 기존 `isr` JSON 키와 통계 계산은 호환성을 위해 유지합니다. 주간 복습/보정 통계는 기존 정의이며 v2 성능 검증이 아닙니다.
+
+검증 기록: `specs/adaptive-progression/validation.md`. 실제 학습자 DB는 테스트에 사용하지 않았습니다.

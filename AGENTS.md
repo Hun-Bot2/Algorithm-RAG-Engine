@@ -742,3 +742,16 @@ Keep these distinctions clear in summaries and docs:
 - Convert filesystem file URLs with fileURLToPath/pathToFileURL. CLI roots and catalog SQLite URI paths have regressions for spaces, Korean, # and %; real Windows execution remains unverified.
 - hosted/runtime/database.mjs owns the SQLite adapter. Test helpers re-export it for compatibility. Existing nonempty DBs receive a SQLite VACUUM INTO snapshot before pending migrations; newer schemas and receipt drift are rejected. Stop concurrent writers before upgrading. No automatic relocation, restore or backup deletion.
 - Full Node tests require loopback sockets; EPERM in restricted runs is environmental. Final 2026-10-29 regression: Node 254/254 and Python 74/74 passed; no real learner DB was used.
+
+## Recommendation audit and adaptive progression (2026-10-29)
+
+- Audit: research/recommendation_audit/REPORT.md (scripts + receipts; reads the private catalog read-only). The journal shows planner reviews
+  plus one progression item; v1 Easy/Medium picks are alphabetical, and several concepts stall on catalog coverage.
+- Daily Markdown rows always ingest as `practice`, so anything needing a declared activity type (v1 transfer/retention, review-stage growth)
+  is unreachable from the user's real input. The 복습 column is a user review request, never evidence; memos are never evidence.
+- Accepted direction: progression-v2 (ADR 006, specs/adaptive-progression/). Implement T1-T9 in order behind journal option
+  `progressionVersion` (default v2 after T8 behavioral AI-review sign-off; v1 selectable); do not modify core/policy.mjs, calibration.mjs or progression.mjs (v1 must stay
+  byte-identical). D2-D4, D6 and the 14-day follow-up are provisional: never describe them as optimised.
+- No independent relevance labels and only 9 real attempts exist: do not report precision, calibration or learning effects as measured.
+
+- Progression-v2 T1-T9 implemented 2026-10-29. Fresh concepts retain authored priors (user clarification); updates begin after own LC evidence. Never use future ratings in evidence-prefix transitions. Review and progression lanes are independent; CLI journal --progression v1 and local PROGRESSION_VERSION=v1 preserve old output. T8 is synthetic behavioral evidence, not human gold, calibration or learning benefit.

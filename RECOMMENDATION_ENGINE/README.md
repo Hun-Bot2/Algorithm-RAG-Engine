@@ -1,5 +1,7 @@
 # Recommendation engine: implementation audit
 
+Current journal recommendation: progression-v2 (ADR 006); see [design](../specs/adaptive-progression/design.md), [validation](../specs/adaptive-progression/validation.md) and the [Korean runbook](../specs/mastery-journal/runbook.md). The audit below remains historical.
+
 > Historical snapshot (2026-10-20). Since policy v3 (2026-10-28, ADR 005) the policy counts every completion as solved;
 > stored outcomes below are unchanged. Current desktop-readiness state: `specs/desktop-readiness/status.md`.
 

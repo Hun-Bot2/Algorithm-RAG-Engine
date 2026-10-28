@@ -158,3 +158,12 @@ test('CLI mock-contest create/show stores one immutable snapshot per date and ne
   assert.match(text[0],/insufficient LeetCode evidence/);
   assert.match(text[0],/https:\/\/leetcode\.com\/problems\//);
 });
+
+test('CLI journal selects v2 by default and preserves explicit v1 without inference calls',async t=>{
+ const dir=mkdtempSync(join(tmpdir(),'progression-cli-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));fixtureCatalog(dir);
+ const lines=[];const cli=(...args)=>run([...args,'--db',join(dir,'learner.sqlite3'),'--catalog-root',join(dir,'cat'),'--now','2026-10-29T00:00:00Z'],{print:x=>lines.push(x),fetcher:()=>{throw new Error('unexpected network');},env:{}});
+ await cli('catalog','use','--version','catalog-t1');
+ await cli('journal');assert.equal(JSON.parse(lines.at(-1)).plan.progression.policy,'progression-v2');
+ await cli('journal','--progression','v1');assert.equal(JSON.parse(lines.at(-1)).plan.progression.version,'progression-v1');
+ await assert.rejects(cli('journal','--progression','invalid'),/progression must/);
+});

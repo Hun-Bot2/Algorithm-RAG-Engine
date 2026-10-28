@@ -18,7 +18,7 @@ const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const PUBLIC = new URL('./public/',import.meta.url);
 const TYPES = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
 export async function startLocal({port=8787,database=resolve(ROOT,'private-learning/hosted.sqlite3'),learnerId='local-owner',
-  curriculum,annotations={},catalogRoot=resolve(ROOT,'private-learning/mastery'),catalogProvider=null,gitSyncIntervalMs=5000,autoGitSync=true,explanationEnv=process.env,contestFetcher}={}) {
+  curriculum,annotations={},catalogRoot=resolve(ROOT,'private-learning/mastery'),catalogProvider=null,gitSyncIntervalMs=5000,autoGitSync=true,explanationEnv=process.env,contestFetcher,progressionVersion='v2'}={}) {
   const databasePath = database === ':memory:' ? database : resolve(database);
   if (databasePath !== ':memory:') await mkdir(dirname(databasePath),{recursive:true,mode:0o700});
   const db = createDatabase(databasePath);
@@ -32,7 +32,7 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
   }};
   const gitSync=createGitSync({db,learnerId,intervalMs:gitSyncIntervalMs,catalogRoot,catalogProvider});
   const explanations=createExplanationService({cacheRoot:resolve(dirname(databasePath),'explanations'),env:explanationEnv});
-  const journal=withExplanations(createJournalService({db,catalogRoot,catalogProvider}),explanations,db);
+  const journal=withExplanations(createJournalService({db,catalogRoot,catalogProvider,progressionVersion}),explanations,db);
   const contests=async({learnerId,now})=>{
     const cache=await cachedProviders(db,learnerId,now),ledger=await readLedger(db,learnerId,{cutoff:now.toISOString()});
     let catalog;try{catalog=catalogProvider?await catalogProvider(ledger):activeLocalCatalog(db,ledger,catalogRoot);}catch{/* No catalog: explicit insufficient evidence. */}
@@ -82,7 +82,7 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const {curriculum,annotations} = await import('./generated/curriculum.mjs');
-  const service = await startLocal({port:Number(process.env.PORT ?? 8787),database:process.env.LOCAL_DATABASE,learnerId:process.env.LOCAL_LEARNER_ID ?? 'local-owner',curriculum,annotations});
+  const service = await startLocal({port:Number(process.env.PORT ?? 8787),database:process.env.LOCAL_DATABASE,learnerId:process.env.LOCAL_LEARNER_ID ?? 'local-owner',curriculum,annotations,progressionVersion:process.env.PROGRESSION_VERSION??'v2'});
   console.log(`Private development service: ${service.url} (loopback only; not Access authentication)`);
   const stop = async()=>{await service.close();process.exit(0);};
   process.once('SIGINT',stop);process.once('SIGTERM',stop);

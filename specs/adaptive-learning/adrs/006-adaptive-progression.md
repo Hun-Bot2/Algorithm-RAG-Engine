@@ -1,6 +1,6 @@
 # ADR 006: Adaptive progression (progression-v2)
 
-Status: accepted (user decisions), 2026-10-29. Implementation pending (`specs/adaptive-progression/tasks.md`).
+Status: accepted (user decisions), 2026-10-29. Implemented T1-T9 (`specs/adaptive-progression/tasks.md`, validation.md).
 Spec: `specs/adaptive-progression/`. Evidence: `research/recommendation_audit/REPORT.md`.
 
 ## Context

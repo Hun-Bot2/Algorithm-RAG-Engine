@@ -33,11 +33,11 @@ export function activeLocalCatalog(db,ledger,root) {
   const catalog=loadCatalog(db.sqlite);catalog.base_version=switches[0].payload.to_version;return catalog;
 }
 const level=p=>p?.platform==='leetcode'?({1:'Easy',2:'Medium',3:'Hard'}[p.difficulty_value] ?? p.difficulty_value):p?.difficulty_value ?? null;
-const stageRows=p=>p.concepts?Object.entries(p.concepts).map(([pattern,s])=>({...s,pattern,stage:s.next_stage ?? s.stage ?? s.stages?.[s.stage_index]?.id ?? null})):p.patterns ?? p.stages ?? [];
+const stageRows=p=>p.concepts?Object.entries(p.concepts).map(([pattern,s])=>({...s,status:s.status ?? (s.readiness ? s.readiness.eligible ? 'in_progress' : 'blocked_prerequisite' : undefined),pattern,stage:s.next_stage ?? s.stage ?? s.best_action ?? s.stages?.[s.stage_index]?.id ?? null})):p.patterns ?? p.stages ?? [];
 const nextCandidate=p=>p.next ?? p.candidate ?? stageRows(p).find(x=>x.candidate)?.candidate ?? null;
 
-export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[],progressionVersion='v1',progressionConfig=defaultConfig}) {
-  if(progressionVersion==='v2')return journalPlanV2({date,now,ledger,catalog,preferences,priorPlans,config:progressionConfig,implementationHash:V2_POLICY_CODE_HASH});
+export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[],progressionVersion='v2',progressionConfig=defaultConfig,learnerId='local-owner'}) {
+  if(progressionVersion==='v2')return journalPlanV2({date,now,ledger,catalog,preferences,priorPlans,learnerId,config:progressionConfig,implementationHash:V2_POLICY_CODE_HASH});
   if(progressionVersion!=='v1')throw new Error('unknown progression version');
   const rhythm=[...preferences.weekly_rhythm],day=weekInfo(date).weekday;
   const contestDay=['virtual','upsolve'].includes(rhythm[day]);
@@ -68,7 +68,7 @@ export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[],p
     budget_minutes:budget,curriculum_version:interview.version,progression_config_sha256:digest({interview,patternConfig}),implementation_sha256:POLICY_CODE_HASH};
 }
 
-export function createJournalService({db,catalogRoot,catalogProvider=null,progressionVersion='v1',progressionConfig=defaultConfig}) {
+export function createJournalService({db,catalogRoot,catalogProvider=null,progressionVersion='v2',progressionConfig=defaultConfig}) {
   if(!['v1','v2'].includes(progressionVersion))throw new Error('unknown progression version');
   progressionConfig=loadProgressionConfig(progressionConfig);
   const load=ledger=>catalogProvider?catalogProvider(ledger):activeLocalCatalog(db,ledger,catalogRoot);
@@ -86,7 +86,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null,progre
     const plans=historyPlans.filter(p=>!p.archived);
     const key='journal-'+digest({date,version:JOURNAL_VERSION,catalog:catalog.version,attempts:ledger.attempts,ratings:ledger.rating_observations,preferences,interview,patternConfig,implementation:progressionVersion==='v1'?POLICY_CODE_HASH:V2_POLICY_CODE_HASH,...(progressionVersion==='v2'?{progressionVersion,config_hash:canonicalConfigHash(progressionConfig)}:{})}).slice(0,40);
     let plan=await getSnapshot(db,learnerId,key,date);
-    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,progressionVersion,progressionConfig,priorPlans:[...plans,...mockExposurePlans(mockContests.filter(m=>!m.archived))]});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
+    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,learnerId,progressionVersion,progressionConfig,priorPlans:[...plans,...mockExposurePlans(mockContests.filter(m=>!m.archived))]});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
     const all=[...historyPlans.filter(p=>p.archived || p.snapshot_id!==key),plan];
     const queue=progressionVersion==='v2'?v2ReviewQueue(ledger,catalog,date,progressionConfig):reviewQueue(problemStates(ledger.attempts,catalog),catalog,date);
     const entries=[];
@@ -108,7 +108,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null,progre
     }
     for(const p of all.filter(x=>x.snapshot_id))for(const [i,s] of p.slots.entries())entries.push({...s,id:(p.archived?'archive-':'')+p.snapshot_id+'-'+i,type:'recommendation',archived:Boolean(p.archived),occurred_at:p.prepared_at ?? p.event_cutoff ?? null,local_date:p.date ?? p.local_date,snapshot_id:p.snapshot_id,priority:s.review_priority ?? 'normal',pattern:(s.concepts ?? []).join(', ')});
     // Reproducible mastery changes are derived at evidence prefixes, not an editable second ledger.
-    if(progressionVersion==='v2')entries.push(...v2Transitions({ledger,catalog,preferences,config:progressionConfig}));
+    if(progressionVersion==='v2')entries.push(...v2Transitions({ledger,catalog,preferences,learnerId,config:progressionConfig}));
     else {
     const initial=planProgression({date,catalog,ledger:{...ledger,attempts:[]},config:{...patternConfig,...interview,version:patternConfig.version},evidenceOnly:true});
     let previous=new Map(stageRows(initial).map(s=>[s.pattern,canonicalJson({stage:s.stage,status:s.status})]));

@@ -1,6 +1,6 @@
 # Adaptive progression: design (progression-v2)
 
-Status: accepted 2026-10-29 (ADR 006); implementation pending. Implements `requirements.md`. References: the audit
+Status: accepted 2026-10-29 (ADR 006); implemented T1-T9 (see validation.md). Implements `requirements.md`. References: the audit
 `research/recommendation_audit/REPORT.md` and its receipts (*exec*), or source reading (*static*). (P) marks a provisional
 assumption, versioned and shown, with no claim of empirical optimisation.
 

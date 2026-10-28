@@ -19,3 +19,12 @@ Read-only catalog-v4, synthetic10 sequential recommendations and then ten eviden
 ## Preservation and limitations
 
 V1 serialized pre-integration fixture stays byte-identical when selected. V1 historical implementation fingerprint is deliberately frozen; v2 has a separate implementation fingerprint/config hash. No migrations, ledgers, Markdown parser, backups or v1 planner/calibration/progression/core-policy behavior changed. Existing snapshots remain history. Weekly retention/calibration metrics still use their existing v1 metric definitions; the label correction does not claim v2 metric validation. No live AI calls, browser smoke, Windows run or causal evaluation.
+
+
+## T9 rollout receipt
+
+V2 is now the default for journal/local runtime only after T8 behavioral sign-off. CLI `journal --progression v1` and local `PROGRESSION_VERSION=v1` select historical behavior. Legacy `plan` unchanged. T9 tests explicitly keep v1's old progression expectations on v1 while testing the default v2 separately. Actual learner ID is forwarded for tie-breaking. No real DB was opened to activate the new policy.
+
+Final Node regression286/286 passed; Python74/74 passed. Chrome `SMOKE_OUTPUT_DIR=<fresh temporary directory> node hosted/workspace-browser-smoke.mjs` exited0: three mocked-provider scenarios (dual_success, partial_failure, both_failed), widths1440/834/390. Structured receipt is browser-smoke.v1.json; screenshots remain private/temporary at /tmp/progression-v2-browser.IpuWKR. This proves synthetic browser behavior, not live APIs. Slack completion-label parity is payload-only; nothing sent. Windows/Intel Mac and learning efficacy remain unverified.
+
+Reviewer handoff: observations/config and beta-math -> leetCodeCells/platformAbilities -> readiness/follow-up/reviews -> planProgressionV2 -> journal-v2/journal -> CLI/local defaults. Review raw T8 output and its source hash; verify golden v1 snapshot, cutoff/seed/config tests and unchanged v1 policy files. No push performed. Unrelated distribution-rights, .claude and historical research-audit work preserved outside implementation commits.
