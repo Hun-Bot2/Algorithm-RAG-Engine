@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Local mastery-system CLI (ADR 003: the local SQLite database is canonical). No network unless a
 // command explicitly says so (`rating sync-cf`). Shares the database with `npm run dev`.
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {parseArgs} from 'node:util';
 import {existsSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 import {resolve,dirname,join} from 'node:path';
@@ -51,7 +52,7 @@ const USAGE=`usage: node hosted/cli.mjs <command> [options]
   status
 common: --db PATH (default private-learning/hosted.sqlite3) --learner ID (default local-owner) --catalog-root DIR (default private-learning/mastery)`;
 
-const ROOT=resolve(new URL('..',import.meta.url).pathname);
+const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const options={db:{type:'string'},learner:{type:'string'},'catalog-root':{type:'string'},version:{type:'string'},id:{type:'string'},path:{type:'string'},branch:{type:'string'},
   anchor:{type:'string'},problem:{type:'string'},outcome:{type:'string'},minutes:{type:'string'},hints:{type:'string'},activity:{type:'string'},from:{type:'string'},at:{type:'string'},
   plan:{type:'string'},candidate:{type:'string'},verdict:{type:'string'},source:{type:'string'},channel:{type:'string'},platform:{type:'string'},rating:{type:'string'},
@@ -279,6 +280,6 @@ export function formatMockContest(m) {
   return lines.join('\n');
 }
 
-if (import.meta.url===`file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
   run(process.argv.slice(2)).then(code=>{ process.exitCode=code; },error=>{ console.error(`error: ${error.message}`); process.exitCode=2; });
 }

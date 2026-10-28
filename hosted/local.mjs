@@ -4,7 +4,7 @@ import {libraryResponse} from './local-library.mjs';
 import {createServer} from 'node:http';
 import {readFile, mkdir, chmod} from 'node:fs/promises';
 import {resolve, dirname, extname} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createGitSync} from './mastery/git-sync.mjs';
 import {cachedProviders,syncProvider} from './provider-service.mjs';
 import {contestDiscoveryFit} from './mastery/contest-discovery-fit.mjs';
@@ -14,7 +14,7 @@ import {createExplanationService,withExplanations} from './mastery/explanations.
 import {createApp} from './core/app.mjs';
 import {createDatabase} from './test/helpers/d1.mjs';
 
-const ROOT=resolve(new URL('..',import.meta.url).pathname);
+const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const PUBLIC = new URL('./public/',import.meta.url);
 const TYPES = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.mjs':'text/javascript; charset=utf-8'};
 export async function startLocal({port=8787,database=resolve(ROOT,'private-learning/hosted.sqlite3'),learnerId='local-owner',
