@@ -1,5 +1,6 @@
 /** Loopback-only development service. Never bundled into the production Worker. */
 import {comparisonResponse} from './local-comparison.mjs';
+import {libraryResponse} from './local-library.mjs';
 import {createServer} from 'node:http';
 import {readFile, mkdir, chmod} from 'node:fs/promises';
 import {resolve, dirname, extname} from 'node:path';
@@ -31,7 +32,7 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
   }};
   const gitSync=createGitSync({db,learnerId,intervalMs:gitSyncIntervalMs,catalogRoot,catalogProvider});
   const explanations=createExplanationService({cacheRoot:resolve(dirname(databasePath),'explanations'),env:explanationEnv});
-  const journal=withExplanations(createJournalService({db,catalogRoot,catalogProvider}),explanations);
+  const journal=withExplanations(createJournalService({db,catalogRoot,catalogProvider}),explanations,db);
   const contests=async({learnerId,now})=>{
     const cache=await cachedProviders(db,learnerId,now),ledger=await readLedger(db,learnerId,{cutoff:now.toISOString()});
     let catalog;try{catalog=catalogProvider?await catalogProvider(ledger):activeLocalCatalog(db,ledger,catalogRoot);}catch{/* No catalog: explicit insufficient evidence. */}
@@ -48,6 +49,10 @@ export async function startLocal({port=8787,database=resolve(ROOT,'private-learn
       if (!/^127\.0\.0\.1:\d+$/.test(host ?? '')) { outgoing.writeHead(403);outgoing.end();return; }
       const base = `http://${host}`, url = new URL(incoming.url,base);
       if (url.origin !== base) { outgoing.writeHead(403);outgoing.end();return; }
+      if(url.pathname==='/api/local/library'||url.pathname.startsWith('/library/')){
+        const library=await libraryResponse(new Request(url,{method:incoming.method,headers:incoming.headers}),{root:ROOT});
+        outgoing.writeHead(library.status,Object.fromEntries(library.headers));outgoing.end(Buffer.from(await library.arrayBuffer()));return;
+      }
       if(url.pathname==='/api/local/comparison'||url.pathname.startsWith('/comparison/')){
         const proxy=await comparisonResponse(new Request(url,{method:incoming.method,headers:incoming.headers}));
         outgoing.writeHead(proxy.status,Object.fromEntries(proxy.headers));outgoing.end(Buffer.from(await proxy.arrayBuffer()));return;

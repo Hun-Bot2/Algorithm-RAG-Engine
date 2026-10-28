@@ -3,9 +3,11 @@ import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
+import numpy as np
 from urllib.parse import parse_qs, urlsplit
 
 from .compare import ROOT, METHODS, load_rankings, verify
+from .maps import attach_vectors, scope_map
 
 METHOD_INFO = {
     'minilm_title': {'label': '제목', 'description': '제목만 임베딩 · 기존 MiniLM 384D', 'score_label': '이 방식의 코사인 유사도'},
@@ -84,6 +86,14 @@ def response_data(dataset, path, params):
         query = params.get('q', [''])[0][:120].casefold().strip()
         found = [p for p in problems.values() if query in ((p['title'] or '')+' '+(p['native_key'] or '')+' '+p['problem_key']).casefold()]
         return [{k: p[k] for k in ('problem_key', 'title', 'platform')} for p in sorted(found, key=lambda p: (p['title'], p['problem_key']))[:30]]
+    if path == '/api/map':
+        method = params.get('method', [''])[0]
+        if method not in selected.get('rankings', {}):
+            raise KeyError('unknown method')
+        platform = params.get('platform', [''])[0] or None
+        if platform is not None and platform not in {p['platform'] for p in problems.values()}:
+            raise KeyError('unknown platform')
+        return scope_map(scope, selected, method, platform)
     if path in {'/api/problem', '/api/compare'}:
         key = params.get('key', [''])[0]
         if key not in problems:
@@ -133,7 +143,7 @@ def create_server(dataset, port=0):
             if parsed.path == '/':
                 return self.reply(200, html, 'text/html; charset=utf-8')
             try:
-                return self.reply(200, response_data(dataset, parsed.path, parse_qs(parsed.query, max_num_fields=4)))
+                return self.reply(200, response_data(dataset, parsed.path, parse_qs(parsed.query, max_num_fields=5)))
             except KeyError:
                 return self.reply(404, {'error': 'not found'})
             except ValueError:
@@ -169,6 +179,11 @@ def main():
                     raise ValueError('invalid scope file')
                 path=root/info['file'];verify(path,info['sha256'])
                 dataset['scopes'][name]=json.loads(path.read_text())
+    ideas=ROOT/'private-learning/recommendation-inputs/curriculum-ideas-v1'
+    if 'strategy_all' in dataset['scopes']:
+        # Rows follow strategy_all's problem order (sorted curriculum keys); maps.verified() rejects any mismatch.
+        vectors={name:np.load(ideas/f'{name}.npy') for name in ('title','idea_rationale','idea_structured') if (ideas/f'{name}.npy').exists()}
+        attach_vectors(dataset['scopes'],list(dataset['scopes']['strategy_all']['problems']),vectors)
     server = create_server(dataset, args.port)
     print(f'Historical input comparison: http://127.0.0.1:{server.server_port}', flush=True)
     print(f'{len(publisher["problems"])} admitted descriptions; scopes: {list(dataset["scopes"])}; read-only.', flush=True)

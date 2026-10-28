@@ -4,7 +4,7 @@ import {mkdtemp,rm,readFile,stat,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
-import {createExplanationService,explanationEvidence,explanationProviders,withExplanations,aggregateExplanationUsage,EXPLANATION_VERSION} from '../mastery/explanations.mjs';
+import {createExplanationService,explanationEvidence,explanationProviders,withExplanations,aggregateExplanationUsage,EXPLANATION_VERSION,pendingPlanEntries} from '../mastery/explanations.mjs';
 import {createExplanationStore} from '../mastery/explanation-store.mjs';
 import {explanationOtlp} from '../mastery/explanation-observability.mjs';
 import {createDatabase} from './helpers/d1.mjs';
@@ -197,4 +197,28 @@ test('Nemotron short prose disables thinking and persists its actual parameters 
  assert.deepEqual(service.records('owner')[1].attempt.generation_parameters.chat_template_kwargs,{enable_thinking:false});
  await createExplanationService({cacheRoot:root,env:configured,fetcher}).explain('owner',plan,slot,{generate:true,retryFailed:true});
  assert.deepEqual(calls,['gemini','nvidia']);
+});
+
+test('pending plans from earlier snapshots are explained from their stored plan; one generation per problem',async t=>{
+ const root=await fixture(t),calls=[];
+ const fetcher=async(url,options)=>{calls.push(request(options));return responseFor(options);};
+ const service=createExplanationService({cacheRoot:root,env,fetcher});
+ const old={date:'2026-10-26',catalog_version:'fixture-v1',policy_bundle:'fixture',slots:[{...slot,problem_key:'leetcode:carry',title:'Carry'},{...slot,problem_key:'leetcode:solved',title:'Solved'}]};
+ const later={...old,date:'2026-10-27'},stale={...old,date:'2026-10-10'};
+ const rec=(s,id,date,extra={})=>({...s,type:'recommendation',snapshot_id:id,local_date:date,occurred_at:`${date}T00:00:00Z`,...extra});
+ const v={available:true,date:'2026-10-28',plan:{...structuredClone(plan),date:'2026-10-28'},days:[{date:'2026-10-27',entries:[
+  rec(old.slots[0],'journal-old','2026-10-26'),rec(old.slots[1],'journal-old','2026-10-26'),rec(later.slots[0],'journal-later','2026-10-27'),
+  rec(stale.slots[0],'journal-stale','2026-10-10'),rec(old.slots[0],'journal-arch','2026-10-26',{archived:true}),
+  {type:'attempt',problem_key:'leetcode:solved',occurred_at:'2026-10-26T03:00:00Z',outcome:'independent'}]}]};
+ v.plan.slots=[];
+ assert.deepEqual(pendingPlanEntries(v).map(e=>`${e.snapshot_id}:${e.problem_key}`),['journal-old:leetcode:carry','journal-later:leetcode:carry']);
+ const plans={'journal-old':old,'journal-later':later};
+ const out=await service.decorate('owner',v,{generate:true,snapshotPlan:async id=>plans[id] ?? null});
+ assert.equal(calls.length,2,'only the displayed origin (earliest date) dispatches, once per provider');
+ assert.equal(JSON.parse(calls[0].input).recommendation_snapshot,'journal-old');assert.equal(JSON.parse(calls[0].input).date,'2026-10-26');
+ const entries=out.days[0].entries;
+ assert.equal(entries[0].explanation.source,'dual_models');assert.equal(entries[2].explanation.results[0].status,'not_generated');
+ assert.equal(entries[1].explanation,undefined);assert.equal(entries[3].explanation,undefined);assert.equal(entries[4].explanation,undefined);
+ const reread=await service.decorate('owner',v,{snapshotPlan:async id=>plans[id] ?? null});
+ assert.equal(calls.length,2);assert.equal(reread.days[0].entries[0].explanation.results[0].cache_hit,true);
 });

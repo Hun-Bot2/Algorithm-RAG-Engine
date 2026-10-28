@@ -17,6 +17,11 @@ const chrome=spawn(process.env.CHROME_BINARY ?? '/Applications/Google Chrome.app
 let chromeError=null;chrome.on('error',error=>{chromeError=error;});
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const receipts=[];
+// Fixture dates follow the real clock so upcoming-only lists never expire (civil Asia/Seoul dates).
+const kstDate=ms=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul'}).format(new Date(ms));
+const addDays=(d,n)=>{const x=new Date(`${d}T12:00:00Z`);x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10);};
+const todayKst=kstDate(Date.now()),monday=addDays(todayKst,7-(new Date(`${todayKst}T12:00:00Z`).getUTCDay()+6)%7);
+const WED=addDays(monday,2),FRI=addDays(monday,4),SUN=addDays(monday,6),YESTERDAY=addDays(todayKst,-1);
 try{
  let debugPort;
  for(let i=0;i<100;i++){
@@ -32,9 +37,9 @@ try{
   let contestCalls=0;
   const contestFetcher=async url=>{
     contestCalls++;
-    if(url.includes('codeforces'))return Response.json({status:'OK',result:[{id:99001,name:'Synthetic Wednesday Round',phase:'BEFORE',startTimeSeconds:Date.parse('2026-10-21T14:35:00Z')/1000,durationSeconds:7200}]});
-    if(url.includes('atcoder.jp'))return new Response(`<div id="contest-table-upcoming"><tbody><tr><td><time>2026-10-23 21:00:00+0900</time></td><td><a href="/contests/abc999">Synthetic Friday ABC</a></td><td>01:40</td><td>- 1999</td></tr></tbody></div>`);
-    return Response.json({schemaVersion:1,updatedAt:new Date().toISOString(),contests:[{platform:'leetcode',name:'Synthetic Sunday Weekly',url:'https://leetcode.com/contest/weekly-contest-999',startsAt:'2026-10-25T02:30:00Z',endsAt:'2026-10-25T04:00:00Z'}]});
+    if(url.includes('codeforces'))return Response.json({status:'OK',result:[{id:99001,name:'Synthetic Wednesday Round',phase:'BEFORE',startTimeSeconds:Date.parse(`${WED}T14:35:00Z`)/1000,durationSeconds:7200}]});
+    if(url.includes('atcoder.jp'))return new Response(`<div id="contest-table-upcoming"><tbody><tr><td><time>${FRI} 21:00:00+0900</time></td><td><a href="/contests/abc999">Synthetic Friday ABC</a></td><td>01:40</td><td>- 1999</td></tr></tbody></div>`);
+    return Response.json({schemaVersion:1,updatedAt:new Date().toISOString(),contests:[{platform:'leetcode',name:'Synthetic Sunday Weekly',url:'https://leetcode.com/contest/weekly-contest-999',startsAt:`${SUN}T02:30:00Z`,endsAt:`${SUN}T04:00:00Z`}]});
   };
   const service=await startLocal({port:0,database:join(directory,'learner.sqlite3'),learnerId:learner,curriculum:{schema_version:1,curriculum_version:'fixture-browser',problems:[],relationships:[]},catalogProvider:()=>catalog,autoGitSync:false,explanationEnv:env,contestFetcher});
   let socket;
@@ -57,6 +62,8 @@ try{
    const evaluate=async expression=>{const result=await call('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(result.exceptionDetails)throw Error(JSON.stringify(result.exceptionDetails));return result.result.value;};
    await call('Runtime.enable');await call('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});
    const wait=async expression=>{for(let i=0;i<100;i++){if(await evaluate(expression))return;await delay(80);}throw Error('Timed out: '+expression);};
+   // The month view starts at today; page to the month that holds a relative fixture date.
+   const showDate=async date=>{for(let i=0;i<3;i++){if(await evaluate(`Boolean(document.querySelector('[data-date="${date}"]'))`))return;await evaluate(`document.querySelector('.calendar-navigation [aria-label="${date>todayKst?'다음 달':'이전 달'}"]').click()`);}throw Error('Calendar never showed '+date);};
    await wait("document.querySelector('.calendar-grid') && document.querySelector('#app').getAttribute('aria-busy')==='false'");
    assert.equal(await evaluate("document.querySelector('[data-view=calendar]').getAttribute('aria-current')"),'page');
    assert.ok(await evaluate("document.querySelectorAll('.calendar-cell').length>=28"));
@@ -67,7 +74,7 @@ try{
    const previous=new Date(Date.parse(todayKst+'T12:00:00Z')-86400000).toISOString().slice(0,10);
    await evaluate(`document.querySelector('[data-date="${previous}"] .calendar-date').click()`);
    assert.equal(await evaluate("document.querySelectorAll('dialog[open]').length"),0);
-   assert.equal(await evaluate("document.querySelector('.agenda-rail').dataset.date"),previous);
+   assert.equal(await evaluate("document.querySelector('.day-panel').dataset.date"),previous);
    assert.equal(await evaluate("document.querySelector('.calendar-cell.is-today').dataset.date"),todayKst);
    assert.equal(await evaluate("document.querySelector('.calendar-cell.is-today .calendar-date').getAttribute('aria-pressed')"),'false');
    await evaluate("[...document.querySelectorAll('.calendar-navigation button')].find(b=>b.textContent==='오늘').click()");
@@ -113,10 +120,10 @@ try{
     let state=await evaluate("(async()=>await(await fetch('/api/state')).json())()");
     const original=state.events.find(e=>e.kind==='attempt');assert.ok(original);assert.equal(original.payload.self_minutes,17);assert.ok(original.occurred_at.includes('02:12:13.123'));
     await evaluate("document.querySelector('[data-view=history]').click();document.querySelector('.history-table-row').click();[...document.querySelectorAll('dialog button')].find(b=>b.textContent==='기록 수정').click()");
-    await evaluate("document.querySelector('#record-outcome').value='assisted';document.querySelector('#record-hints').value='true';document.querySelector('#record-minutes').value='40s';document.querySelector('dialog form').requestSubmit()");
+    await evaluate("if(document.querySelector('#record-hints'))throw Error('policy v3 forms must not ask about hints');document.querySelector('#record-outcome').value='failed';document.querySelector('#record-minutes').value='40s';document.querySelector('dialog form').requestSubmit()");
     await wait("!document.querySelector('dialog[open]')");
     state=await evaluate("(async()=>await(await fetch('/api/state')).json())()");
-    assert.equal(state.events.filter(e=>e.kind==='attempt').length,2);const correction=state.events.find(e=>e.supersedes===original.event_id);assert.ok(correction);assert.equal(correction.occurred_at,original.occurred_at);assert.equal(correction.payload.self_minutes,null);assert.equal(correction.payload.self_seconds,40);
+    assert.equal(state.events.filter(e=>e.kind==='attempt').length,2);const correction=state.events.find(e=>e.supersedes===original.event_id);assert.ok(correction);assert.equal(correction.occurred_at,original.occurred_at);assert.equal(correction.payload.self_minutes,null);assert.equal(correction.payload.self_seconds,40);assert.equal(correction.payload.outcome,'failed');assert.equal(correction.payload.hints,null);
     assert.equal(await evaluate("document.querySelectorAll('.history-table-row').length"),1);
     await evaluate("document.querySelector('.history-table-row').click()");assert.match(await evaluate("document.querySelector('dialog').innerText"),/수정 전/);
     await evaluate("document.querySelector('dialog').close();document.querySelector('.history-filters input[type=search]').value='absent fixture';document.querySelector('.history-filters input[type=search]').dispatchEvent(new Event('input'))");
@@ -148,17 +155,19 @@ try{
     await evaluate("[...document.querySelectorAll('.contest-list-item')].find(b=>b.textContent.includes('Synthetic Wednesday')).click()");
     const contestText=await evaluate("document.querySelector('dialog').innerText");assert.match(contestText,/23:35/);assert.match(contestText,/120분/);assert.match(contestText,/판단 근거 부족/);assert.match(contestText,/마지막 성공 동기화/);
     await writeFile(join(output,'contest-details-desktop.png'),Buffer.from((await call('Page.captureScreenshot',{format:'png'})).data,'base64'));
-    await evaluate("document.querySelector('dialog').close();document.querySelector('[data-view=calendar]').click()");
-    assert.ok(await evaluate("[...document.querySelectorAll('[data-date=\"2026-10-21\"] .calendar-event.contest')].some(b=>b.title.includes('Synthetic Wednesday'))"));
-    assert.ok(await evaluate("[...document.querySelectorAll('[data-date=\"2026-10-23\"] .calendar-event.contest')].some(b=>b.title.includes('Synthetic Friday'))"));
-    assert.equal(await evaluate("document.querySelector('[data-date=\"2026-10-21\"]').classList.contains('weekend')"),false);
-    assert.equal(await evaluate("document.querySelector('[data-date=\"2026-10-25\"]').classList.contains('weekend')"),true);
+    await evaluate("document.querySelector('dialog').close();document.querySelector('[data-view=calendar]').click()");await showDate(WED);
+    assert.ok(await evaluate(`[...document.querySelectorAll('[data-date="${WED}"] .calendar-event.contest')].some(b=>b.title.includes('Synthetic Wednesday'))`));
+    await showDate(FRI);assert.ok(await evaluate(`[...document.querySelectorAll('[data-date="${FRI}"] .calendar-event.contest')].some(b=>b.title.includes('Synthetic Friday'))`));
+    assert.equal(await evaluate(`document.querySelector('[data-date="${WED}"]').classList.contains('weekend')`),false);
+    await showDate(SUN);assert.equal(await evaluate(`document.querySelector('[data-date="${SUN}"]').classList.contains('weekend')`),true);
     await writeFile(join(output,'contest-weekday-weekend-desktop.png'),Buffer.from((await call('Page.captureScreenshot',{format:'png'})).data,'base64'));
-    // Actual daily midnight is Oct 20 KST. Its scheduled review is Oct 21.
-    await journal.attempt(learner,{event_id:'kst-midnight-proof',problem_key:'leetcode:easy-1',outcome:'independent',hints:false,occurred_at:'2026-10-19T15:00:00.000Z',activity_type:'practice'});
-    await call('Page.reload');await wait("document.querySelector('[data-date=\"2026-10-20\"] .calendar-event.actual')");
-    await evaluate("document.querySelector('[data-date=\"2026-10-20\"] .calendar-event.actual').click()");
-    assert.match(await evaluate("document.querySelector('dialog').innerText"),/2026\. 10\. 20\. 00:00/);
+    // An attempt at 00:00 KST yesterday is 15:00Z the day before; it must land on yesterday's KST date.
+    await journal.attempt(learner,{event_id:'kst-midnight-proof',problem_key:'leetcode:easy-1',outcome:'independent',hints:false,occurred_at:`${addDays(YESTERDAY,-1)}T15:00:00.000Z`,activity_type:'practice'});
+    await call('Page.reload');await wait("document.querySelector('.calendar-grid')");await showDate(YESTERDAY);await wait(`document.querySelector('[data-date="${YESTERDAY}"] .calendar-event.actual')`);
+    await evaluate(`document.querySelector('[data-date="${YESTERDAY}"] .calendar-event.actual').click()`);
+    // Two or more attempts collapse into one summary chip that opens the day; open the midnight attempt from there.
+    await evaluate("[...document.querySelectorAll('dialog .done-chip')].find(b=>b.textContent.includes('Easy 1'))?.click()");
+    assert.match(await evaluate("document.querySelector('dialog').innerText"),new RegExp(`${Number(YESTERDAY.slice(0,4))}\\. ${Number(YESTERDAY.slice(5,7))}\\. ${Number(YESTERDAY.slice(8))}\\. 00:00`));
     await evaluate("document.querySelector('dialog').close()");
     const staleRow=await service.db.prepare('SELECT payload FROM provider_cache WHERE learner_id=? AND provider_key=?').bind(learner,'atcoder:discovery').first();
     const staleEnvelope=JSON.parse(staleRow.payload);staleEnvelope.status='stale';staleEnvelope.fetched_at=new Date(Date.now()-86400000).toISOString();staleEnvelope.error='synthetic_outage';
@@ -176,11 +185,13 @@ try{
     await evaluate("document.querySelector('.layer-toggle.planned input').click()");
     assert.equal(await evaluate("document.querySelectorAll('.calendar-event.plan').length"),0);
     await evaluate("document.querySelector('.layer-toggle.planned input').click()");
-    assert.ok(await evaluate("[...document.querySelectorAll('.calendar-cell')].every(c=>c.querySelectorAll('.calendar-event').length<=3)"));
-    const moreDate=await evaluate("document.querySelector('.more-events').closest('.calendar-cell').dataset.date");
-    await evaluate("document.querySelector('.more-events').click()");
+    // Cells show at most three unfinished plans/schedules plus one attempt chip; several attempts collapse into a summary.
+    assert.ok(await evaluate("[...document.querySelectorAll('.calendar-cell')].every(c=>c.querySelectorAll('.calendar-event:not(.actual)').length<=3&&c.querySelectorAll('.calendar-event.actual').length<=1)"));
+    const opener="document.querySelector('.more-events') || document.querySelector('.calendar-event.summary')";
+    const moreDate=await evaluate(`(${opener}).closest('.calendar-cell').dataset.date`);
+    await evaluate(`(${opener}).click()`);
     assert.equal(await evaluate("document.querySelectorAll('dialog[open]').length"),1);
-    assert.equal(await evaluate("document.querySelector('.agenda-rail').dataset.date"),moreDate);
+    assert.equal(await evaluate("document.querySelector('.day-panel').dataset.date"),moreDate);
     await evaluate("document.querySelector('dialog').close()");
     for(const width of [1440,834,390]){
       await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width<600});
@@ -214,9 +225,11 @@ try{
     for(const contest of cachedContests){
       const date=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul'}).format(new Date(contest.start_at));
       await evaluate(`document.querySelector('.calendar-cell[data-date="${date}"] .calendar-date').click()`);
-      assert.ok((await evaluate("document.querySelector('.agenda-rail .day-section.contest').innerText")).includes(contest.title),'cached/manual contest remains on its real calendar date even when chips overflow');
+      assert.ok((await evaluate("document.querySelector('.day-panel .day-section.schedule').innerText")).includes(contest.title),'cached/manual contest remains on its real calendar date even when chips overflow');
     }
     // Month heatmap drills into the day while preserving a single dialog and date context.
+    // Relative contest fixtures can sit in next month; return to the month that holds the fixture attempts.
+    await evaluate("[...document.querySelectorAll('.calendar-navigation button')].find(b=>b.textContent==='오늘').click()");
     await evaluate("document.querySelector('.month-heat-day:not([disabled])').click()");
     assert.equal(await evaluate("document.querySelectorAll('dialog[open]').length"),1);
     await evaluate("document.querySelector('dialog').close()");
@@ -224,8 +237,8 @@ try{
     assert.equal(await evaluate("document.querySelectorAll('.calendar-cell').length"),7);
     await evaluate("document.querySelector('.calendar-date').click()");
     assert.equal(await evaluate("document.querySelectorAll('dialog[open]').length"),0,'date click selects without opening a dialog');
-    await evaluate("[...document.querySelectorAll('.day-actions button')].find(b=>b.textContent==='하루 자세히').click()");assert.match(await evaluate("document.querySelector('dialog').innerText"),/실제 풀이/);
-    await evaluate("document.querySelector('dialog').close();[...document.querySelectorAll('.segment')].find(b=>b.textContent==='월').click()");
+    await evaluate("document.querySelector('.calendar-cell.selected .more-events, .calendar-cell.selected .calendar-event.summary')?.click()");if(await evaluate("Boolean(document.querySelector('dialog'))"))assert.match(await evaluate("document.querySelector('dialog').innerText"),/풀이 기록|풀어야 할 문제|남은 계획|일정/);
+    await evaluate("document.querySelector('dialog')?.close();[...document.querySelectorAll('.segment')].find(b=>b.textContent==='월').click()");
     await call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
     assert.equal(await evaluate("getComputedStyle(document.querySelector('button')).transitionDuration"),'0s');
     await evaluate("window.dispatchEvent(new Event('offline'))");assert.match(await evaluate("document.querySelector('#notice').innerText"),/오프라인/);

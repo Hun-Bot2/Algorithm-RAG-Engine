@@ -10,7 +10,7 @@ const notice = $("#notice");
 let state = null;
 let journalState = null;
 let currentView = "calendar";
-if (window.location?.hash === "#similarity") currentView = "similarity";
+if (["#similarity", "#library"].includes(window.location?.hash)) currentView = window.location.hash.slice(1);
 let pendingWrites = [];
 let pendingJournalWrites = [];
 let pendingParticipation = null;
@@ -239,7 +239,7 @@ function render() {
     tab.setAttribute("aria-current", tab.dataset.view === currentView ? "page" : "false");
   }
   app.replaceChildren();
-  if (["calendar", "history", "analytics", "contests", "similarity"].includes(currentView)) workspace.render(currentView);
+  if (["calendar", "history", "analytics", "contests", "similarity", "library"].includes(currentView)) workspace.render(currentView);
   else if (currentView === "journal") renderJournal();
   else if (currentView === "progress") renderProgress();
   else if (currentView === "contests") renderContests();
@@ -1265,7 +1265,7 @@ function manualContestForm() {
 }
 
 for (const tab of document.querySelectorAll("[data-view]")) {
-  tab.addEventListener("click", () => { currentView = tab.dataset.view; if(currentView==="similarity")window.history.replaceState(null,"","#similarity");else if(window.location.hash==="#similarity")window.history.replaceState(null,"",window.location.pathname+window.location.search);render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  tab.addEventListener("click", () => { currentView = tab.dataset.view; if(["similarity","library"].includes(currentView))window.history.replaceState(null,"","#"+currentView);else if(["#similarity","#library"].includes(window.location.hash))window.history.replaceState(null,"",window.location.pathname+window.location.search);render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
 }
 
 const workspace = createWorkspace({root:app,getState:()=>state,getJournal:()=>journalState,adapters:{

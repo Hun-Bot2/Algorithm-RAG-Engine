@@ -1,0 +1,107 @@
+{
+  "version": "library-v1",
+  "notice": "로컬 연구 기록 모음이에요. 그림은 당시 실험의 결과이며 추천 품질이나 학습 효과의 증거가 아니에요. private 표시 파일은 저장소에 커밋되지 않는 로컬 전용 자료예요.",
+  "folders": [
+    {
+      "id": "difficulty",
+      "title": "난이도",
+      "description": "플랫폼별 고유 난이도 분포와 난이도 색으로 본 임베딩 투영. 플랫폼 간 난이도 환산은 하지 않아요.",
+      "items": [
+        {"id": "difficulty-cdf", "title": "플랫폼별 난이도 분포 (CDF)", "path": "research/algorithm_system/difficulty-cdf.v1.svg", "source": "research/algorithm_system/DIFFICULTY.md",
+         "note": "LeetCode·Codeforces·AtCoder 각자의 난이도 척도 안에서 그린 누적 분포예요. 패널끼리 점수를 맞추거나 환산하지 않아요. AtCoder는 AtCoder Problems 추정치이며 일부 값이 없어요."},
+        {"id": "difficulty-projections", "title": "난이도별 2차원 투영", "path": "research/vector_geometry/projections.png", "source": "research/vector_geometry/REPORT.md",
+         "note": "점은 문제, 색은 기존 난이도 메타데이터예요. 축의 방향·크기는 방법끼리 비교하지 않아요. 난이도 LDA는 색 라벨로 학습한 표본 내 투영이라 분리가 좋아 보일 수 있어요."}
+      ]
+    },
+    {
+      "id": "maps",
+      "title": "유사도 지도",
+      "description": "전체 카탈로그(24,297문제)의 제목 임베딩 지도와 투영 방법 비교. 지도 위 거리는 알고리즘 동등성을 뜻하지 않아요.",
+      "items": [
+        {"id": "full-map-v2", "title": "전체 카탈로그 인터랙티브 지도 (v2, 언어 보정)", "path": "private-learning/unified-map/full-v2/interactive.html", "private": true, "source": "research/language_bias/REPORT.md",
+         "note": "영어 번역 제목(C2) 기준의 전체 지도예요. 약 11MB 단일 파일이라 여는 데 시간이 걸려요. 제목·태그·URL이 들어 있어 커밋하지 않아요."},
+        {"id": "full-map-v1", "title": "전체 카탈로그 인터랙티브 지도 (v1)", "path": "private-learning/unified-map/full-v1/interactive.html", "private": true, "source": "research/unified_map/FULL-MAP-REPORT.md",
+         "note": "언어 보정 전 원래 제목 기준 지도예요. v2와 비교용으로 보존해요."},
+        {"id": "full-projections", "title": "전체 지도 투영 (UMAP · t-SNE · PCA)", "path": "research/unified_map/figures/full-projections.png", "source": "research/unified_map/FULL-MAP-REPORT.md",
+         "note": "같은 384차원 제목 벡터를 여러 방법으로 2차원에 놓은 결과예요. 한 번의 배치 모양은 하나의 표본으로 읽어 주세요."},
+        {"id": "full-fidelity", "title": "투영 충실도", "path": "research/unified_map/figures/full-fidelity.png", "source": "research/unified_map/FULL-MAP-REPORT.md",
+         "note": "2차원 이웃이 원래 384차원 이웃을 얼마나 지키는지 비교한 그림이에요."},
+        {"id": "full-scores", "title": "투영 품질 점수", "path": "research/unified_map/figures/full-scores.png", "source": "research/unified_map/FULL-MAP-REPORT.md",
+         "note": "투영 방법별 품질 지표 요약이에요."},
+        {"id": "sample-tsne", "title": "표본 t-SNE (플랫폼 색)", "path": "research/unified_map/figures/sample-tsne2.png", "source": "research/unified_map/REPORT.md",
+         "note": "층화 표본의 t-SNE예요. 색은 추정한 알고리즘이 아니라 플랫폼이에요."},
+        {"id": "sample-umap", "title": "표본 UMAP", "path": "research/unified_map/figures/sample-umap2.png", "source": "research/unified_map/REPORT.md",
+         "note": "같은 표본의 UMAP 배치예요."},
+        {"id": "sample-pca", "title": "표본 PCA", "path": "research/unified_map/figures/sample-pca2.png", "source": "research/unified_map/REPORT.md",
+         "note": "같은 표본의 PCA 2축이에요."},
+        {"id": "sample-svd", "title": "표본 SVD", "path": "research/unified_map/figures/sample-svd2.png", "source": "research/unified_map/REPORT.md",
+         "note": "중심화하지 않은 SVD 2축이에요."}
+      ]
+    },
+    {
+      "id": "language",
+      "title": "언어 편향",
+      "description": "제목 언어 때문에 생긴 군집과 그 보정 실험.",
+      "items": [
+        {"id": "maps-by-language", "title": "언어별 지도", "path": "research/language_bias/figures/maps-by-language.png", "source": "research/language_bias/REPORT.md",
+         "note": "제목 언어로 색을 칠한 지도예요. 언어별로 뭉치는지 확인하는 용도예요."},
+        {"id": "language-candidates", "title": "보정 후보 비교", "path": "research/language_bias/figures/candidates.png", "source": "research/language_bias/REPORT.md",
+         "note": "언어 보정 후보 표현을 비교한 그림이에요. 무작위 벡터도 낮은 군집도를 보이므로 그 지표만으로 판단하지 않아요."}
+      ]
+    },
+    {
+      "id": "vectors",
+      "title": "벡터 기하 · 모델",
+      "description": "MiniLM 파일럿과 차원 축소·검색 지연 진단.",
+      "items": [
+        {"id": "search-latency", "title": "정확 검색 지연", "path": "research/vector_geometry/search_latency.png", "source": "research/vector_geometry/REPORT.md",
+         "note": "전체 카탈로그에서 정확 최근접 검색에 걸린 시간이에요."},
+        {"id": "dimension-overlap", "title": "차원과 이웃 보존율", "path": "research/vector_geometry/overlap.png", "source": "research/vector_geometry/REPORT.md",
+         "note": "차원을 줄였을 때 원래 cosine top-10 이웃이 얼마나 남는지예요."},
+        {"id": "minilm-similarity", "title": "MiniLM 90개 입력 유사도", "path": "research/minilm_pilot/similarity.png", "source": "research/minilm_pilot/REPORT.md",
+         "note": "작성한 영어 설명 90개의 cosine 유사도 행렬이에요. 전체 카탈로그나 본문이 아니에요."},
+        {"id": "minilm-projections", "title": "MiniLM 투영 (PCA · t-SNE · UMAP)", "path": "research/minilm_pilot/projections.png", "source": "research/minilm_pilot/REPORT.md",
+         "note": "같은 90개 입력의 2차원 투영이에요."}
+      ]
+    },
+    {
+      "id": "recommendation-inputs",
+      "title": "추천 입력 실험",
+      "description": "풀이 설명·구조화 입력·재정렬 실험의 그림과 글.",
+      "items": [
+        {"id": "candidate-overlap", "title": "LeetCode 방법별 Top10 공통 비율", "path": "research/recommendation_inputs/figures/leetcode-candidate-overlap.svg", "source": "research/recommendation_inputs/BLOG.md",
+         "note": "LeetCode 60문제에서 입력 방식끼리 상위 10개 후보가 얼마나 겹치는지예요. 정답 라벨 기반 정확도가 아니에요."},
+        {"id": "cross-encoder-runtime", "title": "재정렬 실행 시간", "path": "research/recommendation_inputs/figures/cross-encoder-runtime.svg", "source": "research/recommendation_inputs/BLOG.md",
+         "note": "노트북에서 다시 실행한 고정 후보군 재정렬 시간이에요."},
+        {"id": "recommendation-blog", "title": "실험 정리 글", "path": "research/recommendation_inputs/blog.html", "source": "research/recommendation_inputs/BLOG.md",
+         "note": "추천 입력 실험을 글로 정리한 페이지예요."},
+        {"id": "recommendation-report", "title": "실험 보고서", "path": "research/recommendation_inputs/experiment_report.html", "source": "research/recommendation_inputs/REPORT.md",
+         "note": "실험 설정과 결과 요약이에요."},
+        {"id": "recommendation-notebook", "title": "실험 노트북 (HTML)", "path": "research/recommendation_inputs/recommendation_experiments.html", "source": "research/recommendation_inputs/EXPERIMENTS.md",
+         "note": "실행된 노트북을 HTML로 내보낸 파일이에요."}
+      ]
+    },
+    {
+      "id": "statements",
+      "title": "본문 기준선 · 압축",
+      "description": "허용된 본문으로 만든 384차원 기준선과 차원 압축 실험.",
+      "items": [
+        {"id": "statement-baseline", "title": "본문 기준선", "path": "research/algorithm_system/figures/statement-baseline.png", "source": "research/algorithm_system/REPORT.md",
+         "note": "허용된 publisher 본문으로 만든 384차원 기준선 결과예요. LeetCode 본문은 쓰지 않았어요."},
+        {"id": "compression-ablation", "title": "차원 압축 비교", "path": "research/algorithm_system/figures/compression-ablation.png", "source": "research/algorithm_system/REPORT.md",
+         "note": "256/128/64 차원으로 줄였을 때의 비교예요. 이웃 보존만으로 모델을 채택하지 않아요."}
+      ]
+    },
+    {
+      "id": "notebooks",
+      "title": "노트북 (HTML)",
+      "description": "실행된 연구 노트북의 HTML 내보내기. 네트워크를 쓰지 않아 수식은 표시되지 않을 수 있어요.",
+      "items": [
+        {"id": "vector-geometry-notebook", "title": "벡터 기하 노트북", "path": "research/vector_geometry/vector_geometry.html", "source": "research/vector_geometry/REPORT.md", "note": "차원 축소·투영·검색 지연 실험 노트북이에요."},
+        {"id": "unified-map-notebook", "title": "통합 지도 비교 노트북", "path": "research/unified_map/comparison.html", "source": "research/unified_map/REPORT.md", "note": "통합 유사도 지도의 채널 비교 노트북이에요."},
+        {"id": "algorithm-system-notebook", "title": "본문 기준선 비교 노트북", "path": "research/algorithm_system/comparison.html", "source": "research/algorithm_system/REPORT.md", "note": "본문 기준선·압축 비교 노트북이에요."},
+        {"id": "minilm-notebook", "title": "MiniLM 파일럿 노트북", "path": "research/minilm_pilot/minilm_pilot.html", "source": "research/minilm_pilot/REPORT.md", "note": "MiniLM 첫 실행 노트북이에요."}
+      ]
+    }
+  ]
+}

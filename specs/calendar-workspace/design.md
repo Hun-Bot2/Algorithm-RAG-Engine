@@ -49,3 +49,16 @@ Sequence: pure classification/date/suitability helpers and regression tests; cal
 Use the canonical learner SQLite preferences JSON for manual dated review selections, independent of attempts, planner decisions and computed due dates. Validation allows only unique problem/date pairs and exact native keys; the CLI verifies catalog membership. `journal.review_selections` enriches keys from the active catalog; the frontend maps these to manual review plan events and retains their precedence over same-day automatic practice cards. Existing automatic review projections remain omitted. Add/remove updates the existing preferences revision and is idempotent; existing backup/export preserves selections through its current preference contract. No new table or side database is needed. The source Markdown remains untouched and uncommitted, so its blank result and inconsistent heading cannot create solve evidence.
 
 Affected modules: core/preferences, cli, mastery/journal, public/workspace-data; tests for invalid/duplicate dates, round-trip state, CLI idempotency, manual/automatic distinction and zero added attempts. Verify with a disposable fixture before applying the explicitly authorized Buddy Strings selection to local-owner on 2026-10-23. Running local readers need the updated code to accept the additive JSON key; retain the existing env-file launch configuration when reloading the local application.
+
+## Plan-first day panel and carry-over (2026-10-28)
+
+`workspaceEvents(journal,state,{today})` marks each plan with `progress` (`pending`/`tried`/`done`) and, for pending system plans
+within `CARRY_DAYS=7`, sets `carried_to` on the original and adds one synthetic `carry:<today>:<key>` event per problem with
+`carried_from` (earliest origin). An existing plan for the same key today gets `carried_from` instead of a copy. `pendingPlans()` is
+the single filter for unfinished work, used by the calendar cells, the day panel and the day dialog. The planner still excludes these
+problems through its exposure cooldown, so today's fresh plan and the carried list do not overlap.
+
+Tradeoffs: any attempt (including a failure) ends carry-over, because failures already get next-day priority from the review policy.
+The 7-day bound keeps the list finite; older unsolved plans stay on their own date. Moving rather than duplicating keeps past cells
+quiet; their day content still lists what moved ("오늘로 이월"). Tests pass `today` explicitly so fixtures stay deterministic.
+The right-hand rail became a full-width panel above the calendar: blocks need horizontal room, and today's work should be visible first.

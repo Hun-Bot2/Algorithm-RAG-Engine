@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {localDate,calendarDates,navigateDate,workspaceEvents,activeAttempts,filterAttempts,conversion,outcomeText,outcomeSymbol,eventCategory,filterCalendarEvents,daySummary,contestSuitability,contestList} from '../public/workspace-data.mjs';
+import {localDate,calendarDates,navigateDate,workspaceEvents,activeAttempts,filterAttempts,conversion,outcomeText,outcomeSymbol,eventCategory,filterCalendarEvents,daySummary,contestSuitability,contestList,pendingPlans,CARRY_DAYS} from '../public/workspace-data.mjs';
 
 test('calendar covers leap February and navigates months without rollover',()=>{
  const dates=calendarDates('2024-02-29');assert.equal(dates[0],'2024-01-29');assert.equal(dates.at(-1),'2024-03-03');assert.ok(dates.includes('2024-02-29'));
@@ -109,11 +109,11 @@ test('automatic review schedules are omitted while actual review history and ord
  days:[{date:'2026-10-22',entries:[{id:'actual-review',type:'attempt',activity_type:'review',problem_key:'leetcode:a',occurred_at:'2026-10-22T03:00:00Z',outcome:'independent',hints:false},
  {id:'old-review-plan',type:'recommendation',kind:'review',problem_key:'leetcode:a',local_date:'2026-10-22'}]}],
  upcoming:[{problem_key:'leetcode:a',date:'2026-10-24',kind:'review'}]};
- const rows=workspaceEvents(view,{});
+ const rows=workspaceEvents(view,{},{today:'2026-10-23'});
  assert.equal(rows.filter(e=>e.layer==='actual').length,1);
  assert.deepEqual(rows.filter(e=>e.layer==='plan').map(e=>e.problem_key),['leetcode:b']);
  assert.equal(rows.some(e=>e.date==='2026-10-24'),false);
- const core=workspaceEvents({available:false},{mission:{date:'2026-10-23',activities:[{type:'review',problem_key:'leetcode:a'},{type:'practice',problem_key:'leetcode:b'}]}});
+ const core=workspaceEvents({available:false},{mission:{date:'2026-10-23',activities:[{type:'review',problem_key:'leetcode:a'},{type:'practice',problem_key:'leetcode:b'}]}},{today:'2026-10-23'});
  assert.deepEqual(core.filter(e=>e.layer==='plan').map(e=>e.problem_key),['leetcode:b']);
 });
 
@@ -172,4 +172,24 @@ test('archived mock contests keep a distinct id beside an active one on the same
  const m=archived=>({local_date:'2026-10-31',duration_minutes:120,archived,problems:[]});
  const events=workspaceEvents({available:true,days:[],mock_contests:[m(true),m(false)]},{});
  assert.deepEqual(events.filter(e=>e.layer==='mock').map(e=>[e.id,e.archived]).sort(),[['mock-archive:2026-10-31',true],['mock:2026-10-31',false]]);
+});
+
+test('unsolved plans carry over to today for a bounded window; attempts settle them',()=>{
+ const rec=(id,date,key,extra={})=>({id,type:'recommendation',problem_key:key,local_date:date,title:key,...extra});
+ const att=(id,at,key,outcome='independent')=>({id,type:'attempt',problem_key:key,occurred_at:at,outcome,hints:false});
+ const j={available:true,days:[{date:'2026-10-27',entries:[
+  rec('p1','2026-10-27','leetcode:a'),rec('p2','2026-10-27','leetcode:b'),rec('p3','2026-10-27','leetcode:c'),rec('p4','2026-10-26','leetcode:a'),
+  rec('old','2026-10-10','leetcode:old'),rec('review','2026-10-27','leetcode:r',{kind:'review'}),rec('arch','2026-10-27','leetcode:z',{archived:true}),rec('today','2026-10-28','leetcode:c'),
+  att('s','2026-10-27T03:00:00Z','leetcode:b'),att('f','2026-10-27T04:00:00Z','leetcode:c','failed')]}]};
+ const rows=workspaceEvents(j,{},{today:'2026-10-28'}),on=d=>rows.filter(e=>e.date===d&&e.layer==='plan');
+ const byId=id=>rows.find(e=>e.id===id);
+ assert.equal(byId('p2').progress,'done');assert.equal(byId('p3').progress,'tried');assert.equal(byId('p1').progress,'pending');
+ assert.equal(byId('p1').carried_to,'2026-10-28');assert.equal(byId('p4').carried_to,'2026-10-28');
+ assert.equal(byId('old').carried_to,undefined,`plans older than ${CARRY_DAYS} days stay on their date`);
+ const carried=on('2026-10-28').filter(e=>e.carry);assert.deepEqual(carried.map(e=>e.problem_key),['leetcode:a']);assert.equal(carried[0].carried_from,'2026-10-26');
+ assert.equal(byId('today').carried_from,undefined,'a plan with an attempt is not carried onto today\'s duplicate');
+ assert.deepEqual(pendingPlans(on('2026-10-27')).map(e=>e.id),['arch']);
+ assert.deepEqual(pendingPlans(on('2026-10-28')).map(e=>e.problem_key).sort(),['leetcode:a','leetcode:c']);
+ assert.equal(conversion(rows).rows.some(r=>r.carry),false,'carried copies never count as extra plans');
+ assert.equal(workspaceEvents(j,{},{today:null}).some(e=>e.carry),false);
 });

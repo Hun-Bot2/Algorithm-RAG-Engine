@@ -10,7 +10,7 @@ import {appendEvents,getPreferences,putPreferences} from './core/store.mjs';
 import {seoulDate} from './core/policy.mjs';
 import {timestamp} from './core/events.mjs';
 import {createJournalService} from './mastery/journal.mjs';
-import {createExplanationService,withExplanations} from './mastery/explanations.mjs';
+import {createExplanationService,withExplanations,snapshotPlanReader} from './mastery/explanations.mjs';
 import {appendLedger} from './mastery/side-ledger.mjs';
 import {readLedger,getSnapshot,saveSnapshot,saveWeeklyReport,getWeeklyReport} from './mastery/ledger.mjs';
 import {attachCatalog,loadCatalog} from './mastery/catalog.mjs';
@@ -156,9 +156,9 @@ export async function run(argv,{print=console.log,fetcher=fetch,env=process.env}
     }
     if(command==='journal'||command==='explain'){
       const explanations=createExplanationService({cacheRoot:join(dirname(dbPath),'explanations'),env,fetcher});
-      const journal=withExplanations(createJournalService({db,catalogRoot}),explanations);
+      const journal=withExplanations(createJournalService({db,catalogRoot}),explanations,db);
       const view=await journal.view(learnerId,now);
-      out(command==='explain'?await explanations.decorate(learnerId,view,{generate:true,retryFailed:Boolean(o['retry-failed'])}):view);return 0;
+      out(command==='explain'?await explanations.decorate(learnerId,view,{generate:true,retryFailed:Boolean(o['retry-failed']),snapshotPlan:snapshotPlanReader(db,learnerId)}):view);return 0;
     }
     if (command==='plan') {
       const date=o.date ?? seoulDate(now);

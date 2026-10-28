@@ -33,3 +33,12 @@
 - CLI add/remove SHALL validate the active catalog identity, preserve unrelated preferences, and be idempotent. Selection MUST NOT create a completion or attempt.
 - Calendar SHALL project only these manual review selections; automatic review schedules remain hidden. Catalog-backed journal responses SHALL provide title/URL/difficulty for the selected keys.
 - This is an additive preferences-JSON extension, with no SQL schema change or migration. Existing stored preferences remain readable. Readers must run the updated normalizer before new fields are written; standard learner backups already include preferences.
+
+## Plan-first day panel and carry-over (2026-10-28)
+
+- The selected-day panel SHALL show unfinished plans first, as full-width blocks above the calendar. Attempts SHALL appear as compact chips. The separate "하루 자세히" action is removed; overflow ("+N개 더 보기") and the multi-attempt summary chip open the same day content in a dialog.
+- A plan is settled WHEN an active attempt for the same problem exists on or after its date (`done` if any completed, else `tried`). Settled plans SHALL NOT appear as unfinished work; their attempts represent them.
+- WHEN a system plan (not a manual review, review slot or archived snapshot) is unsettled and dated within the last 7 days, THE SYSTEM SHALL show it on today as carried over, with its earliest origin date, and hide it from its original date's cell.
+- WHEN explanations are generated, THE SYSTEM SHALL also explain carried plans from their own stored snapshot, dispatching at most one
+  generation per problem (the entry the calendar shows); other revisions only read the cache.
+- Carry-over is presentation only: snapshots, attempts and planner inputs MUST NOT change, and carried copies MUST NOT count as extra plans in recommendation-follow-up statistics.

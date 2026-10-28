@@ -35,7 +35,7 @@ export function outcomeText(entry) {
 export function outcomeSymbol(entry) {
   return completion(entry)?'✓':'·';
 }
-export function workspaceEvents(journal, state) {
+export function workspaceEvents(journal, state, {today=localDate(new Date())}={}) {
   const events=[],seen=new Set();
   const add=e=>{if(e.date && !seen.has(e.id)){seen.add(e.id);events.push(e);}};
   for(const day of journal?.days || [])for(const entry of day.entries || []){
@@ -95,9 +95,36 @@ export function workspaceEvents(journal, state) {
     event.recommended=event.layer==='plan'?!event.explicit_review&&event.kind!=='review':event.layer==='actual'&&prior.length>0;
     if(event.recommended)event.recommended_dates=[...new Set(prior.map(r=>r.date))].sort();
   }
+  carryOver(projected,today);
   const order={actual:0,plan:1,mock:2,contest:3};
   return projected.sort((a,b)=>a.date.localeCompare(b.date)||order[a.layer]-order[b.layer]||String(a.occurred_at || a.start_at || '').localeCompare(String(b.occurred_at || b.start_at || '')));
 }
+/** Unsolved system plans roll forward to today for at most CARRY_DAYS days. */
+export const CARRY_DAYS=7;
+const carriable=e=>e.layer==='plan'&&e.problem_key&&!e.explicit_review&&e.kind!=='review'&&!e.archived;
+// Presentation only: snapshots stay immutable and the planner never sees carried items.
+// Any attempt on or after the plan date settles the plan; failures go to the review policy instead.
+function carryOver(events,today){
+  const attempts=activeAttempts(events);
+  for(const e of events)if(e.layer==='plan'&&e.problem_key){
+    const after=attempts.filter(a=>a.problem_key===e.problem_key&&a.date>=e.date);
+    e.progress=after.some(completion)?'done':after.length?'tried':'pending';
+  }
+  if(!today)return;
+  const first=new Map();
+  for(const e of events)if(carriable(e)&&e.progress==='pending'&&e.date<today&&e.date>=shiftDate(today,-CARRY_DAYS)){
+    e.carried_to=today;
+    if(!first.has(e.problem_key)||e.date<first.get(e.problem_key).date)first.set(e.problem_key,e);
+  }
+  for(const [key,origin] of first){
+    const existing=events.find(e=>e.layer==='plan'&&e.date===today&&e.problem_key===key);
+    if(existing){if(carriable(existing))existing.carried_from=origin.date;continue;}
+    const {versions,current,carried_to,...rest}=origin;
+    events.push({...rest,id:`carry:${today}:${key}`,date:today,carry:true,carried_from:origin.date,origin_id:origin.id});
+  }
+}
+/** Plans still to work on for a day: not settled and not moved to a later day. */
+export function pendingPlans(events) {return events.filter(e=>e.layer==='plan'&&e.progress==='pending'&&!e.carried_to);}
 export function activeAttempts(events) {return events.filter(e=>e.layer==='actual' && e.status!=='superseded');}
 export function filterAttempts(events, filters={}) {
   const q=(filters.query || '').toLowerCase();
@@ -108,7 +135,7 @@ export function groupCounts(rows, key) {
 }
 export function conversion(events) {
   // Only identifiable dated problem plans; repeated snapshots count once per problem/day.
-  const plans=new Map(events.filter(e=>e.layer==='plan'&&e.problem_key).map(e=>[`${e.date}:${e.problem_key}`,e]));
+  const plans=new Map(events.filter(e=>e.layer==='plan'&&e.problem_key&&!e.carry).map(e=>[`${e.date}:${e.problem_key}`,e]));
   const attempts=activeAttempts(events);
   const rows=[...plans.values()].map(p=>({...p,matched:attempts.some(a=>a.problem_key===p.problem_key&&a.date>=p.date&&a.date<=shiftDate(p.date,7))}));
   return {rows,matched:rows.filter(r=>r.matched).length,total:rows.length};

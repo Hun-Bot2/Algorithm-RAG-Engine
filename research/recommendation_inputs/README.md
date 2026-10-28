@@ -35,3 +35,15 @@ node --test hosted/test/*.test.mjs
 ```
 
 Cross-encoder 파일 SHA-256/정확한 구성, 입력 코호트/후보 제외, query 조건, 원래-token 보존을 검사한다. 실제 추론과 저장된 결과의 재현 검사는 노트북에서 수행한다. 그림과 HTML은 실제 브라우저에서도 확인했다. 블로그는 저장소 내 초안이며 외부 게시하지 않았다.
+
+## 2D maps in the viewer (2026-10-28)
+
+`maps.py` adds `/api/map?scope=&method=` to the read-only viewer: a t-SNE layout (cosine, PCA init, fixed seed) of the stored vectors
+for each method. Before drawing, it recomputes top-k from the vectors and requires an exact match with the stored ranking; methods
+without vectors (cross-encoder) or scopes without vectors (LeetCode title/tag, publisher) report that no map is available. The page
+shows the share of each problem's stored top-10 that is also among its 10 nearest map points (about 48-58% here): positions are
+approximate, and the numbered neighbors and lines always come from the 384D ranking. Tests: `.venv/bin/python -m unittest
+research.recommendation_inputs.test_maps`.
+
+The map toolbar switches between all platforms and the selected problem's platform. In same-platform mode the server lays out only
+that platform's problems and recomputes the top-10 within it from the same verified vectors (`/api/map?platform=`).

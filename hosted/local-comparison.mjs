@@ -1,5 +1,5 @@
 /** Local-only, read-only bridge. Never import into the Worker/core bundle. */
-const ROUTES=new Set(['/comparison/','/comparison/api/meta','/comparison/api/search','/comparison/api/problem','/comparison/api/compare','/comparison/notebook.html','/comparison/notebook.ipynb','/comparison/blog.html','/comparison/report.html']);
+const ROUTES=new Set(['/comparison/','/comparison/api/meta','/comparison/api/search','/comparison/api/problem','/comparison/api/compare','/comparison/api/map','/comparison/notebook.html','/comparison/notebook.ipynb','/comparison/blog.html','/comparison/report.html']);
 const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
 export async function comparisonResponse(request,{upstream='http://127.0.0.1:8789',fetcher=fetch}={}){
   const url=new URL(request.url),health=url.pathname==='/api/local/comparison';

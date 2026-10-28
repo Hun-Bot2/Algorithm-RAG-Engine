@@ -194,6 +194,17 @@ export function createExplanationService({cacheRoot,env={},fetcher=fetch,timeout
     for(const slot of copy.plan.slots.slice(0,5))slot.explanation=await explain(learnerId,copy.plan,slot,options);
     const current=new Map(copy.plan.slots.map(s=>[s.problem_key,s.explanation]));
     for(const day of copy.days)for(const entry of day.entries)if(entry.type==='recommendation'&&entry.snapshot_id===copy.plan.snapshot_id)entry.explanation=current.get(entry.problem_key);
+    // Pending plans from earlier snapshots are carried to today by the calendar; explain them from their own stored plan.
+    // Generation is limited to the one entry per problem that the calendar shows; other revisions only read the cache.
+    if(options.snapshotPlan){
+      const pending=pendingPlanEntries(copy),shown=new Set(carriedOrigins(pending)),plans=new Map();
+      for(const entry of pending){
+        const key=`${entry.snapshot_id}|${entry.local_date}`;
+        if(!plans.has(key))plans.set(key,await options.snapshotPlan(entry.snapshot_id,entry.local_date));
+        const plan=plans.get(key);if(!plan)continue;
+        entry.explanation=await explain(learnerId,{...plan,snapshot_id:entry.snapshot_id,date:plan.date ?? entry.local_date},entry,{...options,generate:Boolean(options.generate)&&shown.has(entry)});
+      }
+    }
     copy.explanation_usage=aggregateExplanationUsage(records(learnerId));
     return copy;
   }
@@ -201,6 +212,24 @@ export function createExplanationService({cacheRoot,env={},fetcher=fetch,timeout
   return {decorate,explain,records,addCostReceipts:(learnerId,receipts)=>store.addCostReceipts(learnerHash(learnerId),receipts),usage:learnerId=>aggregateExplanationUsage(records(learnerId))};
 }
 
+export const CARRY_WINDOW_DAYS=7;
+const kstDate=value=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul'}).format(new Date(value));
+const shift=(date,days)=>{const d=new Date(`${date}T12:00:00Z`);d.setUTCDate(d.getUTCDate()+days);return d.toISOString().slice(0,10);};
+/** Mirrors the calendar carry-over rule (hosted/public/workspace-data.mjs): unsettled, non-review, non-archived, within the window. */
+export function pendingPlanEntries(view){
+  const entries=view.days.flatMap(d=>d.entries),current=view.plan?.snapshot_id;
+  const attempts=entries.filter(e=>e.type==='attempt'&&e.status!=='superseded').map(e=>({key:e.problem_key,date:kstDate(e.occurred_at)}));
+  const from=shift(view.date,-CARRY_WINDOW_DAYS);
+  return entries.filter(e=>e.type==='recommendation'&&!e.archived&&e.kind!=='review'&&e.problem_key&&e.snapshot_id&&e.snapshot_id!==current&&
+    e.local_date>=from&&e.local_date<=view.date&&!attempts.some(a=>a.key===e.problem_key&&a.date>=e.local_date));
+}
+/** The entry the calendar displays per problem: earliest date, then the latest revision of that date. */
+export function carriedOrigins(entries){
+  const best=new Map();
+  for(const e of entries){const b=best.get(e.problem_key);
+    if(!b||e.local_date<b.local_date||e.local_date===b.local_date&&(String(e.occurred_at ?? '').localeCompare(String(b.occurred_at ?? ''))||String(e.id ?? '').localeCompare(String(b.id ?? '')))>0)best.set(e.problem_key,e);}
+  return [...best.values()];
+}
 export function aggregateExplanationUsage(records){
   const groups=new Map();
   for(const {attempt,result,cost_receipt} of records){
@@ -222,9 +251,19 @@ export function aggregateExplanationUsage(records){
   return {schema_version:1,scope:'local dispatch attempts (including retries); cache hits excluded',missingness:'null sums mean unavailable; known counts show partial coverage',groups:[...groups.values()].sort((a,b)=>a.provider.localeCompare(b.provider)||a.model.localeCompare(b.model))};
 }
 // Keep this wrapper outside the journal's policy-code hash.
-export function withExplanations(journal,explanations){
+export function snapshotPlanReader(db,learnerId){
+  // journal-* snapshots use their kind as snapshot_id; older ones fall back to `${kind}-${local_date}`.
+  return async(snapshotId,localDate)=>{
+    const row=async kind=>(await db.prepare('SELECT payload FROM recommendation_snapshots WHERE learner_id=? AND kind=? AND local_date=?').bind(learnerId,kind,localDate).first())?.payload;
+    const payload=await row(snapshotId) ?? (snapshotId.endsWith(`-${localDate}`)?await row(snapshotId.slice(0,-localDate.length-1)):null);
+    const plan=payload?JSON.parse(payload):null;
+    return plan&&Array.isArray(plan.slots)?plan:null;
+  };
+}
+export function withExplanations(journal,explanations,db=null){
+  const lookup=learnerId=>db?{snapshotPlan:snapshotPlanReader(db,learnerId)}:{};
   return {
-    async view(learnerId,clock){return explanations.decorate(learnerId,await journal.view(learnerId,clock));},
-    async attempt(learnerId,input,clock){const result=await journal.attempt(learnerId,input,clock);return {...result,journal:await explanations.decorate(learnerId,result.journal)};},
+    async view(learnerId,clock){return explanations.decorate(learnerId,await journal.view(learnerId,clock),lookup(learnerId));},
+    async attempt(learnerId,input,clock){const result=await journal.attempt(learnerId,input,clock);return {...result,journal:await explanations.decorate(learnerId,result.journal,lookup(learnerId))};},
   };
 }

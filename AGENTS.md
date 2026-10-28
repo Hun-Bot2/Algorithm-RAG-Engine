@@ -704,3 +704,29 @@ Keep these distinctions clear in summaries and docs:
   stored `independent` event, so forms send `false` for solved and `null` for unsolved.
 - Changing the policy rotates journal plans (code hash). Run `explain` again for new recommendations.
 
+
+## Plan carry-over in the calendar (2026-10-28)
+
+- Unsolved system plans from the last 7 days show on today as carried (`workspaceEvents` in hosted/public/workspace-data.mjs). This is
+  presentation only: never write carried items into snapshots or feed them to the planner. Any attempt on/after the plan date ends it.
+- `workspaceEvents` takes `{today}`; tests with past-dated fixtures must pass it, or results change with the real date.
+- Carried plans are explained from their stored snapshot: `withExplanations(journal,explanations,db)` and `explain` pass `snapshotPlan`.
+  `pendingPlanEntries` in explanations.mjs mirrors the calendar rule; change both together. Running servers need a restart to pick it up.
+- hosted/workspace-browser-smoke.mjs uses fixture dates relative to today (next Wed/Fri/Sun, yesterday); never reintroduce fixed dates.
+
+## Comparison viewer maps (2026-10-28)
+
+- research/recommendation_inputs/maps.py draws t-SNE maps in the comparison viewer (port 8789, `comparison-viewer` in .claude/launch.json).
+  A method gets a map only if recomputing top-k from its vectors reproduces the stored ranking exactly; rows follow strategy_all's key order.
+- Map positions are layout only (about 50% top-10 preservation). Numbers and lines come from the stored 384D ranking. Only curriculum-idea
+  scopes have vectors; the LeetCode title/tag and publisher scopes show no map. The title method is a baseline, not a recommendation input.
+- hosted/local-comparison.mjs allowlists `/comparison/api/map`; the 8787 server must restart to proxy it.
+- Maps have a same-platform mode (`/api/map?platform=`): layout and top-10 are recomputed within that platform from the verified vectors.
+
+## Research library (2026-10-28)
+
+- `research/library.v1.json` is the curated catalog (folders → files) behind the "연구 자료" view; `hosted/local-library.mjs` serves it
+  locally only, by catalog id (never a requested path), from research/ or private-learning/, refusing symlinks that leave the repo.
+- HTML files are served with a `sandbox allow-scripts` CSP and shown in a sandboxed iframe: no network (notebook MathJax won't render).
+  The desktop Browser pane's screenshots show sandboxed iframes as blank; check them in headless Chrome instead.
+- Add new figures by editing the catalog (title, note on what it does not show, source report). Private files stay uncommitted.
