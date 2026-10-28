@@ -62,6 +62,7 @@ export function createGitSync({db,learnerId,intervalMs=5000,catalogRoot,catalogP
   async function close() {
     if (timer) clearInterval(timer);
     timer=null;
+    state.started=false;
     closed=true;
     state.closed=true;
     if (inFlight) await inFlight;

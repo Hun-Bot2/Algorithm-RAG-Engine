@@ -84,7 +84,7 @@ test('close stops polling and awaits an active tick',async()=>{
     bind:()=>({all:async()=>{await gate;return {results:[]};}}),
   } : original(sql);
   const sync=createGitSync({db,learnerId:'owner',intervalMs:60000});
-  sync.start();
+  assert.equal(sync.start().started,true);
   const tick=sync.tick();
   const closing=sync.close();
   let closed=false; void closing.then(()=>{closed=true;});
@@ -93,5 +93,8 @@ test('close stops polling and awaits an active tick',async()=>{
   release();
   await Promise.all([tick,closing]);
   assert.equal(sync.status().closed,true);
+  assert.equal(sync.status().started,false);
+  assert.equal(sync.status().running,false);
+  assert.throws(()=>sync.start(),/closed/);
   db.close();
 });
