@@ -1,6 +1,7 @@
 // Node-only access to an immutable catalog-vN.sqlite3 (design.md section 2.3, MS-302).
 // The catalog is ATTACHed read-only (SQLite enforces it) and loaded into plain data for
 // the pure policy modules. Learner data never flows into the catalog file.
+import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
 import {resolve,dirname,join} from 'node:path';
@@ -23,7 +24,7 @@ export function attachCatalog(sqlite,path,{verify=true}={}) {
   }
   const attached=sqlite.prepare('PRAGMA database_list').all().some(row=>row.name==='catalog');
   if (attached) sqlite.exec('DETACH DATABASE catalog');
-  sqlite.exec(`ATTACH DATABASE 'file:${absolute.replace(/'/g,"''")}?mode=ro&immutable=1' AS catalog`);
+  sqlite.exec(`ATTACH DATABASE '${pathToFileURL(absolute).href.replace(/'/g,"''")}?mode=ro&immutable=1' AS catalog`);
   const meta=Object.fromEntries(sqlite.prepare('SELECT key,value FROM catalog.catalog_meta').all().map(r=>[r.key,r.value]));
   return {version:meta.version,meta,sha256};
 }
