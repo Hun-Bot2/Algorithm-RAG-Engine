@@ -1,0 +1,15 @@
+{
+  "version": "progression-v2-config-1",
+  "tau": 0.7,
+  "credible_mass": 0.8,
+  "readiness_probability": 0.5,
+  "level_priors": {"1": [3.2, 0.8], "2": [2, 2], "3": [0.8, 3.2]},
+  "kappa": 4,
+  "lambda": 0.5,
+  "weights": {"challenge_fit": 0.5, "information": 0.3, "coverage": 0.2, "follow_up": 0.3, "continuity": 0.2},
+  "follow_up_days": 14,
+  "review_days": [1, 3, 7, 14, 30, 60],
+  "transfer_platforms": ["codeforces", "atcoder"],
+  "transfer_native_difficulty_floor": null,
+  "exclude_experimental_atcoder": true
+}
