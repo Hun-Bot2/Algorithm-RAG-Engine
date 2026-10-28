@@ -1,0 +1,79 @@
+{
+  "scope": "notebook fresh curriculum embedding and Cross-encoder rerun",
+  "model_manifest_sha256": "d3c1baa460ae35bd03f7f670458ef96b361cb4cbce98a7c1be6b1d694b54e7de",
+  "input_receipts": {
+    "curriculum-ideas-v1.receipt.json": "7c57aeb34faec1298e2c34571380010ea1618eb0e74bab49787bf57756559071",
+    "curriculum-rerank-v1.receipt.json": "51b6b87f6fa4ef5c36ad78a47fdf050374d1468e3c4d0610dcf8100777c6bbe2",
+    "curriculum-rerank-plain-v1.receipt.json": "a5a9ec2f8b22b185710c732650c2f01235eaa0297e18c126721a8abdc1ae6d61",
+    "publisher-structure-v1.receipt.json": "4147205eea21c9aacb6a59f5c4d9414c1684cc31cc25b01ae8dd26f3e228ab41"
+  },
+  "fresh_encoding": [
+    {
+      "Input": "title",
+      "Problems": 90,
+      "Chunks": 90,
+      "Encode seconds": 0.10430604196153581,
+      "Maximum abs difference": 0.0
+    },
+    {
+      "Input": "idea_rationale",
+      "Problems": 90,
+      "Chunks": 90,
+      "Encode seconds": 0.09953333390876651,
+      "Maximum abs difference": 0.0
+    },
+    {
+      "Input": "idea_structured",
+      "Problems": 90,
+      "Chunks": 90,
+      "Encode seconds": 0.15890395804308355,
+      "Maximum abs difference": 0.0
+    }
+  ],
+  "fresh_reranking": [
+    {
+      "Query mode": "instruction",
+      "Cohort": "strategy_leetcode",
+      "Queries": 60,
+      "Pairs": 874,
+      "Scoring seconds": 3.0664703329093754,
+      "Pairs per second": 285.0182474032856,
+      "Max pair tokens": 58,
+      "Max saved logit difference": 0.0
+    },
+    {
+      "Query mode": "instruction",
+      "Cohort": "strategy_all",
+      "Queries": 90,
+      "Pairs": 1340,
+      "Scoring seconds": 4.614008333068341,
+      "Pairs per second": 290.41993496116913,
+      "Max pair tokens": 58,
+      "Max saved logit difference": 0.0
+    },
+    {
+      "Query mode": "plain",
+      "Cohort": "strategy_leetcode",
+      "Queries": 60,
+      "Pairs": 874,
+      "Scoring seconds": 2.439931708853692,
+      "Pairs per second": 358.20674686449127,
+      "Max pair tokens": 47,
+      "Max saved logit difference": 0.0
+    },
+    {
+      "Query mode": "plain",
+      "Cohort": "strategy_all",
+      "Queries": 90,
+      "Pairs": 1340,
+      "Scoring seconds": 3.7041809170041233,
+      "Pairs per second": 361.75338894725706,
+      "Max pair tokens": 47,
+      "Max saved logit difference": 0.0
+    }
+  ],
+  "all_saved_candidate_orders_reproduced": true,
+  "human_quality_evaluation": false,
+  "new_training": false,
+  "paid_api_calls": 0
+}

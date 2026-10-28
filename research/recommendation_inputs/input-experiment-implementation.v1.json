@@ -1,0 +1,14 @@
+{
+  "scope": "input experiment implementation and output provenance",
+  "sha256": {
+    "research/recommendation_inputs/experiments.py": "369b97ee146f3e3789833f887576a9c19672b2c19b692e19066e5d839dd37da4",
+    "research/recommendation_inputs/inputs.py": "86dbce32f3d3e3a47bc23839c2d3eb78b5d5b167e70fb55b48892553888cd0be",
+    "src/learning/embedding_backend.py": "2e2d457c44e7fad7ba77527ea6a6a00c0d4e089622022925be39b8a0beefcc8e",
+    "research/full_catalog/retrieve.py": "61d9bbcf59683d918e58d63c105294e9c71bf22f4efcfcaa09c197394128d98f",
+    "research/recommendation_inputs/curriculum-ideas-v1.receipt.json": "7c57aeb34faec1298e2c34571380010ea1618eb0e74bab49787bf57756559071",
+    "research/recommendation_inputs/publisher-structure-v1.receipt.json": "4147205eea21c9aacb6a59f5c4d9414c1684cc31cc25b01ae8dd26f3e228ab41"
+  },
+  "new_embeddings": true,
+  "human_quality_evaluation": false,
+  "cross_encoder_executed": false
+}

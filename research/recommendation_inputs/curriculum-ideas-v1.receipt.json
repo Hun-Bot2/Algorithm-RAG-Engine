@@ -1,0 +1,162 @@
+{
+  "kind": "curriculum",
+  "counts": {
+    "atcoder": 20,
+    "codeforces": 10,
+    "leetcode": 60
+  },
+  "input_sha256": {
+    "curriculum/seed.v1.json": "e5406b367c15736b312706c848cc6c9cc748b725cb2c630bf3e0dd71044535d1",
+    "curriculum/annotations.v1.json": "d14205fcf7f2a958a4e3e9c9dab61da537a4d524d57871870610a06a2a832ba6"
+  },
+  "authorship": "Luna draft; independent Sol review per user authorization; not human empirical gold",
+  "timings": {
+    "title": {
+      "encode_seconds": 0.06469512498006225,
+      "chunks": 90,
+      "selected_tokens": 318,
+      "all_selected_tokens_covered": true
+    },
+    "idea_rationale": {
+      "encode_seconds": 0.06891062506474555,
+      "chunks": 90,
+      "selected_tokens": 1041,
+      "all_selected_tokens_covered": true
+    },
+    "idea_structured": {
+      "encode_seconds": 0.10881316591985524,
+      "chunks": 90,
+      "selected_tokens": 1820,
+      "all_selected_tokens_covered": true
+    }
+  },
+  "diagnostics": {
+    "strategy_leetcode": {
+      "queries": 60,
+      "k": 10,
+      "pairwise": [
+        {
+          "a": "idea_rationale",
+          "b": "idea_structured",
+          "queries": 60,
+          "mean_shared_top10": 5.433333333333334,
+          "top10_overlap_fraction": 0.5433333333333333,
+          "top1_agreement_fraction": 0.36666666666666664,
+          "zero_overlap_queries": 0
+        },
+        {
+          "a": "idea_rationale",
+          "b": "title",
+          "queries": 60,
+          "mean_shared_top10": 2.9166666666666665,
+          "top10_overlap_fraction": 0.2916666666666667,
+          "top1_agreement_fraction": 0.05,
+          "zero_overlap_queries": 1
+        },
+        {
+          "a": "idea_structured",
+          "b": "title",
+          "queries": 60,
+          "mean_shared_top10": 3.0,
+          "top10_overlap_fraction": 0.3,
+          "top1_agreement_fraction": 0.05,
+          "zero_overlap_queries": 4
+        }
+      ],
+      "concentration": {
+        "idea_rationale": {
+          "distinct_targets": 60,
+          "max_indegree": 40,
+          "largest_candidate_query_share": 0.6666666666666666
+        },
+        "idea_structured": {
+          "distinct_targets": 60,
+          "max_indegree": 27,
+          "largest_candidate_query_share": 0.45
+        },
+        "title": {
+          "distinct_targets": 60,
+          "max_indegree": 21,
+          "largest_candidate_query_share": 0.35
+        }
+      }
+    },
+    "strategy_all": {
+      "queries": 90,
+      "k": 10,
+      "pairwise": [
+        {
+          "a": "idea_rationale",
+          "b": "idea_structured",
+          "queries": 90,
+          "mean_shared_top10": 5.111111111111111,
+          "top10_overlap_fraction": 0.5111111111111111,
+          "top1_agreement_fraction": 0.4222222222222222,
+          "zero_overlap_queries": 0
+        },
+        {
+          "a": "idea_rationale",
+          "b": "title",
+          "queries": 90,
+          "mean_shared_top10": 2.2666666666666666,
+          "top10_overlap_fraction": 0.22666666666666666,
+          "top1_agreement_fraction": 0.044444444444444446,
+          "zero_overlap_queries": 6
+        },
+        {
+          "a": "idea_structured",
+          "b": "title",
+          "queries": 90,
+          "mean_shared_top10": 2.422222222222222,
+          "top10_overlap_fraction": 0.24222222222222223,
+          "top1_agreement_fraction": 0.044444444444444446,
+          "zero_overlap_queries": 8
+        }
+      ],
+      "concentration": {
+        "idea_rationale": {
+          "distinct_targets": 90,
+          "max_indegree": 44,
+          "largest_candidate_query_share": 0.4888888888888889
+        },
+        "idea_structured": {
+          "distinct_targets": 90,
+          "max_indegree": 25,
+          "largest_candidate_query_share": 0.2777777777777778
+        },
+        "title": {
+          "distinct_targets": 90,
+          "max_indegree": 22,
+          "largest_candidate_query_share": 0.24444444444444444
+        }
+      }
+    }
+  },
+  "scopes": {
+    "strategy_leetcode": {
+      "file": "strategy_leetcode.json",
+      "sha256": "735cf98b3244a1c95a22d5ada71f02de72d00d729ee522faf3146507f2f7f9c6",
+      "label": "LeetCode 풀이 설명 실험"
+    },
+    "strategy_all": {
+      "file": "strategy_all.json",
+      "sha256": "b8a6c41744a27cf72b867c4d40012053ccd9a9ae151b43b0452c48cc71380a66",
+      "label": "3플랫폼 풀이 설명 실험"
+    }
+  },
+  "new_embeddings_generated": true,
+  "quality_status": "unavailable; no applicable human judgments",
+  "schema": "input-ablation-v1",
+  "model_manifest_sha256": "b4475d8f573844b730b695cdd8e65ce4a558b9f24da47184f1a2d14057430c1a",
+  "dimensions": 384,
+  "run_seconds": 6.691060458077118,
+  "training_performed": false,
+  "paid_api_calls": 0,
+  "files_sha256": {
+    "idea_rationale.npy": "67a80ab789ebc935f09635c12fc41c630d8f9757187cc4bbdb014f0d1e9bd33e",
+    "idea_structured.npy": "726dcc6edb42e26ee0c39c8732bf04b80d4d8d68cfa44e910559c39633f4b4d4",
+    "strategy_all.json": "b8a6c41744a27cf72b867c4d40012053ccd9a9ae151b43b0452c48cc71380a66",
+    "strategy_leetcode.json": "735cf98b3244a1c95a22d5ada71f02de72d00d729ee522faf3146507f2f7f9c6",
+    "title.npy": "2f878d00aa7138844e93101adf1fa397013424a1c3f7ffae19032ec00220a248"
+  }
+}

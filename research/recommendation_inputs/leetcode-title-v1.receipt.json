@@ -1,0 +1,20 @@
+{
+  "schema": "leetcode-within-platform-v1",
+  "source_count": 3053,
+  "candidate_count": 2949,
+  "dimensions": 384,
+  "catalog_sha256": "27a4ca622de50bfa6b86eb7d789abcc856bf40dd8fd511001e91edba20cffde4",
+  "keys_sha256": "766cfabfb2d11952918c22edb50b447dd30d2dab5b432d57196ae3aaead89453",
+  "cached_vectors_sha256": "e8e592d01988af3ec67904cf6e03945482b334f47a5e866c21ed054b2e2078d0",
+  "model_revision": "sentence-transformers/all-MiniLM-L6-v2@1110a243fdf4706b3f48f1d95db1a4f5529b4d41+c2-translation",
+  "vectors_verification": "current file hash recorded; catalog/key hashes verified against prior receipt",
+  "new_embeddings_generated": false,
+  "statement_fields_read": false,
+  "human_quality_evaluation": false,
+  "methods": [
+    "lc_title_cosine",
+    "lc_tag_jaccard"
+  ],
+  "top_k": 10,
+  "output_sha256": "449901a5e15b122a02459174194739e94c17c71642de82803e49aac8aad5fa7c"
+}

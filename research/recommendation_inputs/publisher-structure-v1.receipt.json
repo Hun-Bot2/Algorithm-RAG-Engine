@@ -1,0 +1,143 @@
+{
+  "kind": "publisher",
+  "source_count": 9424,
+  "matched_count": 9264,
+  "counts": {
+    "atcoder": 1275,
+    "codeforces": 7989
+  },
+  "excluded_issues": {
+    "duplicate_output_heading": 25,
+    "missing_input": 58,
+    "missing_output": 110,
+    "duplicate_input_heading": 9,
+    "duplicate_constraints_heading": 10,
+    "missing_description": 25
+  },
+  "missing_standalone_constraints": 7991,
+  "input_corpus_sha256": "42e8cfe6042c34ddcd7a09e271dec98dec07e4f955616ead9ad8ebe911edef0b",
+  "timings": {
+    "title": {
+      "reused_existing_vectors": true
+    },
+    "full_statement": {
+      "reused_existing_vectors": true
+    },
+    "task_sections": {
+      "encode_seconds": 269.40990612492897,
+      "chunks": 17748,
+      "selected_tokens": 3351271,
+      "all_selected_tokens_covered": true
+    },
+    "io_constraints": {
+      "encode_seconds": 146.1453580830712,
+      "chunks": 9935,
+      "selected_tokens": 1304763,
+      "all_selected_tokens_covered": true
+    }
+  },
+  "retrieval_seconds": 2.8410390419885516,
+  "diagnostics": {
+    "queries": 9264,
+    "k": 10,
+    "pairwise": [
+      {
+        "a": "task_sections",
+        "b": "full_statement",
+        "queries": 9264,
+        "mean_shared_top10": 6.727439550949914,
+        "top10_overlap_fraction": 0.6727439550949914,
+        "top1_agreement_fraction": 0.5252590673575129,
+        "zero_overlap_queries": 6
+      },
+      {
+        "a": "task_sections",
+        "b": "io_constraints",
+        "queries": 9264,
+        "mean_shared_top10": 2.8606433506044904,
+        "top10_overlap_fraction": 0.28606433506044904,
+        "top1_agreement_fraction": 0.1540371329879102,
+        "zero_overlap_queries": 974
+      },
+      {
+        "a": "task_sections",
+        "b": "title",
+        "queries": 9264,
+        "mean_shared_top10": 0.6749784110535406,
+        "top10_overlap_fraction": 0.06749784110535406,
+        "top1_agreement_fraction": 0.025690846286701208,
+        "zero_overlap_queries": 5589
+      },
+      {
+        "a": "full_statement",
+        "b": "io_constraints",
+        "queries": 9264,
+        "mean_shared_top10": 2.854598445595855,
+        "top10_overlap_fraction": 0.2854598445595855,
+        "top1_agreement_fraction": 0.15770725388601037,
+        "zero_overlap_queries": 1033
+      },
+      {
+        "a": "full_statement",
+        "b": "title",
+        "queries": 9264,
+        "mean_shared_top10": 0.6646157167530224,
+        "top10_overlap_fraction": 0.06646157167530224,
+        "top1_agreement_fraction": 0.028281519861830744,
+        "zero_overlap_queries": 5661
+      },
+      {
+        "a": "io_constraints",
+        "b": "title",
+        "queries": 9264,
+        "mean_shared_top10": 0.4373920552677029,
+        "top10_overlap_fraction": 0.04373920552677029,
+        "top1_agreement_fraction": 0.01964594127806563,
+        "zero_overlap_queries": 6582
+      }
+    ],
+    "concentration": {
+      "task_sections": {
+        "distinct_targets": 5115,
+        "max_indegree": 560,
+        "largest_candidate_query_share": 0.06044905008635579
+      },
+      "full_statement": {
+        "distinct_targets": 5063,
+        "max_indegree": 510,
+        "largest_candidate_query_share": 0.05505181347150259
+      },
+      "io_constraints": {
+        "distinct_targets": 4463,
+        "max_indegree": 1057,
+        "largest_candidate_query_share": 0.11409758203799654
+      },
+      "title": {
+        "distinct_targets": 3690,
+        "max_indegree": 1457,
+        "largest_candidate_query_share": 0.15727547495682212
+      }
+    }
+  },
+  "scopes": {
+    "structured_content": {
+      "file": "structured_content.json",
+      "sha256": "5338b82d8c213e06946838fca3404b38ad6160fed8e7f64c0e71e61a42a2868a",
+      "label": "본문 구조 실험 (CF↔AtCoder)"
+    }
+  },
+  "new_embeddings_generated": true,
+  "quality_status": "unavailable; no applicable human judgments",
+  "schema": "input-ablation-v1",
+  "model_manifest_sha256": "b4475d8f573844b730b695cdd8e65ce4a558b9f24da47184f1a2d14057430c1a",
+  "dimensions": 384,
+  "run_seconds": 426.38690537493676,
+  "training_performed": false,
+  "paid_api_calls": 0,
+  "files_sha256": {
+    "io_constraints.npy": "7f6f19f5c51ced7f862059fb3eeef0e08b1e801dccdb785a8ce134a256c78af0",
+    "source-indices.npy": "3018df21ac0499952b73331811fc0ba740c1d82814a9e08283f3dcac19a20e64",
+    "structured_content.json": "5338b82d8c213e06946838fca3404b38ad6160fed8e7f64c0e71e61a42a2868a",
+    "task_sections.npy": "2a8e692f26a6818d30a3902e865ec2adf4a68c44e5236a776979bc3815ee6e1a"
+  }
+}
