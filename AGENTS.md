@@ -730,3 +730,8 @@ Keep these distinctions clear in summaries and docs:
 - HTML files are served with a `sandbox allow-scripts` CSP and shown in a sandboxed iframe: no network (notebook MathJax won't render).
   The desktop Browser pane's screenshots show sandboxed iframes as blank; check them in headless Chrome instead.
 - Add new figures by editing the catalog (title, note on what it does not show, source report). Private files stay uncommitted.
+
+## Participation-first contests (2026-10-28)
+
+- User decision: contests show no suitability verdict and no stale-cache badge. `contestSuitability` and server `contest.recommendation`
+  remain in data/tests but are not displayed. Provenance and stale fallback live under the collapsed "일정 출처" section of the details.

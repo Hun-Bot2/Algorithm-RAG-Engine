@@ -42,3 +42,9 @@
 - WHEN explanations are generated, THE SYSTEM SHALL also explain carried plans from their own stored snapshot, dispatching at most one
   generation per problem (the entry the calendar shows); other revisions only read the cache.
 - Carry-over is presentation only: snapshots, attempts and planner inputs MUST NOT change, and carried copies MUST NOT count as extra plans in recommendation-follow-up statistics.
+
+## Participation-first contests (2026-10-28, user decision)
+
+- Contest lists and details SHALL NOT show a suitability verdict ("판단 근거 부족" etc.) or a stale-cache badge. Contests are events the learner joins.
+- Details SHALL show start time (KST), duration, an official link, a participation-record action and, when supplied, the rated range.
+- Source provenance (official, community mirror, manual; last sync; stale fallback) SHALL remain available in a collapsed "일정 출처" section.

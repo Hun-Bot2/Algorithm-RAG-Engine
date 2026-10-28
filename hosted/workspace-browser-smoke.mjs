@@ -133,8 +133,9 @@ try{
     await wait("document.querySelector('#notice').innerText.includes('대회 일정을 저장했어요')");
     await evaluate("document.querySelector('dialog')?.close()");
     const contests=await evaluate("(async()=>await(await fetch('/api/state')).json())()");assert.equal(contests.contests[0].platform,'leetcode');assert.equal(contests.contests[0].source,'manual');
-    await evaluate("document.querySelector('.contest-list-item').click()");assert.match(await evaluate("document.querySelector('dialog').innerText"),/직접 입력/);
-    assert.match(await evaluate("document.querySelector('dialog .contest-fit').innerText"),/판단 근거 부족/);
+    await evaluate("document.querySelector('.contest-list-item').click()");assert.match(await evaluate("document.querySelector('dialog .contest-source').textContent"),/직접 입력/);
+    // Contests show participation info, not a suitability verdict.
+    assert.equal(await evaluate("Boolean(document.querySelector('dialog .contest-fit'))"),false);assert.match(await evaluate("document.querySelector('dialog').innerText"),/참여 기록 남기기/);
     await evaluate("[...document.querySelectorAll('dialog button')].find(b=>b.textContent==='캘린더에서 날짜 보기').click()");
     assert.equal(await evaluate("document.querySelectorAll('.calendar-event.contest').length"),1,'manual contest retained in primary calendar');
     assert.equal(await evaluate("document.querySelector('[data-view=calendar]').getAttribute('aria-current')"),'page');
@@ -153,7 +154,7 @@ try{
     await evaluate("document.querySelector('[data-view=contests]').click();[...document.querySelectorAll('button')].find(b=>b.textContent==='공개 일정 동기화').click()");
     await wait("document.querySelectorAll('.contest-list-item').length===4");assert.equal(contestCalls,3);
     await evaluate("[...document.querySelectorAll('.contest-list-item')].find(b=>b.textContent.includes('Synthetic Wednesday')).click()");
-    const contestText=await evaluate("document.querySelector('dialog').innerText");assert.match(contestText,/23:35/);assert.match(contestText,/120분/);assert.match(contestText,/판단 근거 부족/);assert.match(contestText,/마지막 성공 동기화/);
+    const contestText=await evaluate("document.querySelector('dialog').textContent");assert.match(contestText,/23:35/);assert.match(contestText,/120분/);assert.doesNotMatch(contestText,/판단 근거 부족/);assert.match(contestText,/마지막 동기화/);
     await writeFile(join(output,'contest-details-desktop.png'),Buffer.from((await call('Page.captureScreenshot',{format:'png'})).data,'base64'));
     await evaluate("document.querySelector('dialog').close();document.querySelector('[data-view=calendar]').click()");await showDate(WED);
     assert.ok(await evaluate(`[...document.querySelectorAll('[data-date="${WED}"] .calendar-event.contest')].some(b=>b.title.includes('Synthetic Wednesday'))`));
@@ -215,11 +216,11 @@ try{
     await evaluate("document.querySelector('[data-view=contests]').click()");
     assert.equal(await evaluate("document.querySelectorAll('.calendar-board').length"),0,'contest destination is a list');
     assert.equal(await evaluate("document.querySelectorAll('.contest-list-item').length"),4);
-    assert.match(await evaluate("document.querySelector('.contest-agenda').innerText"),/오래된 캐시/);
+    assert.doesNotMatch(await evaluate("document.querySelector('.contest-agenda').innerText"),/오래된 캐시|판단 근거/,'no cache or verdict badges on contests');
     await evaluate("document.querySelector('[aria-label=\"대회 플랫폼\"]').value='atcoder';document.querySelector('[aria-label=\"대회 플랫폼\"]').dispatchEvent(new Event('change'))");
     assert.equal(await evaluate("document.querySelectorAll('.contest-list-item').length"),1);
     await evaluate("document.querySelector('.contest-list-item').click()");
-    assert.match(await evaluate("document.querySelector('dialog').innerText"),/오래된 캐시/);
+    assert.match(await evaluate("document.querySelector('dialog .contest-source').textContent"),/이전에 받아 둔 일정/,'stale schedules are explained under 일정 출처');
     await evaluate("[...document.querySelectorAll('dialog button')].find(b=>b.textContent==='캘린더에서 날짜 보기').click()");
     const cachedContests=await evaluate("(async()=>(await(await fetch('/api/state')).json()).contests)()");
     for(const contest of cachedContests){

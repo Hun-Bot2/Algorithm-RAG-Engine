@@ -574,3 +574,12 @@ footer { max-width:none; margin:0 35px 0 259px; padding:12px 0; text-align:left;
   .library-folder { flex:none; width:auto; white-space:nowrap; }
 }
 @media (max-width:600px) { .library-grid { grid-template-columns:1fr 1fr; gap:10px; } .library-thumb { height:110px; } .library-note { display:none; } }
+
+/* Contest details (2026-10-28): participation-first; provenance folded under "일정 출처". */
+.joined-badge { display:inline-block; padding:2px 8px; border-radius:999px; background:var(--green-soft); color:var(--green-dark); font-size:10px; font-weight:650; }
+.contest-tip { margin:16px 0 8px; padding:12px 14px; border-radius:8px; background:#f3f7ee; }
+.contest-actions { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 6px; }
+.contest-actions .external-link.button { margin:0; color:white; }
+.contest-source { margin-top:16px; padding-top:12px; border-top:1px solid var(--line); }
+.contest-source summary { font-size:12px; color:var(--muted); cursor:pointer; }
+.contest-source .detail-grid { margin:12px 0 8px; }
