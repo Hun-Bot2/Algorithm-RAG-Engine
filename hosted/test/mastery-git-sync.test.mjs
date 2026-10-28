@@ -34,7 +34,8 @@ test('manual ticks ingest only new commits and retain failed independent-claim p
   assert.ok(Object.values(first.lastResults[0].flags).flat().includes('independent_without_hints_trailer'));
   let ledger=await readLedger(db,'owner');
   assert.equal(ledger.attempts.length,1);
-  assert.equal(ledger.attempts[0].outcome,'reported_completion');
+  assert.equal(ledger.attempts[0].recorded_outcome,'reported_completion');
+  assert.equal(ledger.attempts[0].outcome,'independent','policy v3 counts any completion as solved');
   assert.equal(ledger.git_observations[0].payload.outcome,'reported_completion');
   assert.ok(first.lastWarnings[0].flags.includes('independent_without_hints_trailer'));
   const unchanged=await sync.tick();
@@ -46,7 +47,7 @@ test('manual ticks ingest only new commits and retain failed independent-claim p
   assert.equal(second.lastResults[0].observed,1);
   assert.deepEqual(second.lastWarnings,[],'clean subsequent ingestion clears warnings');
   ledger=await readLedger(db,'owner');
-  assert.deepEqual(ledger.attempts.map(row=>row.outcome),['reported_completion','failed']);
+  assert.deepEqual(ledger.attempts.map(row=>row.recorded_outcome),['reported_completion','failed']);
 });
 
 test('history rewrite remains halted on later sync ticks',async t=>{

@@ -27,11 +27,11 @@ export function explanationEvidence(plan,slot){
 export function koreanReason(slot){
   if(slot.semantic_only)return '제목의 의미가 비슷한 미풀이 후보예요. 같은 알고리즘을 사용하는지는 확인되지 않았으며, 개념 숙련도를 판단하는 근거로는 사용하지 않아요.';
   if(slot.kind==='review')return slot.review_priority==='priority'
-    ? '혼자 해결하지 못했거나 도움을 받은 기록이 있어 우선 복습으로 골랐어요. 다시 풀면서 스스로 해결할 수 있는지 확인해 보세요.'
+    ? '해결하지 못한 기록이 있어 우선 복습으로 골랐어요. 다시 풀어서 해결할 수 있는지 확인해 보세요.'
     : '복습 일정에 따라 다시 풀어볼 문제예요. 이전 풀이를 보지 않고 해결할 수 있는지 확인해 보세요.';
   if(slot.kind==='remediation')return '최근 풀이 기록을 반영해 보완 연습으로 골랐어요. 이번 시도의 결과를 기록하면 다음 학습 순서에 반영돼요.';
   if(slot.kind==='transfer')return '현재 학습 단계에서 다른 문제에 개념을 적용해 보는 연습으로 골랐어요. 개념 분류만으로 두 문제의 풀이법이 같다고 보장할 수는 없어요.';
-  return '현재 풀이 기록과 학습 단계에 따라 다음 연습 문제로 골랐어요. 혼자 해결했는지와 도움을 받았는지를 기록하면 다음 추천에 반영돼요.';
+  return '현재 풀이 기록과 학습 단계에 따라 다음 연습 문제로 골랐어요. 해결 여부를 기록하면 다음 추천에 반영돼요.';
 }
 function checked(output,evidence){
   if(!output || Object.keys(output).sort().join(',')!=='evidence_id,text' || output.evidence_id!==evidence.evidence_id ||

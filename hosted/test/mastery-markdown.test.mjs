@@ -54,7 +54,8 @@ test('records independent O with explicit no hints, X, assisted, missing outcome
   r.commit({'leetcode/group-anagrams.md':'---\nlearning_schema: 1\nproblem: leetcode:group-anagrams\nattempt: a5\n---\nno outcome'});
   const report=await ingest(db), rows=await attempts(db);
   assert.equal(report.observed,4);
-  assert.deepEqual(rows.map(x=>[x.problem_key,x.outcome,x.hints,x.activity_type,x.transfer_from,x.self_minutes]),[
+  // Ingestion fidelity: the stored outcome is preserved as recorded_* (policy v3 projects it to solved/unsolved).
+  assert.deepEqual(rows.map(x=>[x.problem_key,x.recorded_outcome,x.recorded_hints,x.activity_type,x.transfer_from,x.self_minutes]),[
     ['leetcode:two-sum','independent',false,null,null,null],
     ['leetcode:valid-parentheses','failed',null,null,null,null],
     ['leetcode:merge-intervals','assisted',true,null,null,null],
@@ -84,7 +85,7 @@ test('multi-problem commits bind each file to its own key; explicit outcome/hint
   },'pair\n\nOutcome: failed\nHints: used');
   await ingest(db);
   const rows=await attempts(db);
-  assert.deepEqual(rows.map(x=>[x.problem_key,x.outcome,x.hints]).sort((a,b)=>a[0].localeCompare(b[0])),[['codeforces:4A','failed',true],['leetcode:two-sum','failed',true]]);
+  assert.deepEqual(rows.map(x=>[x.problem_key,x.recorded_outcome,x.recorded_hints]).sort((a,b)=>a[0].localeCompare(b[0])),[['codeforces:4A','failed',true],['leetcode:two-sum','failed',true]]);
   const raw=(await readLedger(db,'owner')).git_observations;
   assert.deepEqual(raw.map(x=>x.payload.path).sort(),['codeforces/4A.md','leetcode/two-sum.md']);
 });
@@ -94,7 +95,7 @@ test('Problem-only trailers do not override structured metadata; legacy no-marke
   r.commit({'leetcode/two-sum.md':fm('attempt: a1\noutcome: O\nhints: none')},'metadata\n\nProblem: leetcode:two-sum');
   r.commit({'leetcode/valid-parentheses.md':'---\nid: ignored\ntitle: old note\n---\ntext'});
   await ingest(db); const rows=await attempts(db);
-  assert.deepEqual(rows.map(x=>[x.problem_key,x.outcome]),[['leetcode:two-sum','independent'],['leetcode:valid-parentheses','reported_completion']]);
+  assert.deepEqual(rows.map(x=>[x.problem_key,x.recorded_outcome]),[['leetcode:two-sum','independent'],['leetcode:valid-parentheses','reported_completion']]);
 });
 
 test('templates and path/frontmatter mismatches are ignored with a visible flag',async context=>{

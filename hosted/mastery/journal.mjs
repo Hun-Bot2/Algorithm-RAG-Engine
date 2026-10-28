@@ -6,7 +6,7 @@ import {canonicalJson} from '../contest-history.mjs';
 import {appendEvents,getPreferences} from '../core/store.mjs';
 import {timestamp,timerState} from '../core/events.mjs';
 import {seoulDate} from '../core/policy.mjs';
-import {readLedger,getSnapshot,saveSnapshot} from './ledger.mjs';
+import {readLedger,getSnapshot,saveSnapshot,solvedView,SOLVED_OUTCOMES} from './ledger.mjs';
 import {attachCatalog,loadCatalog} from './catalog.mjs';
 import {planDay,problemStates,weekInfo} from './planner.mjs';
 import {reviewQueue} from './reviews.mjs';
@@ -94,7 +94,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
       for(const r of raw){
         if((table==='events'&&r.kind!=='attempt')||activeIds.has(r[idField])||r.occurred_at>at||r.recorded_at>at)continue;
         const p=catalog.problems.get(canonicalKey(catalog,r.payload.problem_key));
-        entries.push({id:r[idField],type:'attempt',occurred_at:r.occurred_at,recorded_at:r.recorded_at,problem_key:r.payload.problem_key,title:p?.title ?? r.payload.problem_key,platform:p?.platform ?? r.payload.problem_key.split(':')[0],difficulty:level(p),pattern:[...trustedConcepts(p)].join(', '),activity_type:r.payload.activity_type ?? null,transfer_from:r.payload.transfer_from ?? null,outcome:r.payload.outcome,display_outcome:r.payload.outcome==='independent'?'O':r.payload.outcome==='reported_completion'?'?':'X',hints:r.payload.hints,self_minutes:r.payload.self_minutes ?? null,...(r.payload.self_seconds!=null?{self_seconds:r.payload.self_seconds}:{}),priority:['failed','assisted'].includes(r.payload.outcome)?'priority':'normal',status:'superseded',reason:'Historical record corrected by an append-only successor; excluded from active mastery evidence.',superseded_by:raw.find(x=>x.supersedes===r[idField])?.[idField] ?? null});
+        entries.push({id:r[idField],type:'attempt',occurred_at:r.occurred_at,recorded_at:r.recorded_at,problem_key:r.payload.problem_key,title:p?.title ?? r.payload.problem_key,platform:p?.platform ?? r.payload.problem_key.split(':')[0],difficulty:level(p),pattern:[...trustedConcepts(p)].join(', '),activity_type:r.payload.activity_type ?? null,transfer_from:r.payload.transfer_from ?? null,...solvedView(r.payload.outcome,r.payload.hints),display_outcome:SOLVED_OUTCOMES.has(r.payload.outcome)?'O':'X',self_minutes:r.payload.self_minutes ?? null,...(r.payload.self_seconds!=null?{self_seconds:r.payload.self_seconds}:{}),priority:['failed','assisted'].includes(r.payload.outcome)?'priority':'normal',status:'superseded',reason:'Historical record corrected by an append-only successor; excluded from active mastery evidence.',superseded_by:raw.find(x=>x.supersedes===r[idField])?.[idField] ?? null});
       }
     }
     for(const p of all.filter(x=>x.snapshot_id))for(const [i,s] of p.slots.entries())entries.push({...s,id:(p.archived?'archive-':'')+p.snapshot_id+'-'+i,type:'recommendation',archived:Boolean(p.archived),occurred_at:p.prepared_at ?? p.event_cutoff ?? null,local_date:p.date ?? p.local_date,snapshot_id:p.snapshot_id,priority:s.review_priority ?? 'normal',pattern:(s.concepts ?? []).join(', ')});

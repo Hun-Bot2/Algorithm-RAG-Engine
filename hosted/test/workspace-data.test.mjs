@@ -25,7 +25,7 @@ test('actual timestamps never follow plan dates, plans never count as activity',
 });
 test('history search and platform difficulty filters preserve real outcomes and missingness',()=>{
  const rows=workspaceEvents(journal,{});assert.equal(filterAttempts(rows,{query:'arrays',platform:'leetcode',difficulty:'Easy',outcome:'assisted',from:'2026-10-20',to:'2026-10-20'}).length,1);
- assert.equal(filterAttempts(rows,{to:'2026-10-19'}).length,0);assert.equal(outcomeText({outcome:'reported_completion'}),'완료 보고 · 도움 미상');assert.notEqual(outcomeText({outcome:'independent',hints:null}),'독립 해결');
+ assert.equal(filterAttempts(rows,{to:'2026-10-19'}).length,0);assert.equal(outcomeText({outcome:'reported_completion'}),'해결');assert.equal(outcomeText({outcome:'failed'}),'미해결');assert.equal(outcomeText({outcome:'independent',hints:null}),'해결','policy v3: help is not shown');
 });
 test('conversion deduplicates snapshots and requires a subsequent same-problem attempt within seven days',()=>{
  const rows=[{id:'p1',date:'2026-10-01',problem_key:'leetcode:a',layer:'plan'},{id:'p2',date:'2026-10-01',problem_key:'leetcode:a',layer:'plan'},
@@ -37,7 +37,7 @@ test('core-only runtime keeps imported completions uncertain and preserves corre
 });
 
 test('calendar uses distinct recorded independence symbols and prioritizes actual activity',()=>{
- assert.equal(outcomeSymbol({outcome:'independent',hints:false}),'✓');assert.equal(outcomeSymbol({outcome:'assisted'}),'↗');assert.equal(outcomeSymbol({outcome:'reported_completion'}),'?');
+ assert.equal(outcomeSymbol({outcome:'independent',hints:false}),'✓');assert.equal(outcomeSymbol({outcome:'assisted'}),'✓');assert.equal(outcomeSymbol({outcome:'reported_completion'}),'✓');assert.equal(outcomeSymbol({outcome:'failed'}),'·');
  const rows=workspaceEvents(journal,{}).filter(e=>e.date==='2026-10-20');assert.equal(rows[0].layer,'actual');
 });
 
@@ -59,7 +59,7 @@ test('calendar categories form a disjoint partition; filter choices never count 
  const groups=['solved','attempted','planned','contest'].map(key=>filterCalendarEvents(rows,{[key]:true}));
  assert.equal(groups.flat().length,7);assert.equal(new Set(groups.flat().map(e=>e.id)).size,7);
  assert.deepEqual(filterCalendarEvents(rows,{solved:true,contest:true}).map(e=>e.id),['i','a','r','c']);
- assert.deepEqual(daySummary(rows),{attempted:5,solved:3,unsolved:1,unknown:1,independent:1,assisted:1});
+ assert.deepEqual(daySummary(rows),{attempted:5,solved:3,unsolved:1,unknown:1});
 });
 test('contest suitability never derives skill from titles, activity volume or suitable=false',()=>{
  const contest={id:'contest:codeforces:123',contest_id:'codeforces:123',platform:'codeforces',title:'Div. 4 beginner ABC 999',source:'https://codeforces.com/api/contest.list'};
@@ -156,7 +156,7 @@ test('mock contests project as their own hidden-by-default layer with display-on
  const mock=events.find(e=>e.layer==='mock');
  assert.equal(mock.id,'mock:2026-10-31');assert.equal(mock.duration_minutes,60);assert.ok(!('start_at' in mock)&&!('placement_note' in mock),'no clock time, even from a v1 record');assert.equal(mock.date,'2026-10-31');assert.equal(eventCategory(mock),'mock');
  assert.deepEqual(mock.problems.map(p=>p.result?.attempt_id ?? null),['p1-sat',null,'p3-first'],'earliest active attempt on or after the mock date');
- assert.equal(mock.problems[0].result.symbol,'✓');assert.equal(mock.problems[2].result.text,'도움 해결');
+ assert.equal(mock.problems[0].result.symbol,'✓');assert.equal(mock.problems[2].result.text,'해결');
  assert.equal(mock.attempted,2);
  const saturday=events.filter(e=>e.date==='2026-10-31').map(e=>e.layer);
  assert.deepEqual(saturday,['actual','mock','contest']);

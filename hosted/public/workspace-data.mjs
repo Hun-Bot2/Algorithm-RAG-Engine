@@ -29,10 +29,11 @@ export function completion(entry) {
 }
 export function outcomeText(entry) {
   if(entry.status==='superseded')return '수정 전';
-  return entry.outcome==='independent' && entry.hints===false?'독립 해결':entry.outcome==='assisted'?'도움 해결':entry.outcome==='reported_completion'?'완료 보고 · 도움 미상':entry.outcome==='failed'?'미해결':'결과 미상';
+  // Policy v3 (ADR 005): help is not tracked; every completion is shown as solved.
+  return completion(entry)?'해결':entry.outcome==='failed'?'미해결':'결과 미상';
 }
 export function outcomeSymbol(entry) {
-  return entry.outcome==='independent'&&entry.hints===false?'✓':entry.outcome==='assisted'?'↗':entry.outcome==='reported_completion'?'?':'·';
+  return completion(entry)?'✓':'·';
 }
 export function workspaceEvents(journal, state) {
   const events=[],seen=new Set();
@@ -67,7 +68,7 @@ export function workspaceEvents(journal, state) {
   for(const m of journal?.mock_contests ?? []){
     const problems=(m.problems ?? []).map(p=>{
       const hit=solved.filter(a=>a.problem_key===p.problem_key&&a.date>=m.local_date).sort((a,b)=>String(a.occurred_at).localeCompare(String(b.occurred_at))||a.id.localeCompare(b.id))[0];
-      return {...p,result:hit?{attempt_id:hit.id,date:hit.date,outcome:hit.outcome,hints:hit.hints,symbol:outcomeSymbol(hit),text:outcomeText(hit)}:null};
+      return {...p,result:hit?{attempt_id:hit.id,date:hit.date,outcome:hit.outcome,symbol:outcomeSymbol(hit),text:outcomeText(hit)}:null};
     });
     filtered.push({id:`${m.archived?'mock-archive':'mock'}:${m.local_date}`,type:'mock_contest',layer:'mock',date:m.local_date,archived:Boolean(m.archived),platform:'leetcode',title:`LeetCode 모의 대회 · ${problems.length}문제`,
       duration_minutes:m.duration_minutes,policy:m.policy,composition:m.composition,expected_solved:m.expected_solved,target_expected:m.target_expected,
@@ -124,8 +125,7 @@ export function filterCalendarEvents(events, enabled={solved:true,attempted:true
 export function daySummary(events) {
   const rows=activeAttempts(events);
   return {attempted:rows.length,solved:rows.filter(completion).length,unsolved:rows.filter(e=>e.outcome==='failed').length,
-    unknown:rows.filter(e=>!completion(e)&&e.outcome!=='failed').length,
-    independent:rows.filter(e=>e.outcome==='independent'&&e.hints===false).length,assisted:rows.filter(e=>e.outcome==='assisted').length};
+    unknown:rows.filter(e=>!completion(e)&&e.outcome!=='failed').length};
 }
 export function contestSuitability(contest,events=[],participation=[]) {
   if(contest.recommendation)return contest.recommendation;
@@ -155,7 +155,7 @@ export function syncDiagnostic(status){
  const conflicts=warnings.filter(w=>w.flag.startsWith('markdown_attempt_conflict:'));
  const other=warnings.filter(w=>!w.flag.startsWith('markdown_attempt_conflict:'));
  const parts=[];
- if(conflicts.length)parts.push(`기존 시도와 원본 수정 내용이 달라요: ${conflicts.map(w=>`${w.repo} / ${w.flag.slice('markdown_attempt_conflict:'.length)}`).join(', ')}. 시간·결과·힌트 변경도 같은 시도 ID의 충돌로 남아요. 이전 풀이와 시각은 보존했으며, 수정된 값은 자동 반영하지 않았어요. 원본 수정이 새 시도인지 정정인지 확인해 주세요.`);
+ if(conflicts.length)parts.push(`기존 시도와 원본 수정 내용이 달라요: ${conflicts.map(w=>`${w.repo} / ${w.flag.slice('markdown_attempt_conflict:'.length)}`).join(', ')}. 시간·결과 변경도 같은 시도 ID의 충돌로 남아요. 이전 풀이와 시각은 보존했으며, 수정된 값은 자동 반영하지 않았어요. 원본 수정이 새 시도인지 정정인지 확인해 주세요.`);
  if(other.length)parts.push(`가져오기 확인 항목: ${other.map(w=>`${w.repo} / ${w.flag}`).join(', ')}. 해당 파일·행의 형식이나 결과를 확인해 주세요.`);
  return parts.join(' ');
 }

@@ -34,14 +34,17 @@ export async function readLedger(db,learnerId,{cutoff=null,highWater=null}={}) {
   ledger.attempts=attemptStream(ledger);
   return ledger;
 }
-// Unified attempt evidence. Git rows are labeled evidence_source=git; nothing is upgraded.
+// Policy v3 (ADR 005): help is not tracked. Any completion counts as solved; stored evidence is never rewritten.
+export const SOLVED_OUTCOMES = new Set(['independent','assisted','reported_completion']);
+export const solvedView = (outcome,hints) => ({outcome:SOLVED_OUTCOMES.has(outcome)?'independent':outcome,hints:SOLVED_OUTCOMES.has(outcome)?false:null,recorded_outcome:outcome,recorded_hints:hints ?? null});
+// Unified attempt evidence. Git rows are labeled evidence_source=git. Outcomes are projected once here (SO2).
 export function attemptStream(ledger) {
   const out=[];
   for (const e of ledger.events) if (e.kind==='attempt') out.push({id:e.event_id,table:'events',occurred_at:e.occurred_at,recorded_at:e.recorded_at,
-    problem_key:e.payload.problem_key,outcome:e.payload.outcome,hints:e.payload.hints,activity_type:e.payload.activity_type ?? null,
+    problem_key:e.payload.problem_key,...solvedView(e.payload.outcome,e.payload.hints),activity_type:e.payload.activity_type ?? null,
     transfer_from:e.payload.transfer_from ?? null,evidence_source:e.source==='platform_import'?'platform_import':'manual',self_minutes:e.payload.self_minutes ?? null,...(e.payload.self_seconds!=null?{self_seconds:e.payload.self_seconds}:{})});
   for (const g of ledger.git_observations ?? []) out.push({id:g.entry_id,table:'git_observations',occurred_at:g.occurred_at,recorded_at:g.recorded_at,
-    problem_key:g.payload.problem_key,outcome:g.payload.outcome,hints:g.payload.hints,activity_type:g.payload.activity_type,
+    problem_key:g.payload.problem_key,...solvedView(g.payload.outcome,g.payload.hints),activity_type:g.payload.activity_type,
     transfer_from:g.payload.transfer_from,evidence_source:g.source==='manual_correction'?'git_correction':'git',self_minutes:g.payload.self_minutes,...(g.payload.self_seconds!=null?{self_seconds:g.payload.self_seconds}:{})});
   return out.sort((a,b)=>a.occurred_at.localeCompare(b.occurred_at) || RANK[a.table]-RANK[b.table] || a.id.localeCompare(b.id));
 }

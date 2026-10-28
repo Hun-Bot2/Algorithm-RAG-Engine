@@ -24,7 +24,7 @@ export function buildWeeklyReport({ledger,catalog,plans=[],weekStart,preferences
   const weak=outcomes.concepts.filter(c=>c.weak).sort((a,b)=>(a.rate ?? 1)-(b.rate ?? 1) || b.review_failures-a.review_failures || a.concept.localeCompare(b.concept));
   const targets=(preferences.mastery?.target_concepts ?? []).filter(c=>!weak.some(w=>w.concept===c));
   const evidence=Object.fromEntries(outcomes.concepts.map(c=>[c.concept,c.n]));
-  const focus=weak.slice(0,2).map(c=>({concept:c.concept,reason:`weak: independent rate ${c.rate} over n=${c.n}, review failures ${c.review_failures}`}));
+  const focus=weak.slice(0,2).map(c=>({concept:c.concept,reason:`weak: solve rate ${c.rate} over n=${c.n}, review failures ${c.review_failures}`}));
   for (const c of targets.sort((a,b)=>(evidence[a] ?? 0)-(evidence[b] ?? 0) || a.localeCompare(b))) if (focus.length<2) focus.push({concept:c,reason:`target concept with least evidence (n=${evidence[c] ?? 0})`});
   const feedback={total:0,by_verdict:{},by_channel:{}};
   for (const f of (ledger.practice_feedback ?? []).filter(inWeek)) {
@@ -69,7 +69,7 @@ export function renderMarkdown(report) {
   for (const [days,r] of Object.entries(report.review.by_interval)) if (r.n) L.push(`- ${days}-day retention: ${fmtRate(r)}`);
   L.push('','## Outcomes','');
   for (const scope of ['week','rolling']) {
-    L.push(`- Independent solve rate (${scope==='week'?'this week':'4 weeks'}): ${fmtRate(report.outcomes.isr[scope].overall)}`);
+    L.push(`- Solve rate (${scope==='week'?'this week':'4 weeks'}): ${fmtRate(report.outcomes.isr[scope].overall)}`);
     for (const [p,r] of Object.entries(report.outcomes.isr[scope].by_platform)) L.push(`  - ${p}: ${fmtRate(r)}`);
     const e=report.outcomes.excess[scope];
     L.push(`- Excess solve rate vs stored predictions (${scope}): ${e.excess_solve_rate===null?'no data':e.excess_solve_rate} (n=${e.n}, ${e.status}; ${e.without_stored_prediction} attempts had no stored prediction)`);
@@ -92,7 +92,7 @@ export function renderMarkdown(report) {
   L.push('','## Process','',`- Planned slots done: ${report.process.done_slots}/${report.process.planned_slots}`,
     `- Confirmed timer minutes: ${report.process.confirmed_timer_minutes}; self-reported minutes: ${report.process.self_reported_minutes} (minute-unit records)${report.process.self_reported_seconds_total!=null?'; self-reported total: '+report.process.self_reported_seconds_total+'s':''} (${report.process.time_note})`);
   L.push('','## Evaluation','',`- Relatedness verdicts: ${report.evaluation.feedback.total} ${JSON.stringify(report.evaluation.feedback.by_verdict)}`);
-  for (const [k,v] of Object.entries(report.evaluation.explore_kinds).sort()) L.push(`- Explore ${k}: planned ${v.planned}, attempted ${v.attempted}, independent ${v.independent}`);
+  for (const [k,v] of Object.entries(report.evaluation.explore_kinds).sort()) L.push(`- Explore ${k}: planned ${v.planned}, attempted ${v.attempted}, solved ${v.independent}`);
   L.push(`- ${report.evaluation.ai_relatedness}`,'- Explore kinds follow a fixed calendar rotation; their comparison is descriptive, not causal.');
   const dq=report.data_quality;
   L.push('','## Data quality','',`- Git observations without outcome metadata (reported completion only): ${dq.git_untrailered_share ?? 'no Git evidence'}`,

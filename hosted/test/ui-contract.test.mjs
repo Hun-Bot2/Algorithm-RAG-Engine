@@ -143,3 +143,13 @@ test("calendar shows mock contests as a toggleable layer that links LeetCode and
   assert.match(detail, /edit\(null,localDate\(new Date\(\)\),p\.problem_key\)/, "recording goes through the normal attempt editor");
   for (const rule of [".calendar-event.mock", ".layer-toggle.mock", ".workspace-row.mock", ".mock-problem", ".activity-dot.mock"]) assert.ok(styles.includes(rule), rule);
 });
+
+test("policy v3 UI records solved / unsolved only and never asks about help (ADR 005)", async () => {
+  for (const file of ["../public/workspace.mjs", "../public/app.mjs", "../public/workspace-data.mjs"]) {
+    const source = await readFile(new URL(file, import.meta.url), "utf8");
+    assert.doesNotMatch(source, /힌트와 도움|도움을 받아|도움 해결|독립 해결|도움 여부|힌트 없이/, file);
+  }
+  const workspace = await readFile(new URL("../public/workspace.mjs", import.meta.url), "utf8");
+  assert.match(workspace, /\[\['independent','해결'\],\['failed','미해결'\]\]/);
+  assert.match(workspace, /hints:outcome\.value==='independent'\?false:null/);
+});

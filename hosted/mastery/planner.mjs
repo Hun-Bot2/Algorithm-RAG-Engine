@@ -9,7 +9,7 @@ import {MIN_EVIDENCE,fitAll,predict,CALIBRATION_VERSION} from './calibration.mjs
 import {CHANNELS,RELATED_VERSION,canonicalKey,recommendable,relatedCandidates,trustedConcepts} from './related.mjs';
 
 export const PLANNER_VERSION = 'planner-v2';
-export const POLICY_BUNDLE = 'mastery-policy-v2';
+export const POLICY_BUNDLE = 'mastery-policy-v3';
 export const EXPLORE_KINDS = ['uncertain_concept','stretch_probe','related_channel','new_problem'];
 const MINUTES = {review:15,practice:30};
 const ZONE = {low:0.60,high:0.80,center:0.70};
@@ -122,7 +122,7 @@ export function planDay({date,now,ledger,catalog,preferences,priorPlans=[],curri
     const p=catalog.problems.get(key);
     slots.push({kind:'review',sub_kind:null,problem_key:key,platform:p?.platform ?? key.split(':')[0],title:p?.title ?? key,url:p?.url ?? null,concepts:[...trustedConcepts(p)].sort(),
       review_priority:s.review_priority,prediction:predict(p,abilities),components:{failure_count:s.failure_count,urgency:s.urgency,review_stage:s.review_stage,overdue_days:Math.round((Date.parse(date)-Date.parse(s.due_date))/DAY)},
-      reason:`${s.review_priority==='priority'?'Priority review after non-independent evidence. ':''}Review due ${s.due_date} (stage ${s.review_stage}, interval ${REVIEW_DAYS[s.review_stage]} days).`,estimated_minutes:MINUTES.review});
+      reason:`${s.review_priority==='priority'?'Priority review after an unsolved attempt. ':''}Review due ${s.due_date} (stage ${s.review_stage}, interval ${REVIEW_DAYS[s.review_stage]} days).`,estimated_minutes:MINUTES.review});
     used+=MINUTES.review; used_keys.add(key);
   }
   if (['virtual','upsolve'].includes(dayType)) {
@@ -140,7 +140,7 @@ export function planDay({date,now,ledger,catalog,preferences,priorPlans=[],curri
   if(remediation.size && used+MINUTES.practice<=budget){
     for(const concept of [...remediation].sort()){
       const choice=pick(poolFor(mastery.practice_platform,p=>trustedConcepts(p).has(concept)),abilities,{target:0.80,low:0.70,high:0.95,prefer:curriculumKeys});
-      if(choice){take(slotFrom('remediation',null,choice,{concept},`Targeted remediation in ${concept} after unresolved non-independent evidence.`));earlyRemediation=true;break;}
+      if(choice){take(slotFrom('remediation',null,choice,{concept},`Targeted remediation in ${concept} after an unsolved attempt.`));earlyRemediation=true;break;}
     }
   }
 

@@ -590,7 +590,8 @@ Keep these distinctions clear in summaries and docs:
   agc010_a = -10000 is a sentinel. problems.json points shared ABC tasks at the latest ADT reuse, so derive
   canonical contests from contest-problem.json. MiniLM batch padding makes identical texts differ by ~1e-7:
   reuse vectors by (problem_key, text) to keep neighbors byte-identical across refreshes.
-- Never mark reported_completion or Git commits without explicit Outcome/Hints trailers as independent.
+- Ingestion never rewrites a stored outcome (reported_completion stays reported_completion). Since policy v3 (ADR 005, 2026-10-28)
+  the policy counts every completion as solved; see "Solved-only outcomes" below.
   Difficulty stays per platform; selection uses mean minus one SD while history is sparse.
 - AI judgments: two different model roles, blind; agreement -> ai_reviewed, else abstained; never gold.
   Two Claude judges share training memory, so their agreement is not independent verification.
@@ -626,8 +627,8 @@ Keep these distinctions clear in summaries and docs:
   :memory: or a temporary path and synthetic learner IDs.
 - `mastery/journal.mjs` composes the existing planner and versioned progression;
   journal handlers are injected only by the local runtime, not into Worker code.
-  Core review replay schedules every attempted problem; hints/failures reset to
-  next-day priority, imported completion is never independent mastery.
+  Core review replay schedules every attempted problem; failures reset to next-day priority.
+  (Policy v3: hints are not tracked and imported completion counts as solved; ADR 005.)
 - Journal snapshots fingerprint relevant evidence/config/code. Timer-only events
   must not rotate the current recommendation. Corrections remain visible as
   superseded history; do not emit initial unknown-state changes for every concept.
@@ -691,3 +692,15 @@ Keep these distinctions clear in summaries and docs:
 - Backup import wraps every snapshot as an inert `archive-...` row. Restored mock contests show as archived history and are not exposures.
 - Daily recommendations are mostly `journal-*` snapshot kinds, not `plan`. Code that collects exposures must read every kind
   (`snapshotExposures`), not only `kind='plan'`.
+
+## Solved-only outcomes (2026-10-28, ADR 005)
+
+- User decision: whether help was used is a matter of personal honesty and is not tracked. Policy `mastery-policy-v3` treats
+  `independent`, `assisted` and `reported_completion` as solved, `failed` as unsolved. Daily-log `1` therefore counts.
+- The projection lives only in `attemptStream` (hosted/mastery/ledger.mjs): consumers see `outcome:'independent', hints:false` for
+  solved; the stored outcome stays in `recorded_outcome`/`recorded_hints`. Never re-read raw outcomes in policy code, and never
+  rewrite stored rows. Ingestion tests assert `recorded_*`.
+- UI and forms offer solved / unsolved only (contract test in ui-contract.test.mjs). Validators still require `hints:false` for a
+  stored `independent` event, so forms send `false` for solved and `null` for unsolved.
+- Changing the policy rotates journal plans (code hash). Run `explain` again for new recommendations.
+

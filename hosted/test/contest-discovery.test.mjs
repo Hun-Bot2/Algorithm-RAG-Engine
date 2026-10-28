@@ -65,7 +65,7 @@ test('classification requires independent distinct native evidence and discloses
 test('actual October 20 attempts and explicitly selected October 21 reviews remain separate; conflict diagnostics preserve meaning',()=>{
  const journal={available:true,review_selections:[{problem_key:'leetcode:a',date:'2026-10-21'}],days:[{date:'2026-10-21',entries:[{id:'attempt',type:'attempt',problem_key:'leetcode:a',occurred_at:'2026-10-19T15:00:00.000000Z',recorded_at:'2026-10-20T05:48:57Z',outcome:'independent',hints:false}]}],upcoming:[{problem_key:'leetcode:a',date:'2026-10-21',kind:'review'}]};
  const rows=workspaceEvents(journal,{});assert.equal(rows.find(x=>x.layer==='actual').date,'2026-10-20');assert.equal(rows.find(x=>x.layer==='plan').date,'2026-10-21');assert.equal(journal.days[0].entries[0].occurred_at,'2026-10-19T15:00:00.000000Z');
- const message=syncDiagnostic({lastWarnings:[{repo_id:'solutions',flags:['markdown_attempt_conflict:leetcode:a']}]});assert.match(message,/시간·결과·힌트/);assert.match(message,/이전 풀이와 시각은 보존/);assert.ok(!message.includes('Markdown 형식'));
+ const message=syncDiagnostic({lastWarnings:[{repo_id:'solutions',flags:['markdown_attempt_conflict:leetcode:a']}]});assert.match(message,/시간·결과 변경/);assert.match(message,/이전 풀이와 시각은 보존/);assert.ok(!message.includes('Markdown 형식'));
  assert.equal(syncDiagnostic({lastWarnings:[]}),null);assert.match(syncDiagnostic({lastWarnings:[{repo_id:'r',flags:['f.md:daily_invalid_row:line_5']}]}),/line_5/);
 });
 

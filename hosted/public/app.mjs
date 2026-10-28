@@ -66,7 +66,7 @@ export function safeProblemUrl(problem) {
 }
 
 export function evidenceLabel(value) {
-  return ({ unknown: "아직 확인된 기록이 없어요", learning: "학습 중", demonstrated: "독립 풀이 기록", "transfer-evidenced": "응용 풀이 기록" })[value] ?? "기록 없음";
+  return ({ unknown: "아직 확인된 기록이 없어요", learning: "학습 중", demonstrated: "풀이 기록", "transfer-evidenced": "응용 풀이 기록" })[value] ?? "기록 없음";
 }
 
 export function formatConfirmedMinutes(seconds) {
@@ -444,20 +444,17 @@ function journalAttemptForm(slot) {
   details.append(summary);
   const form = document.createElement("form");
   form.className = "form-grid";
-  const outcome = select(`journal-outcome-${slot.problem_key}`, [["independent", "O · 힌트 없이 해결"], ["assisted", "도움을 받아 해결"], ["failed", "X · 아직 해결하지 못함"]]);
-  const hints = select(`journal-hints-${slot.problem_key}`, [["false", "힌트 없이 풀이"], ["true", "힌트나 도움 사용"], ["", "도움 여부 미기록"]], "false");
+  const outcome = select(`journal-outcome-${slot.problem_key}`, [["independent", "O · 해결"], ["failed", "X · 아직 해결하지 못함"]]);
   const minutes = input(`journal-minutes-${slot.problem_key}`, "number"); minutes.min = "0"; minutes.step = "1"; minutes.placeholder = "선택";
   form.append(field("결과", outcome), field("직접 사용한 시간 (분)", minutes));
-  form.append(field("힌트와 도움", hints));
   const actions = node("div", "actions full"); const submit = node("button", "button", "풀이 기록 저장"); submit.type = "submit"; actions.append(submit); form.append(actions);
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const selectedOutcome = outcome.value;
-    if (selectedOutcome === "independent" && hints.value !== "false") return showNotice("힌트 없이 해결한 경우에만 O로 기록할 수 있어요.", true);
     const selfMinutes = minutes.value === "" ? null : Number(minutes.value);
     if (selfMinutes !== null && (!Number.isInteger(selfMinutes) || selfMinutes < 0 || selfMinutes > 1440)) return showNotice("직접 사용한 시간은 0분에서 1440분 사이로 입력해 주세요.", true);
     const activityType = slot.transfer_from ? "transfer" : slot.kind === "review" ? "review" : "practice";
-    const payload = { event_id: crypto.randomUUID(), learner_id: state?.learner_id, problem_key: slot.problem_key, outcome: selectedOutcome, hints: hints.value === "" ? null : hints.value === "true", activity_type: activityType, self_minutes: selfMinutes };
+    const payload = { event_id: crypto.randomUUID(), learner_id: state?.learner_id, problem_key: slot.problem_key, outcome: selectedOutcome, hints: selectedOutcome === "independent" ? false : null, activity_type: activityType, self_minutes: selfMinutes };
     if (slot.transfer_from) payload.transfer_from = slot.transfer_from;
     if (!payload.learner_id) return showNotice("학습자 정보를 확인할 수 없어 저장하지 못했어요.", true);
     pendingJournalWrites.push(payload);
@@ -605,7 +602,7 @@ function renderJournalDay(day) {
     if (entry.status === "superseded") content.append(node("p", "meta corrected-note", `수정된 기록 · 현재 학습 근거에서 제외${entry.superseded_by ? ` · 새 기록 ${entry.superseded_by}` : ""}`));
     if (entry.type === "attempt") {
       const timeBasis = ({ not_recorded: "시간 미기록", self_reported: "직접 입력한 시간", confirmed_intervals_same_day_not_attributed_to_attempt: "같은 날 확인된 타이머 (이 풀이에 직접 연결되지 않음)" })[entry.time_basis] || null;
-      const attemptDetails = [entry.outcome ? outcomeLabel(entry.outcome) : null, ({practice:'연습',review:'알고 있는 문제 복습 · 새 문제 전이 증거 아님',transfer:'타 플랫폼 전이 검증'})[entry.activity_type] || null, entry.hints === true ? "힌트 사용" : entry.hints === false ? "힌트 없음" : "도움 여부 미기록",
+      const attemptDetails = [entry.outcome ? outcomeLabel(entry.outcome) : null, ({practice:'연습',review:'알고 있는 문제 복습 · 새 문제 전이 증거 아님',transfer:'타 플랫폼 전이 검증'})[entry.activity_type] || null,
         entry.self_seconds != null ? `직접 기록 ${entry.self_seconds}s` : entry.self_minutes != null ? `직접 기록 ${entry.self_minutes}m` : null,
         Number.isFinite(Number(entry.confirmed_seconds)) && Number(entry.confirmed_seconds) > 0 ? `확인 시간 ${formatConfirmedMinutes(entry.confirmed_seconds)}` : null,
         timeBasis].filter(Boolean).join(" · ");
@@ -725,17 +722,11 @@ function attemptForm() {
   const problem = select("attempt-problem", keys.map((key) => [key, problemTitle(key)]));
   if (!keys.length) problem.append(new Option("문제 목록을 불러오지 못했어요", ""));
   grid.append(field("문제", problem, true));
-  grid.append(field("결과", select("attempt-outcome", [["independent", "힌트 없이 스스로 해결"], ["assisted", "도움을 받아 해결"], ["failed", "아직 해결하지 못함"], ["reported_completion", "완료했다고 직접 표시"]])));
+  grid.append(field("결과", select("attempt-outcome", [["independent", "해결"], ["failed", "아직 해결하지 못함"]])));
   const transferSources = (state?.mission?.activities || []).filter((item) => item.type === "transfer" && item.transfer_from).map((item) => item.transfer_from);
   const activityOptions = [["", "선택 안 함"], ["practice", "연습"], ["review", "복습"]];
   if (transferSources.length) activityOptions.push(["transfer", "응용"]);
   grid.append(field("활동 종류", select("attempt-type", activityOptions)));
-  const hintWrap = node("div", "field");
-  const hintLabel = node("label", "check-line");
-  const hints = input("attempt-hints", "checkbox");
-  hintLabel.append(hints, document.createTextNode("힌트나 도움을 사용했어요"));
-  hintWrap.append(node("span", "", "도움 여부"), hintLabel);
-  grid.append(hintWrap);
   form.append(grid);
   const actions = node("div", "actions");
   const submit = node("button", "button", "풀이 결과 저장");
@@ -746,7 +737,7 @@ function attemptForm() {
     event.preventDefault();
     if (!problem.value) return showNotice("먼저 기록할 문제를 선택해 주세요.", true);
     const outcome = $("#attempt-outcome", form).value;
-    const payload = { problem_key: problem.value, outcome, hints: outcome === "reported_completion" ? null : hints.checked };
+    const payload = { problem_key: problem.value, outcome, hints: outcome === "independent" ? false : null };
     const activityType = $("#attempt-type", form).value;
     if (activityType) payload.activity_type = activityType;
     if (activityType === "transfer") {
@@ -1092,7 +1083,7 @@ function stat(label, value) {
   return item;
 }
 
-function outcomeLabel(value) { return ({ independent: "스스로 해결", assisted: "도움 받아 해결", failed: "미해결", reported_completion: "완료 표시" })[value] || value; }
+function outcomeLabel(value) { return ({ independent: "해결", assisted: "해결", failed: "미해결", reported_completion: "해결" })[value] || value; }
 function kindLabel(value) { return ({ attempt: "풀이", timer_started: "시간 시작", timer_stopped: "시간 종료", timer_confirmed: "시간 확인" })[value] || value || "학습 기록"; }
 
 function renderContests() {

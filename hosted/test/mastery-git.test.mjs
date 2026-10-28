@@ -76,7 +76,7 @@ test('linear history: trailers, untrailered first touch only, idempotent rerun, 
   const first=await ingestRepository(db,'owner','sol',{now:NOW});
   assert.equal(first.status,'ok'); assert.equal(first.commits,5);
   const ledger=await readLedger(db,'owner');
-  assert.deepEqual(ledger.attempts.map(a=>[a.problem_key,a.outcome,a.evidence_source]),[
+  assert.deepEqual(ledger.attempts.map(a=>[a.problem_key,a.recorded_outcome,a.evidence_source]),[
     ['leetcode:two-sum','independent','git'],['leetcode:two-sum','reported_completion','git'],['codeforces:4A','reported_completion','git']]);
   assert.equal(ledger.attempts[0].self_minutes,20);
   assert.equal((await ingestRepository(db,'owner','sol',{now:NOW})).status,'up_to_date');
@@ -107,7 +107,7 @@ test('force-push stops ingestion until an explicit anchor; legacy Baekjoon notes
   const keep=r.commit({'study/docs/Algorithm/Baekjoon/intro.mdx':'---\nid: algorithm-intro\n---'},'intro');
   await registerRepository(db,'owner',{repoId:'notes',path:r.dir});
   await ingestRepository(db,'owner','notes',{now:NOW});
-  assert.deepEqual((await readLedger(db,'owner')).attempts.map(a=>[a.problem_key,a.outcome]),[['baekjoon:10986','reported_completion']]);
+  assert.deepEqual((await readLedger(db,'owner')).attempts.map(a=>[a.problem_key,a.recorded_outcome]),[['baekjoon:10986','reported_completion']]);
   r.run('reset','-q','--hard','HEAD~1');
   r.commit({'baekjoon/1000.py':'a'},'rewritten');
   const stopped=await ingestRepository(db,'owner','notes',{now:new Date('2026-10-17T02:00:00Z')});
