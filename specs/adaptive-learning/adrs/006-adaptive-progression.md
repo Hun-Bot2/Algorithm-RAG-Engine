@@ -19,7 +19,7 @@ from first-attempt evidence, uncertainty, coverage and failure follow-up. v1 sta
 | ID | Decision | Status |
 |---|---|---|
 | D1 | Target success rate tau = 0.70 (config) | Approved |
-| D2 | Level priors: authored Beta(3.2,0.8)/(2,2)/(0.8,3.2), replaced per level by leave-concept-out learner means once that level has learner evidence | Provisional assumption |
+| D2 | Level priors: authored Beta(3.2,0.8)/(2,2)/(0.8,3.2), retained for fresh concepts; after own LeetCode evidence, updated per level by leave-concept-out learner means | Provisional assumption |
 | D3 | Multi-concept attribution weight 1/k | Provisional assumption |
 | D4 | Shrinkage kappa = 4, Easy→Medium→Hard carry-over lambda = 0.5 | Provisional assumption |
 | D5 | Self-reported time is stored and displayed; it does not affect decisions | Approved |

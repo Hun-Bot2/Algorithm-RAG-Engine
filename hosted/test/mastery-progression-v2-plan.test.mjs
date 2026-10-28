@@ -50,3 +50,17 @@ test('future ratings do not leak into historical plans',()=>{
   const withFuture=planProgressionV2({...args,ledger:{attempts:[],rating_observations:[{entry_id:'future',occurred_at:'2026-02-01T00:00:00Z',recorded_at:'2026-02-01T00:00:00Z',payload:{platform:'codeforces',rating:3000}}]}});
   assert.deepEqual(withFuture,baseline);
 });
+
+test('equivalent cells prefer unseen variation and then concept purity',()=>{
+  const base={platform:'leetcode',difficulty_kind:'lc_level',difficulty_value:1,tags:['unseen']};
+  const c=catalogFromData({problems:[
+    {...base,key:'leetcode:medium',difficulty_value:2,concepts:[{id:'A',status:'approved'}]},
+    {...base,key:'leetcode:pure',concepts:[{id:'A',status:'approved'}]},
+    {...base,key:'leetcode:mixed',concepts:[{id:'A',status:'approved'},{id:'B',status:'approved'}]},
+    {...base,key:'leetcode:old',tags:['old'],concepts:[{id:'A',status:'approved'}]},
+    {...base,key:'leetcode:seen',tags:['old'],concepts:[{id:'A',status:'approved'}]},
+  ]});
+  const attempts=[{id:'first',problem_key:'leetcode:old',outcome:'independent',occurred_at:'2026-10-01T00:00:00Z'}];
+  const out=planProgressionV2({date:'2026-10-02',ledger:{attempts},catalog:c,prerequisites:{},preferences:{mastery:{target_concepts:['A']}}});
+  assert.equal(out.next.problem_key,'leetcode:pure');assert.equal(out.next.tie_break.coverage_gain,1);assert.equal(out.next.tie_break.purity,1);
+});

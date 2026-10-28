@@ -57,7 +57,7 @@ Review flags and memos are never read here (R2, R3).
 ### 4.1 LeetCode cells (Beta-binomial, partial pooling) — D2, D3, D4 (P)
 
 ```text
-level mean outside c   m_l(-c) = posterior mean of Beta(prior_l) updated with ability observations at level l
+level mean outside c   m_l(-c) = authored mean for a fresh concept; otherwise posterior mean of Beta(prior_l) updated with ability observations at level l
                                  whose problems do NOT carry concept c (unit weight per problem)
 prior centre           m'_E = m_E(-c);  m'_M = sigmoid(logit m_M(-c) + lambda*delta_E);  m'_H = sigmoid(logit m_H(-c) + lambda*delta_M)
                        delta_l = logit E[theta_{l,c}] - logit m'_l  (0 when the cell has no own observation)

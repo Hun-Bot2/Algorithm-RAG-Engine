@@ -34,7 +34,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   Files: `hosted/mastery/progression-v2.mjs` (cells only), extend `research/recommendation_audit/adaptive_sim.py` into
   `adaptive_reference.py` (leave-concept-out, 1/k weights, PAV), fixture `hosted/test/fixtures/adaptive-cells.v1.json`,
   `hosted/test/mastery-progression-v2-cells.test.mjs`.
-  Accept: matches the Python reference within 1e-9 on ≥8 scenarios, including the `adaptive_sim.out` cases; an attempt on
+  Accept: matches the Python reference within 1e-9 on ≥8 scenarios, including the `adaptive_sim.out` cases; once c has own evidence, an attempt on
   another concept changes `m_l(-c)` but not the cell's own counts; a PAV-pooled block reports an interval containing its
   mean; repeated solves of one problem change nothing (retention only); time and review flags change nothing.
 
@@ -68,7 +68,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   §8 signature with cause and before/after estimates; the snapshot key includes the progression version and the config hash;
   explanations (`explanations.mjs`) accept v2 slots unchanged; UI contract tests pass.
 
-- [ ] **T8 Real-catalog replay and sensitivity receipt** [§6, §10]. Depends on: T7.
+- [x] **T8 Real-catalog replay and sensitivity receipt** [§6, §10]. Depends on: T7.
   Files: `research/recommendation_audit/adaptive_replay.mjs`, receipt `research/recommendation_audit/receipts/adaptive_replay.out`.
   On catalog-v4 (read-only) with synthetic learners (all-solve, alternating, struggling, CF-only), report per step: concept,
   action, level, P, B. Also the sensitivity grid: kappa {2,4,8} × lambda {0.25,0.5,1}, weights variants (D only; default),
@@ -93,3 +93,5 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T5 (2026-10-29): readiness/follow-up/review focused fixtures pass; independent Terra review corrected sparse config validation and failure due-day; full Node 269/269 pass.
 - T6 (2026-10-29): user clarified fresh concepts retain authored priors; independent 11-cell fixture updated. S1-S8, deterministic insertion order/cooldown/no-deadlock checks pass; full Node 276/276 pass. Sparse-array and custom failure-day regressions added.
 - T7 (2026-10-29): default/explicit v1 serialized output matches pre-integration fixture; v2 snapshot/config isolation, evidence-prefix transitions and independent review lane tests pass. Future ratings excluded at each prefix; full Node 281/281 pass. catalog-v4 synthetic 10-plan run: 618.259292 ms; 10-prefix transition replay: 619.67925 ms (Node26.8.1 macOS arm64, one run, not a general benchmark).
+- T8 (2026-10-29): catalog-v4 verified read-only. Four synthetic scenarios completed (CF-only exhausted after 25 steps; others60), 36 sensitivity combinations plus explicit research-only unit-attribution counterfactual; 41 runs, zero reversed-order mismatches. Receipt preserved at research/recommendation_audit/receipts/adaptive_replay.out. Independent Terra AI review signed off on behavioral scope only; not human validation or relevance/learning evidence.
+- T8 full regression after receipt preservation: Node283/283 pass (includes T9 completion-label preparation).
