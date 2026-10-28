@@ -6,7 +6,7 @@
 (`daily_algorithm_pipeline.yml`, `publish_docker.yml`)는 삭제했습니다(git 이력에서 복구 가능). 현재 방향은 다음과 같습니다.
 
 - **로컬 우선 학습 시스템** (`hosted/`, `specs/mastery-system/`): LeetCode, Codeforces, AtCoder 풀이 기록을 읽고 개인 맞춤 연습을 계획합니다.
-  유료 API와 서버 없이 로컬에서만 동작합니다. 날짜별 학습 일지, O/X 기록, 우선 복습과 Easy → Medium → 전이 → 지연 복습을 지원합니다.
+  서버 없이 로컬에서 동작하며 유료 API가 필요하지 않습니다(추천 설명용 Gemini/NVIDIA 호출은 `explain` 명령에서만 선택적으로 실행). 날짜별 학습 일지, O/X 기록, 우선 복습과 Easy → Medium → 전이 → 지연 복습을 지원합니다.
   사용법은 [학습 일지 시작 안내](specs/mastery-journal/runbook.md)를 보세요.
 - **풀이 기록 저장소**: 별도 private repo `algorithm-solution`. 이 저장소의 커밋을 `node hosted/cli.mjs repo ingest`가 읽습니다.
   push 없이 로컬 Git을 읽으며, 현재 커리큘럼 추천은 `node hosted/cli.mjs journal` 또는 로컬 학습 일지에서 확인합니다. 기존 `plan`의 일별 동결 계약도 보존합니다.
@@ -24,7 +24,7 @@ node hosted/local.mjs
 ```
 
 기존 SQLite를 사용하며 실행 위치와 관계없이 CLI와 같은 기본 DB 경로를 씁니다.
-실패·도움 풀이도 다음 날 우선 복습에 들어갑니다. 성공한 복습과 새로운 전이 문제의
+미해결 풀이도 다음 날 우선 복습에 들어갑니다. 도움 사용 여부는 기록하지 않으며 완료한 풀이는 모두 해결로 셉니다([ADR 005](specs/adaptive-learning/adrs/005-solved-only-outcomes.md)). 성공한 복습과 새로운 전이 문제의
 독립 해결은 구분합니다. 테스트는 합성 학습 이력으로 수행했으며 실제 교육 효과를
 입증한 것은 아닙니다. [설계·검증 기록](specs/mastery-journal/validation.md).
 
@@ -33,7 +33,7 @@ node hosted/local.mjs
 첫 화면은 실제 풀이 시각을 기준으로 한 월간 캘린더입니다. 주간 보기, 날짜별 상세,
 검색 가능한 풀이 이력, 원본 기록으로 내려가는 학습 분석과 시간순 대회 목록을 제공합니다.
 조회된 대회는 메인 캘린더의 실제 날짜에도 표시됩니다. 날짜 선택은 오른쪽 패널을 갱신하고,
-더보기는 하루 상세 모달을 엽니다. 월간 활동과 독립·도움 풀이 분포도 기록에 맞춰 확인할 수 있습니다.
+더보기는 하루 상세 모달을 엽니다. 월간 활동과 해결·미해결 분포도 기록에 맞춰 확인할 수 있습니다.
 추천은 점선 예정 항목이며 완료로 집계하지 않습니다. 수동 기록 수정은 기존 시도를
 보존하는 후속 기록입니다. 가져온 Git 기록은 원본 저장소에서 수정합니다.
 

@@ -1,5 +1,8 @@
 # Recommendation engine: implementation audit
 
+> Historical snapshot (2026-10-20). Since policy v3 (2026-10-28, ADR 005) the policy counts every completion as solved;
+> stored outcomes below are unchanged. Current desktop-readiness state: `specs/desktop-readiness/status.md`.
+
 Audit date: **2026-10-20**. Git baseline: **`a5fcc72485e0a48bf954b459619aeee57d4f4a76`**.
 This describes the actual checkout, including uncommitted explanation and calendar-workspace work;
 those changes are **not attributed to a released commit**. The follow-up implements focused calendar diagnostics and contest discovery. Original learner
