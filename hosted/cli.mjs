@@ -6,7 +6,7 @@ import {parseArgs} from 'node:util';
 import {existsSync,mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 import {resolve,dirname,join} from 'node:path';
 import {createHash,randomUUID} from 'node:crypto';
-import {createDatabase} from './test/helpers/d1.mjs';
+import {createDatabase} from './runtime/database.mjs';
 import {appendEvents,getPreferences,putPreferences} from './core/store.mjs';
 import {seoulDate} from './core/policy.mjs';
 import {timestamp} from './core/events.mjs';

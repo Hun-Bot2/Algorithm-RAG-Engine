@@ -12,7 +12,7 @@ import {readLedger,highWaterMarks} from './mastery/ledger.mjs';
 import {activeLocalCatalog,createJournalService} from './mastery/journal.mjs';
 import {createExplanationService,withExplanations} from './mastery/explanations.mjs';
 import {createApp} from './core/app.mjs';
-import {createDatabase} from './test/helpers/d1.mjs';
+import {createDatabase} from './runtime/database.mjs';
 
 const ROOT=fileURLToPath(new URL('..',import.meta.url));
 const PUBLIC = new URL('./public/',import.meta.url);
