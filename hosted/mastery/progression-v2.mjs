@@ -7,8 +7,25 @@ import {defaultConfig} from './progression-v2-config.mjs';
 import {canonicalKey,recommendable,trustedConcepts} from './related.mjs';
 import curriculum from './interview-curriculum.v1.json' with {type:'json'};
 import {betaInformation,betaSurvival,betaQuantile} from './beta-math.mjs';
+// Catalog versions are immutable. Cache only catalog metadata, never learner evidence.
+const conceptCache=new WeakMap(),indexCache=new WeakMap();
+function conceptsFor(problem){
+  if(!problem)return new Set();
+  if(!conceptCache.has(problem))conceptCache.set(problem,trustedConcepts(problem));
+  return conceptCache.get(problem);
+}
+function catalogIndex(catalog){
+  if(!indexCache.has(catalog)){
+    const index=new Map();
+    for(const p of catalog.problems.values())for(const c of conceptsFor(p)){
+      if(!index.has(c))index.set(c,[]);index.get(c).push(p);
+    }
+    indexCache.set(catalog,index);
+  }
+  return indexCache.get(catalog);
+}
 const logit=p=>Math.log(p/(1-p)),sigmoid=x=>1/(1+Math.exp(-x));
-export function leetCodeCells(observations,concept,config=defaultConfig){
+export function leetCodeCells(observations,concept,config=defaultConfig,{intervals=true}={}){
   const ability=observations.filter(o=>o.kind==='ability'&&(!o.platform||o.platform==='leetcode')&&[1,2,3].includes(o.level));
   const fresh=!ability.some(o=>o.concepts.includes(concept));
   const cells=[];let delta=0;
@@ -34,7 +51,7 @@ export function leetCodeCells(observations,concept,config=defaultConfig){
   return cells.map(cell=>{
     const block=blocks.find(b=>b.members.includes(cell.level));
     return {...cell,alpha:block.alpha,beta:block.beta,p:block.alpha/(block.alpha+block.beta),
-      interval:[betaQuantile(tail,block.alpha,block.beta),betaQuantile(1-tail,block.alpha,block.beta)]};
+      interval:intervals?[betaQuantile(tail,block.alpha,block.beta),betaQuantile(1-tail,block.alpha,block.beta)]:null};
   });
 }
 
@@ -67,9 +84,9 @@ export function validatePrerequisites(graph){
   for(const c of Object.keys(graph))visit(c);
 }
 export function cellReadiness({concept,level,observations,catalog,config=defaultConfig,excludeConcept=null}){
-  const eligible=[...catalog.problems.values()].filter(p=>recommendable(p)&&p.platform==='leetcode'&&Number(p.difficulty_value)===level&&trustedConcepts(p).has(concept)&&(!excludeConcept||!trustedConcepts(p).has(excludeConcept)));
+  const eligible=(catalogIndex(catalog).get(concept)??[]).filter(p=>recommendable(p)&&p.platform==='leetcode'&&Number(p.difficulty_value)===level&&conceptsFor(p).has(concept)&&(!excludeConcept||!conceptsFor(p).has(excludeConcept)));
   const attempted=new Set(observations.map(o=>o.problem_key));
-  const cell=leetCodeCells(observations.filter(o=>!excludeConcept||!o.concepts.includes(excludeConcept)),concept,config)[level-1];
+  const cell=leetCodeCells(observations.filter(o=>!excludeConcept||!o.concepts.includes(excludeConcept)),concept,config,{intervals:false})[level-1];
   const probability=betaSurvival(config.tau,cell.alpha,cell.beta);
   if(cell.n_own>0&&probability>=config.readiness_probability)return {state:'ready',probability,cell};
   if(!eligible.length||eligible.every(p=>attempted.has(p.key)))return {state:'waived',probability,waiver:eligible.length?'exhausted':'no_catalog_coverage',cell};
@@ -97,17 +114,21 @@ const variation=p=>JSON.stringify([...(p.tags??[])].map(String).sort());
 const fnv=text=>{let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;};
 export function planProgressionV2({date,ledger,catalog,preferences={},priorPlans=[],config=defaultConfig,prerequisites=curriculum.prerequisites,learnerId='local-owner',configHash=null}){
   configHash??=canonicalConfigHash(config);
-  const attempts=(ledger.attempts??[]).filter(a=>a.occurred_at&&seoulDate(new Date(a.occurred_at))<=date&&(!ledger.cutoff||a.occurred_at<=ledger.cutoff));
+  const attempts=(ledger.attempts??[]).filter(a=>a.occurred_at&&seoulDate(new Date(a.occurred_at))<=date&&(!ledger.cutoff||Date.parse(a.occurred_at)<=Date.parse(ledger.cutoff)));
   const derived=deriveObservations(attempts,catalog),obs=derived.observations;
-  const abilities=platformAbilities(obs,catalog,ledger.rating_observations??[]);
+  const cutoff=ledger.cutoff?Date.parse(ledger.cutoff):Date.parse(`${date}T23:59:59.999+09:00`);
+  const ratings=(ledger.rating_observations??[]).filter(r=>Date.parse(r.occurred_at)<=cutoff&&(!r.recorded_at||Date.parse(r.recorded_at)<=cutoff));
+  const abilities=platformAbilities(obs,catalog,ratings);
   const attempted=new Set(obs.map(o=>o.problem_key)),exposed=new Set();
   const cooldown=preferences.mastery?.cooldown_days??30;
   for(const plan of priorPlans){
     const age=(Date.parse(date)-Date.parse(plan.date??plan.local_date))/86400000;
     if(age>=0&&age<cooldown)for(const slot of plan.slots??[])if(!attempted.has(slot.problem_key))exposed.add(canonicalKey(catalog,slot.problem_key));
   }
-  const pool=[...catalog.problems.values()].filter(p=>recommendable(p)&&!attempted.has(p.key)&&!exposed.has(p.key)&&trustedConcepts(p).size);
-  const concepts=[...new Set([...catalog.problems.values()].flatMap(p=>[...trustedConcepts(p)]))].sort();
+  const pool=[...catalog.problems.values()].filter(p=>recommendable(p)&&!attempted.has(p.key)&&!exposed.has(p.key)&&conceptsFor(p).size);
+  const concepts=[...catalogIndex(catalog).keys()].sort();
+  const poolByConcept=new Map();
+  for(const p of pool)for(const c of conceptsFor(p)){if(!poolByConcept.has(c))poolByConcept.set(c,[]);poolByConcept.get(c).push(p);}
   const latest=derived.ability.at(-1),states={},all=[];
   validatePrerequisites(prerequisites);
   for(const concept of concepts){
@@ -121,16 +142,16 @@ export function planProgressionV2({date,ledger,catalog,preferences={},priorPlans
     for(const level of [1,2,3]){
       const action=level<highest?'step_down':level===highest?'consolidate':level===highest+1?'step_up':'stretch';
       if(action==='stretch'&&!own.length)continue;
-      const candidates=pool.filter(p=>p.platform==='leetcode'&&Number(p.difficulty_value)===level&&trustedConcepts(p).has(concept));
-      const ties=p=>({coverage_gain:seenVariations.get(level).has(variation(p))?0:1,purity:trustedConcepts(p).size,hash:fnv(`${learnerId}|${date}|${concept}|${p.key}`)});
+      const candidates=(poolByConcept.get(concept)??[]).filter(p=>p.platform==='leetcode'&&Number(p.difficulty_value)===level&&conceptsFor(p).has(concept));
+      const ties=p=>({coverage_gain:seenVariations.get(level).has(variation(p))?0:1,purity:conceptsFor(p).size,hash:fnv(`${learnerId}|${date}|${concept}|${p.key}`)});
       candidates.sort((a,b)=>{const x=ties(a),y=ties(b);return y.coverage_gain-x.coverage_gain||x.purity-y.purity||x.hash-y.hash;});
       coverage[action]=candidates.length?'ok':'insufficient_catalog_coverage';
       if(candidates.length){const problem=candidates[0],cell=cells[level-1];actions.push({action,problem,estimate:cell,information:betaInformation(cell.alpha,cell.beta),tie_break:ties(problem),level});}
     }
     if(readiness.medium.state!=='not_ready'&&!transferDone){
-      const candidates=pool.filter(p=>config.transfer_platforms.includes(p.platform)&&trustedConcepts(p).has(concept)&&!(config.exclude_experimental_atcoder&&p.platform==='atcoder'&&p.atc_experimental)&&
+      const candidates=(poolByConcept.get(concept)??[]).filter(p=>config.transfer_platforms.includes(p.platform)&&conceptsFor(p).has(concept)&&!(config.exclude_experimental_atcoder&&p.platform==='atcoder'&&p.atc_experimental)&&
         (config.transfer_native_difficulty_floor===null||p.difficulty_value>=config.transfer_native_difficulty_floor)).map(problem=>({problem,estimate:platformPrediction(problem,abilities,config)})).filter(p=>p.estimate);
-      const tie=p=>({coverage_gain:obs.some(o=>o.concepts.includes(concept)&&o.platform===p.platform&&variation(catalog.problems.get(o.problem_key))===variation(p))?0:1,purity:trustedConcepts(p).size,hash:fnv(`${learnerId}|${date}|${concept}|${p.key}`)});
+      const tie=p=>({coverage_gain:obs.some(o=>o.concepts.includes(concept)&&o.platform===p.platform&&variation(catalog.problems.get(o.problem_key))===variation(p))?0:1,purity:conceptsFor(p).size,hash:fnv(`${learnerId}|${date}|${concept}|${p.key}`)});
       candidates.sort((a,b)=>{const d=Math.abs(a.estimate.p-config.tau)-Math.abs(b.estimate.p-config.tau);const x=tie(a.problem),y=tie(b.problem);return d||y.coverage_gain-x.coverage_gain||x.purity-y.purity||x.hash-y.hash;});
       coverage.transfer=candidates.length?'ok':'insufficient_catalog_coverage';
       if(candidates.length){const {problem,estimate}=candidates[0];actions.push({action:'transfer',problem,estimate,information:estimate.information,tie_break:tie(problem),rating:problem.difficulty_value});}
@@ -148,6 +169,10 @@ export function planProgressionV2({date,ledger,catalog,preferences={},priorPlans
   const order=(a,b)=>b.benefit_proxy-a.benefit_proxy||b.tie_break.coverage_gain-a.tie_break.coverage_gain||a.tie_break.purity-b.tie_break.purity||a.tie_break.hash-b.tie_break.hash;
   let available=all.filter(a=>a.eligible).sort(order),deadlockWaiver=false;
   if(!available.length&&all.length){available=all.sort(order);deadlockWaiver=true;}
+  for(const [concept,state] of Object.entries(states)){
+    const best=all.filter(a=>a.concept===concept).sort(order)[0];
+    state.best_action=best?.action??null;state.best_level=best?.level??best?.rating??null;
+  }
   const winner=available[0]??null;
   if(winner){
     winner.alternatives=available.slice(1,4).map(a=>({concept:a.concept,action:a.action,benefit_proxy:a.benefit_proxy}));

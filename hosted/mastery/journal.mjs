@@ -15,10 +15,15 @@ import {canonicalKey,trustedConcepts} from './related.mjs';
 import interview from './interview-curriculum.v1.json' with {type:'json'};
 import patternConfig from './progression-pattern.v1.json' with {type:'json'};
 import {planProgression} from './progression.mjs';
+import {defaultConfig,loadProgressionConfig} from './progression-v2-config.mjs';
+import {canonicalConfigHash} from './progression-hash.mjs';
+import {journalPlanV2,v2ReviewQueue,v2Transitions} from './journal-v2.mjs';
 import {mockExposurePlans} from './mock-contest.mjs';
 
 const digest=value=>createHash('sha256').update(canonicalJson(value)).digest('hex');
-const POLICY_CODE_HASH=digest(Object.fromEntries(['./journal.mjs','./progression.mjs','./planner.mjs','./reviews.mjs','./calibration.mjs','../core/policy.mjs'].map(path=>[path,readFileSync(new URL(path,import.meta.url),'utf8')])));
+const V2_POLICY_CODE_HASH=digest(Object.fromEntries(['./journal.mjs','./journal-v2.mjs','./progression-v2.mjs','./observations.mjs','./beta-math.mjs','./progression-v2-config.mjs','./progression-hash.mjs','./reviews-v2.mjs','./related.mjs','./reviews.mjs','./interview-curriculum.v1.json','./calibration.mjs','../core/policy.mjs'].map(path=>[path,readFileSync(new URL(path,import.meta.url),'utf8')])));
+// Frozen at v2 integration so selecting v1 preserves its historical fingerprint.
+const POLICY_CODE_HASH='12f8632a5039d051bd87b685b892148a021d4364801568ec868325c3298f2669';
 export const JOURNAL_VERSION='journal-v1';
 export function activeLocalCatalog(db,ledger,root) {
   const switches=ledger.catalog_switches ?? [],current=switches.at(-1);
@@ -31,7 +36,9 @@ const level=p=>p?.platform==='leetcode'?({1:'Easy',2:'Medium',3:'Hard'}[p.diffic
 const stageRows=p=>p.concepts?Object.entries(p.concepts).map(([pattern,s])=>({...s,pattern,stage:s.next_stage ?? s.stage ?? s.stages?.[s.stage_index]?.id ?? null})):p.patterns ?? p.stages ?? [];
 const nextCandidate=p=>p.next ?? p.candidate ?? stageRows(p).find(x=>x.candidate)?.candidate ?? null;
 
-export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[]}) {
+export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[],progressionVersion='v1',progressionConfig=defaultConfig}) {
+  if(progressionVersion==='v2')return journalPlanV2({date,now,ledger,catalog,preferences,priorPlans,config:progressionConfig,implementationHash:V2_POLICY_CODE_HASH});
+  if(progressionVersion!=='v1')throw new Error('unknown progression version');
   const rhythm=[...preferences.weekly_rhythm],day=weekInfo(date).weekday;
   const contestDay=['virtual','upsolve'].includes(rhythm[day]);
   if(contestDay)rhythm[day]='practice';
@@ -61,7 +68,9 @@ export function journalPlan({date,now,ledger,catalog,preferences,priorPlans=[]})
     budget_minutes:budget,curriculum_version:interview.version,progression_config_sha256:digest({interview,patternConfig}),implementation_sha256:POLICY_CODE_HASH};
 }
 
-export function createJournalService({db,catalogRoot,catalogProvider=null}) {
+export function createJournalService({db,catalogRoot,catalogProvider=null,progressionVersion='v1',progressionConfig=defaultConfig}) {
+  if(!['v1','v2'].includes(progressionVersion))throw new Error('unknown progression version');
+  progressionConfig=loadProgressionConfig(progressionConfig);
   const load=ledger=>catalogProvider?catalogProvider(ledger):activeLocalCatalog(db,ledger,catalogRoot);
   async function view(learnerId,clock=new Date()) {
     const at=timestamp(clock.toISOString()),date=seoulDate(clock),ledger=await readLedger(db,learnerId,{cutoff:at});
@@ -75,11 +84,11 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     const mockContests=rows.filter(isMock).map(r=>r.kind==='mock_contest'?{...r.raw,archived:false}:{...r.raw.original_payload,local_date:r.local_date,archived:true});
     const historyPlans=rows.filter(r=>!isMock(r)).map(r=>{const raw=r.raw,archived=raw.archive_type==='recommendation_snapshot',p=archived?raw.original_payload:raw;return {...p,snapshot_id:p.snapshot_id ?? `${archived?raw.original_kind:r.kind}-${r.local_date}`,local_date:r.local_date,archived};});
     const plans=historyPlans.filter(p=>!p.archived);
-    const key='journal-'+digest({date,version:JOURNAL_VERSION,catalog:catalog.version,attempts:ledger.attempts,ratings:ledger.rating_observations,preferences,interview,patternConfig,implementation:POLICY_CODE_HASH}).slice(0,40);
+    const key='journal-'+digest({date,version:JOURNAL_VERSION,catalog:catalog.version,attempts:ledger.attempts,ratings:ledger.rating_observations,preferences,interview,patternConfig,implementation:progressionVersion==='v1'?POLICY_CODE_HASH:V2_POLICY_CODE_HASH,...(progressionVersion==='v2'?{progressionVersion,config_hash:canonicalConfigHash(progressionConfig)}:{})}).slice(0,40);
     let plan=await getSnapshot(db,learnerId,key,date);
-    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,priorPlans:[...plans,...mockExposurePlans(mockContests.filter(m=>!m.archived))]});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
+    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,progressionVersion,progressionConfig,priorPlans:[...plans,...mockExposurePlans(mockContests.filter(m=>!m.archived))]});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
     const all=[...historyPlans.filter(p=>p.archived || p.snapshot_id!==key),plan];
-    const queue=reviewQueue(problemStates(ledger.attempts,catalog),catalog,date);
+    const queue=progressionVersion==='v2'?v2ReviewQueue(ledger,catalog,date,progressionConfig):reviewQueue(problemStates(ledger.attempts,catalog),catalog,date);
     const entries=[];
     for(const a of ledger.attempts){
       const pk=canonicalKey(catalog,a.problem_key),p=catalog.problems.get(pk);
@@ -99,6 +108,8 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     }
     for(const p of all.filter(x=>x.snapshot_id))for(const [i,s] of p.slots.entries())entries.push({...s,id:(p.archived?'archive-':'')+p.snapshot_id+'-'+i,type:'recommendation',archived:Boolean(p.archived),occurred_at:p.prepared_at ?? p.event_cutoff ?? null,local_date:p.date ?? p.local_date,snapshot_id:p.snapshot_id,priority:s.review_priority ?? 'normal',pattern:(s.concepts ?? []).join(', ')});
     // Reproducible mastery changes are derived at evidence prefixes, not an editable second ledger.
+    if(progressionVersion==='v2')entries.push(...v2Transitions({ledger,catalog,preferences,config:progressionConfig}));
+    else {
     const initial=planProgression({date,catalog,ledger:{...ledger,attempts:[]},config:{...patternConfig,...interview,version:patternConfig.version},evidenceOnly:true});
     let previous=new Map(stageRows(initial).map(s=>[s.pattern,canonicalJson({stage:s.stage,status:s.status})]));
     for(let i=0;i<ledger.attempts.length;i++){
@@ -107,6 +118,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
         const pattern=state.pattern ?? state.concept ?? state.id,signature=canonicalJson({stage:state.stage,status:state.status});
         if(previous.get(pattern)!==signature){entries.push({id:`mastery-${a.id}-${pattern}`,type:'mastery_change',occurred_at:a.occurred_at,pattern,stage:state.stage,status:state.status,reason:state.reason ?? 'Evidence-derived curriculum state changed.'});previous.set(pattern,signature);}
       }
+    }
     }
     const intervals=timerState(ledger.events,at);
     for(const e of entries.filter(e=>e.type==='attempt')){
@@ -117,7 +129,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     const byDate=new Map();
     for(const e of entries){const d=e.occurred_at?seoulDate(new Date(e.occurred_at)):e.local_date;if(!byDate.has(d))byDate.set(d,[]);byDate.get(d).push(e);}
     const patterns=stageRows(plan.progression);
-    return {available:true,date,mock_contests:mockContests,focus:plan.focus_override ?? {pattern:plan.progression.next?.concept ?? plan.progression.focus?.pattern ?? plan.progression.focus ?? patterns.find(p=>p.candidate)?.pattern ?? null,stage:plan.progression.next?.stage ?? plan.progression.stage ?? patterns.find(p=>p.candidate)?.stage ?? null,status:plan.progression.next?.status ?? plan.progression.status ?? null,reason:plan.slots.find(s=>s.kind!=='review')?.reason ?? plan.notes.at(-1)},
+    return {available:true,date,mock_contests:mockContests,focus:plan.focus_override ?? {pattern:plan.progression.next?.concept ?? plan.progression.focus?.pattern ?? plan.progression.focus ?? patterns.find(p=>p.candidate)?.pattern ?? null,stage:plan.progression.next?.stage ?? plan.progression.next?.action ?? plan.progression.stage ?? patterns.find(p=>p.candidate)?.stage ?? null,status:plan.progression.next?.status ?? plan.progression.status ?? null,reason:plan.slots.find(s=>s.kind!=='review')?.reason ?? plan.notes.at(-1)},
       plan,days:[...byDate].sort((a,b)=>b[0].localeCompare(a[0])).map(([date,entries])=>({date,entries:entries.sort((a,b)=>(b.occurred_at ?? '').localeCompare(a.occurred_at ?? '')||a.id.localeCompare(b.id))})),
       review_selections:(preferences.review_targets ?? []).map(t=>{const p=catalog.problems.get(t.problem_key);return {...t,title:p?.title ?? t.problem_key,url:p?.url ?? null,platform:p?.platform ?? t.problem_key.split(':')[0],difficulty:level(p)};}),
       reviews:{priority:queue.filter(r=>r.review_priority==='priority'),normal:queue.filter(r=>r.review_priority!=='priority')},patterns,

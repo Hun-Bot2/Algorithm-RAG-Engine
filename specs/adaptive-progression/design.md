@@ -194,3 +194,7 @@ these measure learning benefit.
 ## Clarification accepted 2026-10-29: fresh concept priors
 
 User decision during T6: a concept with no own LeetCode ability observation at any level SHALL retain authored level priors even when other concepts have learner evidence. Once it has at least one own ability observation, leave-concept-out level updates apply. Outside counts remain visible; prior source stays authored for a fresh concept. This supersedes the unqualified D2 / design section 4.1 update rule.
+
+## T7 integration details
+
+The v1 implementation fingerprint is frozen to its pre-integration value; a captured serialized journal fixture checks byte identity. V2 fingerprints its own modules plus related/review helpers and curriculum. V2 review slots and the progression item occupy separate lanes; when suggested time exceeds budget this is explicit. Historical transitions cut off both attempts and ratings at each observation timestamp. Immutable catalog metadata is indexed in WeakMaps; no learner evidence is cached. Readiness-only calculations omit unused quantiles; emitted cell estimates retain exact intervals.

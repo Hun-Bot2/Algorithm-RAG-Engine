@@ -61,7 +61,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   reason text uses only those fields; no-deadlock property: random ledgers over a catalog with candidates always produce a
   recommendation; output identical across repeated runs.
 
-- [ ] **T7 Journal integration and transitions** [§8, §10]. Depends on: T6.
+- [x] **T7 Journal integration and transitions** [§8, §10]. Depends on: T6.
   Files: `hosted/mastery/journal.mjs` (option `progressionVersion`, default `'v1'`), `hosted/test/mastery-journal.test.mjs`.
   Accept: with `'v1'` the journal view is byte-identical to the current output for the existing fixtures (snapshot test);
   with `'v2'` the slot comes from `planProgressionV2`, reviews come from reviews-v2, and `mastery_change` entries follow the
@@ -92,3 +92,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T4 (2026-10-29): platform repeat/interval property fixtures pass; full Node 267/267 pass.
 - T5 (2026-10-29): readiness/follow-up/review focused fixtures pass; independent Terra review corrected sparse config validation and failure due-day; full Node 269/269 pass.
 - T6 (2026-10-29): user clarified fresh concepts retain authored priors; independent 11-cell fixture updated. S1-S8, deterministic insertion order/cooldown/no-deadlock checks pass; full Node 276/276 pass. Sparse-array and custom failure-day regressions added.
+- T7 (2026-10-29): default/explicit v1 serialized output matches pre-integration fixture; v2 snapshot/config isolation, evidence-prefix transitions and independent review lane tests pass. Future ratings excluded at each prefix; full Node 281/281 pass. catalog-v4 synthetic 10-plan run: 618.259292 ms; 10-prefix transition replay: 619.67925 ms (Node26.8.1 macOS arm64, one run, not a general benchmark).

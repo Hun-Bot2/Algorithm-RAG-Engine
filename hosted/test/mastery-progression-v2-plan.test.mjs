@@ -41,3 +41,12 @@ test('finite generated ledgers cannot deadlock with any remaining eligible candi
     assert.ok(plan.next);assert.ok(plan.next.problem_key);
   }
 });
+
+
+test('future ratings do not leak into historical plans',()=>{
+  const c=catalogFromData({problems:problems.filter(p=>p.platform==='codeforces')});
+  const args={date:'2026-01-01',catalog:c,ledger:{attempts:[]},prerequisites:{}};
+  const baseline=planProgressionV2(args);
+  const withFuture=planProgressionV2({...args,ledger:{attempts:[],rating_observations:[{entry_id:'future',occurred_at:'2026-02-01T00:00:00Z',recorded_at:'2026-02-01T00:00:00Z',payload:{platform:'codeforces',rating:3000}}]}});
+  assert.deepEqual(withFuture,baseline);
+});

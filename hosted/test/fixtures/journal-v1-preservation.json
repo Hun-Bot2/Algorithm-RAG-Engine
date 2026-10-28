@@ -1,0 +1,231 @@
+{
+  "date": "2026-10-29",
+  "policy_bundle": "journal-v1",
+  "components": {
+    "planner": "planner-v2",
+    "calibration": "calibration-v1",
+    "related": "related-v1"
+  },
+  "catalog_version": "v1-preservation-fixture",
+  "event_cutoff": "2026-10-29T00:00:00Z",
+  "prepared_at": "2026-10-29T00:00:00Z",
+  "day_type": "review",
+  "slots": [
+    {
+      "concept": "arrays-hashing",
+      "stage": "leetcode_easy",
+      "status": "in_progress",
+      "kind": "practice",
+      "problem_key": "leetcode:p1-0",
+      "reason": "Concept arrays-hashing: 0/3 Easy and 0/2 Medium solves; next leetcode_easy candidate has not been attempted or recently recommended. Native leetcode difficulty 1; insufficient_evidence calibration. Catalog variation metadata is a coverage proxy, not verified algorithm equivalence.",
+      "semantic_only": false,
+      "prediction": {
+        "p_mean": 0.8,
+        "p_conservative": 0.621,
+        "p_optimistic": 0.979,
+        "basis": "lc_level_beta",
+        "status": "insufficient_evidence"
+      },
+      "title": "Fixture 1-0",
+      "platform": "leetcode",
+      "url": null,
+      "difficulty": "Easy",
+      "concepts": [
+        "arrays-hashing"
+      ],
+      "estimated_minutes": 30
+    }
+  ],
+  "rotation": null,
+  "abilities": {
+    "leetcode": {
+      "status": "insufficient_evidence",
+      "n": 0,
+      "levels": {
+        "1": {
+          "mean": 0.8,
+          "sd": 0.179,
+          "n": 0
+        },
+        "2": {
+          "mean": 0.5,
+          "sd": 0.224,
+          "n": 0
+        },
+        "3": {
+          "mean": 0.2,
+          "sd": 0.179,
+          "n": 0
+        }
+      }
+    },
+    "codeforces": {
+      "status": "insufficient_evidence",
+      "n": 0,
+      "mean": 1000,
+      "sd": 350,
+      "prior": "default"
+    },
+    "atcoder": {
+      "status": "insufficient_evidence",
+      "n": 0,
+      "mean": 0,
+      "sd": 400,
+      "prior": "default"
+    }
+  },
+  "rotation_note": "Explore sub-kinds follow a fixed calendar rotation for reproducibility; comparisons between them are descriptive, not causal.",
+  "mastery": {
+    "practice_platform": "leetcode",
+    "contest_platforms": [
+      "codeforces",
+      "atcoder"
+    ],
+    "target_concepts": [],
+    "cooldown_days": 30,
+    "explore_cap": 0.25,
+    "weekend_window": {
+      "sat": [
+        "20:00",
+        "24:00"
+      ],
+      "sun": [
+        "14:00",
+        "24:00"
+      ]
+    }
+  },
+  "notes": [],
+  "progression": {
+    "version": "progression-v1",
+    "pattern_version": "algorithm-mastery-progression-v1",
+    "date": "2026-10-29",
+    "event_cutoff": "2026-10-29T00:00:00Z",
+    "catalog_version": "v1-preservation-fixture",
+    "stages": [
+      {
+        "id": "leetcode_easy",
+        "concepts": [
+          {
+            "concept": "arrays-hashing",
+            "status": "current",
+            "candidate": "leetcode:p1-0",
+            "reason": "Concept arrays-hashing: 0/3 Easy and 0/2 Medium solves; next leetcode_easy candidate has not been attempted or recently recommended. Native leetcode difficulty 1; insufficient_evidence calibration. Catalog variation metadata is a coverage proxy, not verified algorithm equivalence."
+          }
+        ]
+      },
+      {
+        "id": "leetcode_medium",
+        "concepts": [
+          {
+            "concept": "arrays-hashing",
+            "status": "locked",
+            "candidate": null,
+            "reason": null
+          }
+        ]
+      },
+      {
+        "id": "cross_platform_transfer",
+        "concepts": [
+          {
+            "concept": "arrays-hashing",
+            "status": "locked",
+            "candidate": null,
+            "reason": null
+          }
+        ]
+      },
+      {
+        "id": "retention_review",
+        "concepts": [
+          {
+            "concept": "arrays-hashing",
+            "status": "locked",
+            "candidate": null,
+            "reason": null
+          }
+        ]
+      }
+    ],
+    "next": {
+      "concept": "arrays-hashing",
+      "stage": "leetcode_easy",
+      "status": "in_progress",
+      "kind": "practice",
+      "problem_key": "leetcode:p1-0",
+      "reason": "Concept arrays-hashing: 0/3 Easy and 0/2 Medium solves; next leetcode_easy candidate has not been attempted or recently recommended. Native leetcode difficulty 1; insufficient_evidence calibration. Catalog variation metadata is a coverage proxy, not verified algorithm equivalence.",
+      "semantic_only": false,
+      "prediction": {
+        "p_mean": 0.8,
+        "p_conservative": 0.621,
+        "p_optimistic": 0.979,
+        "basis": "lc_level_beta",
+        "status": "insufficient_evidence"
+      }
+    },
+    "focus": {
+      "pattern": "arrays-hashing",
+      "stage": "leetcode_easy",
+      "status": "in_progress",
+      "reason": "Concept arrays-hashing: 0/3 Easy and 0/2 Medium solves; next leetcode_easy candidate has not been attempted or recently recommended. Native leetcode difficulty 1; insufficient_evidence calibration. Catalog variation metadata is a coverage proxy, not verified algorithm equivalence."
+    },
+    "concepts": {
+      "arrays-hashing": {
+        "concept": "arrays-hashing",
+        "stage_index": 0,
+        "status": "in_progress",
+        "stages": [
+          {
+            "stage": "leetcode_easy",
+            "status": "current"
+          },
+          {
+            "stage": "leetcode_medium",
+            "status": "locked"
+          },
+          {
+            "stage": "cross_platform_transfer",
+            "status": "locked"
+          },
+          {
+            "stage": "retention_review",
+            "status": "locked"
+          }
+        ],
+        "next_stage": "leetcode_easy",
+        "next_candidate": "leetcode:p1-0",
+        "next_candidate_reason": "Concept arrays-hashing: 0/3 Easy and 0/2 Medium solves; next leetcode_easy candidate has not been attempted or recently recommended. Native leetcode difficulty 1; insufficient_evidence calibration. Catalog variation metadata is a coverage proxy, not verified algorithm equivalence.",
+        "next_candidate_prediction": {
+          "p_mean": 0.8,
+          "p_conservative": 0.621,
+          "p_optimistic": 0.979,
+          "basis": "lc_level_beta",
+          "status": "insufficient_evidence"
+        },
+        "completed_counts": {
+          "leetcode_easy": 0,
+          "leetcode_easy_variations": 0,
+          "leetcode_medium": 0,
+          "leetcode_medium_variations": 0,
+          "transfer": false,
+          "retention_review": false
+        },
+        "advanced_evidence": {
+          "attempts": 0,
+          "independent": 0,
+          "failed": 0,
+          "assisted": 0,
+          "status": "observed_not_mastered"
+        },
+        "prerequisites": [],
+        "prerequisites_met": true,
+        "regression": null
+      }
+    }
+  },
+  "budget_minutes": 60,
+  "curriculum_version": "interview-curriculum-v1",
+  "progression_config_sha256": "3619aa08914059d2a9039311a2bbcbe026001d0d313d0cadf298a648ec2c44c9",
+  "implementation_sha256": "12f8632a5039d051bd87b685b892148a021d4364801568ec868325c3298f2669"
+}
