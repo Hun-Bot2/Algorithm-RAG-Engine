@@ -735,3 +735,10 @@ Keep these distinctions clear in summaries and docs:
 
 - User decision: contests show no suitability verdict and no stale-cache badge. `contestSuitability` and server `contest.recommendation`
   remain in data/tests but are not displayed. Provenance and stale fallback live under the collapsed "일정 출처" section of the details.
+
+## Desktop readiness (2026-10-29)
+
+- User desktop-product instructions authorize Windows/macOS distribution direction; the older personal-only audience is historical. Framework and catalog distribution remain undecided. See specs/desktop-readiness/status.md and data-safety.md.
+- Convert filesystem file URLs with fileURLToPath/pathToFileURL. CLI roots and catalog SQLite URI paths have regressions for spaces, Korean, # and %; real Windows execution remains unverified.
+- hosted/runtime/database.mjs owns the SQLite adapter. Test helpers re-export it for compatibility. Existing nonempty DBs receive a SQLite VACUUM INTO snapshot before pending migrations; newer schemas and receipt drift are rejected. Stop concurrent writers before upgrading. No automatic relocation, restore or backup deletion.
+- Full Node tests require loopback sockets; EPERM in restricted runs is environmental. Final 2026-10-29 regression: Node 254/254 and Python 74/74 passed; no real learner DB was used.
