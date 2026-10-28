@@ -38,7 +38,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   another concept changes `m_l(-c)` but not the cell's own counts; a PAV-pooled block reports an interval containing its
   mean; repeated solves of one problem change nothing (retention only); time and review flags change nothing.
 
-- [ ] **T4 Platform abilities and predictions** [§4.2]. Depends on: T1.
+- [x] **T4 Platform abilities and predictions** [§4.2]. Depends on: T1.
   Files: `progression-v2.mjs` (platform part), tests in `mastery-progression-v2-cells.test.mjs`.
   Accept: CF same problem ×20 equals ×1; predictions use `p_mean` with the ±1.2816 SD interval and lo ≤ p ≤ hi always
   (property test over random inputs); `calibration.mjs` tests unchanged and passing.
@@ -89,3 +89,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T1 (2026-10-29): observations/config focused 5 pass; full `node --test hosted/test/*.test.mjs` 259/259 pass with loopback access. New modules only; no real learner DB opened. Config loader is a separate Worker-safe module for independent validation.
 - T2 (2026-10-29): SciPy 1.14.1 reference 49 points; focused 2/2, full Node 261/261 pass. CDF tolerance 1e-9, quantile 1e-7.
 - T3 (2026-10-29): 10 independent SciPy cell scenarios matched within 1e-9; full Node 266/266 pass (includes independently added review fixtures). v1 files unchanged.
+- T4 (2026-10-29): platform repeat/interval property fixtures pass; full Node 267/267 pass.

@@ -1,4 +1,5 @@
 // progression-v2: pure derived estimates. v1 modules remain unchanged.
+import {fitAbility,priorFor,predict} from './calibration.mjs';
 import {defaultConfig} from './progression-v2-config.mjs';
 import {betaQuantile} from './beta-math.mjs';
 const logit=p=>Math.log(p/(1-p)),sigmoid=x=>1/(1+Math.exp(-x));
@@ -30,3 +31,26 @@ export function leetCodeCells(observations,concept,config=defaultConfig){
       interval:[betaQuantile(tail,block.alpha,block.beta),betaQuantile(1-tail,block.alpha,block.beta)]};
   });
 }
+
+
+export function platformAbilities(observations,catalog,ratings=[]){
+  return Object.fromEntries(['codeforces','atcoder'].map(platform=>{
+    const rows=observations.filter(o=>o.kind==='ability'&&o.platform===platform).map(o=>({
+      occurred_at:o.occurred_at,y:o.y,problem:catalog.problems.get(o.problem_key),
+      weight:platform==='atcoder'&&catalog.problems.get(o.problem_key)?.atc_experimental?0.5:1,
+    })).filter(o=>Number.isFinite(o.problem?.difficulty_value));
+    return [platform,fitAbility(platform,rows,priorFor(platform,ratings))];
+  }));
+}
+export function platformPrediction(problem,abilities,config=defaultConfig){
+  const p=predict(problem,abilities).p_mean,ability=abilities[problem.platform];
+  if(p===null||!ability)return null;
+  const a=problem.platform==='codeforces'?Math.LN10/400:(problem.atc_discrimination??0.004479398673070138);
+  const z=1.2816,d=problem.difficulty_value;
+  const lo=sigmoid(a*(ability.mean-z*ability.sd-d)),hi=sigmoid(a*(ability.mean+z*ability.sd-d));
+  const fisher=ability.sd**2*a*a*p*(1-p);
+  return {p,interval:[Math.min(lo,p),Math.max(hi,p)],n_own:ability.n,n_level_outside:0,
+    prior:ability.n?'learner':'authored',information:fisher/(1+fisher)};
+}
+
+
