@@ -1,0 +1,398 @@
+{
+  "version": "beta-reference-v1",
+  "scipy_version": "1.14.1",
+  "rows": [
+    {
+      "alpha": 0.5,
+      "beta": 0.5,
+      "x": 0.01,
+      "cdf": 0.06376856085851985,
+      "quantile_probability": 0.01,
+      "quantile": 0.00024671981713422146
+    },
+    {
+      "alpha": 0.5,
+      "beta": 0.8,
+      "x": 0.05,
+      "cdf": 0.19516124171507573,
+      "quantile_probability": 0.05,
+      "quantile": 0.0033027464843424126
+    },
+    {
+      "alpha": 0.5,
+      "beta": 2.0,
+      "x": 0.2,
+      "cdf": 0.6260990336999412,
+      "quantile_probability": 0.2,
+      "quantile": 0.01799296165025404
+    },
+    {
+      "alpha": 0.5,
+      "beta": 3.2,
+      "x": 0.5,
+      "cdf": 0.9577112825362473,
+      "quantile_probability": 0.5,
+      "quantile": 0.07392049445341764
+    },
+    {
+      "alpha": 0.5,
+      "beta": 4.0,
+      "x": 0.7,
+      "cdf": 0.997455625383593,
+      "quantile_probability": 0.7,
+      "quantile": 0.13307197072844132
+    },
+    {
+      "alpha": 0.5,
+      "beta": 20.0,
+      "x": 0.95,
+      "cdf": 1.0,
+      "quantile_probability": 0.95,
+      "quantile": 0.09265666990602676
+    },
+    {
+      "alpha": 0.5,
+      "beta": 60.0,
+      "x": 0.99,
+      "cdf": 1.0,
+      "quantile_probability": 0.99,
+      "quantile": 0.05400745130350119
+    },
+    {
+      "alpha": 0.8,
+      "beta": 0.5,
+      "x": 0.05,
+      "cdf": 0.05005071138004805,
+      "quantile_probability": 0.2,
+      "quantile": 0.26400911050892767
+    },
+    {
+      "alpha": 0.8,
+      "beta": 0.8,
+      "x": 0.2,
+      "cdf": 0.2317762316459439,
+      "quantile_probability": 0.5,
+      "quantile": 0.5
+    },
+    {
+      "alpha": 0.8,
+      "beta": 2.0,
+      "x": 0.5,
+      "cdf": 0.8040888484979243,
+      "quantile_probability": 0.7,
+      "quantile": 0.38945810831637917
+    },
+    {
+      "alpha": 0.8,
+      "beta": 3.2,
+      "x": 0.7,
+      "cdf": 0.9851396475581189,
+      "quantile_probability": 0.95,
+      "quantile": 0.5657049603961621
+    },
+    {
+      "alpha": 0.8,
+      "beta": 4.0,
+      "x": 0.95,
+      "cdf": 0.9999959772560081,
+      "quantile_probability": 0.99,
+      "quantile": 0.6520113630152831
+    },
+    {
+      "alpha": 0.8,
+      "beta": 20.0,
+      "x": 0.99,
+      "cdf": 1.0,
+      "quantile_probability": 0.01,
+      "quantile": 0.00014561586508025738
+    },
+    {
+      "alpha": 0.8,
+      "beta": 60.0,
+      "x": 0.01,
+      "cdf": 0.5561538074149607,
+      "quantile_probability": 0.05,
+      "quantile": 0.0003654998031346122
+    },
+    {
+      "alpha": 2.0,
+      "beta": 0.5,
+      "x": 0.2,
+      "cdf": 0.016130089900092546,
+      "quantile_probability": 0.7,
+      "quantile": 0.9588805171195213
+    },
+    {
+      "alpha": 2.0,
+      "beta": 0.8,
+      "x": 0.5,
+      "cdf": 0.19591115150207555,
+      "quantile_probability": 0.95,
+      "quantile": 0.9885874566758995
+    },
+    {
+      "alpha": 2.0,
+      "beta": 2.0,
+      "x": 0.7,
+      "cdf": 0.7839999999999999,
+      "quantile_probability": 0.99,
+      "quantile": 0.9410968642218047
+    },
+    {
+      "alpha": 2.0,
+      "beta": 3.2,
+      "x": 0.95,
+      "cdf": 0.9997226134628152,
+      "quantile_probability": 0.01,
+      "quantile": 0.039729450648805294
+    },
+    {
+      "alpha": 2.0,
+      "beta": 4.0,
+      "x": 0.99,
+      "cdf": 0.9999999504,
+      "quantile_probability": 0.05,
+      "quantile": 0.07644039141232889
+    },
+    {
+      "alpha": 2.0,
+      "beta": 20.0,
+      "x": 0.01,
+      "cdf": 0.01851167488332295,
+      "quantile_probability": 0.2,
+      "quantile": 0.03943086396443586
+    },
+    {
+      "alpha": 2.0,
+      "beta": 60.0,
+      "x": 0.05,
+      "cdf": 0.8157208040521922,
+      "quantile_probability": 0.5,
+      "quantile": 0.027361454170322163
+    },
+    {
+      "alpha": 3.2,
+      "beta": 0.5,
+      "x": 0.5,
+      "cdf": 0.04228871746375275,
+      "quantile_probability": 0.99,
+      "quantile": 0.9999734691124101
+    },
+    {
+      "alpha": 3.2,
+      "beta": 0.8,
+      "x": 0.7,
+      "cdf": 0.2492874716000403,
+      "quantile_probability": 0.01,
+      "quantile": 0.2656377344539592
+    },
+    {
+      "alpha": 3.2,
+      "beta": 2.0,
+      "x": 0.95,
+      "cdf": 0.9844043545457029,
+      "quantile_probability": 0.05,
+      "quantile": 0.2690253219773162
+    },
+    {
+      "alpha": 3.2,
+      "beta": 3.2,
+      "x": 0.99,
+      "cdf": 0.9999949857138156,
+      "quantile_probability": 0.2,
+      "quantile": 0.3321717350020404
+    },
+    {
+      "alpha": 3.2,
+      "beta": 4.0,
+      "x": 0.01,
+      "cdf": 8.780777058756071e-06,
+      "quantile_probability": 0.5,
+      "quantile": 0.4390319155411891
+    },
+    {
+      "alpha": 3.2,
+      "beta": 20.0,
+      "x": 0.05,
+      "cdf": 0.07419505978156805,
+      "quantile_probability": 0.7,
+      "quantile": 0.16691126845555004
+    },
+    {
+      "alpha": 3.2,
+      "beta": 60.0,
+      "x": 0.2,
+      "cdf": 0.9998167808087014,
+      "quantile_probability": 0.95,
+      "quantile": 0.10231734405385164
+    },
+    {
+      "alpha": 4.0,
+      "beta": 0.5,
+      "x": 0.7,
+      "cdf": 0.1012215157938664,
+      "quantile_probability": 0.05,
+      "quantile": 0.6007063523572438
+    },
+    {
+      "alpha": 4.0,
+      "beta": 0.8,
+      "x": 0.95,
+      "cdf": 0.7281937697294527,
+      "quantile_probability": 0.2,
+      "quantile": 0.7155821011838626
+    },
+    {
+      "alpha": 4.0,
+      "beta": 2.0,
+      "x": 0.99,
+      "cdf": 0.9990198504,
+      "quantile_probability": 0.5,
+      "quantile": 0.6861898295443025
+    },
+    {
+      "alpha": 4.0,
+      "beta": 3.2,
+      "x": 0.01,
+      "cdf": 1.7738230437727696e-07,
+      "quantile_probability": 0.7,
+      "quantile": 0.6586448646805154
+    },
+    {
+      "alpha": 4.0,
+      "beta": 4.0,
+      "x": 0.05,
+      "cdf": 0.00019357812499999996,
+      "quantile_probability": 0.95,
+      "quantile": 0.7746784159675522
+    },
+    {
+      "alpha": 4.0,
+      "beta": 20.0,
+      "x": 0.2,
+      "cdf": 0.7034685890151187,
+      "quantile_probability": 0.99,
+      "quantile": 0.3744511488932292
+    },
+    {
+      "alpha": 4.0,
+      "beta": 60.0,
+      "x": 0.5,
+      "cdf": 0.9999999999999954,
+      "quantile_probability": 0.01,
+      "quantile": 0.013299504259673207
+    },
+    {
+      "alpha": 20.0,
+      "beta": 0.5,
+      "x": 0.95,
+      "cdf": 0.15459078143343818,
+      "quantile_probability": 0.5,
+      "quantile": 0.988549743294424
+    },
+    {
+      "alpha": 20.0,
+      "beta": 0.8,
+      "x": 0.99,
+      "cdf": 0.7284375340996496,
+      "quantile_probability": 0.7,
+      "quantile": 0.9884997077371122
+    },
+    {
+      "alpha": 20.0,
+      "beta": 2.0,
+      "x": 0.01,
+      "cdf": 2.080000000000001e-39,
+      "quantile_probability": 0.95,
+      "quantile": 0.9828090033675204
+    },
+    {
+      "alpha": 20.0,
+      "beta": 3.2,
+      "x": 0.05,
+      "cdf": 3.046007158143858e-24,
+      "quantile_probability": 0.99,
+      "quantile": 0.9762464769272794
+    },
+    {
+      "alpha": 20.0,
+      "beta": 4.0,
+      "x": 0.2,
+      "cdf": 9.855356108800013e-12,
+      "quantile_probability": 0.01,
+      "quantile": 0.6255488511067707
+    },
+    {
+      "alpha": 20.0,
+      "beta": 20.0,
+      "x": 0.5,
+      "cdf": 0.5000000000000002,
+      "quantile_probability": 0.05,
+      "quantile": 0.3713610502851442
+    },
+    {
+      "alpha": 20.0,
+      "beta": 60.0,
+      "x": 0.7,
+      "cdf": 1.0,
+      "quantile_probability": 0.2,
+      "quantile": 0.20874211208331966
+    },
+    {
+      "alpha": 60.0,
+      "beta": 0.5,
+      "x": 0.99,
+      "cdf": 0.2731159404810684,
+      "quantile_probability": 0.95,
+      "quantile": 0.9999670958925053
+    },
+    {
+      "alpha": 60.0,
+      "beta": 0.8,
+      "x": 0.01,
+      "cdf": 3.7897587239924165e-121,
+      "quantile_probability": 0.99,
+      "quantile": 0.9999516194593118
+    },
+    {
+      "alpha": 60.0,
+      "beta": 2.0,
+      "x": 0.05,
+      "cdf": 5.030698080332756e-77,
+      "quantile_probability": 0.01,
+      "quantile": 0.8960698897159316
+    },
+    {
+      "alpha": 60.0,
+      "beta": 3.2,
+      "x": 0.2,
+      "cdf": 2.5411223321237405e-39,
+      "quantile_probability": 0.05,
+      "quantile": 0.8976826559461484
+    },
+    {
+      "alpha": 60.0,
+      "beta": 4.0,
+      "x": 0.5,
+      "cdf": 4.524158825347513e-15,
+      "quantile_probability": 0.2,
+      "quantile": 0.9141992616818457
+    },
+    {
+      "alpha": 60.0,
+      "beta": 20.0,
+      "x": 0.7,
+      "cdf": 0.15087912375254173,
+      "quantile_probability": 0.5,
+      "quantile": 0.7520915483791942
+    },
+    {
+      "alpha": 60.0,
+      "beta": 60.0,
+      "x": 0.95,
+      "cdf": 1.0,
+      "quantile_probability": 0.7,
+      "quantile": 0.523971614382202
+    }
+  ]
+}

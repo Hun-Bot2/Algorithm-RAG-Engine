@@ -22,7 +22,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   whose events carry a review flag or memo produce identical observations to ones without; (f) alias keys canonicalise;
   (g) unknown problem → reported, not dropped silently; (h) invalid config rejected.
 
-- [ ] **T2 Beta math** [§4.1]. Depends on: —.
+- [x] **T2 Beta math** [§4.1]. Depends on: —.
   Files: `hosted/mastery/beta-math.mjs`; `research/recommendation_audit/beta_reference.py` (scipy, `.venv`) writing
   `hosted/test/fixtures/beta-reference.v1.json`; `hosted/test/mastery-beta-math.test.mjs`.
   Implement regularized incomplete beta (continued fraction), survival `Pr(theta ≥ x)`, quantile (bisection, fixed
@@ -87,3 +87,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 ## Execution receipts
 
 - T1 (2026-10-29): observations/config focused 5 pass; full `node --test hosted/test/*.test.mjs` 259/259 pass with loopback access. New modules only; no real learner DB opened. Config loader is a separate Worker-safe module for independent validation.
+- T2 (2026-10-29): SciPy 1.14.1 reference 49 points; focused 2/2, full Node 261/261 pass. CDF tolerance 1e-9, quantile 1e-7.
