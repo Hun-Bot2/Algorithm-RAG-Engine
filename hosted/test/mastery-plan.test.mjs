@@ -5,6 +5,7 @@ import {atcoderInternalRating,atcoderSolveProbability,calibrationReport,codeforc
 import {EXPLORE_KINDS,exploreIndex,planDay,relatedChannelFor,weekInfo} from '../mastery/planner.mjs';
 import {relatedCandidates,SEMANTIC_ONLY_LABEL,trustedConcepts} from '../mastery/related.mjs';
 import {catalogFromData} from '../mastery/catalog.mjs';
+import {mockExposurePlans} from '../mastery/mock-contest.mjs';
 import {normalizePreferences} from '../core/preferences.mjs';
 
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/atcoder-calibration.json',import.meta.url)));
@@ -182,4 +183,16 @@ test('semantic fallback requires reliable titles on both sides and ranks below a
   assert.equal(result.candidates[0].semantic_only,false);
   const degradedSource=catalogFromData({problems:[{...src,reliability:'degraded'},good],neighbors:{title_v2_cross:{'codeforces:900A':['atcoder:abc301_d']}}});
   assert.equal(relatedCandidates({sourceKey:'codeforces:900A',catalog:degradedSource,abilities:fitAll([],degradedSource,[]),channel:'title_v2_cross'}).candidates.length,0);
+});
+
+test('mock contest problems are prior exposures for new daily plans within the cooldown (mock-contest R6.4)', () => {
+  const c=catalog();
+  const base=planDay({date:MONDAY,now:at(19),ledger:ledgerOf([]),catalog:c,preferences:prefs()});
+  const picked=base.slots.map(s=>s.problem_key).filter(Boolean);
+  assert.ok(picked.length>0);
+  const mock=date=>mockExposurePlans([{local_date:date,problems:picked.map(problem_key=>({problem_key}))}]);
+  const after=planDay({date:MONDAY,now:at(19),ledger:ledgerOf([]),catalog:c,preferences:prefs(),priorPlans:mock('2026-10-17')});
+  assert.ok(after.slots.every(s=>!picked.includes(s.problem_key)),'Saturday mock contest problems are not re-recommended on Monday');
+  const old=planDay({date:MONDAY,now:at(19),ledger:ledgerOf([]),catalog:c,preferences:prefs(),priorPlans:mock('2026-08-01')});
+  assert.deepEqual(old.slots.map(s=>s.problem_key),base.slots.map(s=>s.problem_key),'outside the cooldown the exposure expires');
 });

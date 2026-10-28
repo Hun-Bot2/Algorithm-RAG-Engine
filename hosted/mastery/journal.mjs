@@ -15,6 +15,7 @@ import {canonicalKey,trustedConcepts} from './related.mjs';
 import interview from './interview-curriculum.v1.json' with {type:'json'};
 import patternConfig from './progression-pattern.v1.json' with {type:'json'};
 import {planProgression} from './progression.mjs';
+import {mockExposurePlans} from './mock-contest.mjs';
 
 const digest=value=>createHash('sha256').update(canonicalJson(value)).digest('hex');
 const POLICY_CODE_HASH=digest(Object.fromEntries(['./journal.mjs','./progression.mjs','./planner.mjs','./reviews.mjs','./calibration.mjs','../core/policy.mjs'].map(path=>[path,readFileSync(new URL(path,import.meta.url),'utf8')])));
@@ -68,11 +69,15 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     try{catalog=await load(ledger);}catch(error){if(error.message.startsWith('no active catalog'))return {available:false,reason:error.message};throw error;}
     const preferences=await getPreferences(db,learnerId);
     const prior=(await db.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=? ORDER BY local_date,kind').bind(learnerId).all()).results;
-    const historyPlans=prior.map(r=>{const raw=JSON.parse(r.payload),archived=raw.archive_type==='recommendation_snapshot',p=archived?raw.original_payload:raw;return {...p,snapshot_id:p.snapshot_id ?? `${archived?raw.original_kind:r.kind}-${r.local_date}`,local_date:r.local_date,archived};});
+    // Mock contests are not plans (no slots); they only add exposures for new daily plans (specs/mock-contest R6.4).
+    const rows=prior.map(r=>({...r,raw:JSON.parse(r.payload)})),isMock=r=>r.kind==='mock_contest' || r.raw.original_kind==='mock_contest';
+    // Restored backups wrap them as inert archives: shown as history, never used as exposures (like archived plans).
+    const mockContests=rows.filter(isMock).map(r=>r.kind==='mock_contest'?{...r.raw,archived:false}:{...r.raw.original_payload,local_date:r.local_date,archived:true});
+    const historyPlans=rows.filter(r=>!isMock(r)).map(r=>{const raw=r.raw,archived=raw.archive_type==='recommendation_snapshot',p=archived?raw.original_payload:raw;return {...p,snapshot_id:p.snapshot_id ?? `${archived?raw.original_kind:r.kind}-${r.local_date}`,local_date:r.local_date,archived};});
     const plans=historyPlans.filter(p=>!p.archived);
     const key='journal-'+digest({date,version:JOURNAL_VERSION,catalog:catalog.version,attempts:ledger.attempts,ratings:ledger.rating_observations,preferences,interview,patternConfig,implementation:POLICY_CODE_HASH}).slice(0,40);
     let plan=await getSnapshot(db,learnerId,key,date);
-    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,priorPlans:plans});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
+    if(!plan){plan=journalPlan({date,now:at,ledger,catalog,preferences,priorPlans:[...plans,...mockExposurePlans(mockContests.filter(m=>!m.archived))]});plan.snapshot_id=key;plan=await saveSnapshot(db,learnerId,key,date,plan);}
     const all=[...historyPlans.filter(p=>p.archived || p.snapshot_id!==key),plan];
     const queue=reviewQueue(problemStates(ledger.attempts,catalog),catalog,date);
     const entries=[];
@@ -80,7 +85,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
       const pk=canonicalKey(catalog,a.problem_key),p=catalog.problems.get(pk);
       const q=queue.find(r=>r.problem_key===pk);
       entries.push({id:a.id,type:'attempt',occurred_at:a.occurred_at,recorded_at:a.recorded_at,problem_key:pk,title:p?.title ?? pk,platform:p?.platform ?? pk.split(':')[0],difficulty:level(p),pattern:[...trustedConcepts(p)].join(', '),
-        activity_type:a.activity_type ?? null,transfer_from:a.transfer_from ?? null,evidence_kind:a.activity_type==='review'?'known_problem_review':a.activity_type==='transfer'?'transfer_claim':'practice',outcome:a.outcome,display_outcome:a.outcome==='independent'&&a.hints===false?'O':a.outcome==='reported_completion'?'?':'X',hints:a.hints,self_minutes:a.self_minutes,time_basis:a.self_minutes===null?'not_recorded':'self_reported',priority:['failed','assisted'].includes(a.outcome)?'priority':'normal',evidence_source:a.evidence_source});
+        activity_type:a.activity_type ?? null,transfer_from:a.transfer_from ?? null,evidence_kind:a.activity_type==='review'?'known_problem_review':a.activity_type==='transfer'?'transfer_claim':'practice',outcome:a.outcome,display_outcome:a.outcome==='independent'&&a.hints===false?'O':a.outcome==='reported_completion'?'?':'X',hints:a.hints,self_minutes:a.self_minutes,...(a.self_seconds!=null?{self_seconds:a.self_seconds}:{}),time_basis:a.self_minutes===null&&a.self_seconds==null?'not_recorded':'self_reported',priority:['failed','assisted'].includes(a.outcome)?'priority':'normal',evidence_source:a.evidence_source});
     }
     // Corrections remove evidence from active replay, not from the chronological audit trail.
     const activeIds=new Set(ledger.attempts.map(a=>a.id));
@@ -89,7 +94,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
       for(const r of raw){
         if((table==='events'&&r.kind!=='attempt')||activeIds.has(r[idField])||r.occurred_at>at||r.recorded_at>at)continue;
         const p=catalog.problems.get(canonicalKey(catalog,r.payload.problem_key));
-        entries.push({id:r[idField],type:'attempt',occurred_at:r.occurred_at,recorded_at:r.recorded_at,problem_key:r.payload.problem_key,title:p?.title ?? r.payload.problem_key,platform:p?.platform ?? r.payload.problem_key.split(':')[0],difficulty:level(p),pattern:[...trustedConcepts(p)].join(', '),activity_type:r.payload.activity_type ?? null,transfer_from:r.payload.transfer_from ?? null,outcome:r.payload.outcome,display_outcome:r.payload.outcome==='independent'?'O':r.payload.outcome==='reported_completion'?'?':'X',hints:r.payload.hints,self_minutes:r.payload.self_minutes ?? null,priority:['failed','assisted'].includes(r.payload.outcome)?'priority':'normal',status:'superseded',reason:'Historical record corrected by an append-only successor; excluded from active mastery evidence.',superseded_by:raw.find(x=>x.supersedes===r[idField])?.[idField] ?? null});
+        entries.push({id:r[idField],type:'attempt',occurred_at:r.occurred_at,recorded_at:r.recorded_at,problem_key:r.payload.problem_key,title:p?.title ?? r.payload.problem_key,platform:p?.platform ?? r.payload.problem_key.split(':')[0],difficulty:level(p),pattern:[...trustedConcepts(p)].join(', '),activity_type:r.payload.activity_type ?? null,transfer_from:r.payload.transfer_from ?? null,outcome:r.payload.outcome,display_outcome:r.payload.outcome==='independent'?'O':r.payload.outcome==='reported_completion'?'?':'X',hints:r.payload.hints,self_minutes:r.payload.self_minutes ?? null,...(r.payload.self_seconds!=null?{self_seconds:r.payload.self_seconds}:{}),priority:['failed','assisted'].includes(r.payload.outcome)?'priority':'normal',status:'superseded',reason:'Historical record corrected by an append-only successor; excluded from active mastery evidence.',superseded_by:raw.find(x=>x.supersedes===r[idField])?.[idField] ?? null});
       }
     }
     for(const p of all.filter(x=>x.snapshot_id))for(const [i,s] of p.slots.entries())entries.push({...s,id:(p.archived?'archive-':'')+p.snapshot_id+'-'+i,type:'recommendation',archived:Boolean(p.archived),occurred_at:p.prepared_at ?? p.event_cutoff ?? null,local_date:p.date ?? p.local_date,snapshot_id:p.snapshot_id,priority:s.review_priority ?? 'normal',pattern:(s.concepts ?? []).join(', ')});
@@ -112,14 +117,15 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     const byDate=new Map();
     for(const e of entries){const d=e.occurred_at?seoulDate(new Date(e.occurred_at)):e.local_date;if(!byDate.has(d))byDate.set(d,[]);byDate.get(d).push(e);}
     const patterns=stageRows(plan.progression);
-    return {available:true,date,focus:plan.focus_override ?? {pattern:plan.progression.next?.concept ?? plan.progression.focus?.pattern ?? plan.progression.focus ?? patterns.find(p=>p.candidate)?.pattern ?? null,stage:plan.progression.next?.stage ?? plan.progression.stage ?? patterns.find(p=>p.candidate)?.stage ?? null,status:plan.progression.next?.status ?? plan.progression.status ?? null,reason:plan.slots.find(s=>s.kind!=='review')?.reason ?? plan.notes.at(-1)},
+    return {available:true,date,mock_contests:mockContests,focus:plan.focus_override ?? {pattern:plan.progression.next?.concept ?? plan.progression.focus?.pattern ?? plan.progression.focus ?? patterns.find(p=>p.candidate)?.pattern ?? null,stage:plan.progression.next?.stage ?? plan.progression.stage ?? patterns.find(p=>p.candidate)?.stage ?? null,status:plan.progression.next?.status ?? plan.progression.status ?? null,reason:plan.slots.find(s=>s.kind!=='review')?.reason ?? plan.notes.at(-1)},
       plan,days:[...byDate].sort((a,b)=>b[0].localeCompare(a[0])).map(([date,entries])=>({date,entries:entries.sort((a,b)=>(b.occurred_at ?? '').localeCompare(a.occurred_at ?? '')||a.id.localeCompare(b.id))})),
+      review_selections:(preferences.review_targets ?? []).map(t=>{const p=catalog.problems.get(t.problem_key);return {...t,title:p?.title ?? t.problem_key,url:p?.url ?? null,platform:p?.platform ?? t.problem_key.split(':')[0],difficulty:level(p)};}),
       reviews:{priority:queue.filter(r=>r.review_priority==='priority'),normal:queue.filter(r=>r.review_priority!=='priority')},patterns,
       weekly:buildWeeklyReport({ledger,catalog,plans:all.filter(p=>!p.archived),weekStart:weekInfo(date).weekStart,preferences}),upcoming:queue.filter(r=>!r.due).map(r=>({...r,date:r.due_date,kind:'review',reason:`Scheduled ${r.review_priority} review; stage ${r.review_stage}.`})),
       limitations:['Outcomes are user reported, not judge-verified.','AI-reviewed concepts are not verified algorithm equivalence.','Policy tests do not establish educational effectiveness.']};
   }
   async function attempt(learnerId,input,clock=new Date()){
-    const allowed=['event_id','problem_key','outcome','hints','activity_type','transfer_from','self_minutes','occurred_at','supersedes'];
+    const allowed=['event_id','problem_key','outcome','hints','activity_type','transfer_from','self_minutes','self_seconds','occurred_at','supersedes'];
     if(!input||Object.keys(input).some(k=>!allowed.includes(k)))throw new Error('invalid journal attempt');
     const ledger=await readLedger(db,learnerId),catalog=await load(ledger);
     const key=canonicalKey(catalog,input.problem_key);if(!catalog.problems.has(key))throw new Error('invalid journal problem');
@@ -128,6 +134,7 @@ export function createJournalService({db,catalogRoot,catalogProvider=null}) {
     const now=old?.recorded_at ?? timestamp(clock.toISOString()),payload={problem_key:key,outcome:input.outcome,hints:input.hints,activity_type:input.activity_type ?? 'practice'};
     if(payload.activity_type==='transfer')payload.transfer_from=canonicalKey(catalog,input.transfer_from);
     if('self_minutes'in input)payload.self_minutes=input.self_minutes;
+    if('self_seconds'in input)payload.self_seconds=input.self_seconds;
     const added=await appendEvents(db,learnerId,[{schema_version:1,event_id:input.event_id,learner_id:learnerId,kind:'attempt',source:'manual',occurred_at:input.occurred_at ?? old?.occurred_at ?? now,recorded_at:now,payload,supersedes:input.supersedes ?? null}]);
     return {added,journal:await view(learnerId,clock)};
   }

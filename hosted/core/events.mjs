@@ -52,6 +52,10 @@ export function normalizeEvent(input) {
       if (e.source!=='manual' || (p.self_minutes!==null && (!Number.isInteger(p.self_minutes) || p.self_minutes<0 || p.self_minutes>1440))) throw new Error('invalid self-reported minutes');
       fields.push('self_minutes');
     }
+    if('self_seconds' in p){
+      if(e.source!=='manual'||p.self_seconds!==null&&(!Number.isInteger(p.self_seconds)||p.self_seconds<0||p.self_seconds>86400||p.self_minutes!=null))throw new Error('invalid self-reported seconds');
+      fields.push('self_seconds');
+    }
     if (!exact(p, fields)) throw new Error('unexpected or missing payload fields');
   } else {
     if (e.source !== 'manual') throw new Error('timer actions require manual evidence');

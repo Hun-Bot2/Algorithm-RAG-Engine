@@ -8,6 +8,7 @@ import {exportLearningBackup,importLearningBackup} from '../backup.mjs';
 import {appendLedger} from '../mastery/side-ledger.mjs';
 import {activeLocalCatalog,createJournalService} from '../mastery/journal.mjs';
 import {catalogFromData} from '../mastery/catalog.mjs';
+import {saveSnapshot} from '../mastery/ledger.mjs';
 
 const OWNER='journal-test-owner';
 const CURRICULUM={schema_version:1,curriculum_version:'journal-fixture',problems:[],relationships:[]};
@@ -220,4 +221,48 @@ test('journal does not emit unrelated initial mastery changes for every catalog 
   assert.equal(result.status,201);
   const changes=result.body.journal.days.flatMap(d=>d.entries).filter(e=>e.type==='mastery_change');
   assert.deepEqual(changes.map(c=>c.pattern),['arrays-hashing']);
+});
+
+test('second-based manual durations survive journal edits and backup',async t=>{
+ const f=setup(t);
+ const payload={...attempt('seconds-original','leetcode:easy-1','reported_completion',{self_minutes:null,occurred_at:at('2026-10-19',10)}),self_seconds:40};
+ const posted=await f.request('/journal/attempt',{method:'POST',body:payload});assert.equal(posted.status,201);
+ const row=posted.body.journal.days.flatMap(d=>d.entries).find(x=>x.id==='seconds-original');
+ assert.equal(posted.body.journal.weekly.process.self_reported_seconds_total,40);assert.equal(row.self_seconds,40);assert.equal(row.self_minutes,null);assert.equal(row.time_basis,'self_reported');
+ const changed=await f.request('/journal/attempt',{method:'POST',body:{...payload,event_id:'seconds-edit',self_seconds:0,supersedes:'seconds-original'}});assert.equal(changed.status,201);
+ const rows=changed.body.journal.days.flatMap(d=>d.entries);
+ assert.equal(rows.find(x=>x.id==='seconds-original').self_seconds,40);
+ assert.equal(rows.find(x=>x.id==='seconds-edit').self_seconds,0);
+ const backup=await exportLearningBackup(f.db,OWNER),target=createDatabase();t.after(()=>target.close());
+ await importLearningBackup(target,OWNER,backup);
+ const restored=await createJournalService({db:target,catalogProvider:()=>fixtureCatalog()}).view(OWNER,new Date(at('2026-10-20')));
+ assert.equal(restored.days.flatMap(d=>d.entries).find(x=>x.id==='seconds-edit').self_seconds,0);
+ for(const seconds of [-1,0.5,86401])assert.equal((await f.request('/journal/attempt',{method:'POST',body:{...payload,event_id:'invalid-'+String(seconds),self_seconds:seconds}})).status,400);
+ assert.equal((await f.request('/journal/attempt',{method:'POST',body:{...payload,event_id:'both-units',self_minutes:1}})).status,400);
+});
+
+test('journal survives stored mock contests and treats their problems as exposures, not plans',async t=>{
+  const baseline=setup(t);
+  const first=(await baseline.request('/journal')).body.plan.progression.next.problem_key;
+  assert.ok(first);
+  const {db,request}=setup(t);
+  await saveSnapshot(db,OWNER,'mock_contest','2026-10-17',{policy:'mock-contest-v1',local_date:'2026-10-17',problems:[{slot:1,problem_key:first,level:1}]});
+  const response=await request('/journal');
+  assert.equal(response.status,200);
+  assert.equal(response.body.available,true);
+  assert.notEqual(response.body.plan.progression.next?.problem_key,first,'a mock contest problem is not the next progression candidate');
+  assert.deepEqual(response.body.mock_contests.map(m=>[m.local_date,m.problems[0].problem_key]),[['2026-10-17',first]],'the journal exposes stored mock contests for the calendar');
+  assert.ok(response.body.days.flatMap(d=>d.entries).every(e=>e.type!=='recommendation' || e.problem_key!==first),'mock contest rows are not shown as recommendations');
+});
+
+test('restored (archived) mock contests are calendar history only and do not exclude problems',async t=>{
+  const baseline=setup(t);
+  const first=(await baseline.request('/journal')).body.plan.progression.next.problem_key;
+  const {db,request}=setup(t);
+  await saveSnapshot(db,OWNER,'archive-0123456789abcdef0123456789abcdef','2026-10-17',{archive_type:'recommendation_snapshot',original_kind:'mock_contest',
+    original_payload:{policy:'mock-contest-v2',local_date:'2026-10-17',duration_minutes:120,problems:[{slot:1,problem_key:first,level:1}]}});
+  const response=await request('/journal');
+  assert.equal(response.status,200);
+  assert.deepEqual(response.body.mock_contests.map(m=>[m.local_date,m.archived]),[['2026-10-17',true]]);
+  assert.equal(response.body.plan.progression.next.problem_key,first,'archives never act as exposures');
 });

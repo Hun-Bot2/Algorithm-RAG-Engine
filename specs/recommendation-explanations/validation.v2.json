@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "date": "2026-10-20",
+  "node_tests": {
+    "passed": 162,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test hosted/test/*.test.mjs",
+    "log_sha256": "3954952241479969516d9cdb1e963514945c5eac0d8bf686af65fc8b4d15c48d"
+  },
+  "browser": {
+    "synthetic": true,
+    "receipts": [
+      {
+        "scenario": "dual_success",
+        "desktop_side_by_side": true,
+        "mobile_stacked": true,
+        "no_overflow": true,
+        "refresh_no_new_attempts": true,
+        "provider_calls": 2,
+        "real_providers": false
+      },
+      {
+        "scenario": "partial_failure",
+        "desktop_side_by_side": true,
+        "mobile_stacked": true,
+        "no_overflow": true,
+        "refresh_no_new_attempts": true,
+        "provider_calls": 2,
+        "real_providers": false
+      },
+      {
+        "scenario": "both_failed",
+        "desktop_side_by_side": true,
+        "mobile_stacked": true,
+        "no_overflow": true,
+        "refresh_no_new_attempts": true,
+        "provider_calls": 2,
+        "real_providers": false
+      }
+    ]
+  },
+  "browser_receipt_sha256": "ff1617e938492fc2b337c618b07815b97e778e1efeaadfa7cc06b25564b6fbe2",
+  "implementation_sha256": {
+    "hosted/mastery/explanations.mjs": "425536870ddbfb76d3707ffa8125deeff8709b38941fe94a5f9a917697f6ab8d",
+    "hosted/mastery/explanation-store.mjs": "6cf4f1243afa485de1c922bea6ce5fdf27494326d24b51898cf93774c9cda57f",
+    "hosted/mastery/explanation-observability.mjs": "c894c428b21939fdd145415700d8ecb4519e2b982de97ef26ee38b1abaf4fbc0",
+    "hosted/cli.mjs": "27a689d321d550ca02cce3d907c59368225bb1a5f71166a49318eea6a0c192f5",
+    "hosted/local.mjs": "853d0031566d78b5d53f65067516853b0c5aa18bb74e74d7ba46d3b15a07d121",
+    "hosted/public/app.mjs": "aad3bf2d2cc2aa05e3bc1c64e35492b0b0d01a7406f0c3b12653fc642b7dec29",
+    "hosted/public/styles.css": "56daccafb19d48151a921825908b319e4c23e289c92686a73832f37c7ad07a93",
+    "hosted/test/mastery-explanations.test.mjs": "ea3d9e9a64df9ff7788d1504cfab8ee93fdb67ab75fb8455b64fac73ee7a0036",
+    "hosted/test/mastery-cli.test.mjs": "8f4490bd13acade0726f2f6e166a2cc76c7248730b466242dc807c3e00731044",
+    "hosted/explanation-browser-smoke.mjs": "5d92af3c97b34946328fb9ac95c924ed7fce9eb4be138cd20840a4563f92e4a8"
+  },
+  "live_provider_calls": false,
+  "live_langfuse_import": false,
+  "learner_database_mutated": false,
+  "policy_changed": false
+}

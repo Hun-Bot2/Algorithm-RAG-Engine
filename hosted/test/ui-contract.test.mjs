@@ -14,7 +14,9 @@ function fakeElement() {
   };
 }
 
+globalThis.window = { addEventListener() {} };
 globalThis.document = {
+  addEventListener() {},
   querySelector(selector) { return selector === "#app" || selector === "#notice" || selector === "#learner-label" ? fakeElement() : null; },
   querySelectorAll() { return []; },
   createElement() { return fakeElement(); },
@@ -93,9 +95,9 @@ test("journal filters preserve date groups and match requested facets", () => {
   assert.deepEqual(ui.filterJournalDays(days, { to: "2026-10-16", platform: "leetcode" }), []);
 });
 
-test("static shell exposes the three primary views and accessible live status", async () => {
+test("static shell exposes the four primary views and accessible live status", async () => {
   const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
-  for (const label of ["오늘", "학습 기록", "대회"]) assert.match(html, new RegExp(`>${label}</button>`));
+  for (const view of ["calendar", "history", "analytics", "contests"]) assert.ok(html.includes(`data-view="${view}"`));
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /<main id="main"/);
 });
@@ -107,11 +109,11 @@ test("UI source uses provider sync, full backup, and contest participation route
   assert.match(source, /수정된 기록/);
 });
 
-test("journal remains the default view and uses its dedicated read and attempt routes", async () => {
+test("calendar is the default view and retains dedicated journal read and attempt routes", async () => {
   const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
   const source = await readFile(new URL("../public/app.mjs", import.meta.url), "utf8");
-  assert.match(html, /data-view="journal"/);
-  assert.match(source, /currentView = "journal"/);
+  assert.match(html, /data-view="calendar"/);
+  assert.match(source, /currentView = "calendar"/);
   assert.match(source, /request\("\/journal"\)/);
   assert.match(source, /request\("\/journal\/attempt"/);
   assert.match(source, /adaptive-learning\.pending-journal-attempts\.v1/);
@@ -124,4 +126,20 @@ test("timer confirmation preserves seconds and milliseconds instead of rounding 
   const source = new Date("2026-10-16T01:02:39.123Z");
   const local = ui.toLocalInput(source.toISOString());
   assert.equal(new Date(local).getTime(), source.getTime());
+});
+
+test("calendar shows mock contests as a toggleable layer that links LeetCode and never records attempts by itself", async () => {
+  const source = await readFile(new URL("../public/workspace.mjs", import.meta.url), "utf8");
+  const styles = await readFile(new URL("../public/styles.css", import.meta.url), "utf8");
+  assert.match(source, /layers=\{solved:true,attempted:true,planned:true,mock:true,contest:true\}/);
+  assert.match(source, /\['mock','모의 대회'\]/);
+  assert.match(source, /if\(e\.layer==='mock'\)return mockDetails\(e\);/);
+  const detail = source.slice(source.indexOf("function mockDetails"), source.indexOf("function contestDetails"));
+  assert.match(detail, /link\(p\.title \|\| p\.problem_key,p\.url\)/, "problems link through the HTTPS-only helper");
+  assert.match(detail, /이 화면은 시도를 만들지 않고/);
+  assert.doesNotMatch(detail, /start_at|placement_note|시작 \(KST\)/, "mock contests show a solving time, not a clock time");
+  assert.match(detail, /if\(e\.archived\)/, "restored mock contests are labelled as archived history");
+  assert.doesNotMatch(detail, /saveAttempt/, "opening a mock contest never saves an attempt");
+  assert.match(detail, /edit\(null,localDate\(new Date\(\)\),p\.problem_key\)/, "recording goes through the normal attempt editor");
+  for (const rule of [".calendar-event.mock", ".layer-toggle.mock", ".workspace-row.mock", ".mock-problem", ".activity-dot.mock"]) assert.ok(styles.includes(rule), rule);
 });

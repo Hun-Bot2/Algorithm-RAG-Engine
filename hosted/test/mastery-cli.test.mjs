@@ -89,3 +89,72 @@ test('CLI journal shares canonical SQLite with O/X attempts and preserves zero s
   assert.ok(success.reviews.normal.some(r=>r.problem_key==='leetcode:p3'));
   assert.ok(success.reviews.priority.some(r=>r.problem_key==='leetcode:p0'));
 });
+
+test('production explain CLI generates both providers and repeated runs only read independent caches',async t=>{
+ const dir=mkdtempSync(join(tmpdir(),'mastery-dual-cli-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));fixtureCatalog(dir);
+ const lines=[],requests=[],env={GEMINI_API_KEY:'fixture',NVIDIA_API_KEY:'fixture',NVIDIA_EXPLANATION_MODEL:'fixture/model'};
+ const cli=(...args)=>run([...args,'--db',join(dir,'learner.sqlite3'),'--catalog-root',join(dir,'cat'),'--now','2026-10-20T03:00:00Z','--json'],{
+  env,print:x=>lines.push(JSON.parse(x)),fetcher:async(url,options)=>{
+   const body=JSON.parse(options.body),gemini=Boolean(body.contents),input=gemini?body.contents[0].parts[0].text:body.messages[1].content;
+   requests.push({gemini,input,instructions:gemini?body.systemInstruction.parts[0].text:body.messages[0].content});
+   const text=JSON.stringify({text:'현재 학습 단계에 맞춰 다음 연습 문제를 골랐어요. 풀이 결과를 기록해 주세요.',evidence_id:JSON.parse(input).evidence_id});
+   return Response.json(gemini?{candidates:[{content:{parts:[{text}]}}]}:{choices:[{message:{content:text}}]});
+  },
+ });
+ assert.equal(await cli('catalog','use','--version','catalog-t1'),0);
+ assert.equal(await cli('explain'),0);const first=lines.at(-1);assert.ok(first.plan.slots.length);
+ assert.equal(requests.length,2*first.plan.slots.length);
+ for(let i=0;i<requests.length;i+=2){assert.equal(requests[i].input,requests[i+1].input);assert.equal(requests[i].instructions,requests[i+1].instructions);}
+ assert.ok(first.plan.slots.every(s=>s.explanation.results.length===2&&s.explanation.results.every(r=>r.status==='success')));
+ assert.equal(await cli('explain'),0);assert.equal(requests.length,2*first.plan.slots.length);
+ assert.equal(await cli('explanation-usage'),0);assert.ok(lines.at(-1).groups.every(g=>g.requests===first.plan.slots.length));
+});
+
+test('CLI explicitly adds/removes dated review targets idempotently, never solves',async context=>{
+ const dir=mkdtempSync(join(tmpdir(),'review-cli-'));context.after(()=>rmSync(dir,{recursive:true,force:true}));fixtureCatalog(dir);
+ const lines=[],cli=(...args)=>run([...args,'--db',join(dir,'learner.sqlite3'),'--catalog-root',join(dir,'cat'),'--json'],{print:x=>lines.push(x)}),last=()=>JSON.parse(lines.at(-1));
+ await cli('catalog','use','--version','catalog-t1','--now','2026-10-22T00:00:00Z');
+ await cli('review','add','--problem','leetcode:p0','--date','2026-10-23');assert.equal(last().changed,true);assert.equal(last().attempts_added,0);
+ await cli('review','add','--problem','leetcode:p0','--date','2026-10-23');assert.equal(last().changed,false);assert.equal(last().review_targets.length,1);
+ await cli('journal','--now','2026-10-23T01:00:00Z');assert.equal(last().review_selections[0].title,'P0');assert.equal(last().days.flatMap(d=>d.entries).filter(e=>e.type==='attempt').length,0);
+ await assert.rejects(cli('review','add','--problem','leetcode:missing','--date','2026-10-23'),/invalid review problem/);
+ await cli('review','remove','--problem','leetcode:p0','--date','2026-10-23');assert.equal(last().changed,true);assert.deepEqual(last().review_targets,[]);
+ await cli('review','remove','--problem','leetcode:p0','--date','2026-10-23');assert.equal(last().changed,false);
+});
+
+test('CLI mock-contest create/show stores one immutable snapshot per date and never records attempts',async context=>{
+  const dir=mkdtempSync(join(tmpdir(),'mastery-mock-')); context.after(()=>rmSync(dir,{recursive:true,force:true}));
+  fixtureCatalog(dir);
+  const lines=[], dbPath=join(dir,'learner.sqlite3');
+  const cli=(...args)=>run([...args,'--db',dbPath,'--catalog-root',join(dir,'cat'),'--learner','synthetic-mock','--json'],{print:x=>lines.push(x)});
+  const last=()=>JSON.parse(lines.at(-1));
+  assert.equal(await cli('catalog','use','--version','catalog-t1','--now','2026-10-27T21:00:00Z'),0);
+  assert.equal(await cli('mock-contest','show','--now','2026-10-28T03:00:00Z'),1);
+  assert.deepEqual(last(),{found:false,local_date:'2026-10-31'},'Wednesday defaults to the Saturday virtual day');
+  assert.equal(await cli('mock-contest','create','--count','5','--now','2026-10-28T03:00:00Z'),0);
+  const created=last();
+  assert.equal(created.changed,true);
+  const record=created.mock_contest;
+  assert.equal(record.local_date,'2026-10-31');
+  assert.equal(record.catalog_version,'catalog-t1');
+  assert.equal(record.problems.length,5);
+  assert.equal(record.duration_minutes,120,'solving time only: 2 hours by default for any count');
+  assert.equal(record.policy,'mock-contest-v2');
+  assert.ok(!('start_at' in record));
+  assert.equal(record.ability.status,'insufficient_evidence');
+  assert.ok(record.problems.every(p=>p.problem_key.startsWith('leetcode:')));
+  assert.equal(await cli('mock-contest','create','--date','2026-10-31','--count','7','--now','2026-10-29T03:00:00Z'),0);
+  assert.deepEqual(last(),{changed:false,mock_contest:record},'a stored mock contest is immutable');
+  assert.equal(await cli('mock-contest','show','--date','2026-10-31','--now','2026-11-02T03:00:00Z'),0);
+  assert.deepEqual(last(),record);
+  // The fixture has 10 LeetCode problems; the stored set is an exposure inside the cooldown.
+  await assert.rejects(cli('mock-contest','create','--date','2026-11-07','--count','5','--now','2026-11-02T03:00:00Z'),/not enough unattempted/);
+  await assert.rejects(cli('mock-contest','create','--date','2026-11-07','--count','8','--now','2026-11-02T03:00:00Z'),/count must be an integer/);
+  assert.equal(await cli('status','--now','2026-11-02T03:00:00Z'),0);
+  assert.equal(last().attempts,0,'mock contests never create attempts');
+  const text=[];
+  assert.equal(await run(['mock-contest','show','--date','2026-10-31','--db',dbPath,'--catalog-root',join(dir,'cat'),'--learner','synthetic-mock'],{print:x=>text.push(x)}),0);
+  assert.match(text[0],/^Mock contest 2026-10-31, solving time 120m, policy mock-contest-v2/);
+  assert.match(text[0],/insufficient LeetCode evidence/);
+  assert.match(text[0],/https:\/\/leetcode\.com\/problems\//);
+});

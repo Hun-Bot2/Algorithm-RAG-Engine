@@ -38,6 +38,16 @@ node hosted/cli.mjs weekly --out ~/code/algorithm-notes/reports
 
 A weekly report is frozen only after the week ends; the Markdown file is never overwritten.
 
+LeetCode mock contest (specs/mock-contest/): 5-7 unattempted free problems matched to the LeetCode level estimate,
+on a date with a 2-hour solving time. It has no start time and is independent of official contest schedules.
+One immutable set per date; solve and judge on leetcode.com.
+
+```bash
+node hosted/cli.mjs mock-contest create                  # next virtual day, 6 problems, 120 minutes
+node hosted/cli.mjs mock-contest create --date 2026-10-31 --count 7 --minutes 150
+node hosted/cli.mjs mock-contest show --date 2026-10-31
+```
+
 ## Weekly catalog refresh (NETWORK, approved)
 
 ```bash
@@ -106,3 +116,75 @@ The legacy `plan` command freezes a date's first plan and does not refresh an ex
 No backfill, learner-DB migration, or repair of previously misidentified date-file rows is
 automatic. To import already-watermarked daily files, use a reviewed explicit anchor;
 inspect any existing wrong IDs separately instead of silently deleting history.
+
+## Dual-model Korean explanations
+
+Use `node hosted/cli.mjs explain` with Gemini and NVIDIA credentials/model IDs to
+concurrently generate both explanations from the same frozen evidence. This is the
+default generation path; web/journal reads never dispatch. Durable attempt records,
+independent caches, retry/usage/cost reporting and setup:
+[explanation runbook](../recommendation-explanations/runbook.md).
+
+Optional timing: use `문제 | 결과 | 시간 | 메모` with a four-column separator.
+Write minutes as `10m` or seconds as `40s` (nonnegative integers, maximum 1440m / 86400s); empty or `-` means unrecorded, and `0m`/`0s` remain recorded zero. Seconds are stored exactly in optional `self_seconds`; minute records retain integer `self_minutes`.
+Three-column logs remain valid. Changing elapsed time after ingestion is a semantic conflict (equivalent units such as 60s and 1m deduplicate)
+for the same daily token, not a new attempt or a silent overwrite of the old record.
+
+
+### Local contest discovery (2026-10-20)
+
+Restart `node hosted/local.mjs` after pulling backend changes. In **프로그래밍 대회**, choose
+**공개 일정 동기화**. The same-origin local endpoint `POST /api/contests/sync {}` synchronizes
+CF official API, AtCoder official calendar and an attributed community CLIST LeetCode mirror.
+No additional key, package or infrastructure is required. Refresh reads SQLite only; six-hour cache,
+five-minute failed-attempt suppression and stale fallback prevent repeated requests. Source publication
+age is separate from fetch success; inspect each modal's source/time and official URL. Weekdays retain
+their actual KST date. Hosted/Worker discovery remains unavailable unless explicitly implemented later.
+
+Fit labels are conditional opening-problem practice goals based on existing platform calibration and
+historical native difficulty, with at least six distinct independent practice solves; insufficient data
+stays **판단 근거 부족**. This does not estimate an official rating or assert registration eligibility.
+See `specs/contest-discovery/` and `RECOMMENDATION_ENGINE/` for exact thresholds and evidence.
+
+A `markdown_attempt_conflict` after adding a duration to an already-imported daily row preserves the
+original attempt. It is not evidence that Markdown parsing lost the solve. Do not invent a new attempt
+ID or reset the watermark to suppress it. An explicit imported-Git correction UI is still future work.
+
+### Explicit review targets
+
+```sh
+node hosted/cli.mjs review add --problem leetcode:buddy-strings --date 2026-10-23
+node hosted/cli.mjs review remove --problem leetcode:buddy-strings --date 2026-10-23
+```
+
+These commands select a dated review; they never create attempts, solved results or timer evidence. Dates default to today in Asia/Seoul. Only an exact active-catalog key is accepted. Repeated add/remove is idempotent. Selections live in the canonical learner preferences (`review_targets`) and existing full backups. Calendar readers use catalog-enriched `review_selections`; the computed review queue still does not populate the calendar. Markdown summary-table memo cells now accept the standalone `#복습` label. Commit the file and run repository synchronization to import the dated selection. Blank outcomes and `-` create no attempts; uncommitted files and detailed prose are not imported. The filename date and first heading MUST agree. Import is additive: removing a label does not remove an already imported selection; use `review remove` for that.
+
+Example (in `leetcode/26-10-23.md`):
+
+```md
+# 2026-10-23
+
+| 문제 | 결과 | 시간 | 메모 |
+| --- | --- | --- | --- |
+| https://leetcode.com/problems/buddy-strings/ | | | #복습 |
+```
+
+The date is the log date, not an inferred future review date. `O`/`X` preserve their existing outcome meaning independently of the label. No mastery or completion is inferred from `#복습`.
+
+### Dedicated review column
+
+Preferred format: `문제 | 결과 | 시간 | 복습 | 메모`. Set `복습` to `1` for a target, `0` for a non-target. Blank and legacy `O`/`-` remain readable. The column takes precedence over legacy memo hashtags. Old three/four-column logs and memo `#복습` remain supported when no review column exists. The time column is optional.
+
+```md
+# 2026-10-23
+
+| 문제 | 결과 | 시간 | 복습 | 메모 |
+| --- | --- | --- | --- | --- |
+| https://leetcode.com/problems/buddy-strings/ | | | 1 | 풀이 중 |
+```
+
+### Binary daily outcomes
+
+Current daily format uses result `1` (solved), `0` (not solved), blank (in progress/unrecorded); review `1` (target), `0` (not a target). A numeric success imports as `reported_completion` with hints unknown, never inferred independent success. Legacy `O` retains its explicit independent meaning. An already-ingested legacy O attempt survives its presentation-only migration to 1 without duplicate attempts or false conflict; changed duration or failure still raises a conflict. Legacy per-problem schema metadata is unchanged. Review imports remain additive: setting a previously imported target to 0 does not cancel it; use `review remove`.
+
+Daily durations are shown as `m`/`s` in workspace history, details and the editable record modal. Confirmed timers remain separate. Weekly `self_reported_minutes` retains minute-unit subtotals for compatibility; `self_reported_seconds_total` sums both self-reported units exactly. Optional seconds survive full learning backups. Restart an already running local server to load the extended JSON validation contracts.

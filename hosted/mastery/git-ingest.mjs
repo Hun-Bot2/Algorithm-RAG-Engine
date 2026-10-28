@@ -6,6 +6,7 @@ import {CONVENTION_VERSION,classify,frontMatterKey,keyFromPath,parseTrailers} fr
 import {markdownAttemptSignature,markdownBlobHash,parseMarkdownAttempt} from './markdown-attempt.mjs';
 import {appendLedger,listEntries} from './side-ledger.mjs';
 import {readLedger} from './ledger.mjs';
+import {getPreferences,putPreferences} from '../core/store.mjs';
 import {dailyPath,parseDailyLog} from './daily-log.mjs';
 import {attachCatalog,loadCatalog} from './catalog.mjs';
 import {fileURLToPath} from 'node:url';
@@ -80,6 +81,7 @@ export async function ingestRepository(db,learnerId,repoId,{now=new Date(),ancho
     const token=row.payload.trailers?.markdown_attempt, signature=row.payload.trailers?.markdown_semantic;
     if (token && signature) priorMarkdown.set(`${row.payload.problem_key}\0${token}`,signature);
   }
+  const reviewTargets=new Map();
   const observations=[], unclassified=[], flagsByCommit={};
   for (const c of commits) {
     const {trailers,problems,unknown}=parseTrailers(c.trailerBlock);
@@ -98,16 +100,25 @@ export async function ingestRepository(db,learnerId,repoId,{now=new Date(),ancho
         if(dailyPath(path)) {
           const parsed=parseDailyLog(path,blob,getDailyCatalog());
           if(parsed.flags.length)(flagsByCommit[c.sha]??=[]).push(...parsed.flags.map(flag=>`${path}:${flag}`));
+          for(const target of parsed.review_targets)reviewTargets.set(`${target.problem_key}\0${target.date}`,target);
           for(const row of parsed.rows) {
             const md=row.metadata,key=md.problem_key,semantic=markdownAttemptSignature(md),token=`${key}\0${md.attempt}`;
             const prior=priorMarkdown.get(token);
-            if(prior!==undefined){if(prior!==semantic)(flagsByCommit[c.sha]??=[]).push('markdown_attempt_conflict:'+key);continue;}
+            if(prior!==undefined){
+              // Binary success carries less evidence than legacy O. Preserve the original
+              // independent attempt when only its presentation was migrated to 1.
+              const legacySuccess=md.outcome==='reported_completion'?markdownAttemptSignature({...md,outcome:'independent',hints:false}):null;
+              const normalizedMinutes=md.self_seconds!=null&&md.self_seconds%60===0?markdownAttemptSignature({...md,self_seconds:null,self_minutes:md.self_seconds/60}):null;
+              const normalizedSeconds=md.self_minutes!=null?markdownAttemptSignature({...md,self_minutes:null,self_seconds:md.self_minutes*60}):null;
+              if(prior!==semantic && prior!==legacySuccess && prior!==normalizedMinutes && prior!==normalizedSeconds)(flagsByCommit[c.sha]??=[]).push('markdown_attempt_conflict:'+key);
+              continue;
+            }
             priorMarkdown.set(token,semantic);
             const observedAt=utc(new Date(Math.min(Date.parse(`${row.date}T00:00:00+09:00`),now.getTime())).toISOString());
             const provenance={markdown_source:path.length<=500?path:`path_sha256:${hash(path)}`,markdown_sha256:markdownBlobHash(blob),markdown_attempt:md.attempt,markdown_semantic:semantic,
               daily_date:row.date,daily_line:String(row.line),daily_row:row.raw.length<=500?row.raw:`row_sha256:${hash(row.raw)}`,daily_catalog_version:catalog.version};
             observations.push({schema_version:1,entry_id:'git-'+hash(repoId,key,md.attempt).slice(0,40),learner_id:learnerId,occurred_at:observedAt,recorded_at:recordedAt,source:'git',supersedes:null,
-              payload:{repo_id:repoId,sha:c.sha,path,problem_key:key,outcome:md.outcome,hints:md.hints,self_minutes:null,activity_type:'practice',transfer_from:null,trailers:provenance}});
+              payload:{repo_id:repoId,sha:c.sha,path,problem_key:key,outcome:md.outcome,hints:md.hints,self_minutes:md.self_minutes,...(md.self_seconds!=null?{self_seconds:md.self_seconds}:{}),activity_type:'practice',transfer_from:null,trailers:provenance}});
           }
           continue;
         }
@@ -181,6 +192,13 @@ export async function ingestRepository(db,learnerId,repoId,{now=new Date(),ancho
       }
     }
     if (flags.length) flagsByCommit[c.sha]=[...(flagsByCommit[c.sha]??[]),...flags];
+  }
+  // Save selections before the watermark: retries are idempotent if ledger append fails.
+  if(reviewTargets.size){
+    const preferences=await getPreferences(db,learnerId);
+    const targets=new Map((preferences.review_targets ?? []).map(t=>[`${t.problem_key}\0${t.date}`,t]));
+    for(const [key,target] of reviewTargets)targets.set(key,target);
+    await putPreferences(db,learnerId,{review_targets:[...targets.values()]});
   }
   const added=await appendLedger(db,learnerId,{git_observations:observations,git_watermarks:[watermarkEntry(head,'ok',observations.length,unclassified.length?`unclassified commits: ${unclassified.length}`:null)]});
   return {repo_id:repoId,status:'ok',from,to:head,commits:commits.length,observed:added.git_observations,unclassified,flags:flagsByCommit};

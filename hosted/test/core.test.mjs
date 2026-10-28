@@ -145,3 +145,15 @@ test('Access JWT verifies RS256, issuer/audience/time/email and rejects tamperin
   await assert.rejects(authenticateAccess(request(await sign({...claims,email:'other@example.com'})),env,{fetcher,now:()=>200_000}));
   await assert.rejects(authenticateAccess(request(token),env,{fetcher,now:()=>300_000}));
 });
+
+test('manual LeetCode schedules preserve entered timing and provenance without inventing a provider',async context=>{
+  const db=createDatabase();context.after(()=>db.close());
+  const app=createApp({db,curriculum,authenticate:async()=>({learner_id:'owner'}),now:()=>clock});
+  const schedule={id:'manual-lc',platform:'leetcode',title:'User verified contest',url:'https://leetcode.com/contest/',start_at:'2026-10-18T02:30:00.000Z',duration_minutes:90,suitable:false};
+  const request=body=>app.fetch(new Request('https://learning.test/api/contests/manual',{method:'POST',headers:{origin:'https://learning.test','content-type':'application/json'},body:JSON.stringify(body)}));
+  const response=await request(schedule);assert.equal(response.status,201);
+  const state=await(await app.fetch(new Request('https://learning.test/api/state'))).json();
+  const saved=state.contests.find(c=>c.id==='manual-lc');assert.equal(saved.source,'manual');assert.equal(saved.platform,'leetcode');assert.equal(saved.start_at,'2026-10-18T02:30:00.000000Z');assert.equal(saved.duration_minutes,90);
+  assert.equal(state.capabilities.providers_enabled,false);
+  assert.equal((await request({...schedule,id:'invalid',platform:'invented'})).status,400);
+});

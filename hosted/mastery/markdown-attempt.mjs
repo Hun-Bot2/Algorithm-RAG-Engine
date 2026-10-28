@@ -71,4 +71,4 @@ export function parseMarkdownAttempt(source,{inferredProblem=null}={}) {
 }
 
 export const markdownBlobHash=text=>createHash('sha256').update(String(text)).digest('hex');
-export const markdownAttemptSignature=m=>JSON.stringify([m.problem_key,m.outcome,m.hints,m.self_minutes,m.activity_type,m.transfer_from]);
+export const markdownAttemptSignature=m=>JSON.stringify([m.problem_key,m.outcome,m.hints,m.self_minutes,m.activity_type,m.transfer_from,...(m.self_seconds!=null?[{self_seconds:m.self_seconds}]:[])]);

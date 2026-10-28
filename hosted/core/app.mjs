@@ -30,12 +30,12 @@ const readJson = async request => {
 function manualContest(input,now) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).sort().join('|') !== 'duration_minutes|id|platform|start_at|suitable|title|url') throw new Error('invalid manual contest');
   identifier(input.id);
-  if (typeof input.title !== 'string' || !input.title.trim() || !['atcoder','codeforces','other'].includes(input.platform) || typeof input.suitable !== 'boolean' || !Number.isInteger(input.duration_minutes) || input.duration_minutes < 1) throw new Error('invalid manual contest');
+  if (typeof input.title !== 'string' || !input.title.trim() || !['atcoder','codeforces','leetcode','other'].includes(input.platform) || typeof input.suitable !== 'boolean' || !Number.isInteger(input.duration_minutes) || input.duration_minutes < 1) throw new Error('invalid manual contest');
   const url = new URL(input.url);
   if (url.protocol !== 'https:' || url.username || url.password) throw new Error('HTTPS contest URL required');
   return {...input,start_at:timestamp(input.start_at),source:'manual',fetched_at:timestamp(now.toISOString())};
 }
-export function createApp({env={},db=env.DB,curriculum,annotations={},authenticate=request=>authenticateAccess(request,env),assets=env.ASSETS,contests=({learnerId,now})=>cachedProviders(db,learnerId,now),delivery=({learnerId})=>listDeliveries(db,learnerId),now=()=>new Date(),journal=null}={}) {
+export function createApp({env={},db=env.DB,curriculum,annotations={},authenticate=request=>authenticateAccess(request,env),assets=env.ASSETS,contests=({learnerId,now})=>cachedProviders(db,learnerId,now),delivery=({learnerId})=>listDeliveries(db,learnerId),now=()=>new Date(),journal=null,contestSync=null}={}) {
   if (!db || !curriculum) throw new Error('hosted core bindings missing');
   return {async fetch(request) {
     let identity;
@@ -58,16 +58,20 @@ export function createApp({env={},db=env.DB,curriculum,annotations={},authentica
         const intervals = timerState(snap.events,cutoff);
         const manual = await listManualContests(db,learnerId);
         const upstream = await contests({learnerId,now:clock});
-        const allContests=[...manual,...(Array.isArray(upstream)?upstream:upstream?.items ?? [])];
+        const allContests=[...new Map([...manual,...(Array.isArray(upstream)?upstream:upstream?.items ?? [])].map(c=>[c.platform+':'+(c.url?.replace(/\/$/,'')||c.id),c])).values()];
         const frozen=await getMission(db,learnerId,seoulDate(clock));
-        const mission=frozen ?? buildMission({curriculum,annotations,events:snap.events,preferences:snap.preferences,now:clock,contests:allContests});
+        const mission=frozen ?? buildMission({curriculum,annotations,events:snap.events,preferences:snap.preferences,now:clock,contests:[...manual,...(Array.isArray(upstream)?upstream:upstream?.items ?? [])]});
         const contest_sources=upstream?.sources ?? (Array.isArray(upstream) ? [] : [{source:upstream?.source ?? 'provider',status:upstream?.status ?? 'unavailable',fetched_at:upstream?.fetched_at ?? null,error:upstream?.error ?? null}]);
-        return json({learner_id:learnerId,capabilities:{providers_enabled:env.PROVIDERS_ENABLED==='true',delivery_enabled:env.DELIVERY_ENABLED==='true'},preferences:snap.preferences,curriculum,annotations,events:snap.events,mission:{...mission,snapshot_status:frozen?'frozen':'preview'},snapshot_status:frozen?'frozen':'preview',progress:deriveProgress(curriculum,snap.events,cutoff),timers:{intervals,confirmed_seconds:confirmedSeconds(intervals)},contests:allContests,contest_sources,delivery:await delivery({learnerId,now:clock}),participation:await listParticipation(db,learnerId),delivery_reconciliation_required:Boolean((await db.prepare('SELECT delivery_reconciliation_required FROM learners WHERE learner_id=?').bind(learnerId).first())?.delivery_reconciliation_required)});
+        return json({learner_id:learnerId,capabilities:{contest_discovery:Boolean(contestSync),providers_enabled:env.PROVIDERS_ENABLED==='true',delivery_enabled:env.DELIVERY_ENABLED==='true'},preferences:snap.preferences,curriculum,annotations,events:snap.events,mission:{...mission,snapshot_status:frozen?'frozen':'preview'},snapshot_status:frozen?'frozen':'preview',progress:deriveProgress(curriculum,snap.events,cutoff),timers:{intervals,confirmed_seconds:confirmedSeconds(intervals)},contests:allContests,contest_sources,delivery:await delivery({learnerId,now:clock}),participation:await listParticipation(db,learnerId),delivery_reconciliation_required:Boolean((await db.prepare('SELECT delivery_reconciliation_required FROM learners WHERE learner_id=?').bind(learnerId).first())?.delivery_reconciliation_required)});
       }
       if (path === '/api/participation' && method === 'POST') return json({added:await appendParticipation(db,learnerId,await readJson(request))},201);
       if (path === '/api/backup/export' && method === 'GET') return json(await exportLearningBackup(db,learnerId));
       if (path === '/api/backup/import' && method === 'POST') return json(await importLearningBackup(db,learnerId,await readJson(request)));
       if (path === '/api/operations' && method === 'GET') return json(await operationsSnapshot(db,learnerId));
+      if(path==='/api/contests/sync' && method==='POST'){
+        const input=await readJson(request);if(!input||Object.keys(input).length)return json({error:'expected empty object'},400);
+        return contestSync?json(await contestSync({learnerId,now:now()})):json({error:'contest discovery unavailable'},409);
+      }
       if (path === '/api/providers/sync' && method === 'POST') {
         const input=await readJson(request);
         if (!input || Object.keys(input).some(key=>!['platform','handle'].includes(key))) return json({error:'invalid provider request'},400);

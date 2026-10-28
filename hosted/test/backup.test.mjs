@@ -4,6 +4,7 @@ import {createDatabase} from './helpers/d1.mjs';
 import {appendEvents,putManualContest,putPreferences} from '../core/store.mjs';
 import {appendParticipation,listParticipation,activeParticipation} from '../contest-history.mjs';
 import {exportLearningBackup,importLearningBackup} from '../backup.mjs';
+import {saveSnapshot} from '../mastery/ledger.mjs';
 import {prepareMission} from '../core/policy.mjs';
 import {ensureDelivery,listDeliveries} from '../notifications.mjs';
 import {runDispatcher,deliveryTimes} from '../dispatcher.mjs';
@@ -83,4 +84,20 @@ test('manual contest participates in frozen mission input without duration infer
   assert.equal(mission.activities[0].type,'contest');
   assert.equal(mission.activities[0].estimated_minutes,null);
   assert.equal(mission.activities[0].duration_minutes,100);
+});
+
+test('mock contest snapshots survive backup export/import and restore as inert archives',async context=>{
+  const source=createDatabase(),target=createDatabase();context.after(()=>{source.close();target.close();});
+  const mock={policy:'mock-contest-v2',local_date:'2026-10-31',duration_minutes:120,composition:{easy:4,medium:2,hard:0},
+    problems:[{slot:1,problem_key:'leetcode:two-sum',title:'Two Sum',url:'https://leetcode.com/problems/two-sum/',level:1}]};
+  await saveSnapshot(source,'owner','mock_contest','2026-10-31',mock);
+  const backup=await exportLearningBackup(source,'owner');
+  assert.deepEqual(backup.mastery_archive.recommendation_snapshots,[{kind:'mock_contest',local_date:'2026-10-31',payload:mock}]);
+  await importLearningBackup(target,'owner',backup);
+  const rows=target.sqlite.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=?').all('owner');
+  assert.equal(rows.length,1);
+  assert.match(rows[0].kind,/^archive-[0-9a-f]{32}$/,'restored mock contests are inert archive rows, not active mock_contest rows');
+  assert.deepEqual(JSON.parse(rows[0].payload),{archive_type:'recommendation_snapshot',original_kind:'mock_contest',original_payload:mock});
+  const restored=await exportLearningBackup(target,'owner');
+  assert.deepEqual(restored.mastery_archive.recommendation_snapshots,backup.mastery_archive.recommendation_snapshots,'export unwraps the archive byte-for-byte');
 });

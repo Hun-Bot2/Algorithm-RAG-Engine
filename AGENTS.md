@@ -647,3 +647,47 @@ Keep these distinctions clear in summaries and docs:
 - Resolve plain titles exactly within the platform or validate supported URLs against the active catalog; ambiguous/missing identities are flagged, not guessed.
 - O/X are explicit row evidence. `-` creates no attempt. Date/problem tokens prevent memo edits from counting twice; outcome edits are flagged conflicts.
 - Use `repo ingest` then `journal` to see evidence-refreshed recommendations; `plan` is frozen per date. Test with temporary DBs, preserving the real learner DB.
+
+## Dual-model recommendation explanations
+
+- `hosted/mastery/explanations.mjs` is a Node-only presentation layer. Production `explain` concurrently requests Gemini and NVIDIA from one frozen input/prompt; journal/web reads never dispatch.
+- Keep planner, journal, evidence and immutable snapshots unchanged. AI prose is not verified grounding; output checks cannot establish truth.
+- `explanation-store.mjs` owns a separate, append-only private SQLite research ledger beside the learner DB. It is durable, not disposable cache; back it up separately with SQLite online backup (WAL-aware). v1 JSON is preserved, never promoted into attempt evidence.
+- Cache per learner/input/provider/model/prompt/parameters. Both provider roles remain visible when configuration is missing. Explicit `--retry-failed` appends lineage and preserves successful peers; cache hits never add tokens/requests.
+- Preserve provider-native usage and null missingness. Estimated cost uses explicit versioned rates; actual costs require a separately sourced receipt. Unknown/crashed attempts are not free or confirmed failures.
+- `explanation-usage` reports aggregates; `explanation-records` is private. `explanation-otel` is an offline redacted projection, with no external export by default. No LangChain/Grafana/service dependencies.
+- Browser smoke: `node hosted/explanation-browser-smoke.mjs` uses isolated synthetic learners, mocked APIs, its own Chrome profile and temporary loopback service. It proves UI behavior only. Never inspect or print real keys for validation.
+- Nemotron 3.5 Lightning short prose uses model-specific `chat_template_kwargs.enable_thinking=false`; otherwise its 512-token cap can end with `finish_reason:length`. Persist this option in parameters/cache identity and leave Gemini caches intact. A successful model-list GET does not prove inference permission; classify HTTP errors without exposing raw bodies.
+
+## Calendar workspace (2026-10-20)
+
+- `hosted/public/workspace-data.mjs` is presentation-only; actual attempts use `occurred_at`, plans use their explicit local date. Exclude superseded records from aggregates while retaining them in problem detail history.
+- Policy timezone is fixed at Asia/Seoul; no user timezone preference exists. Calendar forms explicitly convert KST and preserve unchanged correction timestamps byte-for-byte.
+- `local.mjs` has a static allowlist: include new browser modules there. Keep Node-only learner/policy modules out of browser imports.
+- New UI smoke: `SMOKE_OUTPUT_DIR=<fresh private directory> node hosted/workspace-browser-smoke.mjs` uses disposable synthetic learners and mocked explanation providers. It does not establish live contest sync or paid inference availability.
+- Contest source availability follows `specs/contest-discovery/` and the actual capability flag; distinguish official sources, the LeetCode community mirror and manual records. Never infer schedules or eligibility from titles.
+
+- Calendar date clicks select the agenda; overflow opens a day dialog. Both modes cap entries at three. Group same-day/problem recommendation revisions for presentation, preserving reasons and current cached explanations in details.
+- Preserve supplied `contest.recommendation` evidence; the UI fallback must not infer skill from title keywords or platform activity counts. Keep source/sync state separate from suitability.
+- Explicit dated reviews use optional `preferences.review_targets` and catalog-enriched `journal.review_selections`; `review add|remove` never creates attempts. Reload older local readers before writing the additive preference key. Uncommitted Markdown with blank outcomes remains outside committed-Git solve ingestion.
+
+## Daily duration units (2026-10-23)
+
+- Daily summary `시간` accepts integer `m`/`s` up to 24h, blank/`-` unavailable, explicit zero preserved. Seconds use optional JSON `self_seconds`; never round into integer `self_minutes` or set missing minutes to zero. Minute/second values are mutually exclusive.
+- Keep optional seconds in unified ledger/journal, corrected history and backups. Weekly exact `self_reported_seconds_total` includes both units; legacy `self_reported_minutes` remains the minute-unit subtotal. Confirmed timer evidence stays separate.
+- Already-running local servers must restart to pick up new event/ledger validators. The general browser smoke contains fixed October contest fixtures that expire; use targeted duration checks or revise fixtures before claiming a complete browser pass.
+
+## Weekly LeetCode mock contest (2026-10-28)
+
+- Spec specs/mock-contest/, code hosted/mastery/mock-contest.mjs (pure, Worker-safe), CLI `mock-contest create|show`. Stored as
+  `recommendation_snapshots` kind `mock_contest`: one immutable set per date, no attempts. Policy `mock-contest-v2` has a date and a
+  solving time (default 120m) only. Mock contests never read or adjust to official contest schedules (user decision; v1 slot placement removed).
+- No title text or title embeddings in selection (user decision: inaccurate). Ranking uses trusted weak concepts, a tag-set diversity rule
+  and a seeded FNV hash. Composition targets 60% conservative expected solves: an unvalidated heuristic.
+- catalog-v4 has 61 eligible LeetCode rows with no native tags (JavaScript 30-days, Pandas, newer SQL). They are not algorithm problems;
+  the mock-contest pool requires a native tag. The daily planner does not filter them yet.
+- The journal reads every snapshot kind as plan history and iterates `slots`. Any new snapshot kind without `slots` must be filtered out
+  there, or `/api/journal` breaks. Mock contests feed daily plans only as exposures (`mockExposurePlans`).
+- Backup import wraps every snapshot as an inert `archive-...` row. Restored mock contests show as archived history and are not exposures.
+- Daily recommendations are mostly `journal-*` snapshot kinds, not `plan`. Code that collects exposures must read every kind
+  (`snapshotExposures`), not only `kind='plan'`.

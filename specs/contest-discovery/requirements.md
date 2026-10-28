@@ -1,0 +1,11 @@
+# Contest discovery and calendar diagnostics (2026-10-20)
+
+- The system SHALL preserve original learner events, Git observations, timestamps and frozen explanations. Semantic edits to an imported attempt MUST remain conflicts, never silent overwrites.
+- Sync diagnostics SHALL distinguish changed attempt evidence from invalid Markdown and name affected problems. A conflict SHALL NOT imply the earlier attempt was lost.
+- Actual attempts SHALL use their timestamp in Asia/Seoul; date-only plans SHALL retain their civil date. Future reviews MUST be explicitly labelled as planned, never completed attempts.
+- Explicit local schedule synchronization SHALL retrieve Codeforces official API metadata, AtCoder official upcoming contest metadata and an attributed CLIST/ContestDeck LeetCode feed. No statement collection, LeetCode scraping or credentials are required.
+- Normalization SHALL preserve UTC instants, duration, official HTTPS URL, source, source publication time when supplied, and successful retrieval time. Weekends SHALL be emphasized without moving events.
+- Existing owner-scoped SQLite provider_cache SHALL hold deduplicated schedules; GET/refresh MUST NOT fetch upstream. Cache lifetime is six hours, source publication age also matters, and failures SHALL preserve the last successful records with a stale marker. Failed attempts SHALL be throttled for five minutes.
+- Contest classification SHALL use active ledger evidence and the existing platform calibration. At least six distinct independent practice solves and six calibration observations are required. Historical same-format native problem difficulties MAY be a disclosed proxy for an opening-problem practice goal, never an assertion about unpublished problems or an official contest rating.
+- Classification SHALL distinguish recommended, stretch and insufficient evidence. Missing native difficulties, unknown format, heuristic contests, stale sources or missing demand proxies SHALL yield insufficient evidence. Participation eligibility SHALL remain explicitly unverified unless a source states it; rated ranges MUST NOT be treated as eligibility restrictions.
+- Learner evidence MUST stay local. Gemini/NVIDIA generation, ranking, selection and evidence generation SHALL remain unchanged.

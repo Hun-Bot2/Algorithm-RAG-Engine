@@ -10,20 +10,30 @@
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
-    <header class="site-header">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">A</span><span>알고리즘 학습</span></div>
-      <p id="learner-label" class="learner-label">내 학습 기록</p>
-    </header>
-    <nav class="primary-nav" aria-label="주요 메뉴">
-      <button type="button" data-view="journal" aria-current="page">학습 일지</button>
-      <button type="button" data-view="today" aria-current="false">오늘</button>
-      <button type="button" data-view="progress">학습 기록</button>
-      <button type="button" data-view="contests">대회</button>
-    </nav>
+    <aside class="workspace-sidebar">
+      <header class="site-header">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">a.</span><span>알고리즘 학습<small>Learning workspace</small></span></div>
+        <p id="learner-label" class="learner-label">내 학습 기록</p>
+        <button class="mobile-tools" type="button" data-view="today" aria-label="학습 도구 · 목표 · 백업">⚙</button>
+      </header>
+      <p class="nav-caption">WORKSPACE</p>
+      <nav class="primary-nav" aria-label="주요 메뉴">
+        <button type="button" data-view="calendar" aria-current="page"><span aria-hidden="true">▦</span> 캘린더</button>
+        <button type="button" data-view="history"><span aria-hidden="true">☷</span> 풀이 이력</button>
+        <button type="button" data-view="analytics"><span aria-hidden="true">▥</span> 학습 분석</button>
+        <button type="button" data-view="contests"><span aria-hidden="true">⚑</span> 프로그래밍 대회</button>
+        <button type="button" data-view="similarity"><span aria-hidden="true">⇄</span> 문제 유사도 비교</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="tools-nav" type="button" data-view="today">⚙ 학습 도구 · 목표 · 백업</button>
+        <p>매일의 작은 풀이,<br>오래 남는 배움.</p>
+        <small>기록 시간대 · Asia/Seoul<br>단축키 J / K 이동 · T 오늘</small>
+      </div>
+    </aside>
     <main id="main" class="page-shell" tabindex="-1">
       <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
       <div id="app" aria-busy="true"><p class="loading">학습 정보를 불러오는 중이에요.</p></div>
     </main>
-    <footer><p>기록한 학습 정보는 본인 계정에서만 확인할 수 있어요.</p></footer>
+    <footer><p>로컬 학습 기록 · 실제 풀이와 예정된 학습을 구분해요.</p></footer>
   </body>
 </html>

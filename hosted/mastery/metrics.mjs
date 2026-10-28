@@ -156,8 +156,9 @@ export function computeOutcomes({ledger,catalog,plans=[],weekStart,windowWeeks=4
   return {version:OUTCOMES_VERSION,week_start:weekStart,week_end:weekEnd,window_start:windowStart,isr,excess,trajectory,transfer,retention,
     concepts:conceptRows,contests:{participation:contestRows,ratings},calibration,
     process:{planned_slots:planned.length,done_slots:done.length,confirmed_timer_minutes:Math.round(confirmedSeconds(intervals)/60),
+      self_reported_seconds_total:attempts.filter(a=>inRange(dateOf(a.occurred_at),weekStart,weekEnd)).reduce((s,a)=>s+(a.self_seconds ?? (a.self_minutes ?? 0)*60),0),
       self_reported_minutes:attempts.filter(a=>inRange(dateOf(a.occurred_at),weekStart,weekEnd)).reduce((s,a)=>s+(a.self_minutes ?? 0),0),
-      time_note:'Confirmed timer minutes and self-reported minutes are separate evidence and are never added together.'},
+      time_note:'Confirmed timer time and self-reported time are never added together. self_reported_minutes counts minute-unit records; self_reported_seconds_total includes both self-reported units.'},
     explore_kinds:exploreKinds,
     disclaimer:'Observational single-learner metrics; they describe what happened and do not prove that any policy caused it.'};
 }

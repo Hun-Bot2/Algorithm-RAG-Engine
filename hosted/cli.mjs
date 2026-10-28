@@ -10,6 +10,7 @@ import {appendEvents,getPreferences,putPreferences} from './core/store.mjs';
 import {seoulDate} from './core/policy.mjs';
 import {timestamp} from './core/events.mjs';
 import {createJournalService} from './mastery/journal.mjs';
+import {createExplanationService,withExplanations} from './mastery/explanations.mjs';
 import {appendLedger} from './mastery/side-ledger.mjs';
 import {readLedger,getSnapshot,saveSnapshot,saveWeeklyReport,getWeeklyReport} from './mastery/ledger.mjs';
 import {attachCatalog,loadCatalog} from './mastery/catalog.mjs';
@@ -17,6 +18,7 @@ import {planDay,problemStates,weekInfo} from './mastery/planner.mjs';
 import {fitAll} from './mastery/calibration.mjs';
 import {relatedCandidates} from './mastery/related.mjs';
 import {liveProposals,virtualProposal} from './mastery/contests.mjs';
+import {mockContest,mockExposurePlans,snapshotExposures} from './mastery/mock-contest.mjs';
 import {buildWeeklyReport,renderMarkdown} from './mastery/weekly.mjs';
 import {registerRepository,ingestRepository} from './mastery/git-ingest.mjs';
 import {fetchCodeforcesRatings,ratingEntries} from './mastery/ratings.mjs';
@@ -28,13 +30,20 @@ const USAGE=`usage: node hosted/cli.mjs <command> [options]
   catalog use --version catalog-vN            verify and switch the active catalog (logged)
   repo add --id ID --path DIR [--branch main]  register a solutions/notes Git repository
   repo ingest [--id ID] [--anchor SHA]        ingest new commits (all repositories by default)
+  review add|remove --problem KEY [--date YYYY-MM-DD]   explicitly select a review (no attempt)
   attempt --problem KEY --outcome independent|assisted|failed|reported_completion [--hints none|used] [--minutes N] [--activity practice|review|transfer] [--from KEY] [--at ISO]
   feedback --plan DATE --candidate KEY --verdict related|partly|unrelated|skip [--source KEY] [--channel C]
   rating set --platform codeforces|atcoder --rating N [--participations N]
   rating sync-cf --handle H                   NETWORK: one Codeforces API call (opt-in)
   prefs [--mastery JSON] [--weekday-minutes N] show or update preferences
+  explain                                    NETWORK: dual Gemini + NVIDIA explanations [--retry-failed]
+  explanation-usage                          aggregate actual dispatch usage by provider/model
+  explanation-records                        private local research records as JSON
+  explanation-costs --path FILE               append user-supplied actual USD cost receipts
+  explanation-otel [--out FILE]               redacted offline OTLP export (no network)
   journal                                    current curriculum journal as JSON (immutable evidence revisions)
   plan [--date YYYY-MM-DD]                    build (or show the frozen) plan for a day
+  mock-contest create|show [--date YYYY-MM-DD] [--count 5-7] [--minutes N]   weekly LeetCode mock contest: date + solving time (default 120m), immutable, no attempts
   related --problem KEY [--channel concept|title_v2|title_v2_cross]
   weekly [--week YYYY-MM-DD] [--out DIR]      build the weekly report; Markdown never overwrites
   find [--platform] [--concept] [--concept-status] [--tag] [--difficulty a..b] [--predicted a..b] [--status] [--near KEY --channel C --max-rank N]
@@ -48,9 +57,9 @@ const options={db:{type:'string'},learner:{type:'string'},'catalog-root':{type:'
   plan:{type:'string'},candidate:{type:'string'},verdict:{type:'string'},source:{type:'string'},channel:{type:'string'},platform:{type:'string'},rating:{type:'string'},
   participations:{type:'string'},handle:{type:'string'},mastery:{type:'string'},'weekday-minutes':{type:'string'},date:{type:'string'},week:{type:'string'},out:{type:'string'},
   concept:{type:'string'},'concept-status':{type:'string'},tag:{type:'string'},difficulty:{type:'string'},predicted:{type:'string'},status:{type:'string'},near:{type:'string'},
-  'max-rank':{type:'string'},'archive-category':{type:'string'},provenance:{type:'string'},limit:{type:'string'},json:{type:'boolean'},now:{type:'string'}};
+  'max-rank':{type:'string'},'archive-category':{type:'string'},provenance:{type:'string'},limit:{type:'string'},json:{type:'boolean'},now:{type:'string'},'retry-failed':{type:'boolean'},count:{type:'string'}};
 
-export async function run(argv,{print=console.log,fetcher=fetch}={}) {
+export async function run(argv,{print=console.log,fetcher=fetch,env=process.env}={}) {
   const {values:o,positionals}=parseArgs({args:argv,options,allowPositionals:true});
   const [command,sub]=positionals;
   if (!command) { print(USAGE); return 1; }
@@ -73,6 +82,7 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
     return catalog;
   };
   const plansOf=async ()=>(await db.prepare("SELECT payload FROM recommendation_snapshots WHERE learner_id=? AND kind='plan' ORDER BY local_date").bind(learnerId).all()).results.map(r=>JSON.parse(r.payload));
+  const mockContestsOf=async ()=>(await db.prepare("SELECT payload FROM recommendation_snapshots WHERE learner_id=? AND kind='mock_contest' ORDER BY local_date").bind(learnerId).all()).results.map(r=>JSON.parse(r.payload));
   try {
     if (command==='catalog' && sub==='use') {
       if (!o.version) throw new Error('--version required');
@@ -90,6 +100,19 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
       const reports=[];
       for (const id of repos) reports.push(await ingestRepository(db,learnerId,id,{now,anchorSha:o.anchor ?? null,catalogRoot}));
       out(reports); return reports.some(r=>r.status==='history_rewritten') ? 3 : 0;
+    }
+    if(command==='review'&&['add','remove'].includes(sub)){
+      if(!o.problem)throw new Error('--problem required');
+      const catalog=await activeCatalog(),problem=catalog.problems.get(o.problem);
+      if(!problem)throw new Error('invalid review problem: exact active catalog key required');
+      const target={problem_key:o.problem,date:o.date ?? seoulDate(now)},preferences=await getPreferences(db,learnerId);
+      const before=preferences.review_targets ?? [],exists=before.some(t=>t.problem_key===target.problem_key&&t.date===target.date);
+      // Validate even a no-op removal; unrelated preferences are preserved by putPreferences.
+      const {normalizePreferences}=await import('./core/preferences.mjs');normalizePreferences({review_targets:[target]});
+      const changed=sub==='add'?!exists:exists;
+      const targets=sub==='add'?(exists?before:[...before,target]):before.filter(t=>t.problem_key!==target.problem_key||t.date!==target.date);
+      if(changed)await putPreferences(db,learnerId,{review_targets:targets});
+      out({changed,selection:target,title:problem.title,review_targets:targets,attempts_added:0});return 0;
     }
     if (command==='attempt') {
       if (o.hints!==undefined && !['none','used'].includes(o.hints)) throw new Error('--hints must be none or used');
@@ -119,7 +142,24 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
       if (o['weekday-minutes']) patch.weekday_minutes=Number(o['weekday-minutes']);
       out(Object.keys(patch).length ? await putPreferences(db,learnerId,patch) : await getPreferences(db,learnerId)); return 0;
     }
-    if(command==='journal'){out(await createJournalService({db,catalogRoot}).view(learnerId,now));return 0;}
+    if(command.startsWith('explanation-')){
+      const explanations=createExplanationService({cacheRoot:join(dirname(dbPath),'explanations'),env,fetcher});
+      if(command==='explanation-usage'){out(explanations.usage(learnerId));return 0;}
+      if(command==='explanation-records'){out(explanations.records(learnerId));return 0;}
+      if(command==='explanation-costs'){out(explanations.addCostReceipts(learnerId,JSON.parse(readFileSync(o.path,'utf8'))));return 0;}
+      if(command==='explanation-otel'){
+        const {explanationOtlp}=await import('./mastery/explanation-observability.mjs');
+        const payload=explanationOtlp(explanations.records(learnerId));
+        if(o.out){writeFileSync(resolve(o.out),JSON.stringify(payload,null,2),{flag:'wx',mode:0o600});out({written:resolve(o.out)});}else out(payload);
+        return 0;
+      }
+    }
+    if(command==='journal'||command==='explain'){
+      const explanations=createExplanationService({cacheRoot:join(dirname(dbPath),'explanations'),env,fetcher});
+      const journal=withExplanations(createJournalService({db,catalogRoot}),explanations);
+      const view=await journal.view(learnerId,now);
+      out(command==='explain'?await explanations.decorate(learnerId,view,{generate:true,retryFailed:Boolean(o['retry-failed'])}):view);return 0;
+    }
     if (command==='plan') {
       const date=o.date ?? seoulDate(now);
       const frozen=await getSnapshot(db,learnerId,'plan',date);
@@ -139,9 +179,30 @@ export async function run(argv,{print=console.log,fetcher=fetch}={}) {
           calendar_source:cache.length?'provider_cache':'none (no cached calendar; open the dashboard with providers enabled to fetch one)',
           virtual:virtualProposal({catalog,attempts:ledger.attempts,abilities,mastery,date,weakConcepts:report.weaknesses.map(w=>w.concept)}).candidates[0] ?? null};
       }
-      const plan=planDay({date,now:nowIso,ledger,catalog,preferences,priorPlans,contestProposals});
+      const plan=planDay({date,now:nowIso,ledger,catalog,preferences,priorPlans:[...priorPlans,...mockExposurePlans(await mockContestsOf())],contestProposals});
       const saved=await saveSnapshot(db,learnerId,'plan',date,plan);
       out(o.json ? saved : formatPlan(saved,false)); return 0;
+    }
+    if (command==='mock-contest' && ['create','show'].includes(sub)) {
+      const preferences=await getPreferences(db,learnerId);
+      // Default: the next date (today included) whose weekly rhythm day is `virtual` (R5.1).
+      let date=o.date;
+      if (!date) for (let i=0;i<7 && !date;i++) { const d=new Date(Date.parse(seoulDate(now)+'T00:00:00Z')+i*86400000).toISOString().slice(0,10); if (preferences.weekly_rhythm[weekInfo(d).weekday]==='virtual') date=d; }
+      if (!date) throw new Error('no virtual day in the weekly rhythm: pass --date');
+      const stored=await getSnapshot(db,learnerId,'mock_contest',date);
+      if (sub==='show') { if (!stored) { out(o.json ? {found:false,local_date:date} : `No mock contest for ${date}.`); return 1; } out(o.json ? stored : formatMockContest(stored)); return 0; }
+      if (stored) { out(o.json ? {changed:false,mock_contest:stored} : `${formatMockContest(stored)}\n  (already stored; unchanged)`); return 0; }
+      const ledger=await readLedger(db,learnerId,{cutoff:nowIso});
+      const catalog=await activeCatalog(ledger);
+      const mastery=normalizeMastery(preferences.mastery ?? {});
+      const priorPlans=await plansOf();
+      const report=buildWeeklyReport({ledger,catalog,plans:priorPlans,weekStart:weekInfo(date).weekStart,preferences});
+      // Every snapshot kind counts: CLI `plan`, journal recommendations and earlier mock contests.
+      const exposures=snapshotExposures((await db.prepare('SELECT kind,local_date,payload FROM recommendation_snapshots WHERE learner_id=? ORDER BY local_date,kind').bind(learnerId).all()).results.map(r=>({...r,payload:JSON.parse(r.payload)})));
+      const record=mockContest({catalog,attempts:ledger.attempts,exposures,weakConcepts:report.weaknesses.map(w=>w.concept),
+        learnerId,date,mastery,count:o.count===undefined?undefined:Number(o.count),minutes:o.minutes===undefined?null:Number(o.minutes)});
+      const saved=await saveSnapshot(db,learnerId,'mock_contest',date,record);
+      out(o.json ? {changed:true,mock_contest:saved} : formatMockContest(saved)); return 0;
     }
     if (command==='related') {
       const ledger=await readLedger(db,learnerId,{cutoff:nowIso});
@@ -205,6 +266,16 @@ export function formatPlan(plan,frozen) {
   }
   if (plan.notes?.length) lines.push(...plan.notes.map(n=>`  note: ${n}`));
   lines.push(`  ${plan.rotation_note}`);
+  return lines.join('\n');
+}
+
+export function formatMockContest(m) {
+  const lines=[`Mock contest ${m.local_date}, solving time ${m.duration_minutes}m, policy ${m.policy}, catalog ${m.catalog_version}`,
+    `  mix: Easy ${m.composition.easy} / Medium ${m.composition.medium} / Hard ${m.composition.hard}, expected solved ${m.expected_solved} (target ${m.target_expected})`];
+  if (m.evidence_label) lines.push(`  ${m.evidence_label}`);
+  for (const p of m.problems) lines.push(`${p.slot}. [${['','Easy','Medium','Hard'][p.level]}] ${p.problem_key} "${p.title}" P ${p.p_conservative}-${p.p_mean}`,`   ${p.reason}`,`   ${p.url ?? ''}`);
+  if (m.notes?.length) lines.push(...m.notes.map(n=>`  note: ${n}`));
+  lines.push('  Solve on leetcode.com; record results with the daily log, Git trailers or `attempt`.');
   return lines.join('\n');
 }
 

@@ -1,0 +1,13 @@
+# Design and investigation
+
+Use existing provider_cache JSON envelopes under `<platform>:discovery`, with the existing owner-scoped lease. No migration, scheduler or dependency. A local-only same-origin POST synchronizes all three sources; state reads only SQLite. Older `<platform>:calendar` entries remain compatible. New discovery entries take precedence.
+
+Sources checked live 2026-10-20: Codeforces `/api/contest.list`; AtCoder `/contests/?lang=en` upcoming table; ContestDeck `data/contests.json`, an explicitly community-operated CLIST mirror with published schema. CLIST direct API requires authentication (https://clist.by/api/v4/doc/); the mirror avoids requiring another secret. Its source timestamp is checked independently from retrieval time. Official contest URLs are strictly validated. AtCoder published rated range is displayed as rating applicability, not contest difficulty or registration eligibility. Direct official source links remain available on failure.
+
+The old AtCoder Problems response has 6,582 entries; providers.mjs rejected responses above 5,000. Raise the bounded metadata limit and use the official upcoming table for the new route. HTML schema changes fail closed and retain cache.
+
+A separate pure contest recommendation module reuses fitAll/predict without modifying the problem planner. It compares conservative predictions for the easiest known problem in each of at most five recent same-format historical catalog contests. At least three historical contests and six distinct independently solved platform practice problems are required. Average conservative probability >= .65 supports an opening-problem practice recommendation; [.30,.65) is stretch; lower/missing evidence is insufficient. These thresholds are a new, unvalidated practice-goal heuristic, not contest rating prediction. Every output records inputs, catalog version, historical keys and uncertainty. No cross-platform conversion.
+
+Observed warning: local sync reports three markdown_attempt_conflict flags after sibling commit 8b864b2 added 10m to attempts first imported from db710c8. Semantic signatures intentionally include self_minutes. Preserve original null minutes and three independent records; replace the misleading generic warning with an accurate actionable explanation. Do not auto-apply source edits as new solves.
+
+Observed date evidence: stored three attempts are 2026-10-19T15:00:00.000000Z = Oct 20 00:00 KST. Calendar timestamp projection is correct; Oct 21 also has future review entries. No confirmed one-day storage shift. Strengthen actual/review labels and regression/browser coverage rather than subtracting a day.

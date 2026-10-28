@@ -3,7 +3,7 @@ const ENDPOINTS = {
   codeforces: 'https://codeforces.com/api/contest.list',
   atcoder: 'https://kenkoooo.com/atcoder/resources/contests.json',
 };
-const MAX_ITEMS = 5000;
+const MAX_ITEMS = 20000; // Metadata-only historical catalogs exceed 5,000 entries.
 const epoch = value => new Date(value).getTime();
 const iso = value => new Date(value).toISOString();
 const validDate = value => typeof value === 'string' && Number.isFinite(epoch(value));

@@ -86,3 +86,99 @@ test('pasted links wrapping the leading pipe remain importable with original pro
  assert.equal(parsed.rows[0].metadata.problem_key,'leetcode:two-sum');
  assert.ok(parsed.rows[0].raw.startsWith('[|Two Sum]'));
 });
+
+
+test('optional minutes column preserves zero and missingness, rejects invalid durations',()=>{
+ const timed=value=>log(`| Two Sum | O | ${value} | note |`).replace('| 문제 | 결과 | 메모 |','| 문제 | 결과 | 시간 | 메모 |').replace('| --- | --- | --- |','| --- | --- | --- | --- |');
+ for(const [value,minutes] of [['10m',10],['0m',0],['-',null],['',null]]) {
+  const r=parseDailyLog('leetcode/26-10-20.md',timed(value),catalog);
+  assert.equal(r.rows[0].metadata.self_minutes,minutes);
+ }
+ for(const value of ['-1m','1441m','ten','10h']) {
+  const r=parseDailyLog('leetcode/26-10-20.md',timed(value),catalog);
+  assert.equal(r.rows.length,0);assert.ok(r.flags.length);
+ }
+});
+
+test('timed daily rows reach the ledger without losing minutes',async t=>{
+ const {dir,db,commit}=fixture(t);await registerRepository(db,'owner',{repoId:'solutions',path:dir});
+ const body=log('| Two Sum | O | 10m | |').replace('| 문제 | 결과 | 메모 |','| 문제 | 결과 | 시간 | 메모 |').replace('| --- | --- | --- |','| --- | --- | --- | --- |');
+ commit('leetcode/26-10-20.md',body);
+ await ingestRepository(db,'owner','solutions',{catalog});
+ assert.equal((await readLedger(db,'owner')).attempts[0].self_minutes,10);
+});
+
+test('explicit review labels select only summary memo rows, including blank outcomes',()=>{
+ const r=parse('| Two Sum | | #복습 |\n| Other | O | ordinary |');
+ assert.deepEqual(r.review_targets,[{problem_key:'leetcode:two-sum',date:'2026-10-20'}]);
+ assert.equal(r.rows.length,1);
+ for(const memo of ['복습','#복습완료','`#복습`','ordinary'])assert.equal(parse(`| Two Sum | O | ${memo} |`).review_targets.length,0);
+ assert.equal(parse('| Unknown | | #복습 |').review_targets.length,0);
+ assert.equal(parse('| Two Sum | O | #복습 |\n| Two Sum | X | |').review_targets.length,0);
+ const timed='# 2026-10-20\n\n| 문제 | 결과 | 시간 | 메모 |\n| --- | --- | --- | --- |\n| Two Sum | | | #복습 |';
+ assert.equal(parseDailyLog('leetcode/26-10-20.md',timed,catalog).review_targets.length,1);
+ assert.equal(parseDailyLog('leetcode/26-10-21.md',timed,catalog).review_targets.length,0);
+});
+test('committed Markdown review selection imports once without creating solve evidence',async t=>{
+ const {getPreferences}=await import('../core/store.mjs');
+ const {dir,db,commit}=fixture(t);await registerRepository(db,'owner',{repoId:'solutions',path:dir});
+ commit('leetcode/26-10-20.md',log('| Two Sum | | #복습 |'));
+ let tick=0;const ingest=()=>ingestRepository(db,'owner','solutions',{catalog,now:new Date(Date.parse('2026-10-23T00:00:00Z')+1000*tick++)});
+ assert.equal((await ingest()).observed,0);
+ assert.deepEqual((await getPreferences(db,'owner')).review_targets,[{problem_key:'leetcode:two-sum',date:'2026-10-20'}]);
+ assert.equal((await readLedger(db,'owner')).attempts.length,0);
+ commit('leetcode/26-10-20.md',log('| Two Sum | | #복습 추가 메모 |'));
+ await ingest();await ingest();
+ assert.equal((await getPreferences(db,'owner')).review_targets.length,1);
+ assert.equal((await readLedger(db,'owner')).attempts.length,0);
+});
+
+test('review column is independent from solving outcome and overrides legacy memo markers',()=>{
+ const source=(rows)=>`# 2026-10-23\n\n| 문제 | 결과 | 시간 | 복습 | 메모 |\n| --- | --- | --- | --- | --- |\n${rows}`;
+ const p=rows=>parseDailyLog('leetcode/26-10-23.md',source(rows),catalog);
+ const r=p('| Two Sum | | | O | 풀이 중 |\n| Other | O | 10m | | #복습 |');
+ assert.deepEqual(r.review_targets,[{problem_key:'leetcode:two-sum',date:'2026-10-23'}]);
+ assert.deepEqual(r.rows.map(x=>[x.metadata.problem_key,x.metadata.outcome,x.metadata.self_minutes]),[['leetcode:other','independent',10]]);
+ assert.equal(p('| Two Sum | O | | yes | |').rows.length,0);
+ assert.equal(p('| Two Sum | X | 0m | O | |').rows[0].metadata.outcome,'failed');
+ const noTime=source('| Two Sum | - | O | |').replace('| 시간 ','').replace('| --- | --- | --- | --- | --- |','| --- | --- | --- | --- |');
+ assert.equal(parseDailyLog('leetcode/26-10-23.md',noTime,catalog).review_targets.length,1);
+});
+
+test('binary outcomes and reviews keep unknown results and independence separate',()=>{
+ const body=`# 2026-10-23\n\n| 문제 | 결과 | 시간 | 복습 | 메모 |\n| --- | --- | --- | --- | --- |\n| Two Sum | 1 | 10m | 0 | |\n| Other | 0 | | 1 | |`;
+ const r=parseDailyLog('leetcode/26-10-23.md',body,catalog);
+ assert.deepEqual(r.rows.map(x=>[x.metadata.outcome,x.metadata.hints]),[['reported_completion',null],['failed',null]]);
+ assert.deepEqual(r.review_targets,[{problem_key:'leetcode:other',date:'2026-10-23'}]);
+ const unfinished=parseDailyLog('leetcode/26-10-23.md',body.replace('| 1 | 10m |','| | 10m |').replace('| 0 | | 1 |','| | | 1 |'),catalog);
+ assert.equal(unfinished.rows.length,0);assert.equal(unfinished.review_targets.length,1);
+ assert.ok(parseDailyLog('leetcode/26-10-23.md',body.replace('| 0 | | 1 |','| 0 | | 2 |'),catalog).flags.some(x=>x.startsWith('daily_invalid_review')));
+});
+test('O to 1 migration preserves recorded attempts without false conflicts',async t=>{
+ const {dir,db,commit}=fixture(t);await registerRepository(db,'owner',{repoId:'solutions',path:dir});
+ let tick=0;const ingest=()=>ingestRepository(db,'owner','solutions',{catalog,now:new Date(Date.parse('2026-10-23T00:00:00Z')+1000*tick++)});
+ commit('leetcode/26-10-20.md',log('| Two Sum | O | |'));await ingest();
+ commit('leetcode/26-10-20.md',log('| Two Sum | 1 | |'));
+ const r=await ingest();assert.equal(r.observed,0);assert.deepEqual(r.flags,{});
+ assert.equal((await readLedger(db,'owner')).attempts[0].outcome,'independent');
+ commit('leetcode/26-10-20.md',log('| Two Sum | 0 | |'));
+ assert.ok(Object.values((await ingest()).flags).flat().includes('markdown_attempt_conflict:leetcode:two-sum'));
+});
+
+test('daily durations preserve seconds, minutes, zero and unavailable values',()=>{
+ const body=value=>`# 2026-10-23\n\n| 문제 | 결과 | 시간 | 복습 | 메모 |\n| --- | --- | --- | --- | --- |\n| Two Sum | 1 | ${value} | 0 | |`;
+ for(const [value,minutes,seconds] of [['10m',10,undefined],['40s',null,40],['0s',null,0],['0m',0,undefined],['86400s',null,86400],['1440m',1440,undefined],['',null,undefined],['-',null,undefined]]){
+  const r=parseDailyLog('leetcode/26-10-23.md',body(value),catalog);assert.equal(r.rows.length,1,value);
+  assert.equal(r.rows[0].metadata.self_minutes,minutes,value);assert.equal(r.rows[0].metadata.self_seconds,seconds,value);
+ }
+ for(const value of ['86401s','1441m','-1s','1.5m','1.5s','40','10h','10m40s','40S'])assert.equal(parseDailyLog('leetcode/26-10-23.md',body(value),catalog).rows.length,0,value);
+});
+test('Git seconds persist exactly and equivalent unit edits do not duplicate attempts',async t=>{
+ const {dir,db,commit}=fixture(t);await registerRepository(db,'owner',{repoId:'solutions',path:dir});
+ let tick=0;const ingest=()=>ingestRepository(db,'owner','solutions',{catalog,now:new Date(Date.parse('2026-10-24T00:00:00Z')+1000*tick++)});
+ const body=value=>`# 2026-10-23\n\n| 문제 | 결과 | 시간 | 복습 | 메모 |\n| --- | --- | --- | --- | --- |\n| Two Sum | 1 | ${value} | 0 | |\n| Other | 0 | 40s | 1 | |`;
+ commit('leetcode/26-10-23.md',body('60s'));await ingest();
+ const ledger=await readLedger(db,'owner');assert.equal(ledger.attempts.find(a=>a.problem_key==='leetcode:other').self_seconds,40);assert.equal(ledger.attempts[0].self_minutes,null);
+ commit('leetcode/26-10-23.md',body('1m'));const r=await ingest();assert.equal(r.observed,0);assert.deepEqual(r.flags,{});
+ commit('leetcode/26-10-23.md',body('61s'));assert.ok(Object.values((await ingest()).flags).flat().includes('markdown_attempt_conflict:leetcode:two-sum'));
+});

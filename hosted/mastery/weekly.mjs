@@ -90,7 +90,7 @@ export function renderMarkdown(report) {
   for (const c of report.contests.participation) L.push(`- ${c.contest_id} (${c.mode}, ${c.outcome}): solved ${c.solved ?? 'unknown'} / expected ${c.expected_solved ?? 'unknown'}, upsolved within 7 days ${c.upsolved_within_7_days}`);
   for (const r of report.contests.ratings) L.push(`- ${r.platform} rating ${r.rating}${r.delta===null?'':` (${r.delta>=0?'+':''}${r.delta})`} on ${r.date} [${r.source}]`);
   L.push('','## Process','',`- Planned slots done: ${report.process.done_slots}/${report.process.planned_slots}`,
-    `- Confirmed timer minutes: ${report.process.confirmed_timer_minutes}; self-reported minutes: ${report.process.self_reported_minutes} (${report.process.time_note})`);
+    `- Confirmed timer minutes: ${report.process.confirmed_timer_minutes}; self-reported minutes: ${report.process.self_reported_minutes} (minute-unit records)${report.process.self_reported_seconds_total!=null?'; self-reported total: '+report.process.self_reported_seconds_total+'s':''} (${report.process.time_note})`);
   L.push('','## Evaluation','',`- Relatedness verdicts: ${report.evaluation.feedback.total} ${JSON.stringify(report.evaluation.feedback.by_verdict)}`);
   for (const [k,v] of Object.entries(report.evaluation.explore_kinds).sort()) L.push(`- Explore ${k}: planned ${v.planned}, attempted ${v.attempted}, independent ${v.independent}`);
   L.push(`- ${report.evaluation.ai_relatedness}`,'- Explore kinds follow a fixed calendar rotation; their comparison is descriptive, not causal.');

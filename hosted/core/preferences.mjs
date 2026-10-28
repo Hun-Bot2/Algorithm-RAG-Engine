@@ -18,11 +18,23 @@ export function normalizeMastery(input={}) {
   return m;
 }
 export function normalizePreferences(input) {
-  if (!input || typeof input!=='object' || Array.isArray(input) || Object.keys(input).some(k=>!['weekday_minutes','target_keys','weekly_rhythm','mastery'].includes(k))) throw new Error('invalid preferences');
+  if (!input || typeof input!=='object' || Array.isArray(input) || Object.keys(input).some(k=>!['weekday_minutes','target_keys','weekly_rhythm','mastery','review_targets'].includes(k))) throw new Error('invalid preferences');
   const next={...defaultPreferences(),...input};
   if(!Number.isInteger(next.weekday_minutes)||next.weekday_minutes<1||next.weekday_minutes>480||!Array.isArray(next.target_keys)||new Set(next.target_keys).size!==next.target_keys.length)throw new Error('invalid preferences');
   next.target_keys.forEach(problemKey);
   if(!Array.isArray(next.weekly_rhythm)||next.weekly_rhythm.length!==7||next.weekly_rhythm.some(day=>!['practice','review','virtual','upsolve'].includes(day)))throw new Error('invalid weekly rhythm');
+  if ('review_targets' in next) {
+    if(!Array.isArray(next.review_targets)||next.review_targets.length>1000)throw new Error('invalid review targets');
+    const seen=new Set();
+    for(const target of next.review_targets){
+      if(!target||Object.keys(target).sort().join('|')!=='date|problem_key')throw new Error('invalid review target');
+      problemKey(target.problem_key);
+      if(typeof target.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(target.date))throw new Error('invalid review date');
+      const date=new Date(target.date+'T12:00:00Z');
+      if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==target.date)throw new Error('invalid review date');
+      const key=target.date+':'+target.problem_key;if(seen.has(key))throw new Error('invalid duplicate review target');seen.add(key);
+    }
+  }
   if ('mastery' in next) next.mastery=normalizeMastery(next.mastery);
   return structuredClone(next);
 }

@@ -7,7 +7,7 @@
     "build": "python3 ../scripts/learning/build_hosted.py",
     "dry-run": "wrangler deploy --dry-run --outdir dist",
     "test:runtime": "node runtime-smoke.mjs",
-    "test:browser": "node browser-smoke.mjs"
+    "test:browser": "node workspace-browser-smoke.mjs"
   },
   "devDependencies": {
     "wrangler": "4.151.0"

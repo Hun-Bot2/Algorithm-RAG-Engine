@@ -12,7 +12,7 @@ const count=value=>{ if (!Number.isInteger(value) || value<0) throw new Error('i
 
 const OUTCOMES=['independent','assisted','failed','reported_completion'];
 function gitObservation(p) {
-  if (!exact(p,['repo_id','sha','path','problem_key','outcome','hints','self_minutes','activity_type','transfer_from','trailers'])) throw new Error('invalid git observation payload');
+  if (!exact(p,['repo_id','sha','path','problem_key','outcome','hints','self_minutes','activity_type','transfer_from','trailers',...('self_seconds' in p?['self_seconds']:[])])) throw new Error('invalid git observation payload');
   identifier(p.repo_id);
   if (typeof p.sha!=='string' || !/^[0-9a-f]{40}$/.test(p.sha)) throw new Error('invalid git observation sha');
   nullable(p.path,v=>text(v,1000));
@@ -21,6 +21,7 @@ function gitObservation(p) {
   if (p.hints!==null && typeof p.hints!=='boolean') throw new Error('invalid git observation hints');
   if (p.outcome==='independent' && p.hints!==false) throw new Error('independent outcome requires explicit no hints');
   nullable(p.self_minutes,v=>{ if (!Number.isInteger(v) || v<0 || v>1440) throw new Error('invalid self-reported minutes'); return v; });
+  if('self_seconds' in p)nullable(p.self_seconds,v=>{if(!Number.isInteger(v)||v<0||v>86400||p.self_minutes!==null)throw new Error('invalid self-reported seconds');return v;});
   nullable(p.activity_type,v=>oneOf(v,['practice','review','transfer'],'invalid activity type'));
   if (p.activity_type==='transfer') { problemKey(p.transfer_from); if (p.transfer_from===p.problem_key) throw new Error('invalid transfer source'); }
   else if (p.transfer_from!==null) throw new Error('transfer source requires transfer activity');
