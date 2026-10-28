@@ -30,7 +30,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   Accept: ≥40 reference points (alpha, beta in [0.5, 60], x in [0.01, 0.99]) within 1e-9 for CDF and 1e-7 for quantiles;
   information value equals the closed form; quantile(cdf(x)) round-trips; deterministic across runs.
 
-- [ ] **T3 LeetCode cells** [§4.1]. Depends on: T1, T2.
+- [x] **T3 LeetCode cells** [§4.1]. Depends on: T1, T2.
   Files: `hosted/mastery/progression-v2.mjs` (cells only), extend `research/recommendation_audit/adaptive_sim.py` into
   `adaptive_reference.py` (leave-concept-out, 1/k weights, PAV), fixture `hosted/test/fixtures/adaptive-cells.v1.json`,
   `hosted/test/mastery-progression-v2-cells.test.mjs`.
@@ -88,3 +88,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 
 - T1 (2026-10-29): observations/config focused 5 pass; full `node --test hosted/test/*.test.mjs` 259/259 pass with loopback access. New modules only; no real learner DB opened. Config loader is a separate Worker-safe module for independent validation.
 - T2 (2026-10-29): SciPy 1.14.1 reference 49 points; focused 2/2, full Node 261/261 pass. CDF tolerance 1e-9, quantile 1e-7.
+- T3 (2026-10-29): 10 independent SciPy cell scenarios matched within 1e-9; full Node 266/266 pass (includes independently added review fixtures). v1 files unchanged.

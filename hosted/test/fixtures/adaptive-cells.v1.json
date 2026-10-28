@@ -1,0 +1,847 @@
+{
+  "version": "adaptive-cells-v1",
+  "scipy_version": "1.14.1",
+  "rows": [
+    {
+      "name": "empty",
+      "observations": [],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 3.2,
+          "beta": 0.7999999999999998,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.8,
+          "interval": [
+            0.5349903410414304,
+            0.9830809454876033
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.0,
+          "beta": 2.0,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.5,
+          "interval": [
+            0.19580010565909173,
+            0.8041998943409083
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
+      "name": "easy_two_solves",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 5.2,
+          "beta": 0.7999999999999998,
+          "n_own": 2,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.8666666666666667,
+          "interval": [
+            0.6831989910024028,
+            0.9896712551512665
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.241568778251544,
+          "beta": 1.758431221748456,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.560392194562886,
+          "interval": [
+            0.250294157031978,
+            0.8528866706479326
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
+      "name": "easy_five_solves",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 8.2,
+          "beta": 0.7999999999999998,
+          "n_own": 5,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.911111111111111,
+          "interval": [
+            0.7865952346061331,
+            0.9934819061722966
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.462000488042976,
+          "beta": 1.537999511957024,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.615500122010744,
+          "interval": [
+            0.30527642660457355,
+            0.8921959004925704
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
+      "name": "medium_failure",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 5.2,
+          "beta": 0.7999999999999998,
+          "n_own": 2,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.8666666666666667,
+          "interval": [
+            0.6831989910024028,
+            0.9896712551512665
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.241568778251544,
+          "beta": 2.758431221748456,
+          "n_own": 1,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.44831375565030884,
+          "interval": [
+            0.18044320868890165,
+            0.7276287746793153
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.6655693462720331,
+          "beta": 3.334430653727967,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.16639233656800828,
+          "interval": [
+            0.008594085277869727,
+            0.412168100763621
+          ]
+        }
+      ]
+    },
+    {
+      "name": "easy_mixed",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 4.2,
+          "beta": 2.8,
+          "n_own": 3,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.6,
+          "interval": [
+            0.36242049360210854,
+            0.8227896014841063
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 1.5191835884530847,
+          "beta": 2.4808164115469156,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.37979589711327116,
+          "interval": [
+            0.10468186261920125,
+            0.6897857584156242
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
+      "name": "outside_evidence",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 5.96,
+          "beta": 3.04,
+          "n_own": 0,
+          "n_level_outside": 1,
+          "prior": "learner",
+          "p": 0.6622222222222223,
+          "interval": [
+            0.4568427244298908,
+            0.8496858328514536
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 5.96,
+          "beta": 3.04,
+          "n_own": 1,
+          "n_level_outside": 1,
+          "prior": "learner",
+          "p": 0.6622222222222223,
+          "interval": [
+            0.4568427244298908,
+            0.8496858328514536
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.9172897697906925,
+          "beta": 3.0827102302093072,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.22932244244767314,
+          "interval": [
+            0.02651684811293427,
+            0.5075248587556076
+          ]
+        }
+      ]
+    },
+    {
+      "name": "multi_concept",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target",
+            "other",
+            "third"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target",
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 3.5333333333333337,
+          "beta": 0.7999999999999998,
+          "n_own": 1,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.8153846153846154,
+          "interval": [
+            0.5683002973388401,
+            0.9847065443014817
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.049535318660827,
+          "beta": 2.450464681339173,
+          "n_own": 1,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.45545229303573936,
+          "interval": [
+            0.173737904011088,
+            0.7483935140049417
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.7294638632842794,
+          "beta": 3.2705361367157204,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.18236596582106984,
+          "interval": [
+            0.012183727872348539,
+            0.43789776185838053
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pav_violation",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 3,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 21.874317661406103,
+          "beta": 14.125682338593897,
+          "n_own": 8,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.6076199350390584,
+          "interval": [
+            0.502558713636683,
+            0.7100178065354349
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 21.874317661406103,
+          "beta": 14.125682338593897,
+          "n_own": 8,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.6076199350390584,
+          "interval": [
+            0.502558713636683,
+            0.7100178065354349
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 21.874317661406103,
+          "beta": 14.125682338593897,
+          "n_own": 8,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.6076199350390584,
+          "interval": [
+            0.502558713636683,
+            0.7100178065354349
+          ]
+        }
+      ]
+    },
+    {
+      "name": "retention_ignored",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "target"
+          ],
+          "y": 0,
+          "kind": "retention"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 4.2,
+          "beta": 0.7999999999999998,
+          "n_own": 1,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.8400000000000001,
+          "interval": [
+            0.622766938580215,
+            0.9871723665477783
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.135757776141312,
+          "beta": 1.864242223858688,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.533939444035328,
+          "interval": [
+            0.2257026353387896,
+            0.832273527975542
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
+      "name": "outside_shared_excluded",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "target",
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 3.06,
+          "beta": 1.44,
+          "n_own": 1,
+          "n_level_outside": 1,
+          "prior": "learner",
+          "p": 0.68,
+          "interval": [
+            0.3935261369845561,
+            0.9216295426352326
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.089144723794046,
+          "beta": 1.9108552762059539,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.5222861809485115,
+          "interval": [
+            0.21522816895432342,
+            0.8228399525784991
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    }
+  ]
+}
