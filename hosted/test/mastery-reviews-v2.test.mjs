@@ -32,3 +32,8 @@ test('replay is deterministic for shuffled input and honours configured interval
   assert.deepEqual(replayReviewsV2(rows),replayReviewsV2([...rows].reverse()));
   assert.equal(replayReviewsV2(rows,{review_days:[2,4]}).get('leetcode:a').due_date,'2026-01-04');
 });
+
+test('failure is always next-day priority even when success intervals are customized',()=>{
+  const state=replayReviewsV2([row(1,'ability',null,0)],{review_days:[2,4]}).get('leetcode:a');
+  assert.equal(state.due_date,'2026-01-02');assert.equal(state.review_priority,'priority');
+});

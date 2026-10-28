@@ -49,6 +49,133 @@
       ]
     },
     {
+      "name": "cold_with_outside_history",
+      "observations": [
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 1,
+          "concepts": [
+            "other"
+          ],
+          "y": 0,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        },
+        {
+          "level": 2,
+          "concepts": [
+            "other"
+          ],
+          "y": 1,
+          "kind": "ability"
+        }
+      ],
+      "concept": "target",
+      "cells": [
+        {
+          "level": 1,
+          "alpha": 3.2,
+          "beta": 0.7999999999999998,
+          "n_own": 0,
+          "n_level_outside": 6,
+          "prior": "authored",
+          "p": 0.8,
+          "interval": [
+            0.5349903410414304,
+            0.9830809454876033
+          ]
+        },
+        {
+          "level": 2,
+          "alpha": 2.0,
+          "beta": 2.0,
+          "n_own": 0,
+          "n_level_outside": 4,
+          "prior": "authored",
+          "p": 0.5,
+          "interval": [
+            0.19580010565909173,
+            0.8041998943409083
+          ]
+        },
+        {
+          "level": 3,
+          "alpha": 0.8,
+          "beta": 3.2,
+          "n_own": 0,
+          "n_level_outside": 0,
+          "prior": "authored",
+          "p": 0.2,
+          "interval": [
+            0.016919054512396763,
+            0.46500965895856977
+          ]
+        }
+      ]
+    },
+    {
       "name": "easy_two_solves",
       "observations": [
         {

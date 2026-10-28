@@ -190,3 +190,7 @@ default to v2. Validation: Node unit tests against a scipy-generated reference f
 property tests (determinism, alias/rename invariance apart from the seeded hash, repeat invariance, review-flag and time
 invariance, no deadlock), byte-identity of v1 journal output, the full Node suite, and the real-catalog replay. None of
 these measure learning benefit.
+
+## Clarification accepted 2026-10-29: fresh concept priors
+
+User decision during T6: a concept with no own LeetCode ability observation at any level SHALL retain authored level priors even when other concepts have learner evidence. Once it has at least one own ability observation, leave-concept-out level updates apply. Outside counts remain visible; prior source stays authored for a fresh concept. This supersedes the unqualified D2 / design section 4.1 update rule.

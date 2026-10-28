@@ -52,7 +52,7 @@ in brackets. Mark a task done only with the commands' results recorded in the co
   where the gap reached the interval and keep the stage otherwise; a retention failure resets to priority; 복습 targets are
   unchanged.
 
-- [ ] **T6 Actions, scoring, focus, explanation** [§5, §6, §8]. Depends on: T5.
+- [x] **T6 Actions, scoring, focus, explanation** [§5, §6, §8]. Depends on: T5.
   Files: `progression-v2.mjs` (`planProgressionV2`), `hosted/test/mastery-progression-v2-plan.test.mjs`.
   Accept: the eight `adaptive_focus_sim.out` scenarios (S1-S8) reproduce the same winners as fixtures built with `catalogFromData`;
   candidates in one cell ordered by coverage gain, then purity, then FNV-1a (renaming keys changes the winner only through the hash);
@@ -91,3 +91,4 @@ in brackets. Mark a task done only with the commands' results recorded in the co
 - T3 (2026-10-29): 10 independent SciPy cell scenarios matched within 1e-9; full Node 266/266 pass (includes independently added review fixtures). v1 files unchanged.
 - T4 (2026-10-29): platform repeat/interval property fixtures pass; full Node 267/267 pass.
 - T5 (2026-10-29): readiness/follow-up/review focused fixtures pass; independent Terra review corrected sparse config validation and failure due-day; full Node 269/269 pass.
+- T6 (2026-10-29): user clarified fresh concepts retain authored priors; independent 11-cell fixture updated. S1-S8, deterministic insertion order/cooldown/no-deadlock checks pass; full Node 276/276 pass. Sparse-array and custom failure-day regressions added.

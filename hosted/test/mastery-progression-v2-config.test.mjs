@@ -32,3 +32,10 @@ test('malformed configuration is rejected',()=>{
     assert.throws(()=>loadProgressionConfig(input),TypeError);
   }
 });
+
+test('sparse arrays cannot bypass finite-number validation',()=>{
+  const priors=structuredClone(defaultConfig);priors.level_priors['1']=Array(2);
+  assert.throws(()=>loadProgressionConfig(priors),/level_priors/);
+  const reviews=structuredClone(defaultConfig);reviews.review_days=[,3];
+  assert.throws(()=>loadProgressionConfig(reviews),/review_days/);
+});

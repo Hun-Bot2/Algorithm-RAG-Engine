@@ -63,3 +63,7 @@ for history. Decisions: ADR 006 D1–D11. Provisional assumptions are marked (P)
   with the affected estimates before and after.
 - R24 Output SHALL be deterministic for identical ledger, catalog, preferences, date, config and code.
 - R25 All tau, prior, kappa, lambda, weight, interval and follow-up constants SHALL live in one versioned config file.
+
+## Clarification accepted 2026-10-29: fresh concept priors
+
+User decision during T6: a concept with no own LeetCode ability observation at any level SHALL retain authored level priors even when other concepts have learner evidence. Once it has at least one own ability observation, leave-concept-out level updates apply. Outside counts remain visible; prior source stays authored for a fresh concept. This supersedes the unqualified D2 / design section 4.1 update rule.

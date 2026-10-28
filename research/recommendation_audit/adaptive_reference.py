@@ -15,19 +15,21 @@ LEVELS = (1, 2, 3)
 
 def reference(observations, concept):
     ability = [o for o in observations if o['kind'] == 'ability']
+    cold = not any(concept in o['concepts'] for o in ability)
     cells = []
     previous_delta = 0.0
     for level, (prior_a, prior_b) in zip(LEVELS, PRIORS):
         outside = [o for o in ability if o['level'] == level and concept not in o['concepts']]
         own = [o for o in ability if o['level'] == level and concept in o['concepts']]
-        mean = (prior_a + sum(o['y'] for o in outside)) / (prior_a + prior_b + len(outside))
+        used_outside = [] if cold else outside
+        mean = (prior_a + sum(o['y'] for o in used_outside)) / (prior_a + prior_b + len(used_outside))
         centre = 1 / (1 + math.exp(-(math.log(mean / (1 - mean)) + 0.5 * previous_delta)))
         a = 4 * centre + sum(o['y'] / len(o['concepts']) for o in own)
         b = 4 * (1 - centre) + sum((1 - o['y']) / len(o['concepts']) for o in own)
         posterior = a / (a + b)
         previous_delta = math.log(posterior / (1 - posterior)) - math.log(centre / (1 - centre)) if own else 0.0
         cells.append({'level': level, 'alpha': a, 'beta': b, 'n_own': len(own),
-                      'n_level_outside': len(outside), 'prior': 'learner' if outside else 'authored'})
+                      'n_level_outside': len(outside), 'prior': 'learner' if used_outside else 'authored'})
     # Weighted PAV: each contiguous block has its summed beta pseudo-counts.
     blocks = []
     for i, cell in enumerate(cells):
@@ -54,6 +56,7 @@ def main():
     o = observation
     cases = [
         ('empty', []),
+        ('cold_with_outside_history', [o(1, ['other'], 0)] * 6 + [o(2, ['other'], 1)] * 4),
         ('easy_two_solves', [o(1, ['target'], 1)] * 2),
         ('easy_five_solves', [o(1, ['target'], 1)] * 5),
         ('medium_failure', [o(1, ['target'], 1)] * 2 + [o(2, ['target'], 0)]),

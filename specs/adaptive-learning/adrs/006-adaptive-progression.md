@@ -48,3 +48,7 @@ in one config file, shown in every explanation, and covered by the sensitivity r
 - Review dates for re-solved problems change under v2 spacing (D7). The v1 review replay in `core/policy.mjs` is not
   modified; v2 uses its own replay.
 - Calibration, learning benefit and transfer effects remain unmeasured; explanations must say so.
+
+## Clarification accepted 2026-10-29: fresh concept priors
+
+User decision during T6: a concept with no own LeetCode ability observation at any level SHALL retain authored level priors even when other concepts have learner evidence. Once it has at least one own ability observation, leave-concept-out level updates apply. Outside counts remain visible; prior source stays authored for a fresh concept. This supersedes the unqualified D2 / design section 4.1 update rule.
